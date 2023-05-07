@@ -1,10 +1,12 @@
 [build]
-    publish = "public"
-    command = "echo No build command"
+    publish = "dist"
+    command = "yarn run build"
     node_bundler = "esbuild"
 
 [dev]
-    publish = "public"
+    publish = "src"
+    command = "yarn run dev"
+    targetPort = 5173
     node_bundler = "esbuild"
 
 [functions]

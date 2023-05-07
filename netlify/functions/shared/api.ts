@@ -1,4 +1,5 @@
-// Standard variation
+import fetch from "node-fetch"
+
 export async function api<T>(url: string): Promise<T> {
   return fetch(url)
     .then(response => {

@@ -2,7 +2,6 @@ import { Handler } from '@netlify/functions'
 import { api } from "./shared/api"
 
 const handler: Handler = async (event, context) => {
-  console.log(event)
   let lastfm = await api<{
     recenttracks: {
       track: {
