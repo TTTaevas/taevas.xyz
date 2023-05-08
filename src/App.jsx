@@ -4,6 +4,7 @@ import "./App.css";
 import Lastfm from "./components/Lastfm";
 import Speedruncom from "./components/Speedruncom";
 import Hackthebox from "./components/hackthebox";
+import Github from "./components/github";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Lastfm/>
       <Speedruncom/>
       <Hackthebox/>
+      <Github/>
     </div>
   );
 }
