@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
 
 import Lastfm from "./components/Lastfm";
+import Speedruncom from "./components/Speedruncom";
 
 function App() {
   return (
     <div className="App">
-      <h1>Simple last.fm thingie</h1>
+      <h1>Simple website thingie</h1>
       <Lastfm/>
+      <Speedruncom/>
     </div>
   );
 }

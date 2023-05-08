@@ -11,15 +11,16 @@ export default function Lastfm() {
     getLastfm()
   }, [])
 
-	if (lastfm.artist !== undefined) {
-		return (
-			<div id="lastfm">
-				<p>{lastfm.listening ? "Currently listening to:" : "Last listened to:"}</p>
-				<img alt="album thumbnail" src={lastfm.image}></img>
-				<p><strong>{lastfm.artist}</strong> - {lastfm.name}</p>
-				<p>{lastfm.album}</p>
-			</div>
-		)
+	if (lastfm.artist === undefined) {
+		return <></>
 	}
-	return <></>
+	return (
+		<div id="lastfm">
+			<p>{lastfm.listening ? "Currently listening to:" : "Last listened to:"}</p>
+			<img alt="album thumbnail" src={lastfm.image}></img>
+			<p><strong>{lastfm.artist}</strong> - {lastfm.name}</p>
+			<p>{lastfm.album}</p>
+		</div>
+	)
+	
 }
