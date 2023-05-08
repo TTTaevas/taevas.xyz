@@ -5,6 +5,7 @@ import Lastfm from "./components/Lastfm";
 import Speedruncom from "./components/Speedruncom";
 import Hackthebox from "./components/hackthebox";
 import Github from "./components/github";
+import Osu from "./components/osu";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Speedruncom/>
       <Hackthebox/>
       <Github/>
+      <Osu/>
     </div>
   );
 }
