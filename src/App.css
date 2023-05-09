@@ -1,10 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   width: 100%;
   text-align: center;
   margin: auto;
 }
 
-img {
-  padding: 10px 10px 0;
-  max-width: min(500px, calc(100% - 20px));
+body {
+  background: linear-gradient(to left, #0d0c69 0%, #000151 100%);
+  background-size: 530px auto cover;
+  background-attachment: fixed;
+  margin: 0;
+  color: #fff;
+}
+
+.info_details {
+  display: flex;
+}
+
+.info_container > * {
+  border: 3px solid white;
+  width: 300px;
+}
+
+.info_title {
+  border: 3px solid #fff;
+  background-color: #fff;
+  color: red;
+  text-align: right;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.info_description {
+  padding-top: 10px;
+  border-right: 3px solid white;
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: -5px;
+  text-align: start;
+  text-transform: uppercase;
+  text-orientation: upright;
+  writing-mode: vertical-rl;
+}
+
+.info {
+  padding: 20px 10px;
+  margin: auto;
+}
+
+.info > * {
+  padding: 3px 10px;
+  margin: auto;
 }

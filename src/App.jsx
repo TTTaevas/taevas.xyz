@@ -12,14 +12,16 @@ import Anilist from "./components/anilist";
 function App() {
   return (
     <div className="App">
-      <h1>Simple website thingie</h1>
-      <Lastfm/>
-      <Speedruncom/>
-      <Hackthebox/>
-      <Github/>
-      <Gitlab/>
-      <Osu/>
-      <Anilist/>
+      <h1 className="text-3xl font-bold underline">Simple website thingie</h1>
+      <div className="info_container">
+        <Lastfm/>
+        {/* <Speedruncom/>
+        <Hackthebox/>
+        <Github/>
+        <Gitlab/>
+        <Osu/>
+        <Anilist/> */}
+      </div>
     </div>
   );
 }
