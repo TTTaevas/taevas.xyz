@@ -1,7 +1,20 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
+export type AnilistInfo = {
+  title: string
+  episodes: {
+    watched: number
+    total: number
+  },
+  score: number
+  startDate: string
+  updateDate: string
+  endDate: string
+  cover: string
+} | undefined
 
 export default function Anilist() {
-	const [anilist, setAnilist] = useState({})
+	const [anilist, setAnilist]: [AnilistInfo, React.Dispatch<React.SetStateAction<AnilistInfo>>] = useState()
   const getAnilist = async () => {
     const response = await fetch("/.netlify/functions/anilist").then(r => r.json())
     setAnilist(response)
@@ -11,7 +24,7 @@ export default function Anilist() {
     getAnilist()
   }, [])
 
-	if (anilist.title === undefined) {
+	if (anilist === undefined) {
 		return <></>
 	}
 	return (

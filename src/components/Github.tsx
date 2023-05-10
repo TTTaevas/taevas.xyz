@@ -1,7 +1,17 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
+export type GithubInfo = {
+	public: {
+		repo: string
+		date: string
+	}
+	private: {
+		date: string
+	}
+} | undefined
 
 export default function Github() {
-	const [github, setGithub] = useState({})
+	const [github, setGithub]: [GithubInfo, React.Dispatch<React.SetStateAction<GithubInfo>>] = useState()
   const getGithub = async () => {
     const response = await fetch("/.netlify/functions/github").then(r => r.json())
     setGithub(response)
@@ -11,7 +21,7 @@ export default function Github() {
     getGithub()
   }, [])
 
-	if (github.public === undefined || github.public.date === undefined) {
+	if (github === undefined) {
 		return <></>
 	}
 	return (

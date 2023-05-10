@@ -3,11 +3,11 @@ import "./App.css";
 
 import Lastfm from "./components/Lastfm";
 import Speedruncom from "./components/Speedruncom";
-import Hackthebox from "./components/hackthebox";
-import Github from "./components/github";
-import Gitlab from "./components/gitlab";
-import Osu from "./components/osu";
-import Anilist from "./components/anilist";
+import Hackthebox from "./components/Hackthebox";
+import Github from "./components/Github";
+import Gitlab from "./components/Gitlab";
+import Osu from "./components/Osu";
+import Anilist from "./components/Anilist";
 
 function App() {
   return (
@@ -16,10 +16,10 @@ function App() {
       <div className="info_container">
         <Lastfm/>
         <Speedruncom/>
+        <Osu/>
         {/* <Hackthebox/>
         <Github/>
         <Gitlab/>
-        <Osu/>
         <Anilist/> */}
       </div>
     </div>

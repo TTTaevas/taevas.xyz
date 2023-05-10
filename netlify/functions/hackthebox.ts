@@ -1,8 +1,9 @@
 import { Handler } from '@netlify/functions'
 import { api } from "./shared/api"
+import { HacktheboxInfo } from '../../src/components/Hackthebox'
 
 const handler: Handler = async (event, context) => {
-  let hackthebox = await api<{
+  let hackthebox: {profile: {activity: HacktheboxInfo[]}} = await api<{
     profile: {
       activity: {
         id: string
@@ -16,7 +17,7 @@ const handler: Handler = async (event, context) => {
   }>
   (`https://www.hackthebox.com/api/v4/profile/activity/1063999`)
 
-  let pwn = hackthebox.profile.activity.find((a) => a.object_type === "machine")
+  let pwn = hackthebox.profile.activity.find((a: HacktheboxInfo) => a!.object_type === "machine")
   if (!pwn) {
     return {
       statusCode: 404,

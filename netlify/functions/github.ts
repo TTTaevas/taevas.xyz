@@ -1,5 +1,6 @@
 import { Handler } from '@netlify/functions'
 import { Octokit } from '@octokit/core'
+import { GithubInfo } from '../../src/components/Github'
 
 const handler: Handler = async (event, context) => {
   let octokit = new Octokit({auth: process.env.API_GITHUB})
@@ -20,7 +21,7 @@ const handler: Handler = async (event, context) => {
     }
   }
   
-  let info = {
+  let info: GithubInfo = {
     public: {
       repo: public_push.repo.name,
       date: public_push.created_at.substring(0, public_push.created_at.indexOf("T"))

@@ -1,5 +1,6 @@
 import { Handler } from '@netlify/functions'
 import fetch from "node-fetch"
+import { GitlabInfo } from '../../src/components/Gitlab'
 
 const handler: Handler = async (event, context) => {
   let gitlab = await fetch("https://gitlab.com/api/v4/events?action=pushed", {
@@ -19,11 +20,13 @@ const handler: Handler = async (event, context) => {
   }
 
   let json = await gitlab.json() as {[key: string]: any}
-  let date = json[0].created_at.substring(0, json[0].created_at.indexOf("T"))
+  let activity: GitlabInfo = {
+    date: json[0].created_at.substring(0, json[0].created_at.indexOf("T"))
+  }
   
   return {
     statusCode: 200,
-    body: JSON.stringify({date})
+    body: JSON.stringify(activity)
   }
 }
 

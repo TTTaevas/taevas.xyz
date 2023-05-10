@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
+export type GitlabInfo = {
+	date: string
+} | undefined
 
 export default function Gitlab() {
-	const [gitlab, setGitlab] = useState({})
+	const [gitlab, setGitlab]: [GitlabInfo, React.Dispatch<React.SetStateAction<GitlabInfo>>] = useState()
   const getGitlab = async () => {
     const response = await fetch("/.netlify/functions/gitlab").then(r => r.json())
     setGitlab(response)
@@ -11,7 +15,7 @@ export default function Gitlab() {
     getGitlab()
   }, [])
 
-	if (gitlab.date === undefined) {
+	if (gitlab === undefined) {
 		return <></>
 	}
 	return (

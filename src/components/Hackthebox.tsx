@@ -1,7 +1,16 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
+export type HacktheboxInfo = {
+	id: string
+  date_diff: string
+  object_type: string
+  type: string
+  name: string
+  machine_avatar: string
+} | undefined
 
 export default function Hackthebox() {
-	const [hackthebox, setHackthebox] = useState({})
+	const [hackthebox, setHackthebox]: [HacktheboxInfo, React.Dispatch<React.SetStateAction<HacktheboxInfo>>] = useState()
   const getHackthebox = async () => {
     const response = await fetch("/.netlify/functions/hackthebox").then(r => r.json())
     setHackthebox(response)
@@ -11,7 +20,7 @@ export default function Hackthebox() {
     getHackthebox()
   }, [])
 
-	if (hackthebox.name === undefined) {
+	if (hackthebox === undefined) {
 		return <></>
 	}
 

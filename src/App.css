@@ -50,7 +50,8 @@ body {
   writing-mode: vertical-rl;
 }
 
-.info > * {
-  padding: 3px 10px;
-  margin: auto;
+.info canvas {
+  height: 110px !important;
+  width: 220px !important;
+  margin: 0;
 }

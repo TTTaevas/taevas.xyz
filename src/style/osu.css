@@ -1,0 +1,23 @@
+.gamemode-title {
+	display: flex;
+	margin: auto;
+	margin-bottom: 6px;
+	width: fit-content;
+}
+
+.gamemode-title img {
+	height: 64px;
+	width: 64px;
+}
+
+.gamemode-title h2 {
+	margin-top: auto;
+	margin-bottom: auto;
+	font-size: 24px;
+	padding-bottom: 0.4rem;
+}
+
+.gamemode-title > * {
+	margin-left: 6px;
+	margin-right: 6px;
+}

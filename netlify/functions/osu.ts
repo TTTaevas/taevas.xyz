@@ -1,5 +1,6 @@
 import { Handler } from '@netlify/functions'
 import { API, APIError, User } from 'osu-api-v2-js'
+import { OsuInfo } from '../../src/components/Osu'
 
 const handler: Handler = async (event, context) => {
   let api = await API.createAsync({id: 11451, secret: process.env.API_OSU!})
@@ -24,7 +25,7 @@ const handler: Handler = async (event, context) => {
     }
   }
 
-  let ranks = {
+  let ranks: OsuInfo = {
     osu: [0,0],
     taiko: [0,0],
     fruits: [0,0],
