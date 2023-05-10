@@ -1,5 +1,6 @@
 import { Handler } from '@netlify/functions'
 import { api } from "./shared/api"
+import { SpeedruncomInfo } from '../../src/components/Speedruncom'
 
 const handler: Handler = async (event, context) => {
   // embedding would be stupid here, as that'd create lag due to irrelevant runs
@@ -57,13 +58,13 @@ const handler: Handler = async (event, context) => {
 
   let details = await Promise.all(details_to_request) as [{[key: string]: any}]
 
-  let run = {
+  let run: SpeedruncomInfo = {
     place: speedruncom.data[0].place,
     link: speedruncom.data[0].run.weblink,
     date: speedruncom.data[0].run.date,
     thumbnail: details[0].data.assets["cover-tiny"].uri,
     game: details[0].data.names.international,
-    details: details.slice(1).map((d) => d.data.name) || ""
+    details: details.slice(1).map((d) => d.data.name) || []
   }
 
   return {

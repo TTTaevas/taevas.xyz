@@ -16,19 +16,23 @@ body {
   color: #fff;
 }
 
-.info_details {
-  display: flex;
+.info_container {
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  top: 0px;
 }
 
 .info_container > * {
   border: 3px solid white;
+  margin: 20px;
   width: 300px;
 }
 
 .info_title {
-  border: 3px solid #fff;
   background-color: #fff;
   color: red;
+  padding-right: 3px;
   text-align: right;
   text-transform: uppercase;
   font-weight: bold;
@@ -44,11 +48,6 @@ body {
   text-transform: uppercase;
   text-orientation: upright;
   writing-mode: vertical-rl;
-}
-
-.info {
-  padding: 20px 10px;
-  margin: auto;
 }
 
 .info > * {

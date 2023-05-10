@@ -15,8 +15,8 @@ function App() {
       <h1 className="text-3xl font-bold underline">Simple website thingie</h1>
       <div className="info_container">
         <Lastfm/>
-        {/* <Speedruncom/>
-        <Hackthebox/>
+        <Speedruncom/>
+        {/* <Hackthebox/>
         <Github/>
         <Gitlab/>
         <Osu/>
