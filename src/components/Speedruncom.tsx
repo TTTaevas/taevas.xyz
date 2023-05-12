@@ -25,8 +25,7 @@ export default function Speedruncom() {
 		return <></>
 	}
 
-	let game = speedruncom.game
-	speedruncom.details.forEach((d) => game += ` - ${d}`)
+	let details = speedruncom.details.map((d) => <p>{d}</p>)
 
 	return (
 		<Info
@@ -34,11 +33,16 @@ export default function Speedruncom() {
 			link="https://www.speedrun.com/Taevas/"
 			description="Speedrun"
 			elements={[
-				<a href={speedruncom.link} target="_blank" className="p-0">
-					<img alt="game thumbnail" src={speedruncom.thumbnail} className="h-32 mx-auto mb-2"></img>
-					<p className="leading-5"><strong>#{speedruncom.place}</strong> on <strong>{game}</strong></p>
-				</a>,
-				<p className="mt-2"><strong>{speedruncom.date}</strong></p>
+				<div className="flex">
+					<img alt="game thumbnail" src={speedruncom.thumbnail} className="h-32 my-auto mb-2"></img>
+					<div className="my-auto ml-2">
+						<p className="mb-2">Placed <strong>#{speedruncom.place}</strong> on:</p>
+						<p><strong>{speedruncom.game}</strong></p>
+						{details}
+					</div>
+				</div>,
+				<p className="mt-2"><strong>{speedruncom.date}</strong></p>,
+				<a className="button_link" href={speedruncom.link} target="_blank">Run Details</a>
 			]}
 		/>
 	)

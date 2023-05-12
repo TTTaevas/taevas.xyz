@@ -30,15 +30,16 @@ export default function Lastfm() {
 			link="https://www.last.fm/user/TTTaevas"
 			description="Music"
 			elements={[
-				<a href={lastfm.url} target="_blank" className="flex">
-					<img alt="album thumbnail" src={lastfm.image} className="my-auto mx-auto h-2/5 w-2/5"></img>
-					<div className="my-auto mx-auto w-min">
-						<p className="leading-4 mb-2"><strong>{lastfm.artist}</strong></p>
-						<p className="leading-4 mt-2"><strong>{lastfm.name}</strong></p>
+				<div className="flex mx-auto">
+					<img alt="album thumbnail" src={lastfm.image} className="my-auto h-2/5 w-2/5"></img>
+					<div className="my-auto ml-4 w-fit text-left">
+						<p className="mb-2"><strong>{lastfm.artist}</strong></p>
+						<p className="mt-2"><strong>{lastfm.name}</strong></p>
 					</div>
-				</a>,
-				<p><strong>{lastfm.album}</strong></p>,
-	 			<p>{lastfm.listening ? "(Currently listening!)" : "(Last listened)"}</p>
+				</div>,
+				<p className="mt-2"><strong>{lastfm.album}</strong></p>,
+	 			<p className="mt-4">{lastfm.listening ? "(Currently listening!)" : "(Last listened)"}</p>,
+				<a className="button_link" href={lastfm.url} target="_blank">Music Details</a>
 			]}
 		/>
 	)

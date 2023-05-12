@@ -16,6 +16,10 @@ body {
   color: #fff;
 }
 
+p {
+  line-height: 1rem;
+}
+
 .info_container {
   display: inline-block;
   position: absolute;
@@ -24,7 +28,7 @@ body {
 }
 
 .info_container > * {
-  border: 3px solid white;
+  border: 3px solid #fff;
   margin: 20px;
   width: 300px;
 }
@@ -40,7 +44,7 @@ body {
 
 .info_description {
   padding-top: 10px;
-  border-right: 3px solid white;
+  border-right: 3px solid #fff;
   font-weight: bold;
   font-size: 24px;
   letter-spacing: -5px;
@@ -54,4 +58,22 @@ body {
   height: 110px !important;
   width: 220px !important;
   margin: 0;
+}
+
+.button_link {
+  line-height: 40px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 150px;
+  background-color: #020355;
+  border: 3px solid #fff;
+  color: #fff;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 16px;
+}
+
+.button_link:hover {
+  background-color: #004;
 }
