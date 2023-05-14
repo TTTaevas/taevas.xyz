@@ -5,14 +5,7 @@ import { HacktheboxInfo } from '../../src/components/Hackthebox'
 const handler: Handler = async (event, context) => {
   let hackthebox: {profile: {activity: HacktheboxInfo[]}} = await api<{
     profile: {
-      activity: {
-        id: string
-        date_diff: string
-        object_type: string
-        type: string
-        name: string
-        machine_avatar: string
-      }[]
+      activity: HacktheboxInfo[]
     }
   }>
   (`https://www.hackthebox.com/api/v4/profile/activity/1063999`)
@@ -26,6 +19,7 @@ const handler: Handler = async (event, context) => {
   }
   
   pwn.machine_avatar = `https://www.hackthebox.com${pwn.machine_avatar}`
+  pwn.date = pwn.date.substring(0, pwn.date.indexOf("T"))
   
   return {
     statusCode: 200,

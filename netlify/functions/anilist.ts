@@ -21,6 +21,7 @@ const handler: Handler = async (event, context) => {
               coverImage {
                 medium
               }
+              siteUrl
             }
             progress
             score (format: POINT_10)
@@ -63,8 +64,13 @@ const handler: Handler = async (event, context) => {
     startDate: new Date(`${json.startedAt.year}-${json.startedAt.month}-${json.startedAt.day}`).toISOString(),
     updateDate: new Date(json.updatedAt * 1000).toISOString(),
     endDate: new Date(`${json.completedAt.year}-${json.completedAt.month}-${json.completedAt.day}`).toISOString(),
-    cover: json.media.coverImage.medium
+    cover: json.media.coverImage.medium,
+    url: json.media.siteUrl
   }
+
+  anime.startDate = anime.startDate.substring(0, anime.startDate.indexOf("T"))
+  anime.updateDate = anime.updateDate.substring(0, anime.updateDate.indexOf("T"))
+  anime.endDate = anime.endDate.substring(0, anime.endDate.indexOf("T"))
   
   return {
     statusCode: 200,

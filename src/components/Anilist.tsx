@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Info from "./structures/info";
 
 export type AnilistInfo = {
   title: string
@@ -11,6 +12,7 @@ export type AnilistInfo = {
   updateDate: string
   endDate: string
   cover: string
+	url: string
 } | undefined
 
 export default function Anilist() {
@@ -28,23 +30,32 @@ export default function Anilist() {
 		return <></>
 	}
 	return (
-		<div id="anilist">
-			<p>{anilist.episodes.watched >= anilist.episodes.total ? "Last anime watched:" : "Currently watching:"}</p>
-			<img alt="anime cover" src={anilist.cover}></img>
-			<p><strong>{anilist.title}</strong></p>
-			<p>Started on {anilist.startDate.substring(0, anilist.startDate.indexOf("T"))}</p>
-			{
-				anilist.episodes.watched >= anilist.episodes.total ?
-					<div id="finished_anime">
-						<p>Finished on {anilist.endDate.substring(0, anilist.endDate.indexOf("T"))}</p>
-						<p>Rated it a <strong>{anilist.score}/10</strong></p>
-					</div> :
-					<div id="inprogress_anime">
-						<p>Last watched on {anilist.updateDate.substring(0, anilist.updateDate.indexOf("T"))}</p>
-						<p><strong>Currently {anilist.episodes.watched}/{anilist.episodes.total} episodes in</strong></p>
-						<p><s>please no spoil</s></p>
+		<Info
+			title="Anilist"
+			link="https://anilist.co/user/Taevas/"
+			description="Anime"
+			elements={[
+				<div className="flex mb-4">
+					<img className="w-16 h-22" alt="anime cover" src={anilist.cover}></img>
+					<div className="my-auto ml-2">
+						<p><strong>{anilist.title}</strong></p>
+						<p className="mt-4">Started: <strong>{anilist.startDate}</strong></p>
+						{
+							anilist.episodes.watched >= anilist.episodes.total ?
+								<p>Finished: <strong>{anilist.endDate}</strong></p> :
+								<p>Ep. {anilist.episodes.watched}: <strong>{anilist.updateDate}</strong></p>
+						}
 					</div>
-			}
-		</div>
+				</div>,
+				<>
+					{
+						anilist.episodes.watched >= anilist.episodes.total ?
+							<p>I gave it a <strong>{anilist.score}/10</strong></p> :
+							<p><strong>{anilist.episodes.watched}/{anilist.episodes.total}</strong> episodes watched</p>
+					}
+				</>,
+				<a className="button_link" href={anilist.url} target="_blank">Anime Link</a>
+			]}
+		/>
 	)
 }

@@ -13,14 +13,14 @@ function App() {
   return (
     <div className="App">
       <h1 className="text-3xl font-bold underline">Simple website thingie</h1>
-      <div className="info_container">
+      <div className="inline-block static md:absolute right-0 top-0">
         <Lastfm/>
         <Speedruncom/>
         <Osu/>
-        {/* <Hackthebox/>
-        <Github/>
-        <Gitlab/>
-        <Anilist/> */}
+        <Hackthebox/>
+        {/* <Github/>
+        <Gitlab/> */}
+        <Anilist/>
       </div>
     </div>
   );
