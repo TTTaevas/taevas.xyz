@@ -1,6 +1,6 @@
 import { Handler } from '@netlify/functions'
 import { Octokit } from '@octokit/core'
-import { GithubInfo } from '../../src/components/Github'
+import { GithubInfo } from '../../src/components/Git'
 
 const handler: Handler = async (event, context) => {
   let octokit = new Octokit({auth: process.env.API_GITHUB})

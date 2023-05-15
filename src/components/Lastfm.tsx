@@ -26,21 +26,23 @@ export default function Lastfm() {
 	}
 	return (
 		<Info
-			title="Last.fm"
-			link="https://www.last.fm/user/TTTaevas"
-			description="Music"
-			elements={[
-				<div className="flex mx-auto">
-					<img alt="album thumbnail" src={lastfm.image} className="my-auto h-2/5 w-2/5"></img>
-					<div className="my-auto ml-4 w-fit text-left">
-						<p className="mb-2"><strong>{lastfm.artist}</strong></p>
-						<p className="mt-2"><strong>{lastfm.name}</strong></p>
-					</div>
-				</div>,
-				<p className="mt-2"><strong>{lastfm.album}</strong></p>,
-	 			<p className="mt-4">{lastfm.listening ? "(Currently listening!)" : "(Last listened)"}</p>,
-				<a className="button_link" href={lastfm.url} target="_blank">Music Details</a>
-			]}
+			type="Music"
+			websites={[{
+				name: "Last.fm",
+				link: "https://www.last.fm/user/TTTaevas",
+				elements: [
+					<div className="flex mx-auto">
+						<img alt="album thumbnail" src={lastfm.image} className="my-auto h-2/5 w-2/5"></img>
+						<div className="my-auto ml-4 w-fit text-left">
+							<p className="mb-2"><strong>{lastfm.artist}</strong></p>
+							<p className="mt-2"><strong>{lastfm.name}</strong></p>
+						</div>
+					</div>,
+					<p className="mt-2"><strong>{lastfm.album}</strong></p>,
+					<p className="mt-4">{lastfm.listening ? "(Currently listening!)" : "(Last listened)"}</p>,
+					<a className="button_link" href={lastfm.url} target="_blank">Music Details</a>
+				]
+			}]}
 		/>
 	)
 }

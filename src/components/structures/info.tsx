@@ -1,29 +1,40 @@
 import React from "react";
 
 export default function Info({
-	title,
-	link,
-	description,
-	elements,
+	type,
+	websites
 }: {
-	title: string,
-	link: string,
-	description: string
-	elements: React.JSX.Element[]
+	type: string,
+	websites: {
+		name: string,
+		link: string,
+		elements: React.JSX.Element[]
+	}[]
 }) {
-	return (
-		<div 
-			id={title.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}
-			className="border-3 border-solid border-white m-5 w-80"
-		>
-			<a href={link} target="_blank">
-				<h2 className="info_title">{title}</h2>
-			</a>
-			<div className="flex">
-				<h2 className="info_description">{description}</h2>
-				<div className="info py-5 px-2.5 m-auto">
-					{elements}
+	let sections = websites.map((w) => {
+		return (
+			<div id={w.name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}>
+				<a href={w.link} target="_blank">
+					<h2 className="uppercase text-right font-bold pr-1 bg-white text-red-500">
+						{w.name}
+					</h2>
+				</a>
+				<div className="info p-3 m-auto">
+					{w.elements}
 				</div>
+			</div>
+		)
+	})
+
+	return (
+		<div className="m-5 flex w-80 border-l-3 border-r-3 border-b-3 border-white border-solid" id={type.toLowerCase()}>
+			<h2 className="[text-orientation:upright] [writing-mode:vertical-rl]
+			uppercase text-start text-2xl tracking-tight font-bold pt-2
+			border-r-3 border-t-3 border-white border-solid">
+				{type}
+			</h2>
+			<div className="w-80">
+				{sections}
 			</div>
 		</div>
 	)

@@ -4,8 +4,7 @@ import "./App.css";
 import Lastfm from "./components/Lastfm";
 import Speedruncom from "./components/Speedruncom";
 import Hackthebox from "./components/Hackthebox";
-import Github from "./components/Github";
-import Gitlab from "./components/Gitlab";
+import Git from "./components/Git";
 import Osu from "./components/Osu";
 import Anilist from "./components/Anilist";
 
@@ -16,11 +15,10 @@ function App() {
       <div className="inline-block static md:absolute right-0 top-0">
         <Lastfm/>
         <Speedruncom/>
-        <Osu/>
+        <Git/>
         <Hackthebox/>
-        {/* <Github/>
-        <Gitlab/> */}
         <Anilist/>
+        {/* <Osu/> */}
       </div>
     </div>
   );

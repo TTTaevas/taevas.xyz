@@ -29,18 +29,6 @@ p {
   font-weight: bold;
 }
 
-.info_description {
-  padding-top: 10px;
-  border-right: 3px solid #fff;
-  font-weight: bold;
-  font-size: 24px;
-  letter-spacing: -5px;
-  text-align: start;
-  text-transform: uppercase;
-  text-orientation: upright;
-  writing-mode: vertical-rl;
-}
-
 .info canvas {
   height: 110px !important;
   width: 220px !important;

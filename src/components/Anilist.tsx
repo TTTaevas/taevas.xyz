@@ -31,31 +31,33 @@ export default function Anilist() {
 	}
 	return (
 		<Info
-			title="Anilist"
-			link="https://anilist.co/user/Taevas/"
-			description="Anime"
-			elements={[
-				<div className="flex mb-4">
-					<img className="w-16 h-22" alt="anime cover" src={anilist.cover}></img>
-					<div className="my-auto ml-2">
-						<p><strong>{anilist.title}</strong></p>
-						<p className="mt-4">Started: <strong>{anilist.startDate}</strong></p>
+			type="Anime"
+			websites={[{
+				name: "Anilist",
+				link: "https://anilist.co/user/Taevas/",
+				elements: [
+					<div className="flex mb-4">
+						<img className="w-16 h-22" alt="anime cover" src={anilist.cover}></img>
+						<div className="my-auto ml-2">
+							<p><strong>{anilist.title}</strong></p>
+							<p className="mt-4">Started: <strong>{anilist.startDate}</strong></p>
+							{
+								anilist.episodes.watched >= anilist.episodes.total ?
+									<p>Finished: <strong>{anilist.endDate}</strong></p> :
+									<p>Ep. {anilist.episodes.watched}: <strong>{anilist.updateDate}</strong></p>
+							}
+						</div>
+					</div>,
+					<>
 						{
 							anilist.episodes.watched >= anilist.episodes.total ?
-								<p>Finished: <strong>{anilist.endDate}</strong></p> :
-								<p>Ep. {anilist.episodes.watched}: <strong>{anilist.updateDate}</strong></p>
+								<p>I gave it a <strong>{anilist.score}/10</strong></p> :
+								<p><strong>{anilist.episodes.watched}/{anilist.episodes.total}</strong> episodes watched</p>
 						}
-					</div>
-				</div>,
-				<>
-					{
-						anilist.episodes.watched >= anilist.episodes.total ?
-							<p>I gave it a <strong>{anilist.score}/10</strong></p> :
-							<p><strong>{anilist.episodes.watched}/{anilist.episodes.total}</strong> episodes watched</p>
-					}
-				</>,
-				<a className="button_link" href={anilist.url} target="_blank">Anime Link</a>
-			]}
+					</>,
+					<a className="button_link" href={anilist.url} target="_blank">Anime Link</a>
+				]
+			}]}
 		/>
 	)
 }

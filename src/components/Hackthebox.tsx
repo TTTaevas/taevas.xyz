@@ -28,22 +28,24 @@ export default function Hackthebox() {
 
 	return (
 		<Info
-			title="HackTheBox"
-			link="https://app.hackthebox.com/profile/1063999"
-			description="Hacking"
-			elements={[
-				<div className="flex">
-					<a href={`https://www.hackthebox.com/achievement/machine/1063999/${hackthebox.id}`} target="_blank">
-						<img alt="machine thumbnail" src={hackthebox.machine_avatar}/>
-					</a>
-					<div className="ml-2 my-auto">
-						<p><strong>{hackthebox.name}</strong></p>
-						<p>({hackthebox.type})</p>
-					</div>
-				</div>,
-				<p className="mt-2"><strong>{hackthebox.date}</strong></p>,
-				<a className="button_link" href={`https://app.hackthebox.com/machines/${hackthebox.name}`}>Machine Link</a>,
-			]}
+			type="Hacking"
+			websites={[{
+				name: "HackTheBox",
+				link: "https://app.hackthebox.com/profile/1063999",
+				elements: [
+					<div className="flex">
+						<a href={`https://www.hackthebox.com/achievement/machine/1063999/${hackthebox.id}`} target="_blank">
+							<img alt="machine thumbnail" src={hackthebox.machine_avatar}/>
+						</a>
+						<div className="ml-2 my-auto">
+							<p><strong>{hackthebox.name}</strong></p>
+							<p>({hackthebox.type})</p>
+						</div>
+					</div>,
+					<p className="mt-2"><strong>{hackthebox.date}</strong></p>,
+					<a className="button_link" href={`https://app.hackthebox.com/machines/${hackthebox.name}`}>Machine Link</a>
+				]
+			}]}
 		/>
 	)
 }
