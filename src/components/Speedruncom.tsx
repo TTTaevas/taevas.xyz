@@ -34,9 +34,9 @@ export default function Speedruncom() {
 				name: "speedrun.com",
 				link: "https://www.speedrun.com/Taevas/",
 				elements: [
-					<div className="flex">
-						<img alt="game thumbnail" src={speedruncom.thumbnail} className="h-32 my-auto mb-2"></img>
-						<div className="my-auto ml-2">
+					<div className="flex pb-2">
+						<img alt="game thumbnail" src={speedruncom.thumbnail} className="h-32 m-auto"></img>
+						<div className="m-auto pl-2">
 							<p className="mb-2">Placed <strong>#{speedruncom.place}</strong> on:</p>
 							<p><strong>{speedruncom.game}</strong></p>
 							{details}

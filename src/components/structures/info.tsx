@@ -29,7 +29,7 @@ export default function Info({
 	return (
 		<div className="m-5 flex w-80 border-l-3 border-r-3 border-b-3 border-white border-solid" id={type.toLowerCase()}>
 			<h2 className="[text-orientation:upright] [writing-mode:vertical-rl]
-			uppercase text-start text-2xl tracking-tight font-bold pt-2
+			uppercase text-start text-2xl tracking-tighter font-bold pt-2
 			border-r-3 border-t-3 border-white border-solid">
 				{type}
 			</h2>

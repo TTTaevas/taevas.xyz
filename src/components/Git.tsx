@@ -42,17 +42,18 @@ export default function Git() {
 			type="Coding"
 			websites={[{
 				name: "GitHub",
-				link: "https://app.hackthebox.com/profile/1063999",
+				link: "https://github.com/TTTaevas",
 				elements: [
-					<p>Latest public push on GitHub: {github.public.date} on {github.public.repo}</p>,
-					<p>Latest private push on GitHub: {github.private.date}</p>
+					<p>Latest <strong>private</strong> push: <strong>{github.private.date}</strong></p>,
+					<p className="mt-2">Latest <strong>public</strong> push: <strong>{github.public.date} on {github.public.repo}</strong></p>,
+					<a className="button_link" href={`https://github.com/${github.public.repo}`} target="_blank">Repo Link</a>
 				]
 			},
 			{
 				name: "GitLab",
-				link: "https://app.hackthebox.com/profile/1063999",
+				link: "https://gitlab.com/TTTaevas",
 				elements: [
-					<p>Latest push on GitLab: {gitlab.date}</p>
+					<p>Latest push: <strong>{gitlab.date}</strong></p>
 				]
 			}]}
 		/>

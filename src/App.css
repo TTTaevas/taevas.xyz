@@ -20,21 +20,6 @@ p {
   line-height: 1rem;
 }
 
-.info_title {
-  background-color: #fff;
-  color: red;
-  padding-right: 3px;
-  text-align: right;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.info canvas {
-  height: 110px !important;
-  width: 220px !important;
-  margin: 0;
-}
-
 .button_link {
   line-height: 40px;
   font-size: 18px;

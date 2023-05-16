@@ -34,10 +34,10 @@ export default function Hackthebox() {
 				link: "https://app.hackthebox.com/profile/1063999",
 				elements: [
 					<div className="flex">
-						<a href={`https://www.hackthebox.com/achievement/machine/1063999/${hackthebox.id}`} target="_blank">
+						<a className="m-auto h-16 w-16" href={`https://www.hackthebox.com/achievement/machine/1063999/${hackthebox.id}`} target="_blank">
 							<img alt="machine thumbnail" src={hackthebox.machine_avatar}/>
 						</a>
-						<div className="ml-2 my-auto">
+						<div className="m-auto pl-4">
 							<p><strong>{hackthebox.name}</strong></p>
 							<p>({hackthebox.type})</p>
 						</div>

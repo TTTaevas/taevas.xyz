@@ -18,7 +18,7 @@ function App() {
         <Git/>
         <Hackthebox/>
         <Anilist/>
-        {/* <Osu/> */}
+        <Osu/>
       </div>
     </div>
   );
