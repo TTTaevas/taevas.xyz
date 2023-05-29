@@ -1,6 +1,6 @@
 import { Handler } from '@netlify/functions'
 import fetch from "node-fetch"
-import { AnilistInfo } from '../../src/components/Anilist'
+import { AnilistInfo } from '../../src/components/infos/Anilist'
 
 const handler: Handler = async (event, context) => {
   let anilist = await fetch("https://graphql.anilist.co", {

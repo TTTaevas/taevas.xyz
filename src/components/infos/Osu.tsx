@@ -10,8 +10,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import Info from "./structures/info";
-import "../style/osu.css"
+import Info from "./structure";
+import "../../style/infos/osu.css"
 
 export type OsuInfo = {
 	osu: number[]

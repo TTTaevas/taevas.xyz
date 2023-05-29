@@ -8,14 +8,6 @@
   margin: auto;
 }
 
-body {
-  background: linear-gradient(to left, #0d0c69 0%, #000151 100%);
-  background-size: 530px auto cover;
-  background-attachment: fixed;
-  margin: 0;
-  color: #fff;
-}
-
 p {
   line-height: 1rem;
 }

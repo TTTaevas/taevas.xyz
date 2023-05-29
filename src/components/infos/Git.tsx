@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Info from "./structures/info";
+import Info from "./structure";
 
 export type GithubInfo = {
 	public: {

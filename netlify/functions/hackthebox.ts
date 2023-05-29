@@ -1,6 +1,6 @@
 import { Handler } from '@netlify/functions'
 import { api } from "./shared/api"
-import { HacktheboxInfo } from '../../src/components/Hackthebox'
+import { HacktheboxInfo } from '../../src/components/infos/Hackthebox'
 
 const handler: Handler = async (event, context) => {
   let hackthebox: {profile: {activity: HacktheboxInfo[]}} = await api<{
