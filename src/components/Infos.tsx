@@ -8,7 +8,7 @@ import Anilist from "./infos/Anilist";
 
 function Infos() {
 	return (
-		<div className="bg-gradient-to-r from-sky-600 to-indigo-600 text-white inline-block static">
+		<div className="h-full fixed right-0 overflow-y-auto border-l-3 border-white border-solid bg-gradient-to-r from-sky-600 to-indigo-600 text-white inline-block static">
       <Lastfm/>
       <Speedruncom/>
       <Git/>

@@ -2,10 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "LexendDeca";
+  src: url("/LexendDeca-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .App {
   width: 100%;
   text-align: center;
   margin: auto;
+  font-family:"LexendDeca", "Arial", sans-serif;
 }
 
 p {
