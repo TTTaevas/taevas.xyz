@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
+import AnimateHeight from 'react-animate-height';
 import "./App.css";
+
 import Infos from "./components/Infos";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Projects from "./components/Projects";
+import Support from "./components/Support";
 
 function App() {
+  let [tab, setTab] = useState("none")
   let [lang, setLang] = useState(localStorage.getItem("lang") || "en")
   useEffect(() => {localStorage.setItem("lang", lang)}, [lang])
 
@@ -33,15 +40,19 @@ function App() {
     }
   }
 
-
-
   return (
     <div className="App h-screen bg-gradient-to-b from-sky-500 to-white md:flex">
       <div className="w-screen h-screen my-auto md:p-8 lg:p-12 mr-[363px]">
-        <div className="relative justify-center items-center mb-8">
-          <h1 className="text-8xl font-bold">{s.hi[lang]}</h1>
-          <h2 className="text-3xl font-bold">{s.why[lang]}</h2>
-        </div>
+        <AnimateHeight
+          id="intro"
+          duration={300}
+          height={tab === "none" ? "auto" : 0}
+        >
+          <div className={`relative justify-center items-center mb-8`}>
+            <h1 className="text-8xl font-bold">{s.hi[lang]}</h1>
+            <h2 className="text-3xl font-bold">{s.why[lang]}</h2>
+          </div>
+        </AnimateHeight>
         <div className="relative justify-center items-center">
           <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
           bg-gradient-to-t from-70% from-slate-500 to-slate-600 hover:from-slate-700 hover:to-slate-600"
@@ -49,18 +60,48 @@ function App() {
             {lang === "fr" ? "🇬🇧" : "🇫🇷"}
           </button>
           <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-          bg-gradient-to-t from-70% from-purple-500 to-purple-600 hover:from-purple-700 hover:to-purple-600">{s.abt[lang]}</button>
+          bg-gradient-to-t from-70% from-purple-500 to-purple-600 hover:from-purple-700 hover:to-purple-600"
+          onClick={() => {setTab("about")}}>{s.abt[lang]}</button>
           <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-          bg-gradient-to-t from-70% from-emerald-500 to-emerald-600 hover:from-emerald-700 hover:to-emerald-600">{s.pro[lang]}</button>
+          bg-gradient-to-t from-70% from-emerald-500 to-emerald-600 hover:from-emerald-700 hover:to-emerald-600"
+          onClick={() => {setTab("projects")}}>{s.pro[lang]}</button>
           <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-          bg-gradient-to-t from-70% from-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600">{s.con[lang]}</button>
+          bg-gradient-to-t from-70% from-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600"
+          onClick={() => {setTab("contact")}}>{s.con[lang]}</button>
           <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-          bg-gradient-to-t from-70% from-rose-500 to-rose-600 hover:from-rose-700 hover:to-rose-600">{s.sup[lang]}</button>
+          bg-gradient-to-t from-70% from-rose-500 to-rose-600 hover:from-rose-700 hover:to-rose-600"
+          onClick={() => {setTab("support")}}>{s.sup[lang]}</button>
         </div>
+        <AnimateHeight
+          id="about"
+          duration={300}
+          height={tab === "about" ? "auto" : 0}
+        >
+          <About />
+        </AnimateHeight>
+        <AnimateHeight
+          id="projects"
+          duration={300}
+          height={tab === "projects" ? "auto" : 0}
+        >
+          <Projects />
+        </AnimateHeight>
+        <AnimateHeight
+          id="contact"
+          duration={300}
+          height={tab === "contact" ? "auto" : 0}
+        >
+          <Contact />
+        </AnimateHeight>
+        <AnimateHeight
+          id="support"
+          duration={300}
+          height={tab === "support" ? "auto" : 0}
+        >
+          <Support />
+        </AnimateHeight>
       </div>
-      <div>
-        <Infos />
-      </div>
+      <Infos />
     </div>
   );
 }

@@ -32,7 +32,7 @@ export default function Lastfm() {
 				link: "https://www.last.fm/user/TTTaevas",
 				elements: [
 					<div className="flex">
-						<img alt="album thumbnail" src={lastfm.image} className="m-auto h-24 w-24"></img>
+						<img alt="album thumbnail" src={lastfm.image} className="m-auto h-24 w-24" />
 						<div className="m-auto pl-4 w-fit">
 							<p className="mb-2"><strong>{lastfm.artist}</strong></p>
 							<p className="mt-2"><strong>{lastfm.name}</strong></p>

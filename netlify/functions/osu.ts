@@ -25,23 +25,27 @@ const handler: Handler = async (event, context) => {
     }
   }
 
-  let ranks: OsuInfo = {
-    osu: [0,0],
-    taiko: [0,0],
-    fruits: [0,0],
-    mania: [0,0]
+  let info: OsuInfo = {
+    country: (profile[0] as User).country?.name!,
+    osu: {global: 0, country: 0},
+    taiko: {global: 0, country: 0},
+    fruits: {global: 0, country: 0},
+    mania: {global: 0, country: 0}
   }
 
   for (let i = 0; i < profile.length; i++) {
-    let mode = profile[i] as User
-    if (mode.rank_history) {
-      ranks[mode.rank_history.mode] = mode.rank_history.data
+    let umode = profile[i] as User
+    if (umode.statistics && umode.rank_history) {
+      // At the time of writing this, osu-api-v2-js ain't exactly the greatest package ever written
+      let stats = umode.statistics as any
+      info[umode.rank_history.mode].global = stats.global_rank
+      info[umode.rank_history.mode].country = stats.country_rank
     }
   }
   
   return {
     statusCode: 200,
-    body: JSON.stringify(ranks)
+    body: JSON.stringify(info)
   }
 }
 

@@ -37,7 +37,7 @@ export default function Anilist() {
 				link: "https://anilist.co/user/Taevas/",
 				elements: [
 					<div className="flex mb-4">
-						<img className="m-auto w-16 h-22" alt="anime cover" src={anilist.cover}></img>
+						<img className="m-auto w-16 h-22" alt="anime cover" src={anilist.cover} />
 						<div className="m-auto pl-2">
 							<p><strong>{anilist.title}</strong></p>
 							<p className="mt-4">Started: <strong>{anilist.startDate}</strong></p>
