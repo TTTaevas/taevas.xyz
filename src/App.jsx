@@ -3,10 +3,7 @@ import AnimateHeight from 'react-animate-height';
 import "./App.css";
 
 import Infos from "./components/Infos";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Projects from "./components/Projects";
-import Support from "./components/Support";
+import Tabs from "./components/Tabs";
 
 function App() {
   let [tab, setTab] = useState("none")
@@ -53,7 +50,7 @@ function App() {
             <h2 className="text-3xl font-bold">{s.why[lang]}</h2>
           </div>
         </AnimateHeight>
-        <div className="relative justify-center items-center">
+        <div className="relative justify-center items-center mb-8">
           <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
           bg-gradient-to-t from-70% from-slate-500 to-slate-600 hover:from-slate-700 hover:to-slate-600"
           onClick={() => {setLang(lang !== "en" ? "en" : "fr")}}>
@@ -72,34 +69,7 @@ function App() {
           bg-gradient-to-t from-70% from-rose-500 to-rose-600 hover:from-rose-700 hover:to-rose-600"
           onClick={() => {setTab("support")}}>{s.sup[lang]}</button>
         </div>
-        <AnimateHeight
-          id="about"
-          duration={300}
-          height={tab === "about" ? "auto" : 0}
-        >
-          <About />
-        </AnimateHeight>
-        <AnimateHeight
-          id="projects"
-          duration={300}
-          height={tab === "projects" ? "auto" : 0}
-        >
-          <Projects />
-        </AnimateHeight>
-        <AnimateHeight
-          id="contact"
-          duration={300}
-          height={tab === "contact" ? "auto" : 0}
-        >
-          <Contact />
-        </AnimateHeight>
-        <AnimateHeight
-          id="support"
-          duration={300}
-          height={tab === "support" ? "auto" : 0}
-        >
-          <Support />
-        </AnimateHeight>
+        <Tabs lang={lang} tab={tab} />
       </div>
       <Infos />
     </div>
