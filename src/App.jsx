@@ -40,34 +40,36 @@ function App() {
   return (
     <div className="App h-screen bg-gradient-to-b from-sky-500 to-white md:flex">
       <div className="w-screen h-screen my-auto md:p-8 lg:p-12 mr-[363px]">
-        <AnimateHeight
-          id="intro"
-          duration={300}
-          height={tab === "none" ? "auto" : 0}
-        >
-          <div className={`relative justify-center items-center mb-8`}>
-            <h1 className="text-8xl font-bold">{s.hi[lang]}</h1>
-            <h2 className="text-3xl font-bold">{s.why[lang]}</h2>
+        <div className="bg-blue-600 text-white md:border-solid md:border-white md:border-8 md:rounded-xl p-4 md:p-8 md:mb-8">
+          <AnimateHeight
+            id="intro"
+            duration={300}
+            height={tab === "none" ? "auto" : 0}
+          >
+            <div className={`relative justify-center items-center mb-8`}>
+              <h1 className="text-6xl md:text-8xl font-bold">{s.hi[lang]}</h1>
+              <h2 className="text-3xl font-bold">{s.why[lang]}</h2>
+            </div>
+          </AnimateHeight>
+          <div className="relative justify-center items-center">
+            <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
+            bg-gradient-to-t from-70% from-slate-500 to-slate-600 hover:from-slate-700 hover:to-slate-600"
+            onClick={() => {setLang(lang !== "en" ? "en" : "fr")}}>
+              {lang === "fr" ? "🇬🇧" : "🇫🇷"}
+            </button>
+            <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
+            bg-gradient-to-t from-70% from-purple-500 to-purple-600 hover:from-purple-700 hover:to-purple-600"
+            onClick={() => {setTab("about")}}>{s.abt[lang]}</button>
+            <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
+            bg-gradient-to-t from-70% from-emerald-500 to-emerald-600 hover:from-emerald-700 hover:to-emerald-600"
+            onClick={() => {setTab("projects")}}>{s.pro[lang]}</button>
+            <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
+            bg-gradient-to-t from-70% from-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600"
+            onClick={() => {setTab("contact")}}>{s.con[lang]}</button>
+            <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
+            bg-gradient-to-t from-70% from-rose-500 to-rose-600 hover:from-rose-700 hover:to-rose-600"
+            onClick={() => {setTab("support")}}>{s.sup[lang]}</button>
           </div>
-        </AnimateHeight>
-        <div className="relative justify-center items-center mb-8">
-          <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-          bg-gradient-to-t from-70% from-slate-500 to-slate-600 hover:from-slate-700 hover:to-slate-600"
-          onClick={() => {setLang(lang !== "en" ? "en" : "fr")}}>
-            {lang === "fr" ? "🇬🇧" : "🇫🇷"}
-          </button>
-          <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-          bg-gradient-to-t from-70% from-purple-500 to-purple-600 hover:from-purple-700 hover:to-purple-600"
-          onClick={() => {setTab("about")}}>{s.abt[lang]}</button>
-          <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-          bg-gradient-to-t from-70% from-emerald-500 to-emerald-600 hover:from-emerald-700 hover:to-emerald-600"
-          onClick={() => {setTab("projects")}}>{s.pro[lang]}</button>
-          <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-          bg-gradient-to-t from-70% from-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600"
-          onClick={() => {setTab("contact")}}>{s.con[lang]}</button>
-          <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-          bg-gradient-to-t from-70% from-rose-500 to-rose-600 hover:from-rose-700 hover:to-rose-600"
-          onClick={() => {setTab("support")}}>{s.sup[lang]}</button>
         </div>
         <Tabs lang={lang} tab={tab} />
       </div>
