@@ -71,7 +71,7 @@ function App() {
             onClick={() => {setTab("support")}}>{s.sup[lang]}</button>
           </div>
         </div>
-        <Tabs lang={lang} tab={tab} />
+        <Tabs lang={lang} tab={tab} setTab={setTab} />
       </div>
       <Infos />
     </div>
