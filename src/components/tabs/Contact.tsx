@@ -14,15 +14,61 @@ function Contact({
 		name: {
 			en: "contact",
 			fr: "contacter"
+		},
+		p_name: {
+			en: "Your name",
+			fr: "Votre nom"
+		},
+		p_contact: {
+			en: "How I can contact you back",
+			fr: "Comment je peux vous recontacter"
+		},
+		p_message: {
+			en: "Your message",
+			fr: "Votre message"
+		},
+		send: {
+			en: "Send message",
+			fr: "Envoyer le message"
+		},
+		sent: {
+			en: "Message sent!",
+			fr: "Message envoyé !"
 		}
 	}
+
+	const contactMe = (event: any) => {
+		event.preventDefault()
+		if (!event.target) {
+			throw new Error("no event target")
+		}
+
+		const myForm = event.target as HTMLFormElement
+		const formData = new FormData(myForm)
+
+		fetch("/", {
+			method: "POST",
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			body: new URLSearchParams(formData as any).toString(),
+		})
+		.then(() => alert(s.sent[lang]))
+		.catch((error) => alert(error))
+	};
+
 	let elements = [(
 		// @ts-ignore (netlify property is unknown to the form element)
-		<form className="block w-min m-auto" name="contact" netlify="true">
-			<input required type="text" className="form-input w-80 m-1" placeholder="Your name" name="submitted-name" autoComplete="name" />
-			<input type="text" className="form-input w-80 m-1" placeholder="How I can contact you back" name="submitted-contact" autoComplete="email" />
-			<textarea required className="form-textarea h-60 w-96 m-1" placeholder="Your message" name="submitted-message" />
-			<input type="submit" value="Submit" />
+		<form 
+			data-netlify="true"
+			className="block w-min mx-auto my-2"
+			method="post"
+			name="contact"
+			onSubmit={contactMe}
+		>
+			<input type="hidden" name="form-name" value="contact" />
+			<input required type="text" className="form-input w-80 m-1" placeholder={s.p_name[lang]} name="submitted-name" autoComplete="name" />
+			<input type="text" className="form-input w-80 m-1" placeholder={s.p_contact[lang]} name="submitted-contact" autoComplete="email" />
+			<textarea required className="form-textarea h-60 w-96 m-1" placeholder={s.p_message[lang]} name="submitted-message" />
+			<button type="submit" className="cursor-pointer w-80 p-3 m-4 border-solid border-slate-600 border-2 rounded-xl bg-white hover:bg-slate-100">{s.send[lang]}</button>
 		</form>
 	)]
 	return (

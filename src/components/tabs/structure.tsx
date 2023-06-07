@@ -22,7 +22,7 @@ export default function Tab({
       duration={300}
       height={tab === id ? "auto" : 0}
     >
-			<div className="relative bg-white mb-2 md:rounded-t-xl">
+			<div className="relative bg-white md:rounded-t-xl">
 				<div className="float-left cursor-pointer" onClick={() => {setTab("none")}}>
 					<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 32 32"><path fill="red" d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4l6.6 6.6L8 22.6L9.4 24l6.6-6.6l6.6 6.6l1.4-1.4l-6.6-6.6L24 9.4z"/></svg>
 				</div>
