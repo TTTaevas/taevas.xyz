@@ -16,15 +16,15 @@ function About({
 			fr: "à propos"
 		},
 		one: {
-			en: <p>o/ <b>I'm Taevas</b> (rough IPA: /taɛvæs/) and I am a young person from <b>Brittany</b> who is heavily invested in everything networking-related, 
-					such as but not limited to <b>web development, cybersecurity, and cryptography.</b></p>,
-			fr: <p>o/ <b>Je suis Taevas</b> (IPA approximatif: /taɛvæs/) et je suis une jeune personne de <b>Bretagne</b> qui s'investit beaucoup dans tout ce qui
-					touche aux réseaux, comme par exemple le <b>développement web, la cybersécurité et la cryptographie.</b></p>
+			en: <p>o/ <b>I'm Taevas</b> (rough IPA: /taɛvæs/) and I am a young person from <b>Brittany</b> who is currently invested in programming,
+					more specifically <b>game development, web development, networking, and cybersecurity.</b></p>,
+			fr: <p>o/ <b>Je suis Taevas</b> (IPA approximatif: /taɛvæs/) et je suis une jeune personne de <b>Bretagne</b> qui s'investit pour le moment dans la programmation,
+					plus spécifiquement le <b>développmenet de jeux-vidéos, le développement web, et ce qui touche aux réseaux et la cybersécurité.</b></p>
 		},
 		two: {
-			en: <p>I am also somewhat skilled in more common stuff, such as <b>spreadsheeting, video-editing, and even specific video games</b>, so far as to 
+			en: <p>I am also somewhat skilled in more common stuff, such as <b>spreadsheeting, video-editing, and even playing specific video games</b>, so far as to
 					speedrun them or to play them competitively!</p>,
-			fr: <p>J'ai aussi quelques compétences dans des trucs plus commun, tels que pour <b>les tableurs, le montage vidéo, et même certains jeux vidéos</b>,
+			fr: <p>J'ai aussi quelques compétences dans des trucs plus commun, tels que pour <b>les tableurs, le montage vidéo, et même jouer à certains jeux vidéos</b>,
 					jusqu'à même les "speedrun" ou les jouer de façon compétitive !</p>
 		},
 		three: {
