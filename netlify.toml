@@ -1,11 +1,11 @@
 [build]
     publish = "dist"
-    command = "yarn run build"
+    command = "bun run build"
     node_bundler = "esbuild"
 
 [dev]
     publish = "src"
-    command = "yarn run dev"
+    command = "bun run dev"
     targetPort = 5173
     node_bundler = "esbuild"
 
