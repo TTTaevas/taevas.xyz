@@ -32,6 +32,23 @@ function Projects({
 				<br/>
 				<p>It helped friends with remembering katakanas, so I'm glad I took the time to make and polish this webpage!</p>
 			</div>
+			<div className="border-4 p-4 m-4 max-w-3xl text-center">
+				<p>Still in early 2023, I've made <a href="https://github.com/TTTaevas/osu-api-v1-js" target="_blank">osu-api-v1-js</a>, my first JavaScript (TypeScript) package!</p>
+				<br/>
+				<p>I've been using the first version of osu!'s API in several ways for years at this point, and yet I've never been using any package to make my life easier, I remember simply using axios directly and copypasting code between some of my projects. I never felt like using third party software to use such a simple API.</p>
+				<br/>
+				<p>Yet it's not really great to keep writing the same code over and over again, so I used this excuse to finally try my hand at writing packages! I honestly think the result is great, it fully covers the API, is fully documented, and even makes things more intuitive and consistent, I literally don't know how I could make it better!</p>
+			</div>
+			<div className="border-4 p-4 m-4 max-w-3xl text-center">
+				<a href="https://finder.taevas.xyz" target="_blank"><img className="m-4 float-right h-16" src="https://finder.taevas.xyz/Webpage/favicon.png" alt="Website-Finder logo"/></a>
+				<p>...Website-Finder is actually an odd one. What started off in 2020 as <a href="https://gitlab.com/Isterix/rif2" target="_blank">a simple Ruby script that downloads images from <i>every website it can find</i></a>, became a way for me to experiment with different programming languages and their networking capabilities, without dependencies.</p>
+				<br/>
+				<p>I love the concept of a program finding 100% random websites in the wild for you, and that made me want to share the project with other people who would not really know how to run (or even choose!) any script, so in 2023, I redesigned the webpage version of the program, which is the only version with some sort of GUI.</p>
+				<br/>
+				<p>From what I remember, some people didn't actually like the design of the webpage, yet I think it's the best design I've ever managed to make for any website!</p>
+				<br/>
+				<p>I must have weird tastes or something.</p>
+			</div>
 		</div>
 	)]
 	return (
