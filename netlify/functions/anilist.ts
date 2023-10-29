@@ -12,7 +12,7 @@ const handler: Handler = async (event, context) => {
     body: JSON.stringify({
       query: `
         query ($userName: String) {
-          MediaList (userName: $userName, type: ANIME, sort: UPDATED_TIME_DESC) {
+          MediaList (userName: $userName, type: ANIME, startedAt_greater: 1, sort: UPDATED_TIME_DESC) {
             media {
               title {
                 romaji
@@ -44,8 +44,9 @@ const handler: Handler = async (event, context) => {
       }
     })
   })
-
   if (anilist.status !== 200) {
+    // log the issue in netlify, return 404 to the user anyway
+    console.log(await anilist.json())
     return {
       statusCode: 404,
       body: ""

@@ -4,14 +4,14 @@ import "../../style/infos/osu.css"
 
 export type OsuInfo = {
   country: string
-	osu: {global: number, country: number}
+  osu: {global: number, country: number}
   taiko: {global: number, country: number}
   fruits: {global: number, country: number}
   mania: {global: number, country: number}
 } | undefined
 
 export default function Osu() {
-	const [osu, setOsu]: [OsuInfo, React.Dispatch<React.SetStateAction<OsuInfo>>] = useState()
+  const [osu, setOsu]: [OsuInfo, React.Dispatch<React.SetStateAction<OsuInfo>>] = useState()
   const getOsu = async () => {
     const response = await fetch("/.netlify/functions/osu").then(r => r.json())
     setOsu(response)
@@ -21,11 +21,11 @@ export default function Osu() {
     getOsu()
   }, [])
 
-	if (osu === undefined) {
-		return <></>
-	}
+  if (osu === undefined) {
+    return <></>
+  }
 
-	return (
+  return (
     <Info
       type="Rhythm games"
       websites={[{
@@ -78,5 +78,5 @@ export default function Osu() {
         ]
       }]}
     />
-	)
+  )
 }
