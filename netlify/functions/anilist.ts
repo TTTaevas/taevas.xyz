@@ -62,9 +62,9 @@ const handler: Handler = async (event, context) => {
       total: json.media.episodes,
     },
     score: json.score,
-    startDate: new Date(`${json.startedAt.year}-${json.startedAt.month}-${json.startedAt.day}`).toISOString(),
+    startDate: json.startedAt.year ? new Date(`${json.startedAt.year}-${json.startedAt.month}-${json.startedAt.day}`).toISOString() : new Date().toISOString(),
     updateDate: new Date(json.updatedAt * 1000).toISOString(),
-    endDate: new Date(`${json.completedAt.year}-${json.completedAt.month}-${json.completedAt.day}`).toISOString(),
+    endDate: json.completedAt.year ? new Date(`${json.completedAt.year}-${json.completedAt.month}-${json.completedAt.day}`).toISOString() : new Date().toISOString(),
     cover: json.media.coverImage.medium,
     url: json.media.siteUrl
   }

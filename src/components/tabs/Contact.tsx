@@ -1,5 +1,6 @@
 import React from "react";
 import Tab from "./structure";
+import CopyField from "../CopyField";
 
 function Contact({
   lang,
@@ -22,8 +23,13 @@ function Contact({
       <br/>
       <p>And yet, if I want people to easily contact me, and make communication with them convenient, then I need to settle on <i>something!</i></p>
       <br/>
-      <p>So, I've decided to go for the Matrix protocol! Feel free to DM me on this account: @taevas:matrix.org <a className="text-link" href="https://matrix.to/#/@taevas:matrix.org" target="_blank">(matrix.to link)</a></p>
-      <p>If you don't feel like using this protocol though, know that my Discord account hasn't gone inactive just yet: Taevas#9730 (yes I still use a tag)</p>
+      <p className="text-center">So, I've decided to go for the Matrix protocol! Feel free to DM me on this account:</p>
+      <CopyField text="@taevas:matrix.org"/>
+      <p className="text-center"><a className="text-link text-center" href="https://matrix.to/#/@taevas:matrix.org" target="_blank">(matrix.to link)</a></p>
+      <br/>
+      <p className="text-center">If you don't feel like using this protocol though, know that my Discord account hasn't gone inactive just yet:</p>
+      <CopyField text="Taevas#9730"/>
+      <p className="text-center">(yes I still use a tag)</p>
     </div>
   )]
   return (
