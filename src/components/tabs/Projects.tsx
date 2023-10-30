@@ -20,7 +20,7 @@ function Projects({
     <div className="inline-block m-4 text-white">
       <div className="border-4 p-4 m-4 max-w-3xl text-center">
         <iframe className="float-right m-4" src="https://itch.io/embed/2295061?border_width=5&amp;bg_color=1d0e11&amp;fg_color=ffffff&amp;link_color=32c400&amp;border_color=6c5129" width="560" height="175"><a href="https://tttaevas.itch.io/swordventure">SwordVenture by Taevas</a></iframe>
-        <p><b>SwordVenture</b> initially was <a href="https://github.com/RemiL-Nel/Clicker-game" target="_blank">a game made by a friend in React which I helped develop,</a> but I've made the choice months later to <b>recode it from scratch in Godot</b>, a proper game engine!</p>
+        <p><b>SwordVenture</b> initially was <a className="text-link" href="https://github.com/RemiL-Nel/Clicker-game" target="_blank">a game made by a friend in React which I helped develop,</a> but I've made the choice months later to <b>recode it from scratch in Godot</b>, a proper game engine!</p>
         <br/>
         <p>This was my first experience in this engine, and development took me a little more than 100 hours, in the span of less than a month. While a little barebones, I'm still very satisfied with the result!</p>
       </div>
@@ -33,7 +33,7 @@ function Projects({
         <p>It helped friends with remembering katakanas, so I'm glad I took the time to make and polish this webpage!</p>
       </div>
       <div className="border-4 p-4 m-4 max-w-3xl text-center">
-        <p>Still in early 2023, I've made <a href="https://github.com/TTTaevas/osu-api-v1-js" target="_blank">osu-api-v1-js</a>, my first JavaScript (TypeScript) package!</p>
+        <p>Still in early 2023, I've made <a className="text-link" href="https://github.com/TTTaevas/osu-api-v1-js" target="_blank">osu-api-v1-js</a>, my first JavaScript (TypeScript) package!</p>
         <br/>
         <p>I've been using the first version of osu!'s API in several ways for years at this point, and yet I've never been using any package to make my life easier, I remember simply using axios directly and copypasting code between some of my projects. I never felt like using third party software to use such a simple API.</p>
         <br/>
@@ -41,7 +41,7 @@ function Projects({
       </div>
       <div className="border-4 p-4 m-4 max-w-3xl text-center">
         <a href="https://finder.taevas.xyz" target="_blank"><img className="m-4 float-right h-16" src="https://finder.taevas.xyz/Webpage/favicon.png" alt="Website-Finder logo"/></a>
-        <p>...Website-Finder is actually an odd one. What started off in 2020 as <a href="https://gitlab.com/Isterix/rif2" target="_blank">a simple Ruby script that downloads images from <i>every website it can find</i></a>, became a way for me to experiment with different programming languages and their networking capabilities, without dependencies.</p>
+        <p>...Website-Finder is actually an odd one. What started off in 2020 as <a className="text-link" href="https://gitlab.com/Isterix/rif2" target="_blank">a simple Ruby script that downloads images from <i>every website it can find</i>,</a> became a way for me to experiment with different programming languages and their networking capabilities, without dependencies.</p>
         <br/>
         <p>I love the concept of a program finding 100% random websites in the wild for you, and that made me want to share the project with other people who would not really know how to run (or even choose!) any script, so in 2023, I redesigned the webpage version of the program, which is the only version with some sort of GUI.</p>
         <br/>

@@ -20,6 +20,17 @@ p {
   line-height: 1rem;
 }
 
+#tab {
+  box-shadow: 12px 12px #1e1e55;
+}
+
+.text-link {
+  background-color: #0a2e99;
+  color: #ffe88f;
+  line-height: 20px;
+  padding: 0 5px;
+}
+
 .button_link {
   line-height: 40px;
   font-size: 18px;

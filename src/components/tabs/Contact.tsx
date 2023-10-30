@@ -22,7 +22,7 @@ function Contact({
       <br/>
       <p>And yet, if I want people to easily contact me, and make communication with them convenient, then I need to settle on <i>something!</i></p>
       <br/>
-      <p>So, I've decided to go for the Matrix protocol! Feel free to DM me on this account: @taevas:matrix.org</p>
+      <p>So, I've decided to go for the Matrix protocol! Feel free to DM me on this account: @taevas:matrix.org <a className="text-link" href="https://matrix.to/#/@taevas:matrix.org" target="_blank">(matrix.to link)</a></p>
       <p>If you don't feel like using this protocol though, know that my Discord account hasn't gone inactive just yet: Taevas#9730 (yes I still use a tag)</p>
     </div>
   )]

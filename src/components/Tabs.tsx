@@ -14,7 +14,7 @@ function Tabs({
   setTab: React.Dispatch<React.SetStateAction<string>>
 }) {
   return (
-    <div className="bg-blue-500 rounded-t-xl m-auto">
+    <div id="tab" className="bg-blue-500 rounded-t-xl m-auto md:mb-8">
       <About lang={lang} tab={tab} setTab={setTab} />
       <Projects lang={lang} tab={tab} setTab={setTab} />
       <Contact lang={lang} tab={tab} setTab={setTab} />
