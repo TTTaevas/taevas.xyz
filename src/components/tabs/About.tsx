@@ -59,7 +59,7 @@ function About({
         <br/>
         {s.three[lang]}
       </div>
-      <div className="mr-auto mt-4 max-w-3xl text-center">
+      <div className="mr-auto mt-8 max-w-3xl text-center">
         <a href="https://www.pixiv.net/en/artworks/85330094" target="_blank">
           <img className="m-4 float-left h-32 w-32" src="/lain.png" alt="Picture of Lain"/>
         </a>

@@ -38,9 +38,9 @@ function App() {
   }
 
   return (
-    <div className="App h-screen bg-gradient-to-b from-sky-500 to-white md:flex">
-      <div id="tabs" className="w-screen h-screen my-auto md:p-8 lg:p-12 mr-[363px]">
-        <div className="bg-blue-600 text-white md:border-solid md:border-white md:border-8 md:rounded-xl p-4 md:p-8 md:mb-8">
+    <div className="App h-screen bg-gradient-to-b from-sky-500 to-white lg:flex">
+      <div id="tabs" className="w-screen h-screen my-auto m-auto lg:pl-[50px] lg:pr-[413px] lg:py-12 max-w-screen-2xl">
+        <div className="bg-blue-600 text-white lg:border-solid lg:border-white lg:border-8 lg:rounded-xl p-4 lg:p-8 lg:mb-8">
           <AnimateHeight
             id="intro"
             duration={300}

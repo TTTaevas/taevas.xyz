@@ -8,8 +8,8 @@ import Anilist from "./infos/Anilist";
 
 function Infos() {
   return (
-    <div id="infos" className="hidden md:inline-block text-white static m-auto md:bg-gradient-to-r from-sky-600 to-indigo-600
-    border-solid border-white md:border-l-3 h-screen md:fixed md:right-0 md:overflow-y-auto">
+    <div id="infos" className="hidden lg:inline-block text-white static m-auto lg:bg-gradient-to-r from-sky-600 to-indigo-600
+    border-solid border-white lg:border-l-3 h-screen lg:fixed lg:right-0 lg:overflow-y-auto">
       <Lastfm/>
       <Git/>
       <Speedruncom/>
