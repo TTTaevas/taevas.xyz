@@ -18,13 +18,13 @@ function Projects({
   }
   let elements = [(
     <div className="inline-block m-4 text-white">
-      <div className="border-4 p-4 m-4 max-w-3xl text-center">
+      <div className="border-4 p-4 m-4 max-w-3xl text-center bg-blue-700 transition hover:scale-105 hover:shadow-[0px_0_400px_400px_rgba(0,0,0,0.3)]">
         <iframe className="float-right m-4" src="https://itch.io/embed/2295061?border_width=5&amp;bg_color=1d0e11&amp;fg_color=ffffff&amp;link_color=32c400&amp;border_color=6c5129" width="560" height="175"><a href="https://tttaevas.itch.io/swordventure">SwordVenture by Taevas</a></iframe>
         <p><b>SwordVenture</b> initially was <a className="text-link" href="https://github.com/RemiL-Nel/Clicker-game" target="_blank">a game made by a friend in React which I helped develop,</a> but I've made the choice months later to <b>recode it from scratch in Godot</b>, a proper game engine!</p>
         <br/>
         <p>This was my first experience in this engine, and development took me a little more than 100 hours, in the span of less than a month. While a little barebones, I'm still very satisfied with the result!</p>
       </div>
-      <div className="border-4 p-4 m-4 max-w-3xl text-center">
+      <div className="border-4 p-4 m-4 max-w-3xl text-center bg-blue-700 transition hover:scale-105 hover:shadow-[0px_0_400px_400px_rgba(0,0,0,0.3)]">
         <a href="https://kanaguessr.taevas.xyz" target="_blank"><img className="m-4 float-left h-32" src="https://kanaguessr.taevas.xyz/favicon.png" alt="Kanaguessr logo"/></a>
         <p>Working on kanaguessr is one of the first things I've done in 2021, and I essentially made it better in every aspect in early 2023.</p>
         <br/>
@@ -32,14 +32,14 @@ function Projects({
         <br/>
         <p>It helped friends with remembering katakanas, so I'm glad I took the time to make and polish this webpage!</p>
       </div>
-      <div className="border-4 p-4 m-4 max-w-3xl text-center">
+      <div className="border-4 p-4 m-4 max-w-3xl text-center bg-blue-700 transition hover:scale-105 hover:shadow-[0px_0_400px_400px_rgba(0,0,0,0.3)]">
         <p>Still in early 2023, I've made <a className="text-link" href="https://github.com/TTTaevas/osu-api-v1-js" target="_blank">osu-api-v1-js</a>, my first JavaScript (TypeScript) package!</p>
         <br/>
         <p>I've been using the first version of osu!'s API in several ways for years at this point, and yet I've never been using any package to make my life easier, I remember simply using axios directly and copypasting code between some of my projects. I never felt like using third party software to use such a simple API.</p>
         <br/>
         <p>Yet it's not really great to keep writing the same code over and over again, so I used this excuse to finally try my hand at writing packages! I honestly think the result is great, it fully covers the API, is fully documented, and even makes things more intuitive and consistent, I literally don't know how I could make it better!</p>
       </div>
-      <div className="border-4 p-4 m-4 max-w-3xl text-center">
+      <div className="border-4 p-4 m-4 max-w-3xl text-center bg-blue-700 transition hover:scale-105 hover:shadow-[0px_0_400px_400px_rgba(0,0,0,0.3)]">
         <a href="https://finder.taevas.xyz" target="_blank"><img className="m-4 float-right h-16" src="https://finder.taevas.xyz/Webpage/favicon.png" alt="Website-Finder logo"/></a>
         <p>...Website-Finder is actually an odd one. What started off in 2020 as <a className="text-link" href="https://gitlab.com/Isterix/rif2" target="_blank">a simple Ruby script that downloads images from <i>every website it can find</i>,</a> became a way for me to experiment with different programming languages and their networking capabilities, without dependencies.</p>
         <br/>

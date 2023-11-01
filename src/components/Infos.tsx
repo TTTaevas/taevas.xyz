@@ -5,6 +5,7 @@ import Hackthebox from "./infos/Hackthebox";
 import Git from "./infos/Git";
 import Osu from "./infos/Osu";
 import Anilist from "./infos/Anilist";
+import Wanikani from "./infos/Wanikani";
 
 function Infos() {
   return (
@@ -16,6 +17,7 @@ function Infos() {
       <Hackthebox/>
       <Anilist/>
       <Osu/>
+      {/* <Wanikani/> */}
     </div>
   )
 }

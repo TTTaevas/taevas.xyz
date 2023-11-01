@@ -13,7 +13,7 @@
   width: 100%;
   text-align: center;
   margin: auto;
-  font-family:"LexendDeca", "Arial", sans-serif;
+  font-family: "LexendDeca", "Arial", sans-serif;
 }
 
 p {
@@ -26,9 +26,8 @@ p {
 
 .text-link {
   background-color: #0a2e99;
-  color: #ffe88f;
+  color: white;
   line-height: 20px;
-  padding: 0 5px;
 }
 
 .button_link {
