@@ -15,21 +15,45 @@ function Contact({
     name: {
       en: "contact",
       fr: "contacter"
-    }
+    },
+    one: {
+      en: <p>It's... kinda difficult to communicate with the people you want on the internet, I find emails to not be ideal for real-time communication, some other platforms I won't name enshittify themselves, while others do not quite offer the best user experience in my honest opinion.</p>,
+      fr: <p>C'est... plutôt difficile de communiquer avec les gens qu'on veut sur internet, je trouve que les e-mails ne sont pas idéaux pour la communication en temps réel, certaines plateformes dont je ne dirais pas le nom sont devenues horribles, pendant que d'autres n'offrent pas vraiment la meilleure expérience à l'utilisateur, en tout cas je pense.</p>
+    },
+    two: {
+      en: <p>And yet, if I want people to easily contact me, and make communication with them convenient, then I need to settle on <i>something!</i></p>,
+      fr: <p>Et pourtant, si je veux que les gens puissent me contacter facilement, et que la communication soit facile, alors je dois bien choisir <i>quelque chose !</i></p>
+    },
+    three: {
+      en: <p className="text-center">So, I've decided to go for the Matrix protocol! Feel free to DM me on this account:</p>,
+      fr: <p className="text-center">Alors, j'ai opté pour le protocole Matrix ! N'hésitez pas à m'envoyer un message sur ce compte :</p>
+    },
+    four: {
+      en: <p className="text-center"><a className="button-link text-center" href="https://matrix.to/#/@taevas:matrix.org" target="_blank">(matrix.to link)</a></p>,
+      fr: <p className="text-center"><a className="button-link text-center" href="https://matrix.to/#/@taevas:matrix.org" target="_blank">(lien matrix.to)</a></p>
+    },
+    five: {
+      en: <p className="text-center">If you don't feel like using this protocol though, know that my Discord account hasn't gone inactive just yet:</p>,
+      fr: <p className="text-center">Si vous ne vous sentez pas d'utiliser ce protocole, sachez que mon compte Discord n'est pas encore totalement inactif :</p>
+    },
+    six: {
+      en: <p className="text-center">(yes I still use a tag)</p>,
+      fr: <p className="text-center">(oui j'utilise encore un tag)</p>
+    },
   }
   let elements = [(
     <div className="m-4 pb-2 text-white text-left">
-      <p>It's... kinda difficult to communicate with the people you want on the internet, I find emails to not be ideal for real-time communication, some other platforms I won't name enshittify themselves, while others do not quite offer the best user experience in my honest opinion.</p>
+      {s.one[lang]}
       <br/>
-      <p>And yet, if I want people to easily contact me, and make communication with them convenient, then I need to settle on <i>something!</i></p>
+      {s.two[lang]}
       <br/>
-      <p className="text-center">So, I've decided to go for the Matrix protocol! Feel free to DM me on this account:</p>
+      {s.three[lang]}
       <CopyField text="@taevas:matrix.org" imageUrl="matrix.svg"/>
-      <p className="text-center"><a className="button-link text-center" href="https://matrix.to/#/@taevas:matrix.org" target="_blank">(matrix.to link)</a></p>
+      {s.four[lang]}
       <br/>
-      <p className="text-center">If you don't feel like using this protocol though, know that my Discord account hasn't gone inactive just yet:</p>
+      {s.five[lang]}
       <CopyField text="Taevas#9730" imageUrl="discord.svg"/>
-      <p className="text-center">(yes I still use a tag)</p>
+      {s.six[lang]}
     </div>
   )]
   return (

@@ -34,11 +34,11 @@ export default function Lastfm() {
           <div className="flex">
             <img alt="album thumbnail" src={lastfm.image} className="m-auto h-24 w-24" />
             <div className="m-auto pl-4 w-fit">
-              <p className="mb-2"><strong>{lastfm.artist}</strong></p>
-              <p className="mt-2"><strong>{lastfm.name}</strong></p>
+              <p className="mb-2 font-bold">{lastfm.artist}</p>
+              <p className="mt-2 font-bold">{lastfm.name}</p>
             </div>
           </div>,
-          <p className="mt-2"><strong>{lastfm.album}</strong></p>,
+          <p className="mt-2 font-bold">{lastfm.album}</p>,
           <p className="mt-2">{lastfm.listening ? "(Currently listening!)" : "(Last listened)"}</p>,
           <a className="button-link" href={lastfm.url} target="_blank">Music Details</a>
         ]

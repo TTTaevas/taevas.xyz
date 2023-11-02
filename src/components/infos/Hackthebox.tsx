@@ -38,11 +38,11 @@ export default function Hackthebox() {
               <img alt="machine thumbnail" src={hackthebox.machine_avatar}/>
             </a>
             <div className="m-auto pl-4">
-              <p><strong>{hackthebox.name}</strong></p>
+              <p className="font-bold">{hackthebox.name}</p>
               <p>({hackthebox.type})</p>
             </div>
           </div>,
-          <p className="mt-2"><strong>{hackthebox.date}</strong></p>,
+          <p className="mt-2 font-bold">{hackthebox.date}</p>,
           <a className="button-link" href={`https://app.hackthebox.com/machines/${hackthebox.name}`}>Machine Link</a>
         ]
       }]}

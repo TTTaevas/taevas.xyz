@@ -38,11 +38,11 @@ export default function Speedruncom() {
             <img alt="game thumbnail" src={speedruncom.thumbnail} className="h-32 m-auto" />
             <div className="m-auto pl-2">
               <p className="mb-2">Placed <strong>#{speedruncom.place}</strong> on:</p>
-              <p><strong>{speedruncom.game}</strong></p>
+              <p className="font-bold">{speedruncom.game}</p>
               {details}
             </div>
           </div>,
-          <p className="mt-2"><strong>{speedruncom.date}</strong></p>,
+          <p className="mt-2 font-bold">{speedruncom.date}</p>,
           <a className="button-link" href={speedruncom.link} target="_blank">Run Details</a>
         ]
       }]}
