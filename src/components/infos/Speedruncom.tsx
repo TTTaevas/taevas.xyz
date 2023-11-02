@@ -43,7 +43,7 @@ export default function Speedruncom() {
             </div>
           </div>,
           <p className="mt-2"><strong>{speedruncom.date}</strong></p>,
-          <a className="button_link" href={speedruncom.link} target="_blank">Run Details</a>
+          <a className="button-link" href={speedruncom.link} target="_blank">Run Details</a>
         ]
       }]}
     />

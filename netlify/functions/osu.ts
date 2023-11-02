@@ -12,10 +12,10 @@ const handler: Handler = async (event, context) => {
   }
 
   let profile = await Promise.all([
-    new Promise((resolve, reject) => resolve((api!.getUser({id: 7276846}, 0)))),
-    new Promise((resolve, reject) => resolve((api!.getUser({id: 7276846}, 1)))),
-    new Promise((resolve, reject) => resolve((api!.getUser({id: 7276846}, 2)))),
-    new Promise((resolve, reject) => resolve((api!.getUser({id: 7276846}, 3))))
+    new Promise((resolve, reject) => resolve(api!.getUser({id: 7276846}, 0))),
+    new Promise((resolve, reject) => resolve(api!.getUser({id: 7276846}, 1))),
+    new Promise((resolve, reject) => resolve(api!.getUser({id: 7276846}, 2))),
+    new Promise((resolve, reject) => resolve(api!.getUser({id: 7276846}, 3)))
   ])
   
   if (profile.find((mode) => mode instanceof APIError)) {

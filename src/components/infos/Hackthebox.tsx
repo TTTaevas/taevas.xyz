@@ -43,7 +43,7 @@ export default function Hackthebox() {
             </div>
           </div>,
           <p className="mt-2"><strong>{hackthebox.date}</strong></p>,
-          <a className="button_link" href={`https://app.hackthebox.com/machines/${hackthebox.name}`}>Machine Link</a>
+          <a className="button-link" href={`https://app.hackthebox.com/machines/${hackthebox.name}`}>Machine Link</a>
         ]
       }]}
     />

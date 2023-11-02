@@ -55,7 +55,7 @@ export default function Anilist() {
                 <p><strong>{anilist.episodes.watched}/{anilist.episodes.total}</strong> episodes watched</p>
             }
           </>,
-          <a className="button_link" href={anilist.url} target="_blank">Anime Link</a>
+          <a className="button-link" href={anilist.url} target="_blank">Anime Link</a>
         ]
       }]}
     />

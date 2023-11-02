@@ -14,10 +14,10 @@ function Infos() {
       <Lastfm/>
       <Git/>
       <Speedruncom/>
-      <Hackthebox/>
       <Anilist/>
-      <Osu/>
       <Wanikani/>
+      <Osu/>
+      <Hackthebox/>
     </div>
   )
 }

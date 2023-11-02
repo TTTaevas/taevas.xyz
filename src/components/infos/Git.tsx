@@ -46,7 +46,7 @@ export default function Git() {
         elements: [
           <p>Latest <strong>private</strong> push: <strong>{github.private.date}</strong></p>,
           <p className="mt-2">Latest <strong>public</strong> push: <strong>{github.public.date} on {github.public.repo}</strong></p>,
-          <a className="button_link" href={`https://github.com/${github.public.repo}`} target="_blank">Repo Link</a>
+          <a className="button-link" href={`https://github.com/${github.public.repo}`} target="_blank">Repo Link</a>
         ]
       },
       {

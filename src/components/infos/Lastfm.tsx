@@ -40,7 +40,7 @@ export default function Lastfm() {
           </div>,
           <p className="mt-2"><strong>{lastfm.album}</strong></p>,
           <p className="mt-2">{lastfm.listening ? "(Currently listening!)" : "(Last listened)"}</p>,
-          <a className="button_link" href={lastfm.url} target="_blank">Music Details</a>
+          <a className="button-link" href={lastfm.url} target="_blank">Music Details</a>
         ]
       }]}
     />

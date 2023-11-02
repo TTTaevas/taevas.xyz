@@ -30,7 +30,7 @@ p {
   line-height: 20px;
 }
 
-.button_link {
+.button-link {
   line-height: 40px;
   font-size: 18px;
   font-weight: bold;
@@ -44,6 +44,6 @@ p {
   margin-top: 16px;
 }
 
-.button_link:hover {
+.button-link:hover {
   background-color: #004;
 }

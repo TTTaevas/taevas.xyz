@@ -8,7 +8,8 @@ export type WanikaniInfo = {
       data: {
         level: number,
         unlocked_at: null | string,
-        completed_at: null | string
+        completed_at: null | string,
+        abandoned_at: null | string
       }
     }[]
   }
@@ -78,11 +79,11 @@ export default function Wanikani() {
   const now = new Date()
 
   let level = <></>
-  wanikani.progression.data = wanikani.progression.data.sort((a, b) => b.data.level - a.data.level)
-  let level_find = wanikani.progression.data.find(d => d.data.unlocked_at)
-  if (level_find) {
-    level = <p className="mb-4"><b>Level {level_find.data.level}</b> reached!<br/>
-    <b>{new Date(level_find.data.unlocked_at || "").toISOString().substring(0, 10)}</b></p>
+  let unlocked_levels = wanikani.progression.data.filter(d => typeof d.data.unlocked_at === "string")
+  if (unlocked_levels.length) {
+    let arr = unlocked_levels.sort((a, b) => new Date(b.data.unlocked_at!).getTime() - new Date(a.data.unlocked_at!).getTime())
+    level = <p className="mb-4"><b>Level {arr[0].data.level}</b> reached!<br/>
+    <b>{new Date(arr[0].data.unlocked_at!).toISOString().substring(0, 10)}</b></p>
   }
 
   let resets = <></>
@@ -90,7 +91,7 @@ export default function Wanikani() {
     let all_resets: React.JSX.Element[] = []
     for (let i = 0; i < wanikani.resets.length; i++) {
       let data = wanikani.resets[i].data
-      all_resets.push(<p><b>{`${new Date(data.created_at).toISOString().substring(0, 10)}`}</b>{`: Reset progress from level ${data.original_level} to ${data.target_level}`}</p>)
+      all_resets.push(<p><b>{`${new Date(data.created_at).toISOString().substring(0, 10)}`}</b>{`: Reset my progress from level ${data.original_level} to level ${data.target_level}`}</p>)
     }
     resets = <div className="mb-4">{...all_resets}</div>
   }
@@ -116,7 +117,7 @@ export default function Wanikani() {
   let when_next_to_review = <></>
   if (wanikani.more_things_to_review_at && !reviews.length) {
     const rtf = new Intl.RelativeTimeFormat("en", {style: "long", numeric: "always"})
-    let how_many_hours = new Date(Math.abs(new Date(wanikani.more_things_to_review_at).getTime() - now.getTime())).getUTCHours()
+    let how_many_hours = new Date(Math.abs(new Date(wanikani.more_things_to_review_at).getTime() - now.getTime())).getUTCHours() + 1
     when_next_to_review = <p className="mt-2">{`There will be more stuff to review ${rtf.format(how_many_hours, "hour")}!`}</p>
   }
 
@@ -127,8 +128,8 @@ export default function Wanikani() {
         name: "Wanikani",
         link: "https://www.wanikani.com/users/Taevas",
         elements: [
-          level,
           resets,
+          level,
           <p className="text-xl font-bold">Available lessons ({filtered_lessons.length})</p>,
           lessons_div,
           <p className="mt-4 text-xl font-bold">Available reviews ({filtered_reviews.length})</p>,

@@ -3,19 +3,25 @@ import { api } from "./shared/api"
 import { WanikaniInfo } from '../../src/components/infos/Wanikani'
 
 const handler: Handler = async (event, context) => {
-  let progression = await api<{
+  let data: any[] = await Promise.all([
+    new Promise((resolve, reject) => resolve(api("https://api.wanikani.com/v2/level_progressions", process.env["API_WANIKANI"]))),
+    new Promise((resolve, reject) => resolve(api("https://api.wanikani.com/v2/resets", process.env["API_WANIKANI"]))),
+    new Promise((resolve, reject) => resolve(api("https://api.wanikani.com/v2/summary", process.env["API_WANIKANI"])))
+  ])
+
+  let progression: {
     total_count: number
     data: {
       data: {
         level: number,
         unlocked_at: null | string,
-        completed_at: null | string
+        completed_at: null | string,
+        abandoned_at: null| string
       }
     }[]
-  }>
-  ("https://api.wanikani.com/v2/level_progressions", process.env["API_WANIKANI"])
+  } = data[0]
 
-  let resets = await api<{
+  let resets: {
     data: [{
       data: {
         created_at: string,
@@ -23,10 +29,9 @@ const handler: Handler = async (event, context) => {
         target_level: number
       }
     }]
-  }>
-  ("https://api.wanikani.com/v2/resets", process.env["API_WANIKANI"])
+  } = data[1]
 
-  let summary = await api<{
+  let summary: {
     data: {
       lessons: [{
         available_at: string
@@ -38,8 +43,7 @@ const handler: Handler = async (event, context) => {
       }],
       next_reviews_at: null | string,
     }
-  }>
-  ("https://api.wanikani.com/v2/summary", process.env["API_WANIKANI"])
+  } = data[2]
 
   let subject_ids_lessons: number[] = []
   let subject_ids_reviews: number[] = []

@@ -19,10 +19,12 @@ function Projects({
   let elements = [(
     <div className="inline-block m-4 text-white">
       <div className="border-4 p-4 m-4 max-w-3xl text-center bg-blue-700 transition hover:scale-105 hover:shadow-[0px_0_400px_400px_rgba(0,0,0,0.3)]">
-        <iframe className="float-right m-4" src="https://itch.io/embed/2295061?border_width=5&amp;bg_color=1d0e11&amp;fg_color=ffffff&amp;link_color=32c400&amp;border_color=6c5129" width="560" height="175"><a href="https://tttaevas.itch.io/swordventure">SwordVenture by Taevas</a></iframe>
+        <a href="https://tttaevas.itch.io/swordventure" target="_blank"><img className="m-4 float-right w-40" src="/swordventure.png" alt="SwordVenture thumbnail"/></a>
         <p><b>SwordVenture</b> initially was <a className="text-link" href="https://github.com/RemiL-Nel/Clicker-game" target="_blank">a game made by a friend in React which I helped develop,</a> but I've made the choice months later to <b>recode it from scratch in Godot</b>, a proper game engine!</p>
         <br/>
         <p>This was my first experience in this engine, and development took me a little more than 100 hours, in the span of less than a month. While a little barebones, I'm still very satisfied with the result!</p>
+        <br/>
+        <p>Although now, I'm left wondering how I'm gonna get the right assets for my next game, because for SwordVenture, I could just use the assets from the original project... I'm sure I will be able to figure it out!</p>
       </div>
       <div className="border-4 p-4 m-4 max-w-3xl text-center bg-blue-700 transition hover:scale-105 hover:shadow-[0px_0_400px_400px_rgba(0,0,0,0.3)]">
         <a href="https://kanaguessr.taevas.xyz" target="_blank"><img className="m-4 float-left h-32" src="https://kanaguessr.taevas.xyz/favicon.png" alt="Kanaguessr logo"/></a>

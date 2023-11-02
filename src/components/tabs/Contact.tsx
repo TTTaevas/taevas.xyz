@@ -25,7 +25,7 @@ function Contact({
       <br/>
       <p className="text-center">So, I've decided to go for the Matrix protocol! Feel free to DM me on this account:</p>
       <CopyField text="@taevas:matrix.org" imageUrl="matrix.svg"/>
-      <p className="text-center"><a className="text-link text-center" href="https://matrix.to/#/@taevas:matrix.org" target="_blank">(matrix.to link)</a></p>
+      <p className="text-center"><a className="button-link text-center" href="https://matrix.to/#/@taevas:matrix.org" target="_blank">(matrix.to link)</a></p>
       <br/>
       <p className="text-center">If you don't feel like using this protocol though, know that my Discord account hasn't gone inactive just yet:</p>
       <CopyField text="Taevas#9730" imageUrl="discord.svg"/>
