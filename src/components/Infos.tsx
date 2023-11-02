@@ -17,7 +17,7 @@ function Infos() {
       <Hackthebox/>
       <Anilist/>
       <Osu/>
-      {/* <Wanikani/> */}
+      <Wanikani/>
     </div>
   )
 }

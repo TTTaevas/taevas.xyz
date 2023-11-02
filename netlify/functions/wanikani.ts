@@ -63,6 +63,7 @@ const handler: Handler = async (event, context) => {
       object: string,
       data: {
         characters: string,
+        slug: string,
         document_url: string,
         meanings: [{
           meaning: string
@@ -73,7 +74,7 @@ const handler: Handler = async (event, context) => {
   (`https://api.wanikani.com/v2/subjects?ids=${subject_ids_all.toString()}`, process.env["API_WANIKANI"])
 
   let lessons: {
-    available_at: Date,
+    available_at: string,
     type: string,
     writing: string
     meanings: [{
@@ -91,16 +92,16 @@ const handler: Handler = async (event, context) => {
     }
 
     lessons.push({
-      available_at: new Date(summary_data.available_at),
+      available_at: summary_data.available_at,
       type: subject.object,
-      writing: subject.data.characters,
+      writing: subject.data.characters || subject.data.slug || subject.data.meanings[0].meaning,
       meanings: subject.data.meanings,
       url: subject.data.document_url
     })
   }
 
   let reviews: {
-    available_at: Date,
+    available_at: string,
     type: string,
     writing: string
     meanings: [{
@@ -118,20 +119,22 @@ const handler: Handler = async (event, context) => {
     }
 
     reviews.push({
-      available_at: new Date(summary_data.available_at),
+      available_at: summary_data.available_at,
       type: subject.object,
-      writing: subject.data.characters,
+      writing: subject.data.characters || subject.data.slug || subject.data.meanings[0].meaning,
       meanings: subject.data.meanings,
       url: subject.data.document_url
     })
   }
 
   let info: WanikaniInfo = {
+    progression,
     resets: resets.data,
     lessons,
-    reviews
+    reviews,
+    more_things_to_review_at: summary.data.next_reviews_at ? summary.data.next_reviews_at : null
   }
-  
+
   return {
     statusCode: 200,
     body: JSON.stringify(info)
