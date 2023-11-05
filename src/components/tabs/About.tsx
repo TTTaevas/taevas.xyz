@@ -52,7 +52,7 @@ function About({
   let elements = [(
     <div className="m-4 text-white">
       <div className="ml-auto max-w-3xl text-center">
-        <img className="m-4 float-right h-32" src="/brittany.jpg" alt="Flag of Brittany"/>
+        <img className="m-4 float-right h-32" src="/brittany.jpg" alt="Flag of Brittany" title="Flag of Brittany"/>
         {s.one[lang]}
         <br/>
         {s.two[lang]}
@@ -61,7 +61,7 @@ function About({
       </div>
       <div className="mr-auto mt-8 max-w-3xl text-center">
         <a href="https://www.pixiv.net/en/artworks/85330094" target="_blank">
-          <img className="m-4 float-left h-32 w-32" src="/lain.png" alt="Picture of Lain"/>
+          <img className="m-4 float-left h-32 w-32" src="/lain.png" alt="Drawing of Lain" title="Lain"/>
         </a>
         {s.four[lang]}
         <br/>

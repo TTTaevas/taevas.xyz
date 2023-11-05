@@ -117,7 +117,8 @@ export default function Wanikani() {
   let when_next_to_review = <></>
   if (wanikani.more_things_to_review_at && !reviews.length) {
     const rtf = new Intl.RelativeTimeFormat("en", {style: "long", numeric: "always"})
-    let how_many_hours = new Date(Math.abs(new Date(wanikani.more_things_to_review_at).getTime() - now.getTime())).getUTCHours() + 1
+    let time_difference = new Date(Math.abs(new Date(wanikani.more_things_to_review_at).getTime() - now.getTime()))
+    let how_many_hours = (time_difference.getUTCHours() + 1) + ((24 * (time_difference.getUTCDate() - 1)) * (time_difference.getUTCMonth() + 1))
     when_next_to_review = <p className="mt-2">{`There will be more stuff to review ${rtf.format(how_many_hours, "hour")}!`}</p>
   }
 

@@ -26,6 +26,11 @@ export default function Hackthebox() {
     return <></>
   }
 
+  let badge = hackthebox.type === "user" ? <img className="m-auto h-16 w-16" alt="machine thumbnail" src={hackthebox.machine_avatar}/> :
+    <a className="m-auto h-16 w-16" href={`https://www.hackthebox.com/achievement/machine/1063999/${hackthebox.id}`} target="_blank">
+      <img alt="machine thumbnail" src={hackthebox.machine_avatar}/>
+    </a>
+
   return (
     <Info
       type="Hacking"
@@ -34,9 +39,7 @@ export default function Hackthebox() {
         link: "https://app.hackthebox.com/profile/1063999",
         elements: [
           <div className="flex">
-            <a className="m-auto h-16 w-16" href={`https://www.hackthebox.com/achievement/machine/1063999/${hackthebox.id}`} target="_blank">
-              <img alt="machine thumbnail" src={hackthebox.machine_avatar}/>
-            </a>
+            {badge}
             <div className="m-auto pl-4">
               <p className="font-bold">{hackthebox.name}</p>
               <p>({hackthebox.type})</p>
