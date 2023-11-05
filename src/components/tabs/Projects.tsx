@@ -10,7 +10,7 @@ function Projects({
   tab: string
   setTab: React.Dispatch<React.SetStateAction<string>>
 }) {
-  let s = {
+  const s = {
     name: {
       en: "projects",
       fr: "projets"
@@ -76,7 +76,7 @@ function Projects({
       }
     },
   }
-  let elements = [(
+  const elements = [(
     <div className="inline-block m-4 text-white">
       <div className="border-4 p-4 m-4 max-w-3xl text-center bg-blue-700 transition hover:scale-105 hover:shadow-[0px_0_400px_400px_rgba(0,0,0,0.3)]">
         <a href="https://tttaevas.itch.io/swordventure" target="_blank"><img className="m-4 float-right w-40" src="/swordventure.png" alt="SwordVenture thumbnail"/></a>

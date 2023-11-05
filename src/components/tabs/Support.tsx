@@ -10,7 +10,7 @@ function Support({
   tab: string
   setTab: React.Dispatch<React.SetStateAction<string>>
 }) {
-  let s = {
+  const s = {
     name: {
       en: "support",
       fr: "soutenir"
@@ -28,7 +28,7 @@ function Support({
       fr: "Seulement si vous le souhaitez et si vous le pouvez, alors vous pouvez me soutenir sur ma page Ko-fi :"
     }
   }
-  let elements = [(
+  const elements = [(
     <div className="m-4 pb-2 text-white">
       <p><b>{s.thanks[lang]}</b></p>
       <br/>

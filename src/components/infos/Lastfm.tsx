@@ -6,7 +6,7 @@ export type LastfmInfo = {
   name: string
   album: string
   image: string
-  listening: Boolean
+  listening: boolean
   url: string
 } | undefined
 

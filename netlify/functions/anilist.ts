@@ -2,8 +2,8 @@ import { Handler } from '@netlify/functions'
 import fetch from "node-fetch"
 import { AnilistInfo } from '../../src/components/infos/Anilist'
 
-const handler: Handler = async (event, context) => {
-  let anilist = await fetch("https://graphql.anilist.co", {
+const handler: Handler = async () => {
+  const anilist = await fetch("https://graphql.anilist.co", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -53,9 +53,9 @@ const handler: Handler = async (event, context) => {
     }
   }
 
-  let p_json = await anilist.json() as {[key: string]: any}
-  let json = p_json.data.MediaList
-  let anime: AnilistInfo = {
+  const p_json = await anilist.json() as {[key: string]: any}
+  const json = p_json.data.MediaList
+  const anime: AnilistInfo = {
     title: json.media.title.romaji,
     episodes: {
       watched: json.progress,

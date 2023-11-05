@@ -2,14 +2,14 @@ import { Handler } from '@netlify/functions'
 import { api } from "./shared/api"
 import { WanikaniInfo } from '../../src/components/infos/Wanikani'
 
-const handler: Handler = async (event, context) => {
-  let data: any[] = await Promise.all([
-    new Promise((resolve, reject) => resolve(api("https://api.wanikani.com/v2/level_progressions", process.env["API_WANIKANI"]))),
-    new Promise((resolve, reject) => resolve(api("https://api.wanikani.com/v2/resets", process.env["API_WANIKANI"]))),
-    new Promise((resolve, reject) => resolve(api("https://api.wanikani.com/v2/summary", process.env["API_WANIKANI"])))
+const handler: Handler = async () => {
+  const data: any[] = await Promise.all([
+    new Promise((resolve) => resolve(api("https://api.wanikani.com/v2/level_progressions", process.env["API_WANIKANI"]))),
+    new Promise((resolve) => resolve(api("https://api.wanikani.com/v2/resets", process.env["API_WANIKANI"]))),
+    new Promise((resolve) => resolve(api("https://api.wanikani.com/v2/summary", process.env["API_WANIKANI"])))
   ])
 
-  let progression: {
+  const progression: {
     total_count: number
     data: {
       data: {
@@ -21,7 +21,7 @@ const handler: Handler = async (event, context) => {
     }[]
   } = data[0]
 
-  let resets: {
+  const resets: {
     data: [{
       data: {
         created_at: string,
@@ -31,7 +31,7 @@ const handler: Handler = async (event, context) => {
     }]
   } = data[1]
 
-  let summary: {
+  const summary: {
     data: {
       lessons: [{
         available_at: string
@@ -45,10 +45,8 @@ const handler: Handler = async (event, context) => {
     }
   } = data[2]
 
-  let subject_ids_lessons: number[] = []
-  let subject_ids_reviews: number[] = []
-  let subject_ids_all: number[] = []
-  
+  const subject_ids_lessons: number[] = []
+  const subject_ids_reviews: number[] = []
   for (let i = 0; i < summary.data.lessons.length; i++) {
     for (let e = 0; e < summary.data.lessons[i].subject_ids.length; e++) {
       subject_ids_lessons.push(summary.data.lessons[i].subject_ids[e])
@@ -59,9 +57,10 @@ const handler: Handler = async (event, context) => {
       subject_ids_reviews.push(summary.data.reviews[i].subject_ids[e])
     }
   }
-  subject_ids_all = subject_ids_lessons.concat(subject_ids_reviews)
 
-  let subjects = await api<{
+  const subject_ids_all = subject_ids_lessons.concat(subject_ids_reviews)
+
+  const subjects = await api<{
     data: {
       id: number,
       object: string,
@@ -77,7 +76,7 @@ const handler: Handler = async (event, context) => {
   }>
   (`https://api.wanikani.com/v2/subjects?ids=${subject_ids_all.toString()}`, process.env["API_WANIKANI"])
 
-  let lessons: {
+  const lessons: {
     available_at: string,
     type: string,
     writing: string
@@ -104,7 +103,7 @@ const handler: Handler = async (event, context) => {
     })
   }
 
-  let reviews: {
+  const reviews: {
     available_at: string,
     type: string,
     writing: string
@@ -131,7 +130,7 @@ const handler: Handler = async (event, context) => {
     })
   }
 
-  let info: WanikaniInfo = {
+  const info: WanikaniInfo = {
     progression,
     resets: resets.data,
     lessons,

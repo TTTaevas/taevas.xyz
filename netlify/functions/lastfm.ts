@@ -2,8 +2,8 @@ import { Handler } from '@netlify/functions'
 import { api } from "./shared/api"
 import { LastfmInfo } from '../../src/components/infos/Lastfm'
 
-const handler: Handler = async (event, context) => {
-  let lastfm = await api<{
+const handler: Handler = async () => {
+  const lastfm = await api<{
     recenttracks: {
       track: {
         artist: {
@@ -26,8 +26,8 @@ const handler: Handler = async (event, context) => {
   }>
   (`http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=TTTaevas&api_key=${process.env["API_LASTFM"]}&format=json&limit=1`)
 
-  let image = lastfm.recenttracks.track[0].image.find((i) => i.size == "large")
-  let track: LastfmInfo = {
+  const image = lastfm.recenttracks.track[0].image.find((i) => i.size == "large")
+  const track: LastfmInfo = {
     artist: lastfm.recenttracks.track[0].artist['#text'],
     name: lastfm.recenttracks.track[0].name,
     album: lastfm.recenttracks.track[0].album['#text'],

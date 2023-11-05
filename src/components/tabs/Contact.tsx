@@ -11,7 +11,7 @@ function Contact({
   tab: string
   setTab: React.Dispatch<React.SetStateAction<string>>
 }) {
-  let s = {
+  const s = {
     name: {
       en: "contact",
       fr: "contacter"
@@ -41,7 +41,7 @@ function Contact({
       fr: <p className="text-center">(oui j'utilise encore un tag)</p>
     },
   }
-  let elements = [(
+  const elements = [(
     <div className="m-4 pb-2 text-white text-left">
       {s.one[lang]}
       <br/>

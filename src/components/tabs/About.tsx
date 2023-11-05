@@ -10,7 +10,7 @@ function About({
   tab: string
   setTab: React.Dispatch<React.SetStateAction<string>>
 }) {
-  let s = {
+  const s = {
     name: {
       en: "about",
       fr: "à propos"
@@ -49,7 +49,7 @@ function About({
       fr: <p>Si vous avez une question que vous aimeriez me demander, n'hésitez pas à me contacter !</p>
     }
   }
-  let elements = [(
+  const elements = [(
     <div className="m-4 text-white">
       <div className="ml-auto max-w-3xl text-center">
         <img className="m-4 float-right h-32" src="/brittany.jpg" alt="Flag of Brittany" title="Flag of Brittany"/>

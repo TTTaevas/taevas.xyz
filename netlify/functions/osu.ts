@@ -2,8 +2,8 @@ import { Handler } from '@netlify/functions'
 import { API, APIError, User } from 'osu-api-v2-js'
 import { OsuInfo } from '../../src/components/infos/Osu'
 
-const handler: Handler = async (event, context) => {
-  let api = await API.createAsync({id: 11451, secret: process.env.API_OSU!})
+const handler: Handler = async () => {
+  const api = await API.createAsync({id: 11451, secret: process.env.API_OSU!})
   if (!api) {
     return {
       statusCode: 404,
@@ -11,11 +11,11 @@ const handler: Handler = async (event, context) => {
     }
   }
 
-  let profile = await Promise.all([
-    new Promise((resolve, reject) => resolve(api!.getUser({id: 7276846}, 0))),
-    new Promise((resolve, reject) => resolve(api!.getUser({id: 7276846}, 1))),
-    new Promise((resolve, reject) => resolve(api!.getUser({id: 7276846}, 2))),
-    new Promise((resolve, reject) => resolve(api!.getUser({id: 7276846}, 3)))
+  const profile = await Promise.all([
+    new Promise((resolve) => resolve(api!.getUser({id: 7276846}, 0))),
+    new Promise((resolve) => resolve(api!.getUser({id: 7276846}, 1))),
+    new Promise((resolve) => resolve(api!.getUser({id: 7276846}, 2))),
+    new Promise((resolve) => resolve(api!.getUser({id: 7276846}, 3)))
   ])
   
   if (profile.find((mode) => mode instanceof APIError)) {
@@ -25,8 +25,8 @@ const handler: Handler = async (event, context) => {
     }
   }
 
-  let info: OsuInfo = {
-    country: (profile[0] as User).country?.name!,
+  const info: OsuInfo = {
+    country: (profile[0] as User).country?.name || "Unknown",
     osu: {global: 0, country: 0},
     taiko: {global: 0, country: 0},
     fruits: {global: 0, country: 0},
@@ -34,12 +34,12 @@ const handler: Handler = async (event, context) => {
   }
 
   for (let i = 0; i < profile.length; i++) {
-    let umode = profile[i] as User
-    if (umode.statistics && umode.rank_history) {
+    const ruleset = profile[i] as User
+    if (ruleset.statistics && ruleset.rank_history) {
       // At the time of writing this, osu-api-v2-js ain't exactly the greatest package ever written
-      let stats = umode.statistics as any
-      info[umode.rank_history.mode].global = stats.global_rank
-      info[umode.rank_history.mode].country = stats.country_rank
+      const stats = ruleset.statistics as any
+      info[ruleset.rank_history.mode].global = stats.global_rank
+      info[ruleset.rank_history.mode].country = stats.country_rank
     }
   }
   

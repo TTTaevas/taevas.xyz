@@ -26,7 +26,7 @@ export default function Hackthebox() {
     return <></>
   }
 
-  let badge = hackthebox.type === "user" ? <img className="m-auto h-16 w-16" alt="machine thumbnail" src={hackthebox.machine_avatar}/> :
+  const badge = hackthebox.type === "user" ? <img className="m-auto h-16 w-16" alt="machine thumbnail" src={hackthebox.machine_avatar}/> :
     <a className="m-auto h-16 w-16" href={`https://www.hackthebox.com/achievement/machine/1063999/${hackthebox.id}`} target="_blank">
       <img alt="machine thumbnail" src={hackthebox.machine_avatar}/>
     </a>

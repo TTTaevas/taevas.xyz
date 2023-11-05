@@ -11,7 +11,7 @@ export default function Info({
     elements: React.JSX.Element[]
   }[]
 }) {
-  let sections = websites.map((w) => {
+  const sections = websites.map((w) => {
     return (
       <div id={w.name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}>
         <a href={w.link} target="_blank">

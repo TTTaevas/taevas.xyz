@@ -25,7 +25,7 @@ export default function Speedruncom() {
     return <></>
   }
 
-  let details = speedruncom.details.map((d) => <p>{d}</p>)
+  const details = speedruncom.details.map((d) => <p>{d}</p>)
 
   return (
     <Info
