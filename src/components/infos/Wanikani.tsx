@@ -115,7 +115,7 @@ export default function Wanikani() {
   </div> : <p>No review available for now!</p>
 
   let when_next_to_review = <></>
-  if (wanikani.more_things_to_review_at && !reviews.length) {
+  if (wanikani.more_things_to_review_at) {
     const rtf = new Intl.RelativeTimeFormat("en", {style: "long", numeric: "always"})
     const time_difference = new Date(Math.abs(new Date(wanikani.more_things_to_review_at).getTime() - now.getTime()))
     const how_many_hours = (time_difference.getUTCHours() + 1) + ((24 * (time_difference.getUTCDate() - 1)) * (time_difference.getUTCMonth() + 1))
