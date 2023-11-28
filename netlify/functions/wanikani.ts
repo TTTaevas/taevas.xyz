@@ -104,6 +104,7 @@ const handler: Handler = async () => {
 
   const now = new Date()
   // next_reviews checks what reviews will be available in the next 23 hours
+  // summary.data.next_reviews_at checks beyond that, but will be the current time if a review is already available
   const next_reviews = summary.data.reviews
   .map((r: {subject_ids: number[], available_at: Date | string}) => {r.available_at = new Date(r.available_at); return r})
   .filter((r) => r.available_at > now && r.subject_ids.length) as {subject_ids: number[], available_at: Date}[]
