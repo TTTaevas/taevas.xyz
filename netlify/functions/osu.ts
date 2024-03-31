@@ -6,10 +6,10 @@ const handler: Handler = async () => {
   const api = await osu.API.createAsync({id: 11451, secret: process.env.API_OSU!})
 
   const profile = await Promise.all([
-    new Promise((resolve) => resolve(api.getUser({id: 7276846}, osu.Rulesets.osu))),
-    new Promise((resolve) => resolve(api.getUser({id: 7276846}, osu.Rulesets.taiko))),
-    new Promise((resolve) => resolve(api.getUser({id: 7276846}, osu.Rulesets.fruits))),
-    new Promise((resolve) => resolve(api.getUser({id: 7276846}, osu.Rulesets.mania)))
+    new Promise((resolve) => resolve(api.getUser(7276846, osu.Ruleset.osu))),
+    new Promise((resolve) => resolve(api.getUser(7276846, osu.Ruleset.taiko))),
+    new Promise((resolve) => resolve(api.getUser(7276846, osu.Ruleset.fruits))),
+    new Promise((resolve) => resolve(api.getUser(7276846, osu.Ruleset.mania)))
   ]) as osu.UserExtended[]
 
   const info: OsuInfo = {

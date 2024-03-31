@@ -35,11 +35,7 @@ function Contact({
     five: {
       en: <p className="text-center">If you don't feel like using this protocol though, know that my Discord account hasn't gone inactive just yet:</p>,
       fr: <p className="text-center">Si vous ne vous sentez pas d'utiliser ce protocole, sachez que mon compte Discord n'est pas encore totalement inactif :</p>
-    },
-    six: {
-      en: <p className="text-center">(yes I still use a tag)</p>,
-      fr: <p className="text-center">(oui j'utilise encore un tag)</p>
-    },
+    }
   }
   const elements = [(
     <div className="m-4 pb-2 text-white text-left">
@@ -52,8 +48,7 @@ function Contact({
       {s.four[lang]}
       <br/>
       {s.five[lang]}
-      <CopyField text="Taevas#9730" imageUrl="discord.svg"/>
-      {s.six[lang]}
+      <CopyField text="taevas9730" imageUrl="discord.svg"/>
     </div>
   )]
   return (

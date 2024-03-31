@@ -75,6 +75,20 @@ function Projects({
         fr: <p>Je dois avoir des goûts bizarres.</p>
       }
     },
+    osuapiv2js: {
+      one: {
+        en: <p>So <a className="text-link" href="https://github.com/TTTaevas/osu-api-v2-js" target="_blank">osu-api-v2-js</a> is something I've had to work on during three different and distinct periods. I started working on it in March 2023 roughly around the time I finished working on osu-api-v1-js, then I took a break and worked on it again in November 2023, only to finally finish it in March 2024.</p>,
+        fr: <p>Alors <a className="text-link" href="https://github.com/TTTaevas/osu-api-v2-js" target="_blank">osu-api-v2-js</a>, c'est quelque chose sur lequel j'ai dû travailler durant 3 périodes bien différentes, en commençant en Mars 2023 genre quand j'ai fini osu-api-v1-js, puis Novembre 2023 après une pause, puis enfin Mars 2024 après une autre pause.</p>
+      },
+      two: {
+        en: <p>The reason why I took so long is that the task at hand was actually really difficult, as this software is an api wrapper that aimed to provide the best type safety possible while being feature-complete, for an API that is not entirely documented and is everchanging! And if you're wondering why I even bothered finishing this project, that's because I just hate unfinished projects.</p>,
+        fr: <p>La raison pour laquelle j'ai pris tellement longtemps est que ce projet était en fait très difficile, car ce package est un api wrapper qui voulait un maximum de type safety tout en étant complet, pour une API qui n'était pas entièrement documentée et en éternel changement ! Et si vous vous demandez pourquoi je me suis embêté à finir ce projet, c'est parce que je déteste laisser des projets à l'abandon, sans qu'ils puissent être finis.</p>
+      },
+      three: {
+        en: <p>Now that it's finished, I know it'll definitely help <i>someone</i> in the future, let it be someone I don't know, a friend, or even myself! And with that peace of mind, I can safely move on to another project, while keeping an eye out for potential issues that would get opened on this project's repository!</p>,
+        fr: <p>Avec ça de fait, je sais pour sûr que ça aidera <i>quelqu'un</i> à un moment, que ce soit quelqu'un que je ne connais pas, un ami, ou même moi-même ! Et c'est ainsi que je peux m'occuper d'un tout autre projet, tout en gardant l'oeil ouvert pour des issues GitHub sur le repo de ce projet !</p>
+      }
+    }
   }
   const elements = [(
     <div className="inline-block m-4 text-white">
@@ -110,6 +124,13 @@ function Projects({
         {s.websitefinder.three[lang]}
         <br/>
         {s.websitefinder.four[lang]}
+      </div>
+      <div className="border-4 p-4 m-4 max-w-3xl text-center bg-blue-700 transition hover:scale-105 hover:shadow-[0px_0_400px_400px_rgba(0,0,0,0.3)]">
+        {s.osuapiv2js.one[lang]}
+        <br/>
+        {s.osuapiv2js.two[lang]}
+        <br/>
+        {s.osuapiv2js.three[lang]}
       </div>
     </div>
   )]

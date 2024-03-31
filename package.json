@@ -6,9 +6,9 @@
   },
   "dependencies": {
     "@netlify/functions": "^2.4.0",
-    "@octokit/core": "^5.0.2",
+    "@octokit/core": "^6.0.1",
     "node-fetch": "^3.3.2",
-    "osu-api-v2-js": "^0.4.2",
+    "osu-api-v2-js": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
