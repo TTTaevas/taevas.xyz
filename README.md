@@ -1,1 +1,1 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/10889a9b-c148-488d-aecd-9a44e0cf6f46/deploy-status)](https://taevas.xyz) [![CodeFactor](https://www.codefactor.io/repository/github/tttaevas/taevas.xyz/badge/main)](https://www.codefactor.io/repository/github/tttaevas/taevas.xyz/overview/main)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/10889a9b-c148-488d-aecd-9a44e0cf6f46/deploy-status)](https://taevas.xyz)

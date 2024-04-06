@@ -10,7 +10,7 @@ const handler: Handler = async () => {
     new Promise((resolve) => resolve(api.getUser(7276846, osu.Ruleset.taiko))),
     new Promise((resolve) => resolve(api.getUser(7276846, osu.Ruleset.fruits))),
     new Promise((resolve) => resolve(api.getUser(7276846, osu.Ruleset.mania)))
-  ]) as osu.UserExtended[]
+  ]) as osu.User.Extended[]
 
   const info: OsuInfo = {
     country: (profile[0]).country.name || "Unknown",
@@ -22,12 +22,14 @@ const handler: Handler = async () => {
 
   for (let i = 0; i < profile.length; i++) {
     const ruleset = profile[i]
-    if (ruleset.statistics && ruleset.rank_history) {
+    if (ruleset.rank_history) {
       const stats = ruleset.statistics
-      info[ruleset.rank_history.mode].global = stats.global_rank
-      info[ruleset.rank_history.mode].country = stats.country_rank
+      info[ruleset.rank_history.mode].global = stats.global_rank || 0
+      info[ruleset.rank_history.mode].country = stats.country_rank || 0
     }
   }
+
+  api.revokeToken()
   
   return {
     statusCode: 200,
