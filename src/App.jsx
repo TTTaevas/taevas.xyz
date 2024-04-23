@@ -4,6 +4,7 @@ import "./App.css";
 
 import Infos from "./components/Infos";
 import Tabs from "./components/Tabs";
+import TabButton from "./components/TabButton";
 
 function App() {
   let [tab, setTab] = useState("none")
@@ -52,23 +53,31 @@ function App() {
             </div>
           </AnimateHeight>
           <div className="relative justify-center items-center">
-            <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-            bg-gradient-to-t from-70% from-slate-500 to-slate-600 hover:from-slate-700 hover:to-slate-600"
-            onClick={() => {setLang(lang !== "en" ? "en" : "fr")}}>
-              {lang === "fr" ? "🇬🇧" : "🇫🇷"}
-            </button>
-            <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-            bg-gradient-to-t from-70% from-purple-500 to-purple-600 hover:from-purple-700 hover:to-purple-600"
-            onClick={() => {setTab("about")}}>{s.abt[lang]}</button>
-            <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-            bg-gradient-to-t from-70% from-emerald-500 to-emerald-600 hover:from-emerald-700 hover:to-emerald-600"
-            onClick={() => {setTab("projects")}}>{s.pro[lang]}</button>
-            <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-            bg-gradient-to-t from-70% from-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600"
-            onClick={() => {setTab("contact")}}>{s.con[lang]}</button>
-            <button className="text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-            bg-gradient-to-t from-70% from-rose-500 to-rose-600 hover:from-rose-700 hover:to-rose-600"
-            onClick={() => {setTab("support")}}>{s.sup[lang]}</button>
+            <TabButton
+              colors={"from-slate-500 to-slate-600 hover:from-slate-700 hover:to-slate-600"}
+              onClick={() => {setLang(lang !== "en" ? "en" : "fr")}}
+              content={lang === "fr" ? "🇬🇧" : "🇫🇷"}
+            />
+            <TabButton
+              colors={"from-purple-500 to-purple-600 hover:from-purple-700 hover:to-purple-600"}
+              onClick={() => {setTab("about")}}
+              content={s.abt[lang]}
+            />
+            <TabButton
+              colors={"from-emerald-500 to-emerald-600 hover:from-emerald-700 hover:to-emerald-600"}
+              onClick={() => {setTab("projects")}}
+              content={s.pro[lang]}
+            />
+            <TabButton
+              colors={"from-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600"}
+              onClick={() => {setTab("contact")}}
+              content={s.con[lang]}
+            />
+            <TabButton
+              colors={"from-rose-500 to-rose-600 hover:from-rose-700 hover:to-rose-600"}
+              onClick={() => {setTab("support")}}
+              content={s.sup[lang]}
+            />
           </div>
         </div>
         <Tabs lang={lang} tab={tab} setTab={setTab} />
