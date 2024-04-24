@@ -1,34 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import Info from "../Info.js";
 
 export type AnilistInfo = {
-  title: string
+  title: string;
   episodes: {
-    watched: number
-    total: number
-  },
-  score: number
-  startDate: string
-  updateDate: string
-  endDate: string
-  cover: string
-  url: string
-} | undefined
+    watched: number;
+    total: number;
+  };
+  score: number;
+  startDate: string;
+  updateDate: string;
+  endDate: string;
+  cover: string;
+  url: string;
+} | undefined;
 
 export default function Anilist() {
-  const [anilist, setAnilist]: [AnilistInfo, React.Dispatch<React.SetStateAction<AnilistInfo>>] = useState()
+  const [anilist, setAnilist]: [AnilistInfo, React.Dispatch<React.SetStateAction<AnilistInfo>>] = useState();
   const getAnilist = async () => {
-    const response = await fetch("/.netlify/functions/anilist").then(r => r.json())
-    setAnilist(response)
-  }
+    const response = await fetch("/.netlify/functions/anilist").then(async r => r.json());
+    setAnilist(response);
+  };
 
   useEffect(() => {
-    getAnilist()
-  }, [])
+    getAnilist();
+  }, []);
 
   if (anilist === undefined) {
-    return <></>
+    return <></>;
   }
+
   return (
     <Info
       type="Anime"
@@ -55,9 +56,9 @@ export default function Anilist() {
                 <p><strong>{anilist.episodes.watched}/{anilist.episodes.total}</strong> episodes watched</p>
             }
           </>,
-          <a className="button-link" href={anilist.url} target="_blank">Anime Link</a>
-        ]
+          <a className="button-link" href={anilist.url} target="_blank" rel="noreferrer">Anime Link</a>,
+        ],
       }]}
     />
-  )
+  );
 }

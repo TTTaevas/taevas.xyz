@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import Info from "../Info.js";
 
 export type LastfmInfo = {
-  artist: string
-  name: string
-  album: string
-  image: string
-  listening: boolean
-  url: string
-} | undefined
+  artist: string;
+  name: string;
+  album: string;
+  image: string;
+  listening: boolean;
+  url: string;
+} | undefined;
 
 export default function Lastfm() {
-  const [lastfm, setLastfm]: [LastfmInfo, React.Dispatch<React.SetStateAction<LastfmInfo>>] = useState()
+  const [lastfm, setLastfm]: [LastfmInfo, React.Dispatch<React.SetStateAction<LastfmInfo>>] = useState();
   const getLastfm = async () => {
-    const response = await fetch("/.netlify/functions/lastfm").then(r => r.json())
-    setLastfm(response)
-  }
+    const response = await fetch("/.netlify/functions/lastfm").then(async r => r.json());
+    setLastfm(response);
+  };
 
   useEffect(() => {
-    getLastfm()
-  }, [])
+    getLastfm();
+  }, []);
 
   if (lastfm === undefined) {
-    return <></>
+    return <></>;
   }
+
   return (
     <Info
       type="Music"
@@ -40,9 +41,9 @@ export default function Lastfm() {
           </div>,
           <p className="mt-2 font-bold">{lastfm.album}</p>,
           <p className="mt-2">{lastfm.listening ? "(Currently listening!)" : "(Last listened)"}</p>,
-          <a className="button-link" href={lastfm.url} target="_blank">Music Details</a>
-        ]
+          <a className="button-link" href={lastfm.url} target="_blank" rel="noreferrer">Music Details</a>,
+        ],
       }]}
     />
-  )
+  );
 }

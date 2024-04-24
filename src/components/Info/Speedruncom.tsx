@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import Info from "../Info.js";
 
 export type SpeedruncomInfo = {
-  place: number
-  link: string
-  date: string
-  thumbnail: string
-  game: string
-  details: string[]
-} | undefined
+  place: number;
+  link: string;
+  date: string;
+  thumbnail: string;
+  game: string;
+  details: string[];
+} | undefined;
 
 export default function Speedruncom() {
-  const [speedruncom, setSpeedruncom]: [SpeedruncomInfo, React.Dispatch<React.SetStateAction<SpeedruncomInfo>>] = useState()
+  const [speedruncom, setSpeedruncom]: [SpeedruncomInfo, React.Dispatch<React.SetStateAction<SpeedruncomInfo>>] = useState();
   const getSpeedruncom = async () => {
-    const response = await fetch("/.netlify/functions/speedruncom").then(r => r.json())
-    setSpeedruncom(response)
-  }
+    const response = await fetch("/.netlify/functions/speedruncom").then(async r => r.json());
+    setSpeedruncom(response);
+  };
 
   useEffect(() => {
-    getSpeedruncom()
-  }, [])
+    getSpeedruncom();
+  }, []);
 
   if (speedruncom === undefined) {
-    return <></>
+    return <></>;
   }
 
-  const details = speedruncom.details.map((d) => <p>{d}</p>)
+  const details = speedruncom.details.map((d) => <p>{d}</p>);
 
   return (
     <Info
@@ -43,9 +43,9 @@ export default function Speedruncom() {
             </div>
           </div>,
           <p className="mt-2 font-bold">{speedruncom.date}</p>,
-          <a className="button-link" href={speedruncom.link} target="_blank">Run Details</a>
-        ]
+          <a className="button-link" href={speedruncom.link} target="_blank" rel="noreferrer">Run Details</a>,
+        ],
       }]}
     />
-  )
+  );
 }

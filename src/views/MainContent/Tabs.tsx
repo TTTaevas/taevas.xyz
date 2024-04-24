@@ -7,11 +7,11 @@ import Support from "../../components/Tab/Support.js";
 function Tabs({
   lang,
   tab,
-  setTab
+  setTab,
 }: {
-  lang: string,
-  tab: string
-  setTab: React.Dispatch<React.SetStateAction<string>>
+  lang: string;
+  tab: string;
+  setTab: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
     <div id="tab" className="bg-blue-500 rounded-t-xl m-auto lg:mb-8">
@@ -20,7 +20,7 @@ function Tabs({
       <Contact lang={lang} tab={tab} setTab={setTab} />
       <Support lang={lang} tab={tab} setTab={setTab} />
     </div>
-  )
+  );
 }
 
-export default Tabs
+export default Tabs;

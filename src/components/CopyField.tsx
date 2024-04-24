@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
 // For future reference, note that I use Carbon Design System throughout the site!
 export default function CopyField({
   text,
-  imageUrl
+  imageUrl,
 }: {
-  text: string
-  imageUrl?: string
+  text: string;
+  imageUrl?: string;
 }) {
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false);
 
   function copy() {
-    navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => {setCopied(false)}, 5000)
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 5000);
   }
 
   return (
@@ -38,5 +40,5 @@ export default function CopyField({
         </div>
       }
     </div>
-  )
+  );
 }

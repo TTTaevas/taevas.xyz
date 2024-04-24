@@ -12,7 +12,22 @@ const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({baseDirectory: __dirname, recommendedConfig: pluginJs.configs.recommended});
 
 export default [
-  {languageOptions: { globals: globals.node }},
   ...compat.extends("xo-typescript"),
   pluginReactConfig,
+  {
+    languageOptions: {
+      globals: globals.node
+    },
+    settings: {
+      react: {
+        version: "detect"
+      }
+    },
+    rules: {
+      quotes: "off",
+      "@typescript-eslint/quotes": ["error", "double"],
+      indent: "off",
+      "@typescript-eslint/indent": ["error", 2]
+    }
+  },
 ];
