@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "lib": ["DOM"],
+    "target": "ES6",
+    "module": "NodeNext",
+    "declaration": false,
+    "outDir": "./dist",
+    "strict": true
+  }
+}

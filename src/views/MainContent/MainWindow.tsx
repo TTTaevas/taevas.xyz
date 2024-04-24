@@ -1,7 +1,7 @@
 import React from "react";
 import AnimateHeight from 'react-animate-height';
 
-import TabButton from "../../components/TabButton";
+import TabButton from "../../components/TabButton.js";
 
 function MainWindow({
   lang,

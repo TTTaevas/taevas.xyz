@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import MainWindow from "./MainContent/MainWindow"
-import Tabs from "./MainContent/Tabs";
+import MainWindow from "./MainContent/MainWindow.js"
+import Tabs from "./MainContent/Tabs.js";
 
 function MainContent() {
   let [tab, setTab] = useState("none")

@@ -1,6 +1,6 @@
 import React from "react";
-import Tab from "../Tab";
-import CopyField from "../CopyField";
+import Tab from "../Tab.js";
+import CopyField from "../CopyField.js";
 
 function Contact({
   lang,

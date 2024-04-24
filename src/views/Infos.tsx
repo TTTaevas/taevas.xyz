@@ -1,11 +1,11 @@
 import React from "react";
-import Lastfm from "../components/Info/Lastfm";
-import Speedruncom from "../components/Info/Speedruncom";
-import Hackthebox from "../components/Info/Hackthebox";
-import Git from "../components/Info/Git";
-import Osu from "../components/Info/Osu";
-import Anilist from "../components/Info/Anilist";
-import Wanikani from "../components/Info/Wanikani";
+import Lastfm from "../components/Info/Lastfm.js"
+import Speedruncom from "../components/Info/Speedruncom.js"
+import Hackthebox from "../components/Info/Hackthebox.js"
+import Git from "../components/Info/Git.js"
+import Osu from "../components/Info/Osu.js"
+import Anilist from "../components/Info/Anilist.js"
+import Wanikani from "../components/Info/Wanikani.js"
 
 function Infos() {
   return (

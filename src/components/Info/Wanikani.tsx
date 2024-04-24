@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Info from "../Info";
+import Info from "../Info.js";
 
 export type WanikaniInfo = {
   progression: {
