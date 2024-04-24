@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Info from "./structure";
+import Info from "../Info";
 import "../../style/infos/osu.css"
 
 export type OsuInfo = {

@@ -1,8 +1,8 @@
 import React from "react";
-import About from "./tabs/About";
-import Contact from "./tabs/Contact";
-import Projects from "./tabs/Projects";
-import Support from "./tabs/Support";
+import About from "../../components/Tab/About";
+import Contact from "../../components/Tab/Contact";
+import Projects from "../../components/Tab/Projects";
+import Support from "../../components/Tab/Support";
 
 function Tabs({
   lang,

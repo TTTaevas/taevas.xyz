@@ -1,5 +1,5 @@
 import React from "react";
-import Tab from "./structure";
+import Tab from "../Tab";
 
 function Projects({
   lang,
