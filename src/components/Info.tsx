@@ -13,7 +13,7 @@ export default function Info({
 }) {
   const sections = websites.map((w) => {
     return (
-      <div id={w.name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}>
+      <div key={w.name} id={w.name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}>
         <a href={w.link} target="_blank" rel="noreferrer">
           <h2 className="uppercase text-right font-bold pr-1 bg-white text-red-500">
             {w.name}

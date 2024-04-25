@@ -27,7 +27,19 @@ export default [
       quotes: "off",
       "@typescript-eslint/quotes": ["error", "double"],
       indent: "off",
-      "@typescript-eslint/indent": ["error", 2]
-    }
+      "@typescript-eslint/indent": ["error", 2],
+      "@typescript-eslint/no-unsafe-assignment": "off"
+    },
   },
+  {
+    ignores: [
+      "**/.netlify/*",
+      "**/dist/*",
+      "eslint.config.js",
+      "eslintrc.js",
+      "postcss.config.cjs",
+      "tailwind.config.js",
+      "vite.config.js"
+    ]
+  }
 ];

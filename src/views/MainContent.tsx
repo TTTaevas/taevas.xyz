@@ -5,7 +5,7 @@ import Tabs from "./MainContent/Tabs.js";
 
 function MainContent() {
   let [tab, setTab] = useState("none");
-  let [lang, setLang] = useState(localStorage.getItem("lang") || "en");
+  let [lang, setLang] = useState(localStorage.getItem("lang") ?? "en");
   useEffect(() => {
     localStorage.setItem("lang", lang);
   }, [lang]);

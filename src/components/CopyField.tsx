@@ -11,7 +11,7 @@ export default function CopyField({
   const [copied, setCopied] = useState(false);
 
   function copy() {
-    navigator.clipboard.writeText(text);
+    void navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => {
       setCopied(false);

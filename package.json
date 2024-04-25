@@ -3,8 +3,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "lint": "bunx eslint src/",
-    "lint:fix": "bunx eslint src/ --fix"
+    "lint": "bunx eslint .",
+    "lint:fix": "bunx eslint . --fix"
   },
   "dependencies": {
     "@netlify/functions": "^2.4.0",
