@@ -1,13 +1,13 @@
-import { Handler } from '@netlify/functions'
-import fetch from "node-fetch"
-import { AnilistInfo } from '../../src/components/infos/Anilist'
+import {type Handler} from "@netlify/functions";
+import fetch from "node-fetch";
+import {type AnilistInfo} from "../../src/components/Info/Anilist.js";
 
 const handler: Handler = async () => {
   const anilist = await fetch("https://graphql.anilist.co", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json"
+      "Accept": "application/json",
     },
     body: JSON.stringify({
       query: `
@@ -40,21 +40,21 @@ const handler: Handler = async () => {
         }
       `,
       variables: {
-        userName: "Taevas"
-      }
-    })
-  })
+        userName: "Taevas",
+      },
+    }),
+  });
   if (anilist.status !== 200) {
     // log the issue in netlify, return 404 to the user anyway
-    console.log(await anilist.json())
+    console.log(await anilist.json());
     return {
       statusCode: 404,
-      body: ""
-    }
+      body: "",
+    };
   }
 
-  const p_json = await anilist.json() as {[key: string]: any}
-  const json = p_json.data.MediaList
+  const p_json = await anilist.json() as Record<string, any>;
+  const json = p_json.data.MediaList;
   const anime: AnilistInfo = {
     title: json.media.title.romaji,
     episodes: {
@@ -66,17 +66,17 @@ const handler: Handler = async () => {
     updateDate: new Date(json.updatedAt * 1000).toISOString(),
     endDate: json.completedAt.year ? new Date(`${json.completedAt.year}-${json.completedAt.month}-${json.completedAt.day}`).toISOString() : new Date().toISOString(),
     cover: json.media.coverImage.medium,
-    url: json.media.siteUrl
-  }
+    url: json.media.siteUrl,
+  };
 
-  anime.startDate = anime.startDate.substring(0, anime.startDate.indexOf("T"))
-  anime.updateDate = anime.updateDate.substring(0, anime.updateDate.indexOf("T"))
-  anime.endDate = anime.endDate.substring(0, anime.endDate.indexOf("T"))
+  anime.startDate = anime.startDate.substring(0, anime.startDate.indexOf("T"));
+  anime.updateDate = anime.updateDate.substring(0, anime.updateDate.indexOf("T"));
+  anime.endDate = anime.endDate.substring(0, anime.endDate.indexOf("T"));
   
   return {
     statusCode: 200,
-    body: JSON.stringify(anime)
-  }
-}
+    body: JSON.stringify(anime),
+  };
+};
 
-export { handler }
+export {handler};

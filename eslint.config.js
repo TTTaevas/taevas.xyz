@@ -15,6 +15,10 @@ export default [
   ...compat.extends("xo-typescript"),
   pluginReactConfig,
   {
+    files: [
+      "**/*.ts",
+      "**/*.tsx"
+    ],
     languageOptions: {
       globals: globals.node
     },
@@ -33,13 +37,10 @@ export default [
   },
   {
     ignores: [
-      "**/.netlify/*",
-      "**/dist/*",
-      "eslint.config.js",
-      "eslintrc.js",
-      "postcss.config.cjs",
-      "tailwind.config.js",
-      "vite.config.js"
-    ]
+      ".netlify/*",
+      "dist/*",
+      "*.js",
+      "*.cjs"
+    ],
   }
 ];
