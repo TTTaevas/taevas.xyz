@@ -7,6 +7,7 @@ const handler: Handler = async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       "Accept": "application/json",
     },
     body: JSON.stringify({
@@ -53,8 +54,7 @@ const handler: Handler = async () => {
     };
   }
 
-  const p_json = await anilist.json() as Record<string, any>;
-  const json = p_json.data.MediaList;
+  const json = (await anilist.json() as any).data.MediaList;
   const anime: AnilistInfo = {
     title: json.media.title.romaji,
     episodes: {

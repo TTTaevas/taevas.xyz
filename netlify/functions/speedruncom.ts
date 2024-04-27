@@ -15,10 +15,9 @@ const handler: Handler = async () => {
         date: string;
       };
     }>;
-  }>
-  ("https://www.speedrun.com/api/v1/users/j03v45mj/personal-bests");
+  }>("https://www.speedrun.com/api/v1/users/j03v45mj/personal-bests");
 
-  const details_to_request = [new Promise((resolve) => {
+  const detailsToRequest = [new Promise((resolve) => {
     resolve(api<{
       data: {
         names: {
@@ -30,33 +29,30 @@ const handler: Handler = async () => {
           }; 
         };
       };
-    }>
-    (`https://www.speedrun.com/api/v1/games/${speedruncom.data[0].run.game}`));
+    }>(`https://www.speedrun.com/api/v1/games/${speedruncom.data[0].run.game}`));
   })];
 
   if (speedruncom.data[0].run.level) {
-    details_to_request.push(new Promise((resolve) => {
+    detailsToRequest.push(new Promise((resolve) => {
       resolve(api<{
         data: {
           name: string;
         };
-      }>
-      (`https://www.speedrun.com/api/v1/levels/${speedruncom.data[0].run.level}`));
+      }>(`https://www.speedrun.com/api/v1/levels/${speedruncom.data[0].run.level}`));
     }));
   }
 
   if (speedruncom.data[0].run.category) {
-    details_to_request.push(new Promise((resolve) => {
+    detailsToRequest.push(new Promise((resolve) => {
       resolve(api<{
         data: {
           name: string;
         };
-      }>
-      (`https://www.speedrun.com/api/v1/categories/${speedruncom.data[0].run.category}`));
+      }>(`https://www.speedrun.com/api/v1/categories/${speedruncom.data[0].run.category}`));
     }));
   }
 
-  const details = await Promise.all(details_to_request) as [Record<string, any>];
+  const details = await Promise.all(detailsToRequest) as [Record<string, any>];
 
   const run: SpeedruncomInfo = {
     place: speedruncom.data[0].place,
@@ -64,7 +60,7 @@ const handler: Handler = async () => {
     date: speedruncom.data[0].run.date,
     thumbnail: details[0].data.assets["cover-tiny"].uri,
     game: details[0].data.names.international,
-    details: details.slice(1).map((d) => d.data.name) || [],
+    details: details.slice(1).map((d) => (d.data as {name: string}).name),
   };
 
   return {

@@ -7,8 +7,7 @@ const handler: Handler = async () => {
     profile: {
       activity: HacktheboxInfo[];
     };
-  }>
-  ("https://www.hackthebox.com/api/v4/profile/activity/1063999");
+  }>("https://www.hackthebox.com/api/v4/profile/activity/1063999");
 
   const pwn = hackthebox.profile.activity.find((a: HacktheboxInfo) => a!.object_type === "machine");
   if (!pwn) {

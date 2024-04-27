@@ -8,6 +8,7 @@ const handler: Handler = async () => {
     headers: {
       "PRIVATE-TOKEN": process.env.API_GITLAB!,
       "Content-Type": "application/json",
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       "Accept": "application/json",
     },
   });
@@ -19,9 +20,17 @@ const handler: Handler = async () => {
     };
   }
 
-  const json = await gitlab.json() as Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const {created_at} = (await gitlab.json() as Record<string, any>)[0];
+  if (typeof created_at !== "string") {
+    return {
+      statusCode: 404,
+      body: "",
+    };
+  }
+
   const activity: GitlabInfo = {
-    date: json[0].created_at.substring(0, json[0].created_at.indexOf("T")),
+    date: created_at.substring(0, created_at.indexOf("T")),
   };
   
   return {

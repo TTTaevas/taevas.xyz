@@ -15,27 +15,30 @@ type Subject = {
   };
 };
 
-function addStuffToLearn(ids: number[], data: Array<{available_at: string; subject_ids: number[]}>, subjects: Subject[]): Array<{
+type StuffToLearn = {
   available_at: string;
   type: string;
   writing: string;
-  meanings: [{
+  meanings: Array<{
     meaning: string;
-  }];
+  }>;
   url: string;
-}> {
-  const arr: any[] = [];
+};
 
-  for (let i = 0; i < ids.length; i++) {
-    const summary_data = data.find(lesson => lesson.subject_ids.includes(ids[i]));
-    const subject = subjects.find(subject => subject.id === ids[i]);
-    if (!summary_data || !subject) {
-      console.error("Failed: ", summary_data, subject);
+function addStuffToLearn(ids: number[], data: Array<{available_at: string; subject_ids: number[]}>, subjects: Subject[]): StuffToLearn[] {
+  const arr: StuffToLearn[] = [];
+
+  for (const id of ids) {
+    const summaryData = data.find(lesson => lesson.subject_ids.includes(id));
+    const subject = subjects.find(subject => subject.id === id);
+    if (!summaryData || !subject) {
+      console.error("Failed: ", summaryData, subject);
       continue;
     }
 
     arr.push({
-      available_at: summary_data.available_at,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      available_at: summaryData.available_at,
       type: subject.object,
       writing: subject.data.characters || subject.data.slug || subject.data.meanings[0].meaning,
       meanings: subject.data.meanings,
@@ -95,42 +98,42 @@ const handler: Handler = async () => {
     };
   } = data[2];
 
-  const subject_ids_lessons: number[] = [];
-  const subject_ids_reviews: number[] = [];
-  for (let i = 0; i < summary.data.lessons.length; i++) {
-    for (let e = 0; e < summary.data.lessons[i].subject_ids.length; e++) {
-      subject_ids_lessons.push(summary.data.lessons[i].subject_ids[e]);
+  const subjectIdsLessons: number[] = [];
+  const subjectIdsReviews: number[] = [];
+  for (const lesson of summary.data.lessons) {
+    for (const subjectId of lesson.subject_ids) {
+      subjectIdsLessons.push(subjectId);
     }
   }
 
-  for (let i = 0; i < summary.data.reviews.length; i++) {
-    for (let e = 0; e < summary.data.reviews[i].subject_ids.length; e++) {
-      subject_ids_reviews.push(summary.data.reviews[i].subject_ids[e]);
+  for (const review of summary.data.reviews) {
+    for (const subjectId of review.subject_ids) {
+      subjectIdsReviews.push(subjectId);
     }
   }
 
   const now = new Date();
   // next_reviews checks what reviews will be available in the next 23 hours
   // summary.data.next_reviews_at checks beyond that, but will be the current time if a review is already available
-  const next_reviews = summary.data.reviews
+  const nextReviews = summary.data.reviews
     .map((r: {subject_ids: number[]; available_at: Date | string}) => {
       r.available_at = new Date(r.available_at); return r;
     })
     .filter((r) => r.available_at > now && r.subject_ids.length) as Array<{subject_ids: number[]; available_at: Date}>;
-  const more_things_to_review_at = next_reviews[0] ? next_reviews[0].available_at.toISOString() : summary.data.next_reviews_at ? summary.data.next_reviews_at : null;
+  const moreThingsToReviewAt = nextReviews[0] ? nextReviews[0].available_at.toISOString() : summary.data.next_reviews_at ? summary.data.next_reviews_at : undefined;
 
-  const subject_ids_all = subject_ids_lessons.concat(subject_ids_reviews);
-  const subjects = await api<{data: Subject[]}>(`https://api.wanikani.com/v2/subjects?ids=${subject_ids_all.toString()}`, process.env.API_WANIKANI);
+  const subjectIdsAll = subjectIdsLessons.concat(subjectIdsReviews);
+  const subjects = await api<{data: Subject[]}>(`https://api.wanikani.com/v2/subjects?ids=${subjectIdsAll.toString()}`, process.env.API_WANIKANI);
 
-  const lessons = addStuffToLearn(subject_ids_lessons, summary.data.lessons, subjects.data);
-  const reviews = addStuffToLearn(subject_ids_reviews, summary.data.reviews, subjects.data);
+  const lessons = addStuffToLearn(subjectIdsLessons, summary.data.lessons, subjects.data);
+  const reviews = addStuffToLearn(subjectIdsReviews, summary.data.reviews, subjects.data);
 
   const info: WanikaniInfo = {
     progression,
     resets: resets.data,
     lessons,
     reviews,
-    more_things_to_review_at,
+    moreThingsToReviewAt,
   };
 
   return {

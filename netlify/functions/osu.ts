@@ -28,16 +28,15 @@ const handler: Handler = async () => {
     mania: {global: 0, country: 0},
   };
 
-  for (let i = 0; i < profile.length; i++) {
-    const ruleset = profile[i];
+  for (const ruleset of profile) {
     if (ruleset.rank_history) {
       const stats = ruleset.statistics;
-      info[ruleset.rank_history.mode].global = stats.global_rank || 0;
-      info[ruleset.rank_history.mode].country = stats.country_rank || 0;
+      info[ruleset.rank_history.mode].global = stats.global_rank ?? 0;
+      info[ruleset.rank_history.mode].country = stats.country_rank ?? 0;
     }
   }
 
-  api.revokeToken();
+  void api.revokeToken();
   
   return {
     statusCode: 200,

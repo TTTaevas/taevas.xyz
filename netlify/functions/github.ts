@@ -1,10 +1,12 @@
 import {type Handler} from "@netlify/functions";
-import {Octokit} from "@octokit/core";
+import {Octokit} from "@octokit/rest";
 import {type GithubInfo} from "../../src/components/Info/Git.js";
 
 const handler: Handler = async () => {
   const octokit = new Octokit({auth: process.env.API_GITHUB});
-  const github = await octokit.request("GET /users/TTTaevas/events", {per_page: 100});
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const github = await octokit.rest.activity.listEventsForAuthenticatedUser({username: "TTTaevas"});
+
   if (github.status !== 200) {
     return {
       statusCode: 404,
@@ -12,9 +14,9 @@ const handler: Handler = async () => {
     };
   }
 
-  const public_push = github.data.find((e: {type: string; public: boolean}) => e.type === "PushEvent" && e.public);
-  const private_push = github.data.find((e: {type: string; public: boolean}) => e.type === "PushEvent" && !e.public);
-  if (!public_push || !private_push) {
+  const publicPush = github.data.find((e) => e.type === "PushEvent" && e.public);
+  const privatePush = github.data.find((e) => e.type === "PushEvent" && !e.public);
+  if (!publicPush || !privatePush) {
     return {
       statusCode: 404,
       body: "",
@@ -23,11 +25,11 @@ const handler: Handler = async () => {
   
   const info: GithubInfo = {
     public: {
-      repo: public_push.repo.name,
-      date: public_push.created_at.substring(0, public_push.created_at.indexOf("T")),
+      repo: publicPush.repo.name,
+      date: publicPush.created_at ? publicPush.created_at.substring(0, publicPush.created_at.indexOf("T")) : "",
     },
     private: {
-      date: private_push.created_at.substring(0, private_push.created_at.indexOf("T")),
+      date: privatePush.created_at ? privatePush.created_at.substring(0, privatePush.created_at.indexOf("T")) : "",
     },
   };
   

@@ -20,43 +20,29 @@ export type WanikaniInfo = {
       target_level: number;
     };
   }>;
-  lessons: Array<{
-    available_at: string;
-    type: string;
-    writing: string;
-    meanings: [{
-      meaning: string;
-    }];
-    url: string;
-  }>;
-  reviews: Array<{
-    available_at: string;
-    type: string;
-    writing: string;
-    meanings: [{
-      meaning: string;
-    }];
-    url: string;
-  }>;
-  more_things_to_review_at: string | undefined;
+  lessons: Item[];
+  reviews: Item[];
+  moreThingsToReviewAt: string | undefined;
 } | undefined;
 
-function Button(lesson: {
+type Item = {
   available_at: string;
   type: string;
   writing: string;
-  meanings: [{
+  meanings: Array<{
     meaning: string;
-  }];
+  }>;
   url: string;
-}) {
-  const colour = lesson.type === "radical" ? "bg-sky-600" : lesson.type === "kanji" ? "bg-pink-500" : "bg-fuchsia-700";
-  const title = `(${lesson.type}) ${lesson.meanings.map((m) => m.meaning).toString().replace(/,/g, ", ")}`;
+};
+
+function Button(item: Item) {
+  const colour = item.type === "radical" ? "bg-sky-600" : item.type === "kanji" ? "bg-pink-500" : "bg-fuchsia-700";
+  const title = `(${item.type}) ${item.meanings.map((m) => m.meaning).toString().replace(/,/g, ", ")}`;
 
   return (
-    <a href={lesson.url} target="_blank" rel="noreferrer">
+    <a href={item.url} target="_blank" rel="noreferrer">
       <button title={title} className={`m-1 p-2 ${colour} border-solid border-white border-2 rounded-md`}>
-        {lesson.writing}
+        {item.writing}
       </button></a>
   );
 }
@@ -119,9 +105,9 @@ export default function Wanikani() {
   </div> : <p>No review available for now!</p>;
 
   let whenNextToReview = <></>;
-  if (wanikani.more_things_to_review_at) {
+  if (wanikani.moreThingsToReviewAt) {
     const rtf = new Intl.RelativeTimeFormat("en", {style: "long", numeric: "always"});
-    const timeDifference = new Date(Math.abs(new Date(wanikani.more_things_to_review_at).getTime() - now.getTime()));
+    const timeDifference = new Date(Math.abs(new Date(wanikani.moreThingsToReviewAt).getTime() - now.getTime()));
     const howManyHours = (timeDifference.getUTCHours() + 1) + ((24 * (timeDifference.getUTCDate() - 1)) * (timeDifference.getUTCMonth() + 1));
     whenNextToReview = <p className="mt-2">{`There will be more stuff to review ${rtf.format(howManyHours, "hour")}!`}</p>;
   }
