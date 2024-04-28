@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
 
-import Infos from "./views/Infos";
-import MainContent from "./views/MainContent";
+import Infos from "./views/Infos.js";
+import MainContent from "./views/MainContent.js";
 
 function App() {
   return (

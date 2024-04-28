@@ -1,34 +1,36 @@
-import React, { useState, useEffect } from "react";
-import Info from "../Info";
+import React, {useState, useEffect} from "react";
+import Info from "../Info.js";
 
 export type AnilistInfo = {
-  title: string
+  title: string;
   episodes: {
-    watched: number
-    total: number
-  },
-  score: number
-  startDate: string
-  updateDate: string
-  endDate: string
-  cover: string
-  url: string
-} | undefined
+    watched: number;
+    total: number;
+  };
+  score: number;
+  startDate: string;
+  updateDate: string;
+  endDate: string;
+  cover: string;
+  url: string;
+} | undefined;
 
 export default function Anilist() {
-  const [anilist, setAnilist]: [AnilistInfo, React.Dispatch<React.SetStateAction<AnilistInfo>>] = useState()
+  const [anilist, setAnilist]: [AnilistInfo, React.Dispatch<React.SetStateAction<AnilistInfo>>] = useState();
   const getAnilist = async () => {
-    const response = await fetch("/.netlify/functions/anilist").then(r => r.json())
-    setAnilist(response)
-  }
+    const response = await fetch("/.netlify/functions/anilist").then(async r => r.json());
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    setAnilist(response);
+  };
 
   useEffect(() => {
-    getAnilist()
-  }, [])
+    void getAnilist();
+  }, []);
 
   if (anilist === undefined) {
-    return <></>
+    return <></>;
   }
+
   return (
     <Info
       type="Anime"
@@ -36,7 +38,7 @@ export default function Anilist() {
         name: "Anilist",
         link: "https://anilist.co/user/Taevas/",
         elements: [
-          <div className="flex mb-4">
+          <div key={"data"} className="flex mb-4">
             <img className="m-auto w-16 h-22" alt="anime cover" src={anilist.cover} />
             <div className="m-auto pl-2">
               <p className="font-bold">{anilist.title}</p>
@@ -55,9 +57,9 @@ export default function Anilist() {
                 <p><strong>{anilist.episodes.watched}/{anilist.episodes.total}</strong> episodes watched</p>
             }
           </>,
-          <a className="button-link" href={anilist.url} target="_blank">Anime Link</a>
-        ]
+          <a key={"more"} className="button-link" href={anilist.url} target="_blank" rel="noreferrer">Anime Link</a>,
+        ],
       }]}
     />
-  )
+  );
 }

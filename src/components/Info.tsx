@@ -2,19 +2,19 @@ import React from "react";
 
 export default function Info({
   type,
-  websites
+  websites,
 }: {
-  type: string,
-  websites: {
-    name: string,
-    link: string,
-    elements: React.JSX.Element[]
-  }[]
+  type: string;
+  websites: Array<{
+    name: string;
+    link: string;
+    elements: React.JSX.Element[];
+  }>;
 }) {
   const sections = websites.map((w) => {
     return (
-      <div id={w.name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}>
-        <a href={w.link} target="_blank">
+      <div key={w.name} id={w.name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}>
+        <a href={w.link} target="_blank" rel="noreferrer">
           <h2 className="uppercase text-right font-bold pr-1 bg-white text-red-500">
             {w.name}
           </h2>
@@ -23,8 +23,8 @@ export default function Info({
           {w.elements}
         </div>
       </div>
-    )
-  })
+    );
+  });
 
   return (
     <div className="m-5 flex w-80 border-l-3 border-r-3 border-b-3 border-white border-solid" id={type.toLowerCase()}>
@@ -38,5 +38,5 @@ export default function Info({
         {sections}
       </div>
     </div>
-  )
+  );
 }

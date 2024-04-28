@@ -1,40 +1,47 @@
-import { Handler } from '@netlify/functions'
-import * as osu from 'osu-api-v2-js'
-import { OsuInfo } from '../../src/components/infos/Osu'
+import {type Handler} from "@netlify/functions";
+import * as osu from "osu-api-v2-js";
+import {type OsuInfo} from "../../src/components/Info/Osu.js";
 
 const handler: Handler = async () => {
-  const api = await osu.API.createAsync({id: 11451, secret: process.env.API_OSU!})
+  const api = await osu.API.createAsync({id: 11451, secret: process.env.API_OSU!});
 
   const profile = await Promise.all([
-    new Promise((resolve) => resolve(api.getUser(7276846, osu.Ruleset.osu))),
-    new Promise((resolve) => resolve(api.getUser(7276846, osu.Ruleset.taiko))),
-    new Promise((resolve) => resolve(api.getUser(7276846, osu.Ruleset.fruits))),
-    new Promise((resolve) => resolve(api.getUser(7276846, osu.Ruleset.mania)))
-  ]) as osu.User.Extended[]
+    new Promise((resolve) => {
+      resolve(api.getUser(7276846, osu.Ruleset.osu)); 
+    }),
+    new Promise((resolve) => {
+      resolve(api.getUser(7276846, osu.Ruleset.taiko)); 
+    }),
+    new Promise((resolve) => {
+      resolve(api.getUser(7276846, osu.Ruleset.fruits)); 
+    }),
+    new Promise((resolve) => {
+      resolve(api.getUser(7276846, osu.Ruleset.mania)); 
+    }),
+  ]) as osu.User.Extended[];
 
   const info: OsuInfo = {
     country: (profile[0]).country.name || "Unknown",
     osu: {global: 0, country: 0},
     taiko: {global: 0, country: 0},
     fruits: {global: 0, country: 0},
-    mania: {global: 0, country: 0}
-  }
+    mania: {global: 0, country: 0},
+  };
 
-  for (let i = 0; i < profile.length; i++) {
-    const ruleset = profile[i]
+  for (const ruleset of profile) {
     if (ruleset.rank_history) {
-      const stats = ruleset.statistics
-      info[ruleset.rank_history.mode].global = stats.global_rank || 0
-      info[ruleset.rank_history.mode].country = stats.country_rank || 0
+      const stats = ruleset.statistics;
+      info[ruleset.rank_history.mode].global = stats.global_rank ?? 0;
+      info[ruleset.rank_history.mode].country = stats.country_rank ?? 0;
     }
   }
 
-  api.revokeToken()
+  void api.revokeToken();
   
   return {
     statusCode: 200,
-    body: JSON.stringify(info)
-  }
-}
+    body: JSON.stringify(info),
+  };
+};
 
-export { handler }
+export {handler};
