@@ -10,9 +10,7 @@ function TabButton({
   content: string;
 }) {
   return (
-    <button className={`text-xl text-white bg-black m-2 p-4 border-solid border-white border-3 rounded-md
-    bg-gradient-to-t from-70% ` + colors}
-    onClick={onClick}>
+    <button className={`text-xl text-white m-2 p-4 border-solid border-white border-3 rounded-md bg-gradient-to-t from-70% ${colors}`} onClick={onClick}>
       {content}
     </button>
   );
