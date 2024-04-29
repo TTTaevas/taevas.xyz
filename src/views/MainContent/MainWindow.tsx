@@ -38,7 +38,7 @@ function MainWindow({
           <h2 className="text-3xl font-bold">{s.why[lang]}</h2>
         </div>
       </AnimateHeight>
-      {/* <SocialButtons/> */}
+      <SocialButtons/>
       <TabButtons
         lang={lang}
         setLang={setLang}
