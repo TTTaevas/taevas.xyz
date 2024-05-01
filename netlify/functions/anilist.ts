@@ -45,14 +45,6 @@ const handler: Handler = async () => {
       },
     }),
   });
-  if (anilist.status !== 200) {
-    // log the issue in netlify, return 404 to the user anyway
-    console.log(await anilist.json());
-    return {
-      statusCode: 404,
-      body: "",
-    };
-  }
 
   const json = (await anilist.json() as any).data.MediaList;
   const anime: AnilistInfo = {

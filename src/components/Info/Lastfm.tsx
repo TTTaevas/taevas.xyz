@@ -12,18 +12,39 @@ export type LastfmInfo = {
 
 export default function Lastfm() {
   const [lastfm, setLastfm]: [LastfmInfo, React.Dispatch<React.SetStateAction<LastfmInfo>>] = useState();
+  const [error, setError] = useState(false);
+
   const getLastfm = async () => {
-    const response = await fetch("/.netlify/functions/lastfm").then(async r => r.json());
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    setLastfm(response);
+    setLastfm(await fetch("/.netlify/functions/lastfm").then(async r => r.json()));
+  };
+
+  const updateLastFm = () => {
+    getLastfm().catch(() => {
+      setError(true);
+    });
   };
 
   useEffect(() => {
-    void getLastfm();
+    updateLastFm();
+
+    const timer = setInterval(() => {
+      updateLastFm();
+    }, 2 * 60 * 1000);
+    return () => {
+      clearInterval(timer); 
+    };
   }, []);
 
-  if (lastfm === undefined) {
-    return <></>;
+
+  if (!lastfm) {
+    return (
+      <Info
+        type="Music"
+        websites={[]}
+        error={error}
+      />
+    );
   }
 
   return (

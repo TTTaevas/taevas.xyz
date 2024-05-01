@@ -12,21 +12,29 @@ export type SpeedruncomInfo = {
 
 export default function Speedruncom() {
   const [speedruncom, setSpeedruncom]: [SpeedruncomInfo, React.Dispatch<React.SetStateAction<SpeedruncomInfo>>] = useState();
+  const [error, setError] = useState(false);
+
   const getSpeedruncom = async () => {
-    const response = await fetch("/.netlify/functions/speedruncom").then(async r => r.json());
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    setSpeedruncom(response);
+    setSpeedruncom(await fetch("/.netlify/functions/speedruncom").then(async r => r.json()));
   };
 
   useEffect(() => {
-    void getSpeedruncom();
+    getSpeedruncom().catch(() => {
+      setError(true);
+    });
   }, []);
 
-  if (speedruncom === undefined) {
-    return <></>;
-  }
 
-  const details = speedruncom.details.map((d, i) => <p key={`detail-${i}`}>{d}</p>);
+  if (!speedruncom) {
+    return (
+      <Info
+        type="Speedrun"
+        websites={[]}
+        error={error}
+      />
+    );
+  }
 
   return (
     <Info
@@ -40,7 +48,7 @@ export default function Speedruncom() {
             <div className="m-auto pl-2">
               <p className="mb-2">Placed <strong>#{speedruncom.place}</strong> on:</p>
               <p className="font-bold">{speedruncom.game}</p>
-              {details}
+              {speedruncom.details.map((d, i) => <p key={`detail-${i}`}>{d}</p>)}
             </div>
           </div>,
           <p key={"date"} className="mt-2 font-bold">{speedruncom.date}</p>,

@@ -14,7 +14,7 @@ export default function Info({
   }>;
   error?: boolean;
 }) {
-  const [height, setHeight] = useState<Height>(0);
+  const [height, setHeight] = useState<Height>(3);
   
   const sections = websites.map((w, i) => {
     setTimeout(() => { // somehow necessary to not always rerender

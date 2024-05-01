@@ -17,18 +17,28 @@ export type AnilistInfo = {
 
 export default function Anilist() {
   const [anilist, setAnilist]: [AnilistInfo, React.Dispatch<React.SetStateAction<AnilistInfo>>] = useState();
+  const [error, setError] = useState(false);
+
   const getAnilist = async () => {
-    const response = await fetch("/.netlify/functions/anilist").then(async r => r.json());
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    setAnilist(response);
+    setAnilist(await fetch("/.netlify/functions/anilist").then(async r => r.json()));
   };
 
   useEffect(() => {
-    void getAnilist();
+    getAnilist().catch(() => {
+      setError(true);
+    });
   }, []);
 
-  if (anilist === undefined) {
-    return <></>;
+
+  if (!anilist) {
+    return (
+      <Info 
+        type="Anime"
+        websites={[]}
+        error={error}
+      />
+    );
   }
 
   return (
