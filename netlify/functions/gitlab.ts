@@ -13,19 +13,11 @@ const handler: Handler = async () => {
     },
   });
 
-  if (gitlab.status !== 200) {
-    return {
-      statusCode: 404,
-      body: "",
-    };
-  }
-
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const {created_at} = (await gitlab.json() as Record<string, any>)[0];
   if (typeof created_at !== "string") {
     return {
       statusCode: 404,
-      body: "",
     };
   }
 

@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import AnimateHeight, {type Height} from "react-animate-height";
 
 export default function Info({
   type,
@@ -13,9 +14,21 @@ export default function Info({
   }>;
   error?: boolean;
 }) {
-  const sections = websites.map((w) => {
+  const [height, setHeight] = useState<Height>(0);
+  
+  const sections = websites.map((w, i) => {
+    setTimeout(() => { // somehow necessary to not always rerender
+      setHeight("auto"); 
+    }, 0);
+
     return (
-      <div key={w.name} id={w.name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}>
+      <AnimateHeight
+        key={w.name}
+        id={w.name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}
+        delay={150 * i}
+        duration={150 * (i + 1)}
+        height={height}
+      >
         <a href={w.link} target="_blank" rel="noreferrer">
           <h2 className="uppercase text-right font-bold pr-1 bg-white text-red-500">
             {w.name}
@@ -24,7 +37,7 @@ export default function Info({
         <div className="info p-3 m-auto">
           {w.elements}
         </div>
-      </div>
+      </AnimateHeight>
     );
   });
 

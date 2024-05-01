@@ -4,80 +4,83 @@ import "../../style/infos/osu.css";
 
 export type OsuInfo = {
   country: string;
-  osu: {global: number; country: number};
-  taiko: {global: number; country: number};
-  fruits: {global: number; country: number};
-  mania: {global: number; country: number};
-} | undefined;
+  osu?: {global: number; country: number};
+  taiko?: {global: number; country: number};
+  fruits?: {global: number; country: number};
+  mania?: {global: number; country: number};
+};
 
 export default function Osu() {
-  const [osu, setOsu]: [OsuInfo, React.Dispatch<React.SetStateAction<OsuInfo>>] = useState();
+  const [osu, setOsu]: [OsuInfo, React.Dispatch<React.SetStateAction<OsuInfo>>] = useState({country: "Unknown"});
+  const [error, setError] = useState(false);
+
   const getOsu = async () => {
-    const response = await fetch("/.netlify/functions/osu").then(async r => r.json());
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    setOsu(response);
+    setOsu(await fetch("/.netlify/functions/osu").then(async r => r.json()));
   };
 
   useEffect(() => {
-    void getOsu();
+    getOsu().catch(() => {
+      setError(true);
+    });
   }, []);
 
-  if (osu === undefined) {
-    return <></>;
+
+  const generateWebsite = (name: string, interalName: string, data: {global: number; country: number} | undefined) => {
+    const website = {
+      name,
+      link: `https://osu.ppy.sh/users/7276846/${interalName}`,
+      elements: [] as React.JSX.Element[],
+    };
+
+    if (data) {
+      website.elements.push(
+        <div key={interalName} className="flex">
+          <img className="m-auto w-16 h-16" alt={`${name} mode logo`} src={`/mode-${interalName}.png`} />
+          <div className="m-auto">
+            <p>Global: <strong>#{data.global}</strong></p>
+            <p>{osu.country}: <strong>#{data.country}</strong></p>
+          </div>
+        </div>,
+      );
+    }
+
+    return website;
+  };
+
+  const osuWebsite = generateWebsite("osu!", "osu", osu.osu);
+  const taikoWebsite = generateWebsite("osu!taiko", "taiko", osu.taiko);
+  const catchWebsite = generateWebsite("osu!catch", "fruits", osu.fruits);
+  const maniaWebsite = generateWebsite("osu!mania", "mania", osu.mania);
+
+  const websites = [
+    osuWebsite,
+    taikoWebsite,
+    catchWebsite,
+    maniaWebsite,
+  ];
+
+  for (const website of websites) {
+    if (!website.elements.length) {
+      return (
+        <Info
+          type="Rhythm games"
+          websites={[]}
+          error={error}
+        />
+      );
+    }
   }
 
   return (
     <Info
       type="Rhythm games"
-      websites={[{
-        name: "osu!",
-        link: "https://osu.ppy.sh/users/7276846/osu",
-        elements: [
-          <div key={"osu"} className="flex">
-            <img className="m-auto w-16 h-16" alt="osu mode logo" src="/mode-osu.png" />
-            <div className="m-auto">
-              <p>Global: <strong>#{osu.osu.global}</strong></p>
-              <p>{osu.country}: <strong>#{osu.osu.country}</strong></p>
-            </div>
-          </div>,
-        ],
-      }, {
-        name: "osu!taiko",
-        link: "https://osu.ppy.sh/users/7276846/taiko",
-        elements: [
-          <div key={"osu!taiko"} className="flex">
-            <img className="m-auto w-16 h-16" alt="taiko mode logo" src="/mode-taiko.png" />
-            <div className="m-auto">
-              <p>Global: <strong>#{osu.taiko.global}</strong></p>
-              <p>{osu.country}: <strong>#{osu.taiko.country}</strong></p>
-            </div>
-          </div>,
-        ],
-      }, {
-        name: "osu!catch",
-        link: "https://osu.ppy.sh/users/7276846/fruits",
-        elements: [
-          <div key={"osu!catch"} className="flex">
-            <img className="m-auto w-16 h-16" alt="ctb mode logo" src="/mode-fruits.png" />
-            <div className="m-auto">
-              <p>Global: <strong>#{osu.fruits.global}</strong></p>
-              <p>{osu.country}: <strong>#{osu.fruits.country}</strong></p>
-            </div>
-          </div>,
-        ],
-      }, {
-        name: "osu!mania",
-        link: "https://osu.ppy.sh/users/7276846/mania",
-        elements: [
-          <div key={"osu!mania"} className="flex">
-            <img className="m-auto w-16 h-16" alt="mania mode logo" src="/mode-mania.png" />
-            <div className="m-auto">
-              <p>Global: <strong>#{osu.mania.global}</strong></p>
-              <p>{osu.country}: <strong>#{osu.mania.country}</strong></p>
-            </div>
-          </div>,
-        ],
-      }]}
+      websites={[
+        osuWebsite,
+        taikoWebsite,
+        catchWebsite,
+        maniaWebsite,
+      ]}
     />
   );
 }

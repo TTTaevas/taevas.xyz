@@ -20,24 +20,22 @@ const handler: Handler = async () => {
     }),
   ]) as osu.User.Extended[];
 
+  void api.revokeToken();
+
   const info: OsuInfo = {
-    country: (profile[0]).country.name || "Unknown",
-    osu: {global: 0, country: 0},
-    taiko: {global: 0, country: 0},
-    fruits: {global: 0, country: 0},
-    mania: {global: 0, country: 0},
+    country: (profile[0]).country.name ?? "Unknown",
   };
 
   for (const ruleset of profile) {
     if (ruleset.rank_history) {
       const stats = ruleset.statistics;
-      info[ruleset.rank_history.mode].global = stats.global_rank ?? 0;
-      info[ruleset.rank_history.mode].country = stats.country_rank ?? 0;
+      info[ruleset.rank_history.mode] = {
+        global: stats.global_rank ?? 0,
+        country: stats.country_rank ?? 0,
+      };
     }
   }
 
-  void api.revokeToken();
-  
   return {
     statusCode: 200,
     body: JSON.stringify(info),
