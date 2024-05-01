@@ -3,6 +3,7 @@ import React from "react";
 export default function Info({
   type,
   websites,
+  error,
 }: {
   type: string;
   websites: Array<{
@@ -10,6 +11,7 @@ export default function Info({
     link: string;
     elements: React.JSX.Element[];
   }>;
+  error?: boolean;
 }) {
   const sections = websites.map((w) => {
     return (
@@ -28,15 +30,25 @@ export default function Info({
 
   return (
     <div className="m-5 flex w-80 border-l-3 border-r-3 border-b-3 border-white border-solid" id={type.toLowerCase()}>
-      <h2 className="[text-orientation:upright] [writing-mode:vertical-rl]
+      <h2 className={`[text-orientation:upright] [writing-mode:vertical-rl]
       uppercase text-start text-2xl tracking-[-.1em] font-bold pt-2
       border-r-3 border-t-3 border-white border-solid
-      bg-sky-800">
+      ${!error ? sections.length ? "bg-sky-800" : "bg-indigo-800" : "bg-purple-800"}`}>
         {type}
       </h2>
-      <div className="w-80 bg-gradient-to-r from-sky-900 to-indigo-900">
-        {sections}
-      </div>
+      {
+        !error ?
+          sections.length ?
+            <div className={"w-80 bg-gradient-to-r from-sky-900 to-indigo-900"}>
+              {sections}
+            </div> :
+            <div className={"w-80 bg-gradient-to-r from-indigo-900 to-purple-900 border-t-3"}>
+              {sections} {/** loading */}
+            </div> :
+          <div className={"w-80 bg-gradient-to-r from-purple-900 to-pink-900 border-t-3"}>
+            {sections} {/** error */}
+          </div>
+      }
     </div>
   );
 }

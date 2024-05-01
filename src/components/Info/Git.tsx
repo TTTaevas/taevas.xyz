@@ -2,42 +2,76 @@ import React, {useState, useEffect} from "react";
 import Info from "../Info.js";
 
 export type GithubInfo = {
-  public: {
+  public?: {
     repo: string;
     date: string;
   };
-  private: {
+  private?: {
     date: string;
   };
-} | undefined;
+};
 
 export type GitlabInfo = {
   date: string;
 } | undefined;
 
 export default function Git() {
-  const [github, setGithub]: [GithubInfo, React.Dispatch<React.SetStateAction<GithubInfo>>] = useState();
+  const [github, setGithub]: [GithubInfo, React.Dispatch<React.SetStateAction<GithubInfo>>] = useState({});
   const [gitlab, setGitlab]: [GitlabInfo, React.Dispatch<React.SetStateAction<GitlabInfo>>] = useState();
-
-  const getGitlab = async () => {
-    const response = await fetch("/.netlify/functions/gitlab").then(async r => r.json());
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    setGitlab(response);
-  };
+  const [error, setError] = useState(false);
 
   const getGithub = async () => {
-    const response = await fetch("/.netlify/functions/github").then(async r => r.json());
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    setGithub(response);
+    setGithub(await fetch("/.netlify/functions/github").then(async r => r.json()));
+  };
+
+  const getGitlab = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    setGitlab(await fetch("/.netlify/functions/gitlab").then(async r => r.json()));
   };
 
   useEffect(() => {
-    void getGithub();
-    void getGitlab();
+    void Promise.all([
+      getGithub(),
+      getGitlab(),
+    ]).catch(() => {
+      setError(true);
+    });
   }, []);
 
-  if (github === undefined || gitlab === undefined) {
-    return <></>;
+
+  const githubElements: React.JSX.Element[] = [];
+
+  if (github.private) {
+    githubElements.push(
+      <p key={"github-date-private"} className={github.public ? "mb-2" : ""}>Latest <strong>private</strong> push: <strong>{github.private.date}</strong></p>,
+    );
+  }
+
+  if (github.public) {
+    githubElements.push(
+      <p key={"github-date-public"}>Latest <strong>public</strong> push: <strong>{github.public?.date} on {github?.public?.repo}</strong></p>,
+    );
+    githubElements.push(
+      <a key={"github-link"} className="button-link" href={`https://github.com/${github?.public?.repo}`} target="_blank" rel="noreferrer">Repo Link</a>,
+    );
+  }
+
+  const gitlabElements: React.JSX.Element[] = [];
+
+  if (gitlab) {
+    gitlabElements.push(<p key={"gitlab-date"}>Latest push: <strong>{gitlab?.date}</strong></p>);
+  }
+
+
+  if (!githubElements.length || !gitlabElements.length) {
+    return (
+      <Info
+        type="Coding"
+        websites={[]}
+        error={error}
+      />
+    );
   }
 
   return (
@@ -46,18 +80,12 @@ export default function Git() {
       websites={[{
         name: "GitHub",
         link: "https://github.com/TTTaevas",
-        elements: [
-          <p key={"github-date-private"}>Latest <strong>private</strong> push: <strong>{github.private.date}</strong></p>,
-          <p key={"github-date-public"} className="mt-2">Latest <strong>public</strong> push: <strong>{github.public.date} on {github.public.repo}</strong></p>,
-          <a key={"github-link"} className="button-link" href={`https://github.com/${github.public.repo}`} target="_blank" rel="noreferrer">Repo Link</a>,
-        ],
+        elements: githubElements,
       },
       {
         name: "GitLab",
         link: "https://gitlab.com/TTTaevas",
-        elements: [
-          <p key={"gitlab-date"}>Latest push: <strong>{gitlab.date}</strong></p>,
-        ],
+        elements: gitlabElements,
       }]}
     />
   );

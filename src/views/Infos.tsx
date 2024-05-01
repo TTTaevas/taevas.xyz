@@ -12,7 +12,7 @@ function Infos() {
     <div id="infos" className="hidden lg:inline-block text-white static m-auto lg:bg-gradient-to-r from-sky-600 to-indigo-600
     border-solid border-white lg:border-l-3 h-screen lg:fixed lg:right-0 lg:overflow-y-auto">
       <Lastfm/>
-      <Git/>
+      {/* <Git/> */}
       <Speedruncom/>
       <Anilist/>
       <Wanikani/>
