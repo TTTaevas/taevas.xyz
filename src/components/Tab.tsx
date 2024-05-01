@@ -14,7 +14,7 @@ export default function Tab({
   id: string;
   name: string;
   elements: React.JSX.Element[];
-  image?: React.JSX.Element;
+  image?: string;
 }) {
   return (
     <AnimateHeight
@@ -24,7 +24,7 @@ export default function Tab({
     >
       <div className="relative bg-white lg:rounded-t-xl h-12">
         <h3 className="float-left text-5xl text-left pl-2 overflow-hidden">{name.charAt(0).toUpperCase() + name.slice(1)}</h3>
-        {image ? <div className="absolute w-0 sm:w-12 h-12 inset-x-1/2 ml-[-24px]">{image}</div> : ""}
+        {image ? <img src={image} className="absolute w-0 sm:w-12 h-12 inset-x-1/2 ml-[-24px]"/> : <></>}
         <div className="float-right cursor-pointer" onClick={() => {
           setTab("none");
         }}>

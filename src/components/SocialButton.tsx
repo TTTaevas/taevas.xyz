@@ -18,7 +18,7 @@ function SocialButton({
   return (
     <a draggable="false" href={link} target="_blank" rel="noreferrer">
       <button title={title} className={`
-      m-1 h-12 w-12 bg-white
+      m-1 h-12 w-12 bg-white text-black tracking-[-.2em]
       rounded-full border-solid hover:border-dashed active:brightness-95 border-4 hover:border-8 ${border}
       transition-transform duration-75 ${rotation} hover:rotate-0
       `}>
