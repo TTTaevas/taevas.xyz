@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Info from "../Info.js";
+import {handleError} from "./shared/handleError.js";
 
 export type HacktheboxInfo = {
   id: string;
@@ -13,43 +14,52 @@ export type HacktheboxInfo = {
 
 export default function Hackthebox() {
   const [hackthebox, setHackthebox]: [HacktheboxInfo, React.Dispatch<React.SetStateAction<HacktheboxInfo>>] = useState();
+  const [error, setError] = useState(false);
+
   const getHackthebox = async () => {
-    const response = await fetch("/.netlify/functions/hackthebox").then(async r => r.json());
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    setHackthebox(response);
+    setHackthebox(await fetch("/.netlify/functions/hackthebox").then(async r => r.json()));
   };
 
   useEffect(() => {
-    void getHackthebox();
+    getHackthebox().catch(() => {
+      setError(true);
+    });
   }, []);
 
-  if (hackthebox === undefined) {
-    return <></>;
+
+  if (!hackthebox) {
+    return handleError("Hacking", error);
   }
 
-  const badge = hackthebox.type === "user" ? <img className="m-auto h-16 w-16" alt="machine thumbnail" src={hackthebox.machine_avatar}/> :
-    <a className="m-auto h-16 w-16" href={`https://www.hackthebox.com/achievement/machine/1063999/${hackthebox.id}`} target="_blank" rel="noreferrer">
-      <img alt="machine thumbnail" src={hackthebox.machine_avatar}/>
-    </a>;
-
-  return (
-    <Info
-      type="Hacking"
-      websites={[{
-        name: "HackTheBox",
-        link: "https://app.hackthebox.com/profile/1063999",
-        elements: [
-          <div key={"data"} className="flex">
-            {badge}
-            <div className="m-auto pl-4">
-              <p className="font-bold">{hackthebox.name}</p>
-              <p>({hackthebox.type})</p>
-            </div>
-          </div>,
-          <p key={"date"} className="mt-2 font-bold">{hackthebox.date}</p>,
-          <a key={"more"} className="button-link" href={`https://app.hackthebox.com/machines/${hackthebox.name}`}>Machine Link</a>,
-        ],
-      }]}
-    />
-  );
+  try {
+    return (
+      <Info
+        type="Hacking"
+        websites={[{
+          name: "HackTheBox",
+          link: "https://app.hackthebox.com/profile/1063999",
+          elements: [
+            <div key={"data"} className="flex">
+              {
+                hackthebox.type === "user" ?
+                  <img className="m-auto h-16 w-16" alt="machine thumbnail" src={hackthebox.machine_avatar}/> :
+                  <a className="m-auto h-16 w-16" href={`https://www.hackthebox.com/achievement/machine/1063999/${hackthebox.id}`} target="_blank" rel="noreferrer">
+                    <img alt="machine thumbnail" src={hackthebox.machine_avatar}/>
+                  </a>
+              }
+              <div className="m-auto pl-4">
+                <p className="font-bold">{hackthebox.name}</p>
+                <p>({hackthebox.type})</p>
+              </div>
+            </div>,
+            <p key={"date"} className="mt-2 font-bold">{hackthebox.date}</p>,
+            <a key={"more"} className="button-link" href={`https://app.hackthebox.com/machines/${hackthebox.name}`}>Machine Link</a>,
+          ],
+        }]}
+      />
+    );
+  } catch (e) {
+    return handleError("Hacking", true, e);
+  }
 }

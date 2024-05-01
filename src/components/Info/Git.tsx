@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Info from "../Info.js";
+import {handleError} from "./shared/handleError.js";
 
 export type GithubInfo = {
   public?: {
@@ -40,53 +41,57 @@ export default function Git() {
   }, []);
 
 
-  const githubElements: React.JSX.Element[] = [];
+  try {
+    const githubElements: React.JSX.Element[] = [];
 
-  if (github.private) {
-    githubElements.push(
-      <p key={"github-date-private"} className={github.public ? "mb-2" : ""}>Latest <strong>private</strong> push: <strong>{github.private.date}</strong></p>,
-    );
-  }
+    if (github.private) {
+      githubElements.push(
+        <p key={"github-date-private"} className={github.public ? "mb-2" : ""}>Latest <strong>private</strong> push: <strong>{github.private.date}</strong></p>,
+      );
+    }
 
-  if (github.public) {
-    githubElements.push(
-      <p key={"github-date-public"}>Latest <strong>public</strong> push: <strong>{github.public?.date} on {github?.public?.repo}</strong></p>,
-    );
-    githubElements.push(
-      <a key={"github-link"} className="button-link" href={`https://github.com/${github?.public?.repo}`} target="_blank" rel="noreferrer">Repo Link</a>,
-    );
-  }
+    if (github.public) {
+      githubElements.push(
+        <p key={"github-date-public"}>Latest <strong>public</strong> push: <strong>{github.public.date} on {github.public.repo}</strong></p>,
+      );
+      githubElements.push(
+        <a key={"github-link"} className="button-link" href={`https://github.com/${github.public.repo}`} target="_blank" rel="noreferrer">Repo Link</a>,
+      );
+    }
 
-  const gitlabElements: React.JSX.Element[] = [];
+    const gitlabElements: React.JSX.Element[] = [];
 
-  if (gitlab) {
-    gitlabElements.push(<p key={"gitlab-date"}>Latest push: <strong>{gitlab?.date}</strong></p>);
-  }
+    if (gitlab) {
+      gitlabElements.push(<p key={"gitlab-date"}>Latest push: <strong>{gitlab.date}</strong></p>);
+    }
 
 
-  if (!githubElements.length || !gitlabElements.length) {
+    if ((githubElements.length && !gitlabElements.length) || (!githubElements.length && gitlabElements.length)) {
+      console.error("GitHub:", githubElements);
+      console.error("GitLab:", gitlabElements);
+      throw new Error("Missing data somewhere!");
+    }
+
+    if (!githubElements.length || !gitlabElements.length) {
+      return handleError("Coding", error);
+    }
+
     return (
       <Info
         type="Coding"
-        websites={[]}
-        error={error}
+        websites={[{
+          name: "GitHub",
+          link: "https://github.com/TTTaevas",
+          elements: githubElements,
+        },
+        {
+          name: "GitLab",
+          link: "https://gitlab.com/TTTaevas",
+          elements: gitlabElements,
+        }]}
       />
     );
+  } catch (e) {
+    return handleError("Coding", true, e);
   }
-
-  return (
-    <Info
-      type="Coding"
-      websites={[{
-        name: "GitHub",
-        link: "https://github.com/TTTaevas",
-        elements: githubElements,
-      },
-      {
-        name: "GitLab",
-        link: "https://gitlab.com/TTTaevas",
-        elements: gitlabElements,
-      }]}
-    />
-  );
 }

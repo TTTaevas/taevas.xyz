@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Info from "../Info.js";
+import {handleError} from "./shared/handleError.js";
 import "../../style/infos/osu.css";
 
 export type OsuInfo = {
@@ -48,39 +49,37 @@ export default function Osu() {
     return website;
   };
 
-  const osuWebsite = generateWebsite("osu!", "osu", osu.osu);
-  const taikoWebsite = generateWebsite("osu!taiko", "taiko", osu.taiko);
-  const catchWebsite = generateWebsite("osu!catch", "fruits", osu.fruits);
-  const maniaWebsite = generateWebsite("osu!mania", "mania", osu.mania);
+  try {
+    const osuWebsite = generateWebsite("osu!", "osu", osu.osu);
+    const taikoWebsite = generateWebsite("osu!taiko", "taiko", osu.taiko);
+    const catchWebsite = generateWebsite("osu!catch", "fruits", osu.fruits);
+    const maniaWebsite = generateWebsite("osu!mania", "mania", osu.mania);
 
-  const websites = [
-    osuWebsite,
-    taikoWebsite,
-    catchWebsite,
-    maniaWebsite,
-  ];
+    const websites = [
+      osuWebsite,
+      taikoWebsite,
+      catchWebsite,
+      maniaWebsite,
+    ];
 
-  for (const website of websites) {
-    if (!website.elements.length) {
-      return (
-        <Info
-          type="Rhythm games"
-          websites={[]}
-          error={error}
-        />
-      );
+    for (const website of websites) {
+      if (!website.elements.length) {
+        return handleError("Rhythm games", error);
+      }
     }
-  }
 
-  return (
-    <Info
-      type="Rhythm games"
-      websites={[
-        osuWebsite,
-        taikoWebsite,
-        catchWebsite,
-        maniaWebsite,
-      ]}
-    />
-  );
+    return (
+      <Info
+        type="Rhythm games"
+        websites={[
+          osuWebsite,
+          taikoWebsite,
+          catchWebsite,
+          maniaWebsite,
+        ]}
+      />
+    );
+  } catch (e) {
+    return handleError("Rhythm games", true, e);
+  }
 }

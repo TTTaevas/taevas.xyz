@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Info from "../Info.js";
+import {handleError} from "./shared/handleError.js";
 
 export type LastfmInfo = {
   artist: string;
@@ -38,34 +39,32 @@ export default function Lastfm() {
 
 
   if (!lastfm) {
+    return handleError("Music", error);
+  }
+
+  try {
     return (
       <Info
         type="Music"
-        websites={[]}
-        error={error}
+        websites={[{
+          name: "Last.fm",
+          link: "https://www.last.fm/user/TTTaevas",
+          elements: [
+            <div key={"data"} className="flex">
+              <img alt="album thumbnail" src={lastfm.image} className="m-auto h-24 w-24" />
+              <div className="m-auto pl-4 w-fit">
+                <p className="mb-2 font-bold">{lastfm.artist}</p>
+                <p className="mt-2 font-bold">{lastfm.name}</p>
+              </div>
+            </div>,
+            <p key={"album"} className="mt-2 font-bold">{lastfm.album}</p>,
+            <p key={"status"} className="mt-2">{lastfm.listening ? "(Currently listening!)" : "(Last listened)"}</p>,
+            <a key={"more"} className="button-link" href={lastfm.url} target="_blank" rel="noreferrer">Music Details</a>,
+          ],
+        }]}
       />
     );
+  } catch (e) {
+    return handleError("Music", true, e);
   }
-
-  return (
-    <Info
-      type="Music"
-      websites={[{
-        name: "Last.fm",
-        link: "https://www.last.fm/user/TTTaevas",
-        elements: [
-          <div key={"data"} className="flex">
-            <img alt="album thumbnail" src={lastfm.image} className="m-auto h-24 w-24" />
-            <div className="m-auto pl-4 w-fit">
-              <p className="mb-2 font-bold">{lastfm.artist}</p>
-              <p className="mt-2 font-bold">{lastfm.name}</p>
-            </div>
-          </div>,
-          <p key={"album"} className="mt-2 font-bold">{lastfm.album}</p>,
-          <p key={"status"} className="mt-2">{lastfm.listening ? "(Currently listening!)" : "(Last listened)"}</p>,
-          <a key={"more"} className="button-link" href={lastfm.url} target="_blank" rel="noreferrer">Music Details</a>,
-        ],
-      }]}
-    />
-  );
 }
