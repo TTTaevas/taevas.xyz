@@ -46,20 +46,27 @@ export default function Info({
       <h2 className={`[text-orientation:upright] [writing-mode:vertical-rl]
       uppercase text-start text-2xl tracking-[-.1em] font-bold pt-2
       border-r-3 border-t-3 border-white border-solid
-      ${!error ? sections.length ? "bg-sky-800" : "bg-indigo-800" : "bg-purple-800"}`}>
+      ${!error ? "bg-sky-800" : "bg-purple-800"}`}>
         {type}
       </h2>
       {
         !error ?
           sections.length ?
-            <div className={"w-80 bg-gradient-to-r from-sky-900 to-indigo-900"}>
+            <div className="w-80 bg-gradient-to-r from-sky-900 to-indigo-900">
               {sections}
             </div> :
-            <div className={"w-80 bg-gradient-to-r from-indigo-900 to-purple-900 border-t-3"}>
-              {sections} {/** loading */}
+            <div className="flex w-80 bg-gradient-to-r from-sky-900 to-indigo-900 border-t-3">
+              <div className="animate-pulse h-min m-auto">
+                <div className="animate-spin h-16 w-16 mx-auto mb-2 border-8 border-sky-600 border-r-gray-200 rounded-full"/>
+                <p className="mx-4">Loading...</p>
+              </div>
             </div> :
-          <div className={"w-80 bg-gradient-to-r from-purple-900 to-pink-900 border-t-3"}>
-            {sections} {/** error */}
+          <div className="flex w-80 bg-gradient-to-r from-purple-900 to-pink-900 border-t-3">
+            <div className="h-min m-auto">
+              <img className="w-16 mb-2 mx-auto" src="/cds/misuse--outline.svg"/>
+              <p className="mx-4">Failed to load this info! {"><"}</p>
+              <p className="mx-4 mb-2">Please contact me and let me know about it!</p>
+            </div>
           </div>
       }
     </div>
