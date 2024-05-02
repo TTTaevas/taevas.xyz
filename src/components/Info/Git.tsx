@@ -32,11 +32,19 @@ export default function Git() {
   };
 
   useEffect(() => {
-    void Promise.all([
-      getGithub(),
-      getGitlab(),
-    ]).catch(() => {
-      setError(true);
+    let errors = 0;
+    const promises = [
+      getGithub().catch(() => {
+        errors++;
+      }),
+      getGitlab().catch(() => {
+        errors++;
+      }),
+    ];
+    void Promise.all(promises).then(() => {
+      if (errors >= 1) {
+        setError(true);
+      }
     });
   }, []);
 
@@ -65,30 +73,37 @@ export default function Git() {
       gitlabElements.push(<p key={"gitlab-date"}>Latest push: <strong>{gitlab.date}</strong></p>);
     }
 
+  
+    const websites: Array<{
+      name: string;
+      link: string;
+      elements: React.JSX.Element[];
+    }> = [];
 
-    if ((githubElements.length && !gitlabElements.length) || (!githubElements.length && gitlabElements.length)) {
-      console.error("GitHub:", githubElements);
-      console.error("GitLab:", gitlabElements);
-      throw new Error("Missing data somewhere!");
+    if (githubElements.length) {
+      websites.push({
+        name: "GitHub",
+        link: "https://github.com/TTTaevas",
+        elements: githubElements,
+      });
     }
 
-    if (!githubElements.length || !gitlabElements.length) {
+    if (gitlabElements.length) {
+      websites.push({
+        name: "GitLab",
+        link: "https://gitlab.com/TTTaevas",
+        elements: gitlabElements,
+      });
+    }
+
+    if (websites.length < 2) {
       return handleError("Coding", error);
     }
 
     return (
       <Info
         type="Coding"
-        websites={[{
-          name: "GitHub",
-          link: "https://github.com/TTTaevas",
-          elements: githubElements,
-        },
-        {
-          name: "GitLab",
-          link: "https://gitlab.com/TTTaevas",
-          elements: gitlabElements,
-        }]}
+        websites={websites}
       />
     );
   } catch (e) {
