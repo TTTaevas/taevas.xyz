@@ -1,6 +1,6 @@
 import {type Handler} from "@netlify/functions";
 import {api} from "./shared/api.js";
-import {type LastfmInfo} from "../../src/components/Info/Lastfm.js";
+import {type LastfmInfo} from "../../src/components/Info/Music/Lastfm.js";
 
 const handler: Handler = async () => {
   const lastfm = await api<{

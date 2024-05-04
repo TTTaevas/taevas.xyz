@@ -32,7 +32,8 @@ export default [
       "@typescript-eslint/quotes": ["error", "double"],
       indent: "off",
       "@typescript-eslint/indent": ["error", 2],
-      "@typescript-eslint/no-unsafe-assignment": "off"
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/dot-notation": "off",
     },
   },
   {

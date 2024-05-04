@@ -1,6 +1,6 @@
 import {type Handler} from "@netlify/functions";
 import {api} from "./shared/api.js";
-import {type SpeedruncomInfo} from "../../src/components/Info/Speedruncom.js";
+import {type SpeedruncomInfo} from "../../src/components/Info/Speedrunning/Speedruncom.js";
 
 const handler: Handler = async () => {
   // using the API's embedding would be stupid here, as that'd create lag due to irrelevant runs

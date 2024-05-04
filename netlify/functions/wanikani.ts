@@ -1,6 +1,6 @@
 import {type Handler} from "@netlify/functions";
 import {api} from "./shared/api.js";
-import {type WanikaniInfo} from "../../src/components/Info/Wanikani.js";
+import {type WanikaniInfo} from "../../src/components/Info/Japanese/Wanikani.js";
 
 type Subject = {
   id: number;

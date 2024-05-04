@@ -1,6 +1,6 @@
 import {type Handler} from "@netlify/functions";
 import fetch from "node-fetch";
-import {type GitlabInfo} from "../../src/components/Info/Git.js";
+import {type GitlabInfo} from "../../src/components/Info/Coding/GitLab.js";
 
 const handler: Handler = async () => {
   const gitlab = await fetch("https://gitlab.com/api/v4/events?action=pushed", {
