@@ -18,7 +18,9 @@ export default class Info extends Component<{
           this.props.websites.length ?
             <div className="w-80 bg-gradient-to-r from-sky-900 to-indigo-900">
               {this.props.websites.map((website) => {
-                return <>{website}</>;
+                return <div key={`${website.key}-container`}>
+                  {website}
+                </div>;
               })}
             </div> :
             this.props.error ?

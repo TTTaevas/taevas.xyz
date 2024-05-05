@@ -29,7 +29,6 @@ export default function RhythmGames() {
   }, []);
 
   useEffect(() => {
-    console.log("token is set?", token);
     if (token) {
       const osu = <Osu key={"osu"}/>;
       const taiko = <Taiko key={"taiko"}/>;

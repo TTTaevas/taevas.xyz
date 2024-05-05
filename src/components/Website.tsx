@@ -22,10 +22,7 @@ export default function Website({
   }, [elements]);
 
   return (
-    <div
-      key={name}
-      id={name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}
-    >
+    <div id={name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}>
       <a href={link} target="_blank" rel="noreferrer">
         <h2 className="uppercase text-right font-bold pr-1 bg-white text-red-500">
           {name}
@@ -36,12 +33,15 @@ export default function Website({
       `}>
         {
           state === 1 ?
-            <AnimateHeight
-              duration={150}
-              height={height}
-            >
-              {elements}
-            </AnimateHeight> :
+            elements.map((e, i) => 
+              <AnimateHeight
+                key={`element-${i}}`}
+                duration={150}
+                height={height}
+              >
+                {e}
+              </AnimateHeight>,
+            ) :
             state === 2 ?
               <div>
                 <img className="w-16 mb-2 m-auto" src="/cds/misuse--outline.svg"/>
