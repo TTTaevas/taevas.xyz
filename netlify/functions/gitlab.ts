@@ -1,5 +1,4 @@
 import {type Handler} from "@netlify/functions";
-import fetch from "node-fetch";
 import {type GitlabInfo} from "../../src/components/Info/Coding/GitLab.js";
 
 const handler: Handler = async () => {

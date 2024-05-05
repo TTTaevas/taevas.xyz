@@ -1,5 +1,4 @@
 import {type Handler} from "@netlify/functions";
-import fetch from "node-fetch";
 import {type AnilistInfo} from "../../src/components/Info/Anime/Anilist.js";
 
 const handler: Handler = async () => {
@@ -46,7 +45,7 @@ const handler: Handler = async () => {
     }),
   });
 
-  const json = (await anilist.json() as any).data.MediaList;
+  const json = (await anilist.json()).data.MediaList;
   const anime: AnilistInfo = {
     title: json.media.title.romaji,
     episodes: {

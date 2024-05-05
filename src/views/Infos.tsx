@@ -16,7 +16,7 @@ function Infos() {
       <Speedrun/>
       <Anime/>
       <Japanese/>
-      {/* <RhythmGames/> */}
+      <RhythmGames/>
       <Hacking/>
     </div>
   );
