@@ -4,46 +4,15 @@
 
 @font-face {
   font-family: "LexendDeca";
-  src: url("/LexendDeca-Regular.ttf") format("truetype");
+  src: url("/fonts/LexendDeca-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 .App {
-  width: 100%;
-  text-align: center;
-  margin: auto;
   font-family: "LexendDeca", "Arial", sans-serif;
 }
 
 p {
   line-height: 1rem;
-}
-
-#tab {
-  box-shadow: 12px 12px #1e1e55;
-}
-
-.text-link {
-  background-color: #0a2e99;
-  color: white;
-  line-height: 20px;
-}
-
-.button-link {
-  line-height: 40px;
-  font-size: 18px;
-  font-weight: bold;
-  width: 150px;
-  background-color: #020355;
-  border: 3px solid #fff;
-  color: #fff;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 16px;
-}
-
-.button-link:hover {
-  background-color: #004;
 }

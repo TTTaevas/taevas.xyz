@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../../Website.js";
+import ButtonLink from "../../Link/ButtonLink.js";
 
 export type GithubInfo = {
   public?: {
@@ -43,7 +44,7 @@ export default function GitHub() {
             <p key={"github-date-public"}>Latest <strong>public</strong> push: <strong>{github.public.date} on {github.public.repo}</strong></p>,
           );
           elms.push(
-            <a key={"github-link"} className="button-link" href={`https://github.com/${github.public.repo}`} target="_blank" rel="noreferrer">Repo Link</a>,
+            <ButtonLink key={"more"} link={`https://github.com/${github.public.repo}`} text="Repo Link" />,
           );
         }
 

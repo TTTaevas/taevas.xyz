@@ -1,5 +1,6 @@
 import React from "react";
 import Tab from "../Tab.js";
+import TextLink from "../Link/TextLink.js";
 
 function Projects({
   lang,
@@ -17,8 +18,8 @@ function Projects({
     },
     swordventure: {
       one: {
-        en: <p><b>SwordVenture</b> initially was <a className="text-link" href="https://github.com/RemiL-Nel/Clicker-game" target="_blank" rel="noreferrer">a game made by a friend in React which I helped develop,</a> but I've made the choice months later to <b>recode it from scratch in Godot</b>, a proper game engine!</p>,
-        fr: <p><b>SwordVenture</b> était à la base <a className="text-link" href="https://github.com/RemiL-Nel/Clicker-game" target="_blank" rel="noreferrer">un jeu fait par un ami en React auquel j'ai contribué côté développement,</a> mais quelques mois plus tard, j'ai décidé de <b>le recoder en entier dans Godot</b>, qui est un véritable moteur de jeu vidéo !</p>,
+        en: <p><b>SwordVenture</b> initially was <TextLink link="https://github.com/RemiL-Nel/Clicker-game" text="a game made by a friend in React which I helped develop,"/> but I've made the choice months later to <b>recode it from scratch in Godot</b>, a proper game engine!</p>,
+        fr: <p><b>SwordVenture</b> était à la base <TextLink link="https://github.com/RemiL-Nel/Clicker-game" text="un jeu fait par un ami en React auquel j'ai contribué côté développement,"/> mais quelques mois plus tard, j'ai décidé de <b>le recoder en entier dans Godot</b>, qui est un véritable moteur de jeu vidéo !</p>,
       },
       two: {
         en: <p>This was my first experience in this engine, and development took me a little more than 100 hours, in the span of less than a month. While a little barebones, I'm still very satisfied with the result!</p>,
@@ -45,8 +46,8 @@ function Projects({
     },
     osuapiv1js: {
       one: {
-        en: <p>Still in early 2023, I've made <a className="text-link" href="https://github.com/TTTaevas/osu-api-v1-js" target="_blank" rel="noreferrer">osu-api-v1-js</a>, my first JavaScript (TypeScript) package!</p>,
-        fr: <p>Toujours début 2023, j'ai crée <a className="text-link" href="https://github.com/TTTaevas/osu-api-v1-js" target="_blank" rel="noreferrer">osu-api-v1-js</a>, mon premier package JavaScript (TypeScript) !</p>,
+        en: <p>Still in early 2023, I've made <TextLink link="https://github.com/TTTaevas/osu-api-v1-js" text="osu-api-v1-js"/>, my first JavaScript (TypeScript) package!</p>,
+        fr: <p>Toujours début 2023, j'ai crée <TextLink link="https://github.com/TTTaevas/osu-api-v1-js" text="osu-api-v1-js"/>, mon premier package JavaScript (TypeScript) !</p>,
       },
       two: {
         en: <p>I've been using the first version of osu!'s API in several ways for years at this point, and yet I've never been using any package to make my life easier, I remember simply using axios directly and copypasting code between some of my projects. I never felt like using third party software to use such a simple API.</p>,
@@ -59,8 +60,8 @@ function Projects({
     },
     websitefinder: {
       one: {
-        en: <p>...Website-Finder is actually an odd one. What started off in 2020 as <a className="text-link" href="https://gitlab.com/Isterix/rif2" target="_blank" rel="noreferrer">a simple Ruby script that downloads images from <i>every webpage it can find</i>,</a> became a way for me to experiment with different programming languages and their networking capabilities, without dependencies.</p>,
-        fr: <p>...Website-Finder est en fait assez étrange. Ce qui a commencé en 2020 en tant que <a className="text-link" href="https://gitlab.com/Isterix/rif2" target="_blank" rel="noreferrer">simple script Ruby qui télécharge les images de <i>chaque page web qu'il peut trouver</i>,</a> est devenu une façon pour moi de jouer avec differents langages de programmation et leures capacités en terme d'accès à internet.</p>,
+        en: <p>...Website-Finder is actually an odd one. What started off in 2020 as <TextLink link="https://gitlab.com/Isterix/rif2" text="a simple Ruby script that downloads images from every webpage it can find,"/> became a way for me to experiment with different programming languages and their networking capabilities, without dependencies.</p>,
+        fr: <p>...Website-Finder est en fait assez étrange. Ce qui a commencé en 2020 en tant que <TextLink link="https://gitlab.com/Isterix/rif2" text="simple script Ruby qui télécharge les images de chaque page web qu'il peut trouver,"/> est devenu une façon pour moi de jouer avec differents langages de programmation et leures capacités en terme d'accès à internet.</p>,
       },
       two: {
         en: <p>I love the concept of a program finding 100% random websites in the wild for you, and that made me want to share the project with other people who would not really know how to run (or even choose!) any script, so in 2023, I redesigned the webpage version of the program, which is the only version with some sort of GUI.</p>,
@@ -77,8 +78,8 @@ function Projects({
     },
     osuapiv2js: {
       one: {
-        en: <p>So <a className="text-link" href="https://github.com/TTTaevas/osu-api-v2-js" target="_blank" rel="noreferrer">osu-api-v2-js</a> is something I've had to work on during three different and distinct periods. I started working on it in March 2023 roughly around the time I finished working on osu-api-v1-js, then I took a break and worked on it again in November 2023, only to finally finish it in March 2024.</p>,
-        fr: <p>Alors <a className="text-link" href="https://github.com/TTTaevas/osu-api-v2-js" target="_blank" rel="noreferrer">osu-api-v2-js</a>, c'est quelque chose sur lequel j'ai dû travailler durant 3 périodes bien différentes, en commençant en Mars 2023 genre quand j'ai fini osu-api-v1-js, puis Novembre 2023 après une pause, puis enfin Mars 2024 après une autre pause.</p>,
+        en: <p>So <TextLink link="https://github.com/TTTaevas/osu-api-v2-js" text="osu-api-v2-js"/> is something I've had to work on during three different and distinct periods. I started working on it in March 2023 roughly around the time I finished working on osu-api-v1-js, then I took a break and worked on it again in November 2023, only to finally finish it in March 2024.</p>,
+        fr: <p>Alors <TextLink link="https://github.com/TTTaevas/osu-api-v2-js" text="osu-api-v2-js"/>, c'est quelque chose sur lequel j'ai dû travailler durant 3 périodes bien différentes, en commençant en Mars 2023 genre quand j'ai fini osu-api-v1-js, puis Novembre 2023 après une pause, puis enfin Mars 2024 après une autre pause.</p>,
       },
       two: {
         en: <p>The reason why I took so long is that the task at hand was actually really difficult, as this software is an api wrapper that aimed to provide the best type safety possible while being feature-complete, for an API that is not entirely documented and is everchanging! And if you're wondering why I even bothered finishing this project, that's because I just hate unfinished projects.</p>,

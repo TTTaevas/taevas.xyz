@@ -5,7 +5,6 @@ import Osu from "./RhythmGames/Osu.js";
 import Taiko from "./RhythmGames/OsuTaiko.js";
 import Fruits from "./RhythmGames/OsuFruits.js";
 import Mania from "./RhythmGames/OsuMania.js";
-import "../../style/infos/osu.css";
 
 export default function RhythmGames() {
   const [token, setToken] = useState(false);

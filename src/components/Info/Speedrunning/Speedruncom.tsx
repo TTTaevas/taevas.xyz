@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../../Website.js";
+import ButtonLink from "../../Link/ButtonLink.js";
 
 export type SpeedruncomInfo = {
   place: number;
@@ -39,7 +40,7 @@ export default function Speedruncom() {
             </div>
           </div>,
           <p key={"date"} className="mt-2 font-bold">{speedruncom.date}</p>,
-          <a key={"more"} className="button-link" href={speedruncom.link} target="_blank" rel="noreferrer">Run Details</a>,
+          <ButtonLink key={"more"} link={speedruncom.link} text="Run Details" />,
         ]);
       } catch {
         setError(true);

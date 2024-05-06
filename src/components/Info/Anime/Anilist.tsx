@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../../Website.js";
+import ButtonLink from "../../Link/ButtonLink.js";
 
 export type AnilistInfo = {
   title: string;
@@ -54,7 +55,7 @@ export default function Anilist() {
                 <p><strong>{anilist.episodes.watched}/{anilist.episodes.total}</strong> episodes watched</p>
             }
           </>,
-          <a key={"more"} className="button-link" href={anilist.url} target="_blank" rel="noreferrer">Anime Link</a>,
+          <ButtonLink key={"more"} link={anilist.url} text="Anime Link" />,
         ]);
       } catch {
         setError(true);

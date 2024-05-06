@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../../Website.js";
+import ButtonLink from "../../Link/ButtonLink.js";
 
 export type LastfmInfo = {
   artist: string;
@@ -50,7 +51,7 @@ export default function Lastfm() {
           </div>,
           <p key={"album"} className="mt-2 font-bold">{lastfm.album}</p>,
           <p key={"status"} className="mt-2">{lastfm.listening ? "(Currently listening!)" : "(Last listened)"}</p>,
-          <a key={"more"} className="button-link" href={lastfm.url} target="_blank" rel="noreferrer">Music Details</a>,
+          <ButtonLink key={"more"} link={lastfm.url} text="Music Details" />,
         ]);
       } catch {
         setError(true);

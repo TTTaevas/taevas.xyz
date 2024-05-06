@@ -4,7 +4,7 @@ import AnimateHeight from "react-animate-height";
 import TabButtons from "./MainWindow/TabButtons.js";
 import SocialButtons from "./MainWindow/SocialButtons.js";
 
-function MainWindow({
+export default function MainWindow({
   lang,
   setLang,
   tab,
@@ -47,5 +47,3 @@ function MainWindow({
     </div>
   );
 }
-
-export default MainWindow;

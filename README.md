@@ -7,7 +7,7 @@ My personal website!
 ## Build
 
 ```bash
-npm i -g netlify-cli
+bun install --global netlify-cli
 bun i
 netlify run
 ```

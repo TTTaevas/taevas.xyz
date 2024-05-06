@@ -1,6 +1,7 @@
 import React from "react";
 import Tab from "../Tab.js";
 import CopyField from "../CopyField.js";
+import ButtonLink from "../Link/ButtonLink.js";
 
 function Contact({
   lang,
@@ -29,8 +30,8 @@ function Contact({
       fr: <p className="text-center">Alors, j'ai opté pour le protocole Matrix ! N'hésitez pas à m'envoyer un message sur ce compte :</p>,
     },
     four: {
-      en: <p className="text-center"><a className="button-link text-center" href="https://matrix.to/#/@taevas:matrix.org" target="_blank" rel="noreferrer">(matrix.to link)</a></p>,
-      fr: <p className="text-center"><a className="button-link text-center" href="https://matrix.to/#/@taevas:matrix.org" target="_blank" rel="noreferrer">(lien matrix.to)</a></p>,
+      en: <p className="text-center"><ButtonLink link="https://matrix.to/#/@taevas:matrix.org" text="(matrix.to link)" /></p>,
+      fr: <p className="text-center"><ButtonLink link="https://matrix.to/#/@taevas:matrix.org" text="(lien matrix.to)" /></p>,
     },
     five: {
       en: <p className="text-center">If you don't feel like using this protocol though, know that my Discord account hasn't gone inactive just yet:</p>,

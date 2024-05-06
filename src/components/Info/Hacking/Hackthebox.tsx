@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../../Website.js";
+import ButtonLink from "../../Link/ButtonLink.js";
 
 export type HacktheboxInfo = {
   id: string;
@@ -46,7 +47,7 @@ export default function Hackthebox() {
             </div>
           </div>,
           <p key={"date"} className="mt-2 font-bold">{hackthebox.date}</p>,
-          <a key={"more"} className="button-link" href={`https://app.hackthebox.com/machines/${hackthebox.name}`}>Machine Link</a>,
+          <ButtonLink key={"more"} link={`https://app.hackthebox.com/machines/${hackthebox.name}`} text="Machine Link" />,
         ]);
       } catch {
         setError(true);

@@ -4,7 +4,7 @@ import Contact from "../../components/Tab/Contact.js";
 import Projects from "../../components/Tab/Projects.js";
 import Support from "../../components/Tab/Support.js";
 
-function Tabs({
+export default function Tabs({
   lang,
   tab,
   setTab,
@@ -14,7 +14,7 @@ function Tabs({
   setTab: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
-    <div id="tab" className="bg-blue-500 rounded-t-xl m-auto lg:mb-8">
+    <div className="bg-blue-500 rounded-t-xl m-auto lg:mb-8 shadow-[12px_12px_0_0] shadow-blue-950">
       <About lang={lang} tab={tab} setTab={setTab} />
       <Projects lang={lang} tab={tab} setTab={setTab} />
       <Contact lang={lang} tab={tab} setTab={setTab} />
@@ -22,5 +22,3 @@ function Tabs({
     </div>
   );
 }
-
-export default Tabs;
