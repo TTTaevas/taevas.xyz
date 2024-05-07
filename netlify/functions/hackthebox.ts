@@ -1,6 +1,6 @@
 import {type Handler} from "@netlify/functions";
 import {api} from "./shared/api.js";
-import {type HacktheboxInfo} from "../../src/components/Info/Hacking.js";
+import {type HacktheboxInfo} from "../../src/components/Info/Hacking/Hackthebox.js";
 
 const handler: Handler = async () => {
   const hackthebox: {profile: {activity: HacktheboxInfo[]}} = await api<{

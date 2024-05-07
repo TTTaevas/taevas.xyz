@@ -1,34 +1,16 @@
 import React from "react";
-
 import TabButton from "../../../components/TabButton.js";
+import Translatable from "../../../components/Translatable.js";
+import {LanguageContext} from "../../MainContent.js";
 
 function TabButtons({
-  lang,
   setLang,
   setTab,
 }: {
-  lang: string;
   setLang: React.Dispatch<React.SetStateAction<string>>;
   setTab: React.Dispatch<React.SetStateAction<string>>;
 }) {
-  let s = {
-    abt: {
-      en: "About me",
-      fr: "À propos de moi",
-    },
-    pro: {
-      en: "My projects",
-      fr: "Mes projets",
-    },
-    con: {
-      en: "Contact me",
-      fr: "Me contacter",
-    },
-    sup: {
-      en: "Support me",
-      fr: "Me soutenir",
-    },
-  };
+  const lang = React.useContext(LanguageContext);
 
   return (
     <div className="relative justify-center items-center">
@@ -44,28 +26,48 @@ function TabButtons({
         onClick={() => {
           setTab("about");
         }}
-        content={s.abt[lang]}
+        content={
+          <Translatable
+            en={"About me"}
+            fr={"À propos de moi"}
+          />
+        }
       />
       <TabButton
         colors={"from-emerald-500 to-emerald-600 hover:from-emerald-700 hover:to-emerald-600"}
         onClick={() => {
           setTab("projects");
         }}
-        content={s.pro[lang]}
+        content={
+          <Translatable
+            en={"My projects"}
+            fr={"Mes projets"}
+          />
+        }
       />
       <TabButton
         colors={"from-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600"}
         onClick={() => {
           setTab("contact");
         }}
-        content={s.con[lang]}
+        content={
+          <Translatable
+            en={"Contact me"}
+            fr={"Me contacter"}
+          />
+        }
       />
       <TabButton
         colors={"from-rose-500 to-rose-600 hover:from-rose-700 hover:to-rose-600"}
         onClick={() => {
           setTab("support");
         }}
-        content={s.sup[lang]}
+        content={
+          <Translatable
+            en={"Support me"}
+            fr={"Me soutenir"}
+          />
+        }
       />
     </div>
   );

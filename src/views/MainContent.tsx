@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
-
 import MainWindow from "./MainContent/MainWindow.js";
 import Tabs from "./MainContent/Tabs.js";
+
+export const LanguageContext = React.createContext("en");
 
 export default function MainContent() {
   const [tab, setTab] = useState("none");
@@ -12,8 +13,10 @@ export default function MainContent() {
 
   return (
     <div id="tabs" className="w-screen h-screen my-auto m-auto lg:pl-[50px] lg:pr-[413px] lg:py-12 max-w-screen-2xl">
-      <MainWindow lang={lang} setLang={setLang} tab={tab} setTab={setTab} />
-      <Tabs lang={lang} tab={tab} setTab={setTab} />
+      <LanguageContext.Provider value={lang}>
+        <MainWindow setLang={setLang} tab={tab} setTab={setTab} />
+        <Tabs lang={lang} tab={tab} setTab={setTab} />
+      </LanguageContext.Provider>
     </div>
   );
 }
