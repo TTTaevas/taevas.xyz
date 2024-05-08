@@ -1,8 +1,7 @@
 import React from "react";
-
 import SocialButton from "../../../components/SocialButton.js";
 
-function SocialButtons() {
+export default function SocialButtons() {
   return (
     <div className="relative justify-center items-center">
       <SocialButton
@@ -63,5 +62,3 @@ function SocialButtons() {
     </div>
   );
 }
-
-export default SocialButtons;

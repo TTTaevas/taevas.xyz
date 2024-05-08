@@ -34,6 +34,7 @@ export default [
       "@typescript-eslint/indent": ["error", 2],
       "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/dot-notation": "off",
+      "react/no-unescaped-entities": "off",
     },
   },
   {

@@ -3,7 +3,7 @@ import TabButton from "../../../components/TabButton.js";
 import Translatable from "../../../components/Translatable.js";
 import {LanguageContext} from "../../MainContent.js";
 
-function TabButtons({
+export default function TabButtons({
   setLang,
   setTab,
 }: {
@@ -72,5 +72,3 @@ function TabButtons({
     </div>
   );
 }
-
-export default TabButtons;

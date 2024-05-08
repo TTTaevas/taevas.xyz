@@ -15,7 +15,7 @@ export default function MainContent() {
     <div id="tabs" className="w-screen h-screen my-auto m-auto lg:pl-[50px] lg:pr-[413px] lg:py-12 max-w-screen-2xl">
       <LanguageContext.Provider value={lang}>
         <MainWindow setLang={setLang} tab={tab} setTab={setTab} />
-        <Tabs lang={lang} tab={tab} setTab={setTab} />
+        <Tabs tab={tab} setTab={setTab} />
       </LanguageContext.Provider>
     </div>
   );

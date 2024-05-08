@@ -1,5 +1,6 @@
 import React from "react";
 import AnimateHeight from "react-animate-height";
+import type Translatable from "./Translatable.js";
 
 export default function Tab({
   tab,
@@ -12,7 +13,7 @@ export default function Tab({
   tab: string;
   setTab: React.Dispatch<React.SetStateAction<string>>;
   id: string;
-  name: string;
+  name: ReturnType<typeof Translatable>;
   elements: React.JSX.Element[];
   image?: string;
 }) {
@@ -23,7 +24,9 @@ export default function Tab({
       height={tab === id ? "auto" : 0}
     >
       <div className="relative bg-white lg:rounded-t-xl h-12">
-        <h3 className="float-left text-5xl text-left pl-2 overflow-hidden">{name.charAt(0).toUpperCase() + name.slice(1)}</h3>
+        <h3 className="float-left text-5xl text-left pl-2 overflow-hidden">
+          {name}
+        </h3>
         {image ? <img src={image} draggable="false" className="absolute w-0 sm:w-12 h-12 inset-x-1/2 ml-[-24px]"/> : <></>}
         <div className="float-right cursor-pointer" onClick={() => {
           setTab("none");
