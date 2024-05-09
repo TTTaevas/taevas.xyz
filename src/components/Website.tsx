@@ -1,3 +1,4 @@
+import {MisuseOutline} from "@carbon/icons-react";
 import React, {useEffect, useState} from "react";
 import AnimateHeight, {type Height} from "react-animate-height";
 
@@ -23,7 +24,7 @@ export default function Website({
 
   return (
     <div id={name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}>
-      <a href={link} target="_blank" rel="noreferrer">
+      <a href={link} target="_blank" rel="noreferrer" draggable="false">
         <h2 className="uppercase text-right font-bold pr-1 bg-white text-red-500">
           {name}
         </h2>
@@ -44,7 +45,9 @@ export default function Website({
             ) :
             state === 2 ?
               <div>
-                <img className="w-16 mb-2 m-auto" src="/cds/misuse--outline.svg"/>
+                <div className="w-min mb-2 mx-auto">
+                  <MisuseOutline size={48} fill="red"/>
+                </div>
                 <p className="mx-4">Something went wrong... {"><"}</p>
                 <p className="mx-4 mb-2">Please contact me and let me know about it!</p>
               </div> :

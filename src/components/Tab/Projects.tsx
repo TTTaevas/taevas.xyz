@@ -2,6 +2,7 @@ import React from "react";
 import Tab from "../Tab.js";
 import TextLink from "../Link/TextLink.js";
 import Translatable from "../Translatable.js";
+import {Devices} from "@carbon/icons-react";
 
 export default function Projects({
   tab,
@@ -115,7 +116,7 @@ export default function Projects({
         />
       }
       elements={elements}
-      image="/cds/devices.svg"
+      logo={<Devices size={48}/>}
     />
   );
 }

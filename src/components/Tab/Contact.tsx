@@ -3,6 +3,7 @@ import Tab from "../Tab.js";
 import CopyField from "../CopyField.js";
 import ButtonLink from "../Link/ButtonLink.js";
 import Translatable from "../Translatable.js";
+import {MailAll} from "@carbon/icons-react";
 
 export default function Contact({
   tab,
@@ -53,7 +54,7 @@ export default function Contact({
         />
       }
       elements={elements}
-      image="/cds/mail--all.svg"
+      logo={<MailAll size={48}/>}
     />
   );
 }

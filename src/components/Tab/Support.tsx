@@ -1,6 +1,7 @@
 import React from "react";
 import Tab from "../Tab.js";
 import Translatable from "../Translatable.js";
+import {UserFavorite} from "@carbon/icons-react";
 
 export default function Support({
   tab,
@@ -50,7 +51,7 @@ export default function Support({
         />
       }
       elements={elements}
-      image="/cds/user--favorite.svg"
+      logo={<UserFavorite size={48}/>}
     />
   );
 }

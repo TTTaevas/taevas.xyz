@@ -1,6 +1,7 @@
 import React from "react";
 import Tab from "../Tab.js";
 import Translatable from "../Translatable.js";
+import {UserProfile} from "@carbon/icons-react";
 
 export default function About({
   tab,
@@ -62,7 +63,7 @@ export default function About({
         />
       }
       elements={elements}
-      image="/cds/user--profile.svg"
+      logo={<UserProfile size={48}/>}
     />
   );
 }

@@ -1,3 +1,4 @@
+import {MisuseOutline} from "@carbon/icons-react";
 import React, {Component} from "react";
 
 export default class Info extends Component<{
@@ -7,7 +8,7 @@ export default class Info extends Component<{
 }> {
   render() {
     return (
-      <div className="m-5 flex w-80 border-l-3 border-r-3 border-b-3 border-white border-solid" id={this.props.type.toLowerCase()}>
+      <div className="m-5 flex w-80 border-l-3 border-r-3 border-b-3 border-white border-solid">
         <h2 className={`[text-orientation:upright] [writing-mode:vertical-rl]
         uppercase text-start text-2xl tracking-[-.1em] font-bold pt-2
         border-r-3 border-t-3 border-white border-solid
@@ -26,7 +27,9 @@ export default class Info extends Component<{
             this.props.error ?
               <div className="flex w-80 bg-gradient-to-r from-purple-900 to-pink-900 border-t-3">
                 <div className="h-min m-auto">
-                  <img className="w-16 mb-2 mx-auto" src="/cds/misuse--outline.svg"/>
+                  <div className="w-min mb-2 mx-auto">
+                    <MisuseOutline size={64} fill="red"/>
+                  </div>
                   <p className="mx-4">Failed to load this info! {"><"}</p>
                   <p className="mx-4 mb-2">Please contact me and let me know about it!</p>
                 </div>
