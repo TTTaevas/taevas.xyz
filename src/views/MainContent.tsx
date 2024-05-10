@@ -12,7 +12,7 @@ export default function MainContent() {
   }, [lang]);
 
   return (
-    <div className="w-screen h-screen my-auto m-auto lg:pl-[50px] lg:pr-[413px] lg:py-12 max-w-screen-2xl">
+    <div className="h-screen w-screen max-w-[1620px] m-auto lg:pl-[50px] lg:pr-[413px] lg:py-12">
       <LanguageContext.Provider value={lang}>
         <MainWindow setLang={setLang} tab={tab} setTab={setTab} />
         <Tabs tab={tab} setTab={setTab} />
