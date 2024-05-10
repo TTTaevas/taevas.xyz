@@ -23,15 +23,14 @@ export default function Website({
   }, [elements]);
 
   return (
-    <div id={name.toLowerCase().match(/[a-z]/g)!.join().replace(/,/g, "")}>
+    <div className="hover:font-bold active:font-bold overflow-hidden">
       <a href={link} target="_blank" rel="noreferrer" draggable="false">
-        <h2 className="uppercase text-right font-bold pr-1 bg-white text-red-500">
+        <h2 className="pr-1 py-1 rounded-tr-[10px] bg-white uppercase text-right font-bold text-indigo-500 transition-all
+        hover:brightness-110 hover:pr-4 hover:text-blue-600">
           {name}
         </h2>
       </a>
-      <div className={`info p-3 m-auto bg-gradient-to-r
-      ${state !== 2 ? "from-sky-900 to-indigo-900" : "from-purple-900 to-pink-900"}
-      `}>
+      <div className="p-4 m-auto">
         {
           state === 1 ?
             elements.map((e, i) => 
@@ -46,13 +45,12 @@ export default function Website({
             state === 2 ?
               <div>
                 <div className="w-min mb-2 mx-auto">
-                  <MisuseOutline size={48} fill="red"/>
+                  <MisuseOutline size={48} fill="white"/>
                 </div>
                 <p className="mx-4">Something went wrong... {"><"}</p>
                 <p className="mx-4 mb-2">Please contact me and let me know about it!</p>
               </div> :
               <div className="animate-pulse h-min m-auto">
-                {/* <div className="animate-spin h-16 w-16 mx-auto mb-2 border-8 border-sky-600 border-r-gray-200 rounded-full"/> */}
                 <p className="mx-4">Loading...</p>
               </div>
         }

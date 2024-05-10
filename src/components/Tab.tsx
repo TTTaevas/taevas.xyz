@@ -19,7 +19,6 @@ export default function Tab({
 }) {
   return (
     <AnimateHeight
-      id={id}
       duration={300}
       height={tab === id ? "auto" : 0}
     >

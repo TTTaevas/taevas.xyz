@@ -9,8 +9,8 @@ import Japanese from "../components/Info/Japanese.js";
 
 export default function Infos() {
   return (
-    <div id="infos" className="hidden lg:inline-block text-white static m-auto lg:bg-gradient-to-r from-sky-600 to-indigo-600
-    border-solid border-white lg:border-l-3 h-screen lg:fixed lg:right-0 lg:overflow-y-auto">
+    <div className="hidden lg:inline-block text-white static m-auto lg:bg-gradient-to-r from-sky-600 to-indigo-600
+    border-solid border-white lg:border-l-4 h-screen lg:fixed lg:right-0 lg:overflow-y-auto">
       <Music/>
       <Coding/>
       <Speedrun/>
