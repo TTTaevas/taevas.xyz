@@ -21,7 +21,7 @@ export default function MainWindow({
         duration={300}
         height={tab === "none" ? "auto" : 0}
       >
-        <div className="bg-white text-blue-600 rounded-b-xl relative justify-center items-center pb-4 pt-2 lg:pt-0 lg:px-4 hover:brightness-110">
+        <div className="bg-white text-blue-600 rounded-b-xl relative justify-center items-center pb-4 pt-2 lg:pt-0 lg:px-4 hover:brightness-110 active:brightness-110">
           <Translatable
             en={<h1 className="text-6xl md:text-8xl font-bold">Hi, I'm Taevas!</h1>}
             fr={<h1 className="text-6xl md:text-8xl font-bold">Bonjour, je suis <span className="text-nowrap">Taevas !</span></h1>}

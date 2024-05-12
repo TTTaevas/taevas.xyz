@@ -51,7 +51,7 @@ export default function Support({
         />
       }
       elements={elements}
-      logo={<UserFavorite size={48}/>}
+      logo={<UserFavorite size={48} fill=""/>}
     />
   );
 }

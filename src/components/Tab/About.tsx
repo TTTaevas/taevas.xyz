@@ -63,7 +63,7 @@ export default function About({
         />
       }
       elements={elements}
-      logo={<UserProfile size={48}/>}
+      logo={<UserProfile size={48} fill=""/>}
     />
   );
 }

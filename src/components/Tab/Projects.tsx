@@ -116,7 +116,7 @@ export default function Projects({
         />
       }
       elements={elements}
-      logo={<Devices size={48}/>}
+      logo={<Devices size={48} fill=""/>}
     />
   );
 }

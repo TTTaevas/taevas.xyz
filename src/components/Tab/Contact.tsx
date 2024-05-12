@@ -54,7 +54,7 @@ export default function Contact({
         />
       }
       elements={elements}
-      logo={<MailAll size={48}/>}
+      logo={<MailAll size={48} fill=""/>}
     />
   );
 }

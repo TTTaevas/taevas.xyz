@@ -12,11 +12,11 @@ export default function Tabs({
   setTab: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
-    <div className="bg-blue-500 rounded-t-xl m-auto lg:mb-8 shadow-[12px_12px_0_0] shadow-blue-950">
+    <>
       <About tab={tab} setTab={setTab} />
       <Projects tab={tab} setTab={setTab} />
       <Contact tab={tab} setTab={setTab} />
       <Support tab={tab} setTab={setTab} />
-    </div>
+    </>
   );
 }
