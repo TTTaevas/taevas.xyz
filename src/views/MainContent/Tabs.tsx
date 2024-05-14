@@ -5,18 +5,16 @@ import Projects from "../../components/Tab/Projects.js";
 import Support from "../../components/Tab/Support.js";
 
 export default function Tabs({
-  tab,
-  setTab,
+  setTabs,
 }: {
-  tab: string;
-  setTab: React.Dispatch<React.SetStateAction<string>>;
+  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   return (
     <>
-      <About tab={tab} setTab={setTab} />
-      <Projects tab={tab} setTab={setTab} />
-      <Contact tab={tab} setTab={setTab} />
-      <Support tab={tab} setTab={setTab} />
+      <About setTabs={setTabs} />
+      <Projects setTabs={setTabs} />
+      <Contact setTabs={setTabs} />
+      <Support setTabs={setTabs} />
     </>
   );
 }

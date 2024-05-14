@@ -5,21 +5,22 @@ import TabButtons from "./MainWindow/TabButtons.js";
 import SocialButtons from "./MainWindow/SocialButtons.js";
 import Translatable from "../../components/Translatable.js";
 
+import {TabContext} from "../MainContent.js";
+
 export default function MainWindow({
   setLang,
-  tab,
-  setTab,
+  setTabs,
 }: {
   setLang: React.Dispatch<React.SetStateAction<string>>;
-  tab: string;
-  setTab: React.Dispatch<React.SetStateAction<string>>;
+  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
+  const tabs = React.useContext(TabContext);
   return (
     <div className="bg-blue-600 text-white lg:border-solid lg:border-white lg:border-8 lg:rounded-xl lg:mb-8">
       <AnimateHeight
         id="intro"
         duration={300}
-        height={tab === "none" ? "auto" : 0}
+        height={tabs.length ? 0 : "auto"}
       >
         <div className="bg-white text-blue-600 rounded-b-xl relative justify-center items-center pb-4 pt-2 lg:pt-0 lg:px-4 hover:brightness-110 active:brightness-110">
           <Translatable
@@ -38,7 +39,7 @@ export default function MainWindow({
         <SocialButtons/>
         <TabButtons
           setLang={setLang}
-          setTab={setTab}
+          setTabs={setTabs}
         />
       </div>
     </div>

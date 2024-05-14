@@ -6,11 +6,9 @@ import Translatable from "../Translatable.js";
 import {MailAll} from "@carbon/icons-react";
 
 export default function Contact({
-  tab,
-  setTab,
+  setTabs,
 }: {
-  tab: string;
-  setTab: React.Dispatch<React.SetStateAction<string>>;
+  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   const elements = [(
     <div className="m-4 pb-2 text-white text-left" key={"contact"}>
@@ -44,8 +42,7 @@ export default function Contact({
 
   return (
     <Tab
-      tab={tab}
-      setTab={setTab}
+      setTabs={setTabs}
       id="contact"
       name={
         <Translatable

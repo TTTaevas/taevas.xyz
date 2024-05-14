@@ -1,6 +1,6 @@
 import React from "react";
 
-function TabButton({
+export default function TabButton({
   colors,
   onClick,
   content,
@@ -15,6 +15,3 @@ function TabButton({
     </button>
   );
 }
-
-export default TabButton;
-

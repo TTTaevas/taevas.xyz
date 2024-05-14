@@ -4,14 +4,12 @@ import Translatable from "../Translatable.js";
 import {UserProfile} from "@carbon/icons-react";
 
 export default function About({
-  tab,
-  setTab,
+  setTabs,
 }: {
-  tab: string;
-  setTab: React.Dispatch<React.SetStateAction<string>>;
+  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   const elements = [(
-    <div className="m-4 text-white" key={"about"}>
+    <div className="m-4 text-white order-1" key={"about"}>
       <div className="ml-auto max-w-3xl text-center">
         <img className="m-4 float-right h-32" src="/brittany.jpg" alt="Flag of Brittany" title="Flag of Brittany"/>
         <Translatable
@@ -53,8 +51,7 @@ export default function About({
 
   return (
     <Tab
-      tab={tab}
-      setTab={setTab}
+      setTabs={setTabs}
       id="about"
       name={
         <Translatable

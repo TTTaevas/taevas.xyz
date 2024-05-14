@@ -5,11 +5,9 @@ import Translatable from "../Translatable.js";
 import {Devices} from "@carbon/icons-react";
 
 export default function Projects({
-  tab,
-  setTab,
+  setTabs,
 }: {
-  tab: string;
-  setTab: React.Dispatch<React.SetStateAction<string>>;
+  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   const elements = [(
     <div className="inline-block m-4 text-white" key={"projects"}>
@@ -106,8 +104,7 @@ export default function Projects({
 
   return (
     <Tab
-      tab={tab}
-      setTab={setTab}
+      setTabs={setTabs}
       id="projects"
       name={
         <Translatable

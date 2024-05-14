@@ -1,16 +1,25 @@
 import React from "react";
 import TabButton from "../../../components/TabButton.js";
 import Translatable from "../../../components/Translatable.js";
-import {LanguageContext} from "../../MainContent.js";
+import {LanguageContext, TabContext} from "../../MainContent.js";
 
 export default function TabButtons({
   setLang,
-  setTab,
+  setTabs,
 }: {
   setLang: React.Dispatch<React.SetStateAction<string>>;
-  setTab: React.Dispatch<React.SetStateAction<string>>;
+  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   const lang = React.useContext(LanguageContext);
+  const tabs = React.useContext(TabContext);
+
+  const toggleTab = (tab: string) => {
+    if (tabs.includes(tab)) {
+      setTabs(tabs.filter((t) => t !== tab));
+    } else {
+      setTabs([...tabs, tab]);
+    }
+  };
 
   return (
     <div className="relative justify-center items-center">
@@ -22,9 +31,9 @@ export default function TabButtons({
         content={lang === "fr" ? "🇬🇧" : "🇫🇷"}
       />
       <TabButton
-        colors={"from-purple-500 to-purple-600 hover:from-purple-700 hover:to-purple-600"}
+        colors={`from-purple-500 to-purple-600 hover:from-purple-700 hover:to-purple-600 ${tabs.includes("about") ? "brightness-75" : ""}`}
         onClick={() => {
-          setTab("about");
+          toggleTab("about");
         }}
         content={
           <Translatable
@@ -34,9 +43,9 @@ export default function TabButtons({
         }
       />
       <TabButton
-        colors={"from-emerald-500 to-emerald-600 hover:from-emerald-700 hover:to-emerald-600"}
+        colors={`from-emerald-500 to-emerald-600 hover:from-emerald-700 hover:to-emerald-600 ${tabs.includes("projects") ? "brightness-75" : ""}`}
         onClick={() => {
-          setTab("projects");
+          toggleTab("projects");
         }}
         content={
           <Translatable
@@ -46,9 +55,9 @@ export default function TabButtons({
         }
       />
       <TabButton
-        colors={"from-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600"}
+        colors={`from-blue-500 to-blue-600 hover:from-blue-700 hover:to-blue-600 ${tabs.includes("contact") ? "brightness-75" : ""}`}
         onClick={() => {
-          setTab("contact");
+          toggleTab("contact");
         }}
         content={
           <Translatable
@@ -58,9 +67,9 @@ export default function TabButtons({
         }
       />
       <TabButton
-        colors={"from-rose-500 to-rose-600 hover:from-rose-700 hover:to-rose-600"}
+        colors={`from-rose-500 to-rose-600 hover:from-rose-700 hover:to-rose-600 ${tabs.includes("support") ? "brightness-75" : ""}`}
         onClick={() => {
-          setTab("support");
+          toggleTab("support");
         }}
         content={
           <Translatable

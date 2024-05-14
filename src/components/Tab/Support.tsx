@@ -4,11 +4,9 @@ import Translatable from "../Translatable.js";
 import {UserFavorite} from "@carbon/icons-react";
 
 export default function Support({
-  tab,
-  setTab,
+  setTabs,
 }: {
-  tab: string;
-  setTab: React.Dispatch<React.SetStateAction<string>>;
+  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   const elements = [(
     <div className="m-4 pb-2 text-white" key={"support"}>
@@ -41,8 +39,7 @@ export default function Support({
 
   return (
     <Tab
-      tab={tab}
-      setTab={setTab}
+      setTabs={setTabs}
       id="support"
       name={
         <Translatable
