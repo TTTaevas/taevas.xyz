@@ -5,14 +5,14 @@ import TabButtons from "./MainWindow/TabButtons.js";
 import SocialButtons from "./MainWindow/SocialButtons.js";
 import Translatable from "../../components/Translatable.js";
 
-import {TabContext} from "../MainContent.js";
+import {type TabDetails, TabContext} from "../../contexts.js";
 
 export default function MainWindow({
   setLang,
   setTabs,
 }: {
   setLang: React.Dispatch<React.SetStateAction<string>>;
-  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
+  setTabs: React.Dispatch<React.SetStateAction<TabDetails[]>>;
 }) {
   const tabs = React.useContext(TabContext);
   return (

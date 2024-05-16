@@ -3,11 +3,12 @@ import Tab from "../Tab.js";
 import TextLink from "../Link/TextLink.js";
 import Translatable from "../Translatable.js";
 import {Devices} from "@carbon/icons-react";
+import {type TabDetails} from "../../contexts.js";
 
 export default function Projects({
   setTabs,
 }: {
-  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
+  setTabs: React.Dispatch<React.SetStateAction<TabDetails[]>>;
 }) {
   const elements = [(
     <div className="inline-block m-4 text-white" key={"projects"}>
@@ -114,6 +115,7 @@ export default function Projects({
       }
       elements={elements}
       logo={<Devices size={48} fill=""/>}
+      position="lg:left-[250px] lg:top-[250px]"
     />
   );
 }

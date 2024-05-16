@@ -2,11 +2,12 @@ import React from "react";
 import Tab from "../Tab.js";
 import Translatable from "../Translatable.js";
 import {UserProfile} from "@carbon/icons-react";
+import {type TabDetails} from "../../contexts.js";
 
 export default function About({
   setTabs,
 }: {
-  setTabs: React.Dispatch<React.SetStateAction<string[]>>;
+  setTabs: React.Dispatch<React.SetStateAction<TabDetails[]>>;
 }) {
   const elements = [(
     <div className="m-4 text-white order-1" key={"about"}>
@@ -61,6 +62,7 @@ export default function About({
       }
       elements={elements}
       logo={<UserProfile size={48} fill=""/>}
+      position="lg:left-[100px] lg:top-[200px]"
     />
   );
 }
