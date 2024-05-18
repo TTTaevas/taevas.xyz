@@ -62,7 +62,7 @@ export default class Tab extends Component<{
     let offsetx = 0;
     let offsety = 0;
   
-    this.header.current?.addEventListener("mousedown", (e) => {
+    this.header.current?.addEventListener("pointerdown", (e) => {
       isDown = true;
 
       if (this.div.current) {
@@ -71,11 +71,11 @@ export default class Tab extends Component<{
       }
     });
 
-    this.header.current?.parentElement?.parentElement?.parentElement?.parentElement?.addEventListener("mouseup", () => {
+    document.addEventListener("pointerup", () => {
       isDown = false;
     });
 
-    this.div.current?.addEventListener("mousedown", () => {
+    this.div.current?.addEventListener("pointerdown", () => {
       const tabs = this.context;
       this.props.setTabs(tabs.map((tab) => {
         if (tab.id === this.props.id) {
@@ -88,7 +88,10 @@ export default class Tab extends Component<{
       }));
     });
 
-    this.div.current?.parentElement?.parentElement?.parentElement?.addEventListener("mousemove", (e) => {
+    document.addEventListener("pointermove", (e) => {
+      if (e.clientX < 0 || e.clientY < 0) return;
+      if (e.clientX > window.innerWidth || e.clientY > window.innerHeight) return;
+
       if (this.div.current && isDown && window.innerWidth >= 1024) {
         this.div.current.style.left = `${e.clientX + offsetx}px`;
         this.div.current.style.top = `${e.clientY + offsety}px`;

@@ -5,6 +5,5 @@ export type TabDetails = {
   priority: string;
 };
 
-  
 export const LanguageContext = React.createContext<string>("en");
 export const TabContext = React.createContext<TabDetails[]>([]);

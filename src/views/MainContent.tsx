@@ -14,7 +14,7 @@ export default function MainContent() {
       } satisfies TabDetails);
     });
   const [lang, setLang] = useState<string>(localStorage.getItem("lang") ?? "en");
-  const [tabs, setTabs] = useState<TabDetails[]>(storedTabs?.length ? storedTabs : []);
+  const [tabs, setTabs] = useState<TabDetails[]>([]); //(storedTabs?.length ? storedTabs : []);
 
   useEffect(() => {
     localStorage.setItem("lang", lang);
