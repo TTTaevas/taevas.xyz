@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "../Link.js";
 
-export default function TextLink({
+export default function ButtonLink({
   link,
   text,
 }: {

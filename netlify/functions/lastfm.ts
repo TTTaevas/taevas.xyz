@@ -21,10 +21,13 @@ const handler: Handler = async () => {
           nowplaying?: string;
         };
         url: string;
+        date?: {
+          uts: string;
+          "#text": string;
+        };
       }>;
     };
   }>(`http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=TTTaevas&api_key=${process.env.API_LASTFM}&format=json&limit=1`);
-
   const image = lastfm.recenttracks.track[0].image.find((i) => i.size == "large");
   const track: LastfmInfo = {
     artist: lastfm.recenttracks.track[0].artist["#text"],
@@ -33,6 +36,7 @@ const handler: Handler = async () => {
     image: image ? image["#text"] : "",
     listening: Boolean(lastfm.recenttracks.track[0]["@attr"]?.nowplaying),
     url: lastfm.recenttracks.track[0].url,
+    date: lastfm.recenttracks.track[0].date?.uts ?? String(Date.now()),
   };
 
   return {

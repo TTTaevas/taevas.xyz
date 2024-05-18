@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
+import {format} from "timeago.js";
 import Website from "../../Website.js";
-import ButtonLink from "../../Link/ButtonLink.js";
+import Link from "../../Link.js";
 
 export type LastfmInfo = {
   artist: string;
@@ -9,6 +10,7 @@ export type LastfmInfo = {
   image: string;
   listening: boolean;
   url: string;
+  date: string;
 } | undefined;
 
 export default function Lastfm() {
@@ -41,17 +43,22 @@ export default function Lastfm() {
   useEffect(() => {
     if (lastfm) {
       try {
+        const date = new Date(Number(lastfm.date) * 1000);
+        const dateParagraph = !lastfm.listening ? <p key="date" className="text-left mt-1">
+          When: <span className="font-bold">{format(date)}</span>
+        </p> : <></>;
+
         setElements([
-          <div key={"data"} className="flex">
-            <img alt="album thumbnail" src={lastfm.image} className="m-auto h-24 w-24" />
+          <div key="data" className="flex leading-[18px]">
+            <img alt="album thumbnail" src={lastfm.image} className="m-auto h-24 w-24"/>
             <div className="m-auto pl-4 w-fit">
-              <p className="mb-2 font-bold">{lastfm.artist}</p>
-              <p className="mt-2 font-bold">{lastfm.name}</p>
+              <p className="mb-2">{lastfm.listening ? "I'm currently listening to" : "Last listened to"}</p>
+              <Link classes="mt-1 px-1 py-2 inline-block w-full font-bold leading-[18px] bg-white text-blue-800" link={lastfm.url} text={lastfm.name}/>
             </div>
           </div>,
-          <p key={"album"} className="mt-2 font-bold">{lastfm.album}</p>,
-          <p key={"status"} className="mt-2">{lastfm.listening ? "(Currently listening!)" : "(Last listened)"}</p>,
-          <ButtonLink key={"more"} link={lastfm.url} text="Music Details" />,
+          <p key="artist" className="text-left mt-4">Artist: <span className="font-bold">{lastfm.artist}</span></p>,
+          <p key="album" className="text-left mt-1">Album: <span className="font-bold">{lastfm.album}</span></p>,
+          dateParagraph,
         ]);
       } catch {
         setError(true);
