@@ -2,16 +2,15 @@ import React from "react";
 import Tab from "../Tab.js";
 import Translatable from "../Translatable.js";
 import {UserProfile} from "@carbon/icons-react";
+import {type TabDetails} from "../../contexts.js";
 
 export default function About({
-  tab,
-  setTab,
+  setTabs,
 }: {
-  tab: string;
-  setTab: React.Dispatch<React.SetStateAction<string>>;
+  setTabs: React.Dispatch<React.SetStateAction<TabDetails[]>>;
 }) {
   const elements = [(
-    <div className="m-4 text-white" key={"about"}>
+    <div className="m-4 text-white order-1" key={"about"}>
       <div className="ml-auto max-w-3xl text-center">
         <img className="m-4 float-right h-32" src="/brittany.jpg" alt="Flag of Brittany" title="Flag of Brittany"/>
         <Translatable
@@ -53,8 +52,7 @@ export default function About({
 
   return (
     <Tab
-      tab={tab}
-      setTab={setTab}
+      setTabs={setTabs}
       id="about"
       name={
         <Translatable
@@ -63,7 +61,8 @@ export default function About({
         />
       }
       elements={elements}
-      logo={<UserProfile size={48}/>}
+      logo={<UserProfile size={48} fill=""/>}
+      position="lg:left-[100px] lg:top-[200px]"
     />
   );
 }

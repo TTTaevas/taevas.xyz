@@ -3,20 +3,19 @@ import About from "../../components/Tab/About.js";
 import Contact from "../../components/Tab/Contact.js";
 import Projects from "../../components/Tab/Projects.js";
 import Support from "../../components/Tab/Support.js";
+import {type TabDetails} from "../../contexts.js";
 
 export default function Tabs({
-  tab,
-  setTab,
+  setTabs,
 }: {
-  tab: string;
-  setTab: React.Dispatch<React.SetStateAction<string>>;
+  setTabs: React.Dispatch<React.SetStateAction<TabDetails[]>>;
 }) {
   return (
-    <div className="bg-blue-500 rounded-t-xl m-auto lg:mb-8 shadow-[12px_12px_0_0] shadow-blue-950">
-      <About tab={tab} setTab={setTab} />
-      <Projects tab={tab} setTab={setTab} />
-      <Contact tab={tab} setTab={setTab} />
-      <Support tab={tab} setTab={setTab} />
-    </div>
+    <>
+      <About setTabs={setTabs} />
+      <Projects setTabs={setTabs} />
+      <Contact setTabs={setTabs} />
+      <Support setTabs={setTabs} />
+    </>
   );
 }

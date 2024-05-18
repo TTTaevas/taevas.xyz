@@ -2,13 +2,12 @@ import React from "react";
 import Tab from "../Tab.js";
 import Translatable from "../Translatable.js";
 import {UserFavorite} from "@carbon/icons-react";
+import {type TabDetails} from "../../contexts.js";
 
 export default function Support({
-  tab,
-  setTab,
+  setTabs,
 }: {
-  tab: string;
-  setTab: React.Dispatch<React.SetStateAction<string>>;
+  setTabs: React.Dispatch<React.SetStateAction<TabDetails[]>>;
 }) {
   const elements = [(
     <div className="m-4 pb-2 text-white" key={"support"}>
@@ -41,8 +40,7 @@ export default function Support({
 
   return (
     <Tab
-      tab={tab}
-      setTab={setTab}
+      setTabs={setTabs}
       id="support"
       name={
         <Translatable
@@ -51,7 +49,8 @@ export default function Support({
         />
       }
       elements={elements}
-      logo={<UserFavorite size={48}/>}
+      logo={<UserFavorite size={48} fill=""/>}
+      position="lg:left-[550px] lg:top-[350px]"
     />
   );
 }

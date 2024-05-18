@@ -57,7 +57,7 @@ export default function Hackthebox() {
 
   return (
     <Website
-      name="Hacking"
+      name="HackTheBox"
       link="https://app.hackthebox.com/profile/1063999"
       elements={elements}
       error={error}

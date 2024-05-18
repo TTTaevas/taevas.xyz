@@ -1,6 +1,5 @@
 import React from "react";
 import {createRoot} from "react-dom/client";
-import "./App.css";
 
 import Infos from "./views/Infos.js";
 import MainContent from "./views/MainContent.js";
@@ -10,10 +9,9 @@ const root = createRoot(container!);
 
 root.render(
   <React.StrictMode>
-    <div className="App h-screen w-full m-auto text-center bg-gradient-to-b from-sky-500 to-white lg:flex">
-      <MainContent />
-      <Infos />
+    <div className="App lg:flex text-center bg-gradient-to-tl from-indigo-100 via-sky-300 to-indigo-100 bg-fixed">
+      <MainContent/>
+      <Infos/>
     </div>
   </React.StrictMode>,
 );
-

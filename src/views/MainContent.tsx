@@ -1,21 +1,36 @@
 import React, {useEffect, useState} from "react";
 import MainWindow from "./MainContent/MainWindow.js";
 import Tabs from "./MainContent/Tabs.js";
-
-export const LanguageContext = React.createContext("en");
+import {type TabDetails, LanguageContext, TabContext} from "../contexts.js";
 
 export default function MainContent() {
-  const [tab, setTab] = useState("none");
-  const [lang, setLang] = useState(localStorage.getItem("lang") ?? "en");
+  const storedTabs = localStorage.getItem("tabs")?.split(",")
+    .filter((t) => t.length)
+    .map((t) => {
+      const details = t.split("_");
+      return ({
+        id: details[0],
+        priority: details[1],
+      } satisfies TabDetails);
+    });
+  const [lang, setLang] = useState<string>(localStorage.getItem("lang") ?? "en");
+  const [tabs, setTabs] = useState<TabDetails[]>([]); //(storedTabs?.length ? storedTabs : []);
+
   useEffect(() => {
     localStorage.setItem("lang", lang);
   }, [lang]);
 
+  useEffect(() => {
+    localStorage.setItem("tabs", tabs.map((t) => `${t.id}_${t.priority}`).toString());
+  }, [tabs]);
+
   return (
-    <div id="tabs" className="w-screen h-screen my-auto m-auto lg:pl-[50px] lg:pr-[413px] lg:py-12 max-w-screen-2xl">
+    <div className="h-screen w-screen max-w-[1632px] m-auto lg:pl-[50px] lg:pr-[413px] lg:py-12">
       <LanguageContext.Provider value={lang}>
-        <MainWindow setLang={setLang} tab={tab} setTab={setTab} />
-        <Tabs tab={tab} setTab={setTab} />
+        <TabContext.Provider value={tabs}>
+          <MainWindow setLang={setLang} setTabs={setTabs}/>
+          <Tabs setTabs={setTabs}/>
+        </TabContext.Provider>
       </LanguageContext.Provider>
     </div>
   );

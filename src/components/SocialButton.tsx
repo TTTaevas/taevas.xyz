@@ -1,6 +1,6 @@
 import React from "react";
 
-function SocialButton({
+export default function SocialButton({
   title,
   border,
   rotation,
@@ -27,6 +27,3 @@ function SocialButton({
     </a>
   );
 }
-
-export default SocialButton;
-

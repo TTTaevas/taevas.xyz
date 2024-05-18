@@ -1,6 +1,6 @@
 import React from "react";
 
-function TabButton({
+export default function TabButton({
   colors,
   onClick,
   content,
@@ -10,11 +10,8 @@ function TabButton({
   content: string | React.JSX.Element;
 }) {
   return (
-    <button className={`text-xl text-white m-2 p-4 border-solid border-white border-3 rounded-md bg-gradient-to-t from-70% ${colors} active:brightness-90`} onClick={onClick}>
+    <button className={`text-xl text-white m-2 p-4 border-solid border-white border-4 rounded-md bg-gradient-to-t from-70% ${colors} active:brightness-90`} onClick={onClick}>
       {content}
     </button>
   );
 }
-
-export default TabButton;
-

@@ -1,5 +1,5 @@
 import React from "react";
-import {LanguageContext} from "../views/MainContent.js";
+import {LanguageContext} from "../contexts.js";
 
 export default function Translatable<T extends string | React.JSX.Element>({
   en,

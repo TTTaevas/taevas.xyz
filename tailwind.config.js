@@ -5,14 +5,12 @@ module.exports = {
   ],
   theme: {
     extend: {
-      borderWidth: {
-        "3": "3px"
-      },
+      
     },
   },
   plugins: [
     require("@tailwindcss/forms")
   ],
-  important: true
+  important: false
 }
 

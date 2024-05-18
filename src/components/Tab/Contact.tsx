@@ -4,13 +4,12 @@ import CopyField from "../CopyField.js";
 import ButtonLink from "../Link/ButtonLink.js";
 import Translatable from "../Translatable.js";
 import {MailAll} from "@carbon/icons-react";
+import {type TabDetails} from "../../contexts.js";
 
 export default function Contact({
-  tab,
-  setTab,
+  setTabs,
 }: {
-  tab: string;
-  setTab: React.Dispatch<React.SetStateAction<string>>;
+  setTabs: React.Dispatch<React.SetStateAction<TabDetails[]>>;
 }) {
   const elements = [(
     <div className="m-4 pb-2 text-white text-left" key={"contact"}>
@@ -44,8 +43,7 @@ export default function Contact({
 
   return (
     <Tab
-      tab={tab}
-      setTab={setTab}
+      setTabs={setTabs}
       id="contact"
       name={
         <Translatable
@@ -54,7 +52,8 @@ export default function Contact({
         />
       }
       elements={elements}
-      logo={<MailAll size={48}/>}
+      logo={<MailAll size={48} fill=""/>}
+      position="lg:left-[400px] lg:top-[300px]"
     />
   );
 }
