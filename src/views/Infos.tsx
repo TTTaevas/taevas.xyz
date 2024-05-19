@@ -9,7 +9,7 @@ import Japanese from "../components/Info/Japanese.js";
 
 export default function Infos() {
   return (
-    <div className="invisible lg:visible fixed right-0 h-screen outline outline-4 outline-white overflow-y-auto
+    <div className="invisible lg:visible w-[360px] resize-x p-2.5 flex flex-wrap fixed right-0 h-screen outline outline-4 outline-white overflow-y-auto
     text-white bg-gradient-to-r from-sky-600 to-indigo-600">
       <Music/>
       <Coding/>
