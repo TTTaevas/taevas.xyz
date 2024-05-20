@@ -29,8 +29,8 @@ export default class Tab extends Component<{
             height={tabs.map((t) => t.id).includes(this.props.id) ? "auto" : 0}
           >
             <div ref={this.header} className="relative bg-white lg:rounded-xl h-12 hover:brightness-110 lg:hover:cursor-grab lg:active:cursor-move">
-              {this.props.logo ? <div className="absolute start-0 h-0 ml-2 invisible sm:visible fill-gray-600">{this.props.logo}</div> : <></>}
-              <div className="absolute end-0 w-0 sm:w-10 mr-1 mt-1 cursor-pointer
+              {this.props.logo ? <div className="absolute start-0 h-0 ml-2 invisible lg:visible fill-gray-600">{this.props.logo}</div> : <></>}
+              <div className="absolute end-0 w-0 sm:w-10 mr-1 mt-1 invisible lg:visible cursor-pointer
           rounded-full fill-red-500 hover:fill-black hover:bg-red-500 active:brightness-50" onClick={() => {
                 this.props.setTabs(tabs.filter((t) => t.id !== this.props.id));
               }}>

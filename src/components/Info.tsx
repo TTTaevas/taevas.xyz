@@ -10,7 +10,7 @@ export default class Info extends Component<{
     const state = this.props.websites.length ? 1 : this.props.error ? 2 : 0;
   
     return (
-      <div className="m-2.5 flex w-80 hover:scale-[1.02] active:scale-[1.02]">
+      <div className="m-2.5 flex max-w-64 sm:max-w-72 lg:w-80 lg:max-w-80 hover:scale-[1.02] active:scale-[1.02]">
         <h2 className={`[text-orientation:upright] [writing-mode:vertical-rl]
         uppercase text-start text-2xl tracking-[-.1em] font-bold pt-2
         rounded-l-xl bg-white select-none
