@@ -24,7 +24,6 @@ export default class Infos extends Component {
         <RhythmGames/>
         <Hacking/>
       </div>
-      
     </div>;
   }
 
@@ -37,8 +36,8 @@ export default class Infos extends Component {
 
     document.addEventListener("pointermove", (e) => {
       if (dragging && this.dragbar.current && this.collection.current) {
-        this.collection.current.style.width = `${window.innerWidth - e.pageX}px`;
-        this.dragbar.current.style.right = `${Math.max(window.innerWidth - e.pageX - 20, 0)}px`;
+        this.collection.current.style.width = `${Math.min(Math.max(window.innerWidth - e.pageX, 2), window.innerWidth - 20)}px`;
+        this.dragbar.current.style.right = `${Math.min(Math.max(window.innerWidth - e.pageX - 20, 0), window.innerWidth - 40)}px`;
       }
     });
     

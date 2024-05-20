@@ -38,7 +38,7 @@ export default class Tab extends Component<{
                   <path d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4l6.6 6.6L8 22.6L9.4 24l6.6-6.6l6.6 6.6l1.4-1.4l-6.6-6.6L24 9.4z"/>
                 </svg>
               </div>
-              <h3 className="text-4xl text-center font-bold text-blue-700 overflow-hidden select-none pt-1">
+              <h3 className="text-4xl text-center font-bold text-blue-700 overflow-hidden truncate select-none pt-1">
                 {this.props.name} - taevas.xyz
               </h3>
             </div>
