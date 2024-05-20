@@ -30,19 +30,27 @@ export default class Infos extends Component {
   componentDidMount(): void {
     let dragging = false;
 
-    this.dragbar.current?.addEventListener("pointerdown", (e) => {
+    this.dragbar.current?.addEventListener("mousedown", (e) => {
       dragging = true;
     });
 
-    document.addEventListener("pointermove", (e) => {
+    document.addEventListener("mousemove", (e) => {
       if (dragging && this.dragbar.current && this.collection.current) {
         this.collection.current.style.width = `${Math.min(Math.max(window.innerWidth - e.pageX, 2), window.innerWidth - 20)}px`;
         this.dragbar.current.style.right = `${Math.min(Math.max(window.innerWidth - e.pageX - 20, 0), window.innerWidth - 40)}px`;
       }
     });
     
-    document.addEventListener("pointerup", (e) => {
+    document.addEventListener("mouseup", (e) => {
       dragging = false;
+    });
+
+    // Mobile support
+    document.addEventListener("touchmove", (e) => {
+      if (this.dragbar.current && this.collection.current) {
+        this.collection.current.style.width = `${Math.min(Math.max(window.innerWidth - e.targetTouches[0].pageX, 2), window.innerWidth - 20)}px`;
+        this.dragbar.current.style.right = `${Math.min(Math.max(window.innerWidth - e.targetTouches[0].pageX - 20, 0), window.innerWidth - 40)}px`;
+      }
     });
   }
 }
