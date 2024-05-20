@@ -46,7 +46,7 @@ export default class Infos extends Component {
     });
 
     // Mobile support
-    document.addEventListener("touchmove", (e) => {
+    this.dragbar.current?.addEventListener("touchmove", (e) => {
       if (this.dragbar.current && this.collection.current) {
         this.collection.current.style.width = `${Math.min(Math.max(window.innerWidth - e.targetTouches[0].pageX, 2), window.innerWidth - 20)}px`;
         this.dragbar.current.style.right = `${Math.min(Math.max(window.innerWidth - e.targetTouches[0].pageX - 20, 0), window.innerWidth - 40)}px`;
