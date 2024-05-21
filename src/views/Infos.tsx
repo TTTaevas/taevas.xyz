@@ -14,7 +14,7 @@ export default class Infos extends Component {
   render() {
     return <div ref={this.collection} className="z-[110] lg:z-[0] w-[27px] lg:w-[360px] fixed right-0 h-screen outline outline-4 outline-white overflow-y-auto
     bg-gradient-to-r from-sky-600 to-indigo-600">
-      <div ref={this.dragbar} className="z-[100] h-full w-[25px] fixed right-[7px] lg:right-[335px] cursor-ew-resize"></div>
+      <div draggable="false" ref={this.dragbar} className="z-[100] h-full w-[25px] fixed right-[7px] lg:right-[340px] cursor-ew-resize select-none hover:bg-gradient-to-r from-white/80 to-white/1 active:to-white/20"></div>
       <div className="z-[90] p-2.5 flex flex-wrap text-white">
         <Music/>
         <Coding/>
@@ -31,7 +31,9 @@ export default class Infos extends Component {
     let dragging = false;
 
     this.dragbar.current?.addEventListener("mousedown", (e) => {
-      dragging = true;
+      if (e.button === 0) {
+        dragging = true;
+      }
     });
 
     document.addEventListener("mousemove", (e) => {
@@ -42,7 +44,9 @@ export default class Infos extends Component {
     });
     
     document.addEventListener("mouseup", (e) => {
-      dragging = false;
+      if (e.button === 0) {
+        dragging = false;
+      }
     });
 
     // Mobile support

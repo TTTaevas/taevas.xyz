@@ -21,7 +21,7 @@ export default class Tab extends Component<{
       <TabContext.Consumer>
         {tabs => (
           <AnimateHeight
-            className={`absolute w-full lg:w-[525px] m-auto lg:mb-8 lg:rounded-xl ${this.props.position}
+            className={`absolute w-full lg:w-[525px] lg:rounded-xl ${this.props.position}
               bg-blue-600/75 backdrop-brightness-75 backdrop-contrast-150 backdrop-blur shadow-[12px_12px_0_0] shadow-blue-950/75
               ${tabs.find((t) => t.id === this.props.id)?.priority ?? "z-50"}`}
             ref={this.div}
@@ -63,16 +63,20 @@ export default class Tab extends Component<{
     let offsety = 0;
   
     this.header.current?.addEventListener("pointerdown", (e) => {
-      isDown = true;
+      if (e.button === 0) {
+        isDown = true;
 
-      if (this.div.current) {
-        offsetx = this.div.current.offsetLeft - e.clientX;
-        offsety = this.div.current.offsetTop - e.clientY;
+        if (this.div.current) {
+          offsetx = this.div.current.offsetLeft - e.clientX;
+          offsety = this.div.current.offsetTop - e.clientY;
+        }
       }
     });
 
-    document.addEventListener("pointerup", () => {
-      isDown = false;
+    document.addEventListener("pointerup", (e) => {
+      if (e.button === 0) {
+        isDown = false;
+      }
     });
 
     this.div.current?.addEventListener("pointerdown", () => {
