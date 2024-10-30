@@ -4,12 +4,12 @@
 
 My personal website!
 
-## Build
+## Build and develop
 
 ```bash
 bun install --global netlify-cli
 bun i --ignore-scripts
-netlify run
+netlify dev
 ```
 
 ## Environment variables
