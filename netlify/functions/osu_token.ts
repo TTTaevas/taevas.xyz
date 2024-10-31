@@ -23,9 +23,9 @@ const handler: Handler = async () => {
   const promises: Array<Promise<void>> = [];
 
   if (!token) {
-    promises.push(new Promise(async (resolve, _reject) => {
+    promises.push(new Promise(async (resolve) => {
       console.log("Setting a new token for osu!...");
-      const api = await API.createAsync({id: 11451, secret: process.env.API_OSU!});
+      const api = await API.createAsync(11451, process.env.API_OSU!);
       const insertion = await collection.insertOne({
         access_token: api.access_token,
         expires: api.expires,
@@ -36,10 +36,10 @@ const handler: Handler = async () => {
   }
 
   if (expiredTokens.length) {
-    promises.push(new Promise(async (resolve, _reject) => {
+    promises.push(new Promise(async (resolve) => {
       console.log("Deleting old tokens for osu!...");
       await Promise.all(expiredTokens.map(async (t) => {
-        return new Promise<void>(async (resolve, _reject) => {
+        return new Promise<void>(async (resolve) => {
           const deletion = await collection.deleteOne({_id: t._id});
           if (deletion.deletedCount) {
             console.log(`Old osu! token deleted from the database: ${t._id.toString()}`);

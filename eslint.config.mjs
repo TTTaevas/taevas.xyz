@@ -1,8 +1,8 @@
 import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 import react from "eslint-plugin-react";
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import stylisticTs from '@stylistic/eslint-plugin-ts'
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
+import stylisticTs from "@stylistic/eslint-plugin-ts";
 
 /**
  * Rules to consider:
