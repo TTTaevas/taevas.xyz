@@ -14,5 +14,10 @@
 }
 
 p {
-  line-height: 1rem;
+  line-height: 1.15rem;
+}
+
+p a {
+  color: rgb(244, 196, 253);
+  text-decoration: underline;
 }

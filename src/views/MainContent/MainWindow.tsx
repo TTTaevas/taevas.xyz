@@ -25,12 +25,12 @@ export default function MainWindow({
         <div className="bg-white text-blue-600 rounded-b-xl relative justify-center items-center pb-4 pt-2 lg:pt-0 lg:px-4 hover:brightness-110 active:brightness-110">
           <Translatable
             en={<h1 className="text-6xl md:text-8xl font-bold">Hi, I'm Taevas!</h1>}
-            fr={<h1 className="text-6xl md:text-8xl font-bold">Bonjour, je suis <span className="text-nowrap">Taevas !</span></h1>}
+            fr={<h1 className="text-6xl md:text-8xl font-bold">Bonjour, je m'appelle <span className="text-nowrap">Taevas !</span></h1>}
           />
           <h2 className="text-3xl font-bold pt-4 md:pt-2">
             <Translatable
               en={"If you're here, you're probably interested by who I am and what I do"}
-              fr={"Si vous êtes ici, vous êtes alors probablement intéressé par qui je suis et ce que je fais"}
+              fr={"Si vous êtes ici, vous êtes alors probablement intéressé·e par qui je suis et ce que je fais"}
             />
           </h2>
         </div>

@@ -5,14 +5,15 @@ export default function Link({
   link,
   text,
 }: {
-  classes: string;
+  classes?: string;
   link: string;
   text: string;
 }) {
   return (
     <a
-      className={classes}
+      className={classes ?? ""}
       href={link}
+      title={link}
       target="_blank"
       rel="noreferrer"
       draggable="false"
