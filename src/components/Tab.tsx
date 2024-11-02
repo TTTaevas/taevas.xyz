@@ -22,7 +22,7 @@ export default class Tab extends Component<{
         {tabs => (
           <AnimateHeight
             className={`absolute w-full lg:w-[525px] lg:rounded-xl ${this.props.position}
-              bg-blue-600/75 hover:bg-blue-600/90 active:bg-blue-600/90 backdrop-brightness-75 backdrop-contrast-150 backdrop-blur
+              bg-blue-800/75 hover:bg-blue-800/80 active:bg-blue-800/70 backdrop-brightness-75 backdrop-contrast-150 backdrop-blur
               shadow-[12px_12px_0_0] shadow-blue-950/75
               ${tabs.find((t) => t.id === this.props.id)?.priority ?? "z-50"}`}
             ref={this.div}

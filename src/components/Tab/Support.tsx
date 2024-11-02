@@ -3,6 +3,7 @@ import Tab from "../Tab.js";
 import Translatable from "../Translatable.js";
 import {UserFavorite} from "@carbon/icons-react";
 import {type TabDetails} from "../../contexts.js";
+import ButtonLink from "../Link/ButtonLink.js";
 
 export default function Support({
   setTabs,
@@ -14,27 +15,27 @@ export default function Support({
       <p>
         <b>
           <Translatable
-            en={"Thanks for even considering supporting me!"}
-            fr={"Déjà, merci d'envisager de me soutenir !"}
+            en={"Thank you for wanting to support me!"}
+            fr={"Déjà, merci de vouloir me soutenir !"}
           />
         </b>
       </p>
       <br/>
+      <Translatable
+        en={<p>If you like what I do, donating some money would allow me to do even more without worrying <i>too much</i> about spending money for that purpose.</p>}
+        fr={<p>Si vous aimez ce que je fais, me donner un peu d'argent me permettrait de faire encore plus sans <i>trop</i> me soucier de dépenser de l'argent pour ça.</p>}
+      />
+      <br/>
       <p>
         <Translatable
-          en={"Monthly, I would basically only need $3 from 2 people to keep doing what I like without losing much money!"}
-          fr={"En gros, je n'aurais besoin que de $3 de 2 personnes par mois pour que je puisse continuer de faire ce que j'aime sans perdre top d'argent !"}
+          en={"Only if you want and can, you may go on my Ko-fi page to give me some monetary support:"}
+          fr={"Seulement si vous le souhaitez et le pouvez, alors vous pouvez aller sur ma page Ko-fi afin de me faire un petit don d'argent :"}
         />
       </p>
-      <p>
-        <Translatable
-          en={"Only if you want and if you can, you may support me through my Ko-fi page:"}
-          fr={"Seulement si vous le souhaitez et si vous le pouvez, alors vous pouvez me soutenir sur ma page Ko-fi :"}
-        />
-      </p>
-      <a href='https://ko-fi.com/V7V4J78L0' target='_blank' rel="noreferrer">
-        <img className="h-12 mx-auto my-2" src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' alt='Support me on Ko-fi!' />
-      </a>
+      <Translatable
+        en={<ButtonLink link="https://ko-fi.com/V7V4J78L0" text="Support me on Ko-fi!" />}
+        fr={<ButtonLink link="https://ko-fi.com/V7V4J78L0" text="Soutenez-moi sur Ko-fi !"/>}
+      />
     </div>
   )];
 

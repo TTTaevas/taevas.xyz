@@ -30,8 +30,8 @@ export default function Contact({
       />
       <CopyField text="@taevas:matrix.org" imageUrl="/logos/matrix.svg"/>
       <Translatable
-        en={<p className="text-center"><ButtonLink link="https://matrix.to/#/@taevas:matrix.org" text="(matrix.to link)" /></p>}
-        fr={<p className="text-center"><ButtonLink link="https://matrix.to/#/@taevas:matrix.org" text="(lien matrix.to)" /></p>}
+        en={<ButtonLink link="https://matrix.to/#/@taevas:matrix.org" text="(matrix.to link)" />}
+        fr={<ButtonLink link="https://matrix.to/#/@taevas:matrix.org" text="(lien matrix.to)" />}
       />
     </div>
   )];

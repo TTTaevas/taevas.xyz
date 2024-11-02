@@ -31,7 +31,7 @@ export default function About({
       </div>
       <div className="mr-auto mt-8 max-w-3xl text-right">
         <a href="https://www.pixiv.net/en/artworks/85330094" target="_blank" rel="noreferrer">
-          <img className="m-4 float-left h-24 w-24 mt-8" src="/lain.png" alt="A drawing of Lain" title="A drawing of Lain"/>
+          <img className="m-4 float-left h-24 w-24" src="/lain.png" alt="A drawing of Lain" title="A drawing of Lain"/>
         </a>
         <Translatable
           en={<p>I really like Japanese media! I'll pretty much always choose to have some drawing of <b>Lain Iwakura from <Link link="https://en.wikipedia.org/wiki/Serial_Experiments_Lain" text="Serial Experiments Lain"/></b> as my profile picture on the various websites I have an account on, as it is a piece of media I deeply enjoy.</p>}
