@@ -33,8 +33,8 @@ export default function Support({
         />
       </p>
       <Translatable
-        en={<ButtonLink link="https://ko-fi.com/V7V4J78L0" text="Support me on Ko-fi!" />}
-        fr={<ButtonLink link="https://ko-fi.com/V7V4J78L0" text="Soutenez-moi sur Ko-fi !"/>}
+        en={<ButtonLink link="https://ko-fi.com/taevas" text="Support me on Ko-fi!" />}
+        fr={<ButtonLink link="https://ko-fi.com/taevas" text="Soutenez-moi sur Ko-fi !"/>}
       />
     </div>
   )];

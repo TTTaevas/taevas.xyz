@@ -58,7 +58,7 @@ export default function Wanikani() {
   };
 
   useEffect(() => {
-    getWanikani().catch((e) => {
+    getWanikani().catch(() => {
       setError(true);
     });
   }, []);
@@ -71,14 +71,14 @@ export default function Wanikani() {
         let level = <></>;
         const unlockedLevels = wanikani.progression.data.filter(d => typeof d.data.unlocked_at === "string");
         if (unlockedLevels.length) {
-          let arr = unlockedLevels.sort((a, b) => new Date(b.data.unlocked_at!).getTime() - new Date(a.data.unlocked_at!).getTime());
+          const arr = unlockedLevels.sort((a, b) => new Date(b.data.unlocked_at!).getTime() - new Date(a.data.unlocked_at!).getTime());
           level = <p className="mb-4"><b>Level {arr[0].data.level}</b> reached!<br/>
             <b>{new Date(arr[0].data.unlocked_at!).toISOString().substring(0, 10)}</b></p>;
         }
 
         let resets = <></>;
         if (wanikani.resets.length) {
-          let allResets: React.JSX.Element[] = [];
+          const allResets: React.JSX.Element[] = [];
           for (const dataWrapper of wanikani.resets) {
             const data = dataWrapper.data;
             allResets.push(<p><b>{`${new Date(data.created_at).toISOString().substring(0, 10)}`}</b>{`: Reset my progress from level ${data.original_level} to level ${data.target_level}`}</p>);
