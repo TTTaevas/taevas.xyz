@@ -5,7 +5,7 @@ import Hacking from "../components/Info/Hacking.js";
 import Coding from "../components/Info/Coding.js";
 import RhythmGames from "../components/Info/RhythmGames.js";
 import Anime from "../components/Info/Anime.js";
-import Japanese from "../components/Info/Japanese.js";
+// import Japanese from "../components/Info/Japanese.js";
 
 export default class Infos extends Component {
   private readonly dragbar = React.createRef<HTMLDivElement>();
@@ -20,7 +20,7 @@ export default class Infos extends Component {
         <Coding/>
         <Speedrun/>
         <Anime/>
-        <Japanese/>
+        {/* <Japanese/> */}
         <RhythmGames/>
         <Hacking/>
       </div>
