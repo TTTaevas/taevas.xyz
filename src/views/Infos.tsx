@@ -6,6 +6,7 @@ import Coding from "../components/Info/Coding.js";
 import RhythmGames from "../components/Info/RhythmGames.js";
 import Anime from "../components/Info/Anime.js";
 // import Japanese from "../components/Info/Japanese.js";
+import Fediverse from "../components/Info/Fediverse.js"
 
 export default class Infos extends Component {
   private readonly dragbar = React.createRef<HTMLDivElement>();
@@ -17,10 +18,11 @@ export default class Infos extends Component {
       <div draggable="false" ref={this.dragbar} className="z-[100] h-full w-[25px] fixed right-[7px] lg:right-[340px] cursor-ew-resize select-none hover:bg-gradient-to-r from-white/80 to-white/1 active:to-white/20"></div>
       <div className="z-[90] p-2.5 flex flex-wrap text-white">
         <Music/>
+        <Fediverse/>
         <Coding/>
         <Speedrun/>
         <Anime/>
-        {/* <Japanese/> */}
+        {/*<Japanese/>*/}
         <RhythmGames/>
         <Hacking/>
       </div>

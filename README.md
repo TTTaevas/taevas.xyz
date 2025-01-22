@@ -20,10 +20,11 @@ This package uses [`@carbon/icons-react`](https://github.com/carbon-design-syste
 netlify env:set IBM_TELEMETRY_DISABLED true
 ```
 
-This package makes use of several online APIs through Netlify in order to deliver the `Infos` that are available on the right side of the website for large screens, accessing most of these APIs requires a key (or similar), which can be set through the following environment variables:
+This package makes use of several online APIs through Netlify in order to deliver the `Infos` that are available on the right side of the website, accessing most of these APIs requires a key (or similar), which can be set through the following environment variables:
 
 - `API_GITHUB`
 - `API_GITLAB`
+- `API_KITSUCLUB`
 - `API_LASTFM`
 - `API_OSU`
 - `API_WANIKANI`
