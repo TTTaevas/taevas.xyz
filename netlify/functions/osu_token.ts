@@ -1,12 +1,13 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint no-async-promise-executor: 0 */ // Doing promises is needed in order to make multiple requests at once, lowering wait time
+
 import {type Handler} from "@netlify/functions";
 import {API} from "osu-api-v2-js";
 import {MongoClient} from "mongodb";
 
-export type Token = {
+export interface Token {
   access_token: API["access_token"];
   expires: API["expires"];
-};
+}
 
 const handler: Handler = async () => {
   const client = new MongoClient(process.env.URL_MONGODB!);
@@ -20,7 +21,7 @@ const handler: Handler = async () => {
   const token = tokens.find((t) => t.expires > now);
   const expiredTokens = tokens.filter((t) => now > t.expires);
 
-  const promises: Array<Promise<void>> = [];
+  const promises: Promise<void>[] = [];
 
   if (!token) {
     promises.push(new Promise(async (resolve) => {

@@ -11,7 +11,6 @@ export default function GitLab() {
   const [error, setError] = useState(false);
 
   const getGitlab = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setGitlab(await fetch("/.netlify/functions/gitlab").then(async r => r.json()));
   };
 

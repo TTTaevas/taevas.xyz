@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import Website from "../../Website.js";
 import ButtonLink from "../../Link/ButtonLink.js";
 
-export type GithubInfo = {
+export interface GithubInfo {
   public?: {
     repo: string;
     date: string;
@@ -10,7 +10,7 @@ export type GithubInfo = {
   private?: {
     date: string;
   };
-};
+}
 
 export default function GitHub() {
   const [github, setGithub]: [GithubInfo, React.Dispatch<React.SetStateAction<GithubInfo>>] = useState({});
@@ -18,7 +18,6 @@ export default function GitHub() {
   const [error, setError] = useState(false);
 
   const getGithub = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setGithub(await fetch("/.netlify/functions/github").then(async r => r.json()));
   };
 

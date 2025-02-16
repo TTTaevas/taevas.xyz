@@ -4,36 +4,36 @@ import Website from "../../Website.js";
 export type WanikaniInfo = {
   progression: {
     total_count: number;
-    data: Array<{
+    data: {
       data: {
         level: number;
         unlocked_at: undefined | string;
         completed_at: undefined | string;
         abandoned_at: undefined | string;
       };
-    }>;
+    }[];
   };
-  resets: Array<{
+  resets: {
     data: {
       created_at: string;
       original_level: number;
       target_level: number;
     };
-  }>;
+  }[];
   lessons: Item[];
   reviews: Item[];
   moreThingsToReviewAt: string | undefined;
 } | undefined;
 
-type Item = {
+interface Item {
   available_at: string;
   type: string;
   writing: string;
-  meanings: Array<{
+  meanings: {
     meaning: string;
-  }>;
+  }[];
   url: string;
-};
+}
 
 function Button(item: Item) {
   const colour = item.type === "radical" ? "bg-sky-600" : item.type === "kanji" ? "bg-pink-500" : "bg-fuchsia-700";
@@ -53,7 +53,6 @@ export default function Wanikani() {
   const [error, setError] = useState(false);
   
   const getWanikani = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setWanikani(await fetch("/.netlify/functions/wanikani").then(async r => r.json()));
   };
 

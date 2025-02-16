@@ -5,7 +5,7 @@ import {type SpeedruncomInfo} from "../../src/components/Info/Speedrunning/Speed
 const handler: Handler = async () => {
   // using the API's embedding would be stupid here, as that'd create lag due to irrelevant runs
   const speedruncom = await api<{
-    data: Array<{
+    data: {
       place: number;
       run: {
         weblink: string;
@@ -14,7 +14,7 @@ const handler: Handler = async () => {
         category: string | undefined;
         date: string;
       };
-    }>;
+    }[];
   }>("https://www.speedrun.com/api/v1/users/j03v45mj/personal-bests");
 
   const detailsToRequest = [new Promise((resolve) => {

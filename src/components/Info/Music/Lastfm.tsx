@@ -19,7 +19,6 @@ export default function Lastfm() {
   const [error, setError] = useState(false);
 
   const getLastfm = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setLastfm(await fetch("/.netlify/functions/lastfm").then(async r => r.json()));
   };
 

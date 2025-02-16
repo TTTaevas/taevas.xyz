@@ -15,7 +15,6 @@ export default function Taiko() {
   const [error, setError] = useState(false);
 
   const getTaiko = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setTaiko(await fetch("/.netlify/functions/osu_taiko").then(async r => r.json()));
   };
 

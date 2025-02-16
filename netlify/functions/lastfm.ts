@@ -5,14 +5,14 @@ import {type LastfmInfo} from "../../src/components/Info/Music/Lastfm.js";
 const handler: Handler = async () => {
   const lastfm = await api<{
     recenttracks: {
-      track: Array<{
+      track: {
         artist: {
           "#text": string;
         };
-        image: Array<{
+        image: {
           size: string;
           "#text": string;
-        }>;
+        }[];
         album: {
           "#text": string;
         };
@@ -25,7 +25,7 @@ const handler: Handler = async () => {
           uts: string;
           "#text": string;
         };
-      }>;
+      }[];
     };
   }>(`http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=TTTaevas&api_key=${process.env.API_LASTFM}&format=json&limit=1`);
   const image = lastfm.recenttracks.track[0].image.find((i) => i.size == "large");

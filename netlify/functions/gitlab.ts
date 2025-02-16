@@ -7,12 +7,10 @@ const handler: Handler = async () => {
     headers: {
       "PRIVATE-TOKEN": process.env.API_GITLAB!,
       "Content-Type": "application/json",
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       "Accept": "application/json",
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   const {created_at} = (await gitlab.json() as Record<string, any>)[0];
   if (typeof created_at !== "string") {
     return {

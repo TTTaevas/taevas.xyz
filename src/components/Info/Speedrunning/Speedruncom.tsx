@@ -17,7 +17,6 @@ export default function Speedruncom() {
   const [error, setError] = useState(false);
 
   const getSpeedruncom = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setSpeedruncom(await fetch("/.netlify/functions/speedruncom").then(async r => r.json()));
   };
 

@@ -15,7 +15,6 @@ export default function Osu() {
   const [error, setError] = useState(false);
 
   const getOsu = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setOsu(await fetch("/.netlify/functions/osu_osu").then(async r => r.json()));
   };
 

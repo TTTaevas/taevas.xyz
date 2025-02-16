@@ -2,30 +2,30 @@ import {type Handler} from "@netlify/functions";
 import {api} from "./shared/api.js";
 import {type WanikaniInfo} from "../../src/components/Info/Japanese/Wanikani.js";
 
-type Subject = {
+interface Subject {
   id: number;
   object: string;
   data: {
     characters: string;
     slug: string;
     document_url: string;
-    meanings: Array<{
+    meanings: {
       meaning: string;
-    }>;
+    }[];
   };
-};
+}
 
-type StuffToLearn = {
+interface StuffToLearn {
   available_at: string;
   type: string;
   writing: string;
-  meanings: Array<{
+  meanings: {
     meaning: string;
-  }>;
+  }[];
   url: string;
-};
+}
 
-function addStuffToLearn(ids: number[], data: Array<{available_at: string; subject_ids: number[]}>, subjects: Subject[]): StuffToLearn[] {
+function addStuffToLearn(ids: number[], data: {available_at: string; subject_ids: number[]}[], subjects: Subject[]): StuffToLearn[] {
   const arr: StuffToLearn[] = [];
 
   for (const id of ids) {
@@ -37,7 +37,6 @@ function addStuffToLearn(ids: number[], data: Array<{available_at: string; subje
     }
 
     arr.push({
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       available_at: summaryData.available_at,
       type: subject.object,
       writing: subject.data.characters || subject.data.slug || subject.data.meanings[0].meaning,
@@ -64,14 +63,14 @@ const handler: Handler = async () => {
 
   const progression: {
     total_count: number;
-    data: Array<{
+    data: {
       data: {
         level: number;
         unlocked_at: undefined | string;
         completed_at: undefined | string;
         abandoned_at: undefined | string;
       };
-    }>;
+    }[];
   } = data[0];
 
   const resets: {
@@ -86,14 +85,14 @@ const handler: Handler = async () => {
 
   const summary: {
     data: {
-      lessons: Array<{
+      lessons: {
         available_at: string;
         subject_ids: number[];
-      }>;
-      reviews: Array<{
+      }[];
+      reviews: {
         available_at: string;
         subject_ids: number[];
-      }>;
+      }[];
       next_reviews_at: undefined | string;
     };
   } = data[2];
@@ -113,14 +112,15 @@ const handler: Handler = async () => {
   }
 
   const now = new Date();
-  // next_reviews checks what reviews will be available in the next 23 hours
-  // summary.data.next_reviews_at checks beyond that, but will be the current time if a review is already available
+  // next_reviews | Checks what reviews will be available in the next 23 hours
+  // summary.data.next_reviews_at | Checks beyond that, but will be the current time if a review is already available
   const nextReviews = summary.data.reviews
     .map((r: {subject_ids: number[]; available_at: Date | string}) => {
       r.available_at = new Date(r.available_at); return r;
     })
-    .filter((r) => r.available_at > now && r.subject_ids.length) as Array<{subject_ids: number[]; available_at: Date}>;
-  const moreThingsToReviewAt = nextReviews[0] ? nextReviews[0].available_at.toISOString() : summary.data.next_reviews_at ? summary.data.next_reviews_at : undefined;
+    .filter((r) => r.available_at > now && r.subject_ids.length) as {subject_ids: number[]; available_at: Date}[];
+
+  const moreThingsToReviewAt = nextReviews.at(0)?.available_at.toISOString() ?? summary.data.next_reviews_at;
 
   const subjectIdsAll = subjectIdsLessons.concat(subjectIdsReviews);
   const subjects = await api<{data: Subject[]}>(`https://api.wanikani.com/v2/subjects?ids=${subjectIdsAll.toString()}`, process.env.API_WANIKANI);

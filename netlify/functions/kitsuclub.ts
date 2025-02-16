@@ -31,7 +31,7 @@ const handler: Handler = async () => {
     emojis: details.user.emojis,
     text: details.text,
     date: details.createdAt
-  }
+  };
 
   return {
     statusCode: 200,

@@ -15,7 +15,6 @@ export default function Fruits() {
   const [error, setError] = useState(false);
 
   const getFruits = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setFruits(await fetch("/.netlify/functions/osu_fruits").then(async r => r.json()));
   };
 

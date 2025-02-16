@@ -13,7 +13,6 @@ const handler: Handler = async () => {
   const token = await collection.findOne();
   void client.close();
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   const api = new osu.API({access_token: token?.access_token});
   const profile = await api.getUser(7276846, osu.Ruleset.fruits);
 

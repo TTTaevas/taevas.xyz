@@ -18,7 +18,6 @@ export default function Hackthebox() {
   const [error, setError] = useState(false);
 
   const getHackthebox = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setHackthebox(await fetch("/.netlify/functions/hackthebox").then(async r => r.json()));
   };
 

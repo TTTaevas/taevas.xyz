@@ -22,7 +22,6 @@ export default function Anilist() {
   const [error, setError] = useState(false);
 
   const getAnilist = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setAnilist(await fetch("/.netlify/functions/anilist").then(async r => r.json()));
   };
 

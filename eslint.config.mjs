@@ -1,28 +1,29 @@
-import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 import react from "eslint-plugin-react";
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
-import stylisticTs from "@stylistic/eslint-plugin-ts";
-
-/**
- * Rules to consider:
- * 
- * "@typescript-eslint/no-unsafe-assignment": "off",
- * "@typescript-eslint/dot-notation": "off",
- */
+import stylistic from "@stylistic/eslint-plugin";
 
 export default tseslint.config(
-  pluginReactConfig,
+  react.configs.flat.recommended,
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
+  ...tseslint.configs.stylisticTypeChecked,
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname
+      }
+    }
+  },
   {
     plugins: {
-      "@stylistic/ts": stylisticTs,
-      react,
+      "@stylistic": stylistic,
     },
     rules: {
-      "@stylistic/ts/quotes": ["error", "double"],
-      "@stylistic/ts/indent": ["error", 2],
+      "@stylistic/quotes": ["error", "double"],
+      "@stylistic/indent": ["error", 2],
+      "@stylistic/semi": ["error", "always"],
       "react/no-unescaped-entities": "off",
     }
   },

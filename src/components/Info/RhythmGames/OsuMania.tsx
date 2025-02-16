@@ -15,7 +15,6 @@ export default function Mania() {
   const [error, setError] = useState(false);
 
   const getMania = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setMania(await fetch("/.netlify/functions/osu_mania").then(async r => r.json()));
   };
 

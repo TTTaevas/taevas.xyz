@@ -16,7 +16,6 @@ export default function KitsuClub() {
   const [error, setError] = useState(false);
 
   const getKitsuclub = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     setKitsuclub(await fetch("/.netlify/functions/kitsuclub").then(async r => r.json()));
   };
 
@@ -28,7 +27,7 @@ export default function KitsuClub() {
 
   useEffect(() => {
     if (kitsuclub) {
-      const date = new Date(kitsuclub.date).toISOString()
+      const date = new Date(kitsuclub.date).toISOString();
       try {
         setElements([
           <div key={"kitsuclub-details"} className="text-left mb-2">
@@ -38,9 +37,9 @@ export default function KitsuClub() {
             <strong key={"kitsuclub-date"} className="inline-flex text-sm">{date.substring(0, date.indexOf("T"))}</strong>
           </div>,
           <p key={"kitsuclub-text"} className="text-left">{...emojify(kitsuclub.text, kitsuclub.emojis)}</p>, // emojis that are only in the post aren't in the response yet :(
-        ])
+        ]);
       } catch {
-        setError(true)
+        setError(true);
       }
     }
   }, [kitsuclub]);
@@ -55,21 +54,21 @@ export default function KitsuClub() {
   );
 }
 
-function emojify(text: string, all_emojis: Record<string, string>): Array<string | React.JSX.Element> {
-  const emoji_list: string[] = Object.keys(all_emojis)
-  const emoji_imgs: string[] = Object.values(all_emojis)
-  const to_return: Array<string | React.JSX.Element> = []
+function emojify(text: string, all_emojis: Record<string, string>): (string | React.JSX.Element)[] {
+  const emoji_list: string[] = Object.keys(all_emojis);
+  const emoji_imgs: string[] = Object.values(all_emojis);
+  const to_return: (string | React.JSX.Element)[] = [];
 
   for (let i = 0; i < emoji_list.length; i++) {
-    const emoji_name = emoji_list[i]
-    while (text.indexOf(emoji_name) !== -1) {
-      const index = text.indexOf(emoji_name)
-      to_return.push(text.substring(0, index - 1)) // push whatever text before the emoji
-      to_return.push(<img src={emoji_imgs[i]} alt={emoji_name} className="h-6 w-6 mx-1"/>) // push the emoji
-      text = text.substring(index + emoji_name.length + 1) // remove whatever text before the emoji and the emoji name
+    const emoji_name = emoji_list[i];
+    while (text.includes(emoji_name)) {
+      const index = text.indexOf(emoji_name);
+      to_return.push(text.substring(0, index - 1)); // push whatever text before the emoji
+      to_return.push(<img src={emoji_imgs[i]} alt={emoji_name} className="h-6 w-6 mx-1"/>); // push the emoji
+      text = text.substring(index + emoji_name.length + 1); // remove whatever text before the emoji and the emoji name
     }
   }
-  to_return.push(text) // push whatever text AFTER the last emoji (so all the text if no emoji)
+  to_return.push(text); // push whatever text AFTER the last emoji (so all the text if no emoji)
 
-  return to_return
+  return to_return;
 }
