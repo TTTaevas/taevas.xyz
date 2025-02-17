@@ -1,6 +1,7 @@
 import {type Handler} from "@netlify/functions";
 import {api} from "./shared/api.js";
 import {type WanikaniInfo} from "../../src/components/Info/Japanese/Wanikani.js";
+import { WKLevelProgression, WKResetCollection, WKSummary } from "@bachmacintosh/wanikani-api-types";
 
 interface Subject {
   id: number;
@@ -49,7 +50,7 @@ function addStuffToLearn(ids: number[], data: {available_at: string; subject_ids
 }
 
 const handler: Handler = async () => {
-  const data: any[] = await Promise.all([
+  const data = await Promise.all([
     new Promise((resolve) => {
       resolve(api("https://api.wanikani.com/v2/level_progressions", process.env.API_WANIKANI)); 
     }),
@@ -61,66 +62,32 @@ const handler: Handler = async () => {
     }),
   ]);
 
-  const progression: {
+  const progression = data[0] as {
     total_count: number;
-    data: {
-      data: {
-        level: number;
-        unlocked_at: undefined | string;
-        completed_at: undefined | string;
-        abandoned_at: undefined | string;
-      };
-    }[];
-  } = data[0];
-
-  const resets: {
-    data: [{
-      data: {
-        created_at: string;
-        original_level: number;
-        target_level: number;
-      };
-    }];
-  } = data[1];
-
-  const summary: {
-    data: {
-      lessons: {
-        available_at: string;
-        subject_ids: number[];
-      }[];
-      reviews: {
-        available_at: string;
-        subject_ids: number[];
-      }[];
-      next_reviews_at: undefined | string;
-    };
-  } = data[2];
+    data: WKLevelProgression[];
+  };
+  const resets = data[1] as WKResetCollection;
+  const summary = data[2] as WKSummary;
 
   const subjectIdsLessons: number[] = [];
-  const subjectIdsReviews: number[] = [];
   for (const lesson of summary.data.lessons) {
     for (const subjectId of lesson.subject_ids) {
       subjectIdsLessons.push(subjectId);
     }
   }
 
+  const subjectIdsReviews: number[] = [];
   for (const review of summary.data.reviews) {
     for (const subjectId of review.subject_ids) {
       subjectIdsReviews.push(subjectId);
     }
   }
 
-  const now = new Date();
   // next_reviews | Checks what reviews will be available in the next 23 hours
   // summary.data.next_reviews_at | Checks beyond that, but will be the current time if a review is already available
-  const nextReviews = summary.data.reviews
-    .map((r: {subject_ids: number[]; available_at: Date | string}) => {
-      r.available_at = new Date(r.available_at); return r;
-    })
-    .filter((r) => r.available_at > now && r.subject_ids.length) as {subject_ids: number[]; available_at: Date}[];
-
-  const moreThingsToReviewAt = nextReviews.at(0)?.available_at.toISOString() ?? summary.data.next_reviews_at;
+  const now = new Date();
+  const nextReviews = summary.data.reviews.filter((r) => new Date(r.available_at) > now && r.subject_ids.length);
+  const moreThingsToReviewAt = nextReviews.at(0)?.available_at ?? summary.data.next_reviews_at;
 
   const subjectIdsAll = subjectIdsLessons.concat(subjectIdsReviews);
   const subjects = await api<{data: Subject[]}>(`https://api.wanikani.com/v2/subjects?ids=${subjectIdsAll.toString()}`, process.env.API_WANIKANI);

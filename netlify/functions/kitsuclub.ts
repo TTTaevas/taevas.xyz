@@ -1,29 +1,38 @@
 import {type Handler} from "@netlify/functions";
 import { KitsuclubInfo } from "../../src/components/Info/Fediverse/KitsuClub.js";
+import { api } from "./shared/api.js";
 
 const handler: Handler = async () => {
-  const kitsuclub = await fetch("https://kitsunes.club/api/users/notes", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${process.env.API_KITSUCLUB}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      "userId": "a2hgd7delf",
-      "limit": 1,
-      "withReplies": false,
-      "withRepliesToSelf": false,
-      "withQuotes": true,
-      "withRenotes": false,
-      "withBots": true,
-      "withNonPublic": true,
-      "withChannelNotes": false,
-      "withFiles": false,
-      "allowPartial": false,
-    })
-  });
+  const kitsuclub = await api<{
+    user: {
+      name: string
+      username: string
+      avatarUrl: string
+      emojis: Record<string, string>
+    }
+    text: string
+    createdAt: string
+  }[]>("https://kitsunes.club/api/users/notes", process.env.API_KITSUCLUB, true, JSON.stringify({
+    "userId": "a2hgd7delf",
+    "limit": 1,
+    "withReplies": false,
+    "withRepliesToSelf": false,
+    "withQuotes": true,
+    "withRenotes": false,
+    "withBots": true,
+    "withNonPublic": true,
+    "withChannelNotes": false,
+    "withFiles": false,
+    "allowPartial": false,
+  }));
 
-  const details = (await kitsuclub.json() as Record<string, any>)[0];
+  const details = kitsuclub.at(0);
+  if (!details) {
+    return {
+      statusCode: 404,
+    };
+  }
+
   const activity: KitsuclubInfo = {
     id: details.user.username,
     username: details.user.name,

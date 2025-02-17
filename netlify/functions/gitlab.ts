@@ -1,17 +1,12 @@
 import {type Handler} from "@netlify/functions";
+import { Gitlab } from "@gitbeaker/rest";
 import {type GitlabInfo} from "../../src/components/Info/Coding/GitLab.js";
 
 const handler: Handler = async () => {
-  const gitlab = await fetch("https://gitlab.com/api/v4/events?action=pushed", {
-    method: "GET",
-    headers: {
-      "PRIVATE-TOKEN": process.env.API_GITLAB!,
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-    },
-  });
+  const api = new Gitlab({token: process.env.API_GITLAB!});
+  const gitlab = await api.Events.all({action: "pushed"});
 
-  const {created_at} = (await gitlab.json() as Record<string, any>)[0];
+  const created_at = gitlab.at(0)?.created_at;
   if (typeof created_at !== "string") {
     return {
       statusCode: 404,

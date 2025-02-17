@@ -9,10 +9,17 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   ...tseslint.configs.stylisticTypeChecked,
   {
+    settings: {
+      react: {
+        version: "detect",
+      }
+    }
+  },
+  {
     languageOptions: {
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: import.meta.dirname
+        tsconfigRootDir: import.meta.dirname,
       }
     }
   },

@@ -9,6 +9,8 @@ export type SpeedruncomInfo = {
   thumbnail: string;
   game: string;
   details: string[];
+  time: string;
+  video?: string;
 } | undefined;
 
 export default function Speedruncom() {

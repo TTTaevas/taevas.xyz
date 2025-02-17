@@ -1,28 +1,16 @@
 import React, {useState, useEffect} from "react";
 import Website from "../../Website.js";
+import { WKLevelProgression, WKReset } from "@bachmacintosh/wanikani-api-types";
 
 export type WanikaniInfo = {
   progression: {
     total_count: number;
-    data: {
-      data: {
-        level: number;
-        unlocked_at: undefined | string;
-        completed_at: undefined | string;
-        abandoned_at: undefined | string;
-      };
-    }[];
+    data: WKLevelProgression[];
   };
-  resets: {
-    data: {
-      created_at: string;
-      original_level: number;
-      target_level: number;
-    };
-  }[];
+  resets: WKReset[];
   lessons: Item[];
   reviews: Item[];
-  moreThingsToReviewAt: string | undefined;
+  moreThingsToReviewAt: string | null;
 } | undefined;
 
 interface Item {

@@ -6,7 +6,9 @@
     "lint": "bunx eslint ."
   },
   "dependencies": {
+    "@bachmacintosh/wanikani-api-types": "^1.7.0",
     "@carbon/icons-react": "^11.55.0",
+    "@gitbeaker/rest": "^42.1.0",
     "@netlify/functions": "^2.8.2",
     "@octokit/rest": "^20.1.1",
     "mongodb": "^6.13.0",
