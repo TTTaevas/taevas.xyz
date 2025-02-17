@@ -1,8 +1,9 @@
 import React from "react";
 import {createRoot} from "react-dom/client";
 
-import Infos from "./views/Infos.js";
-import MainContent from "./views/MainContent.js";
+import MainContent from "./Main/index.js";
+import Infos from "./Infos/index.js";
+
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
