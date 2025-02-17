@@ -2,9 +2,7 @@ import React, {useEffect, useState} from "react";
 import Info from "../Info.js";
 
 import Osu from "./RhythmGames/Osu.js";
-import Taiko from "./RhythmGames/OsuTaiko.js";
-import Fruits from "./RhythmGames/OsuFruits.js";
-import Mania from "./RhythmGames/OsuMania.js";
+import { Ruleset } from "osu-api-v2-js";
 
 export default function RhythmGames() {
   const [token, setToken] = useState(false);
@@ -29,10 +27,10 @@ export default function RhythmGames() {
 
   useEffect(() => {
     if (token) {
-      const osu = <Osu key={"osu"}/>;
-      const taiko = <Taiko key={"taiko"}/>;
-      const fruits = <Fruits key={"fruits"}/>;
-      const mania = <Mania key={"mania"}/>;
+      const osu = <Osu ruleset={Ruleset.osu} key={"osu"}/>;
+      const taiko = <Osu ruleset={Ruleset.taiko} key={"taiko"}/>;
+      const fruits = <Osu ruleset={Ruleset.fruits} key={"fruits"}/>;
+      const mania = <Osu ruleset={Ruleset.mania} key={"mania"}/>;
       setWebsites([osu, taiko, fruits, mania]);
     }
   }, [token]);

@@ -4,7 +4,7 @@ import {type OsuInfo} from "../../src/components/Info/RhythmGames/Osu.js";
 import {MongoClient} from "mongodb";
 import {type Token} from "./osu_token.js";
 
-const handler: Handler = async () => {
+const handler: Handler = async (req) => {
   const client = new MongoClient(process.env.URL_MONGODB!);
   await client.connect();
 
@@ -13,8 +13,9 @@ const handler: Handler = async () => {
   const token = await collection.findOne();
   void client.close();
 
+  const ruleset = Number(req.queryStringParameters?.ruleset);
   const api = new osu.API({access_token: token?.access_token});
-  const profile = await api.getUser(7276846, osu.Ruleset.osu);
+  const profile = await api.getUser(7276846, !isNaN(ruleset) ? ruleset : undefined);
 
   const info: OsuInfo = {
     country: profile.country.name,
