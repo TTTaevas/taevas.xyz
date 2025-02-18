@@ -1,6 +1,6 @@
 import {type Handler} from "@netlify/functions";
 import { Gitlab } from "@gitbeaker/rest";
-import {type GitlabInfo} from "../../src/components/Info/Coding/GitLab.js";
+import {type GitlabInfo} from "#Infos/Coding/GitLab.js";
 
 const handler: Handler = async () => {
   const api = new Gitlab({token: process.env.API_GITLAB!});

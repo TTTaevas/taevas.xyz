@@ -1,6 +1,6 @@
 import {type Handler} from "@netlify/functions";
 import {api} from "./shared/api.js";
-import {type WanikaniInfo} from "../../src/components/Info/Japanese/Wanikani.js";
+import {type WanikaniInfo} from "#Infos/Japanese/Wanikani.js";
 import { WKLevelProgression, WKResetCollection, WKSummary } from "@bachmacintosh/wanikani-api-types";
 
 interface Subject {

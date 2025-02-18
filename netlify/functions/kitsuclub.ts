@@ -1,5 +1,5 @@
 import {type Handler} from "@netlify/functions";
-import { KitsuclubInfo } from "../../src/components/Info/Fediverse/KitsuClub.js";
+import { KitsuclubInfo } from "#Infos/Fediverse/KitsuClub.js";
 import { api } from "./shared/api.js";
 
 const handler: Handler = async () => {

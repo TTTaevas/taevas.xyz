@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Music from "./Music/index.js";
 import Speedrun from "./Speedrun/index.js";
-import Hacking from "./Hacking/index.js";
+// import Hacking from "./Hacking/index.js";
 import Coding from "./Coding/index.js";
 import RhythmGames from "./RhythmGames/index.js";
 import Anime from "./Anime/index.js";
@@ -24,7 +24,7 @@ export default class Infos extends Component {
         <Anime/>
         {/*<Japanese/>*/}
         <RhythmGames/>
-        <Hacking/>
+        {/*<Hacking/>*/}
       </div>
     </div>;
   }

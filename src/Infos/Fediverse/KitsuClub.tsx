@@ -27,8 +27,8 @@ export default function KitsuClub() {
 
   useEffect(() => {
     if (kitsuclub) {
-      const date = new Date(kitsuclub.date).toISOString();
       try {
+        const date = new Date(kitsuclub.date).toISOString();
         setElements([
           <div key={"kitsuclub-details"} className="text-left mb-2">
             <img key={"kitsuclub-avatar"} src={kitsuclub.avatar} alt="avatar" className="float-left rounded-lg w-12 mr-2"/>

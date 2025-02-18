@@ -1,6 +1,6 @@
 import {type Handler} from "@netlify/functions";
 import {api} from "./shared/api.js";
-import {type SpeedruncomInfo} from "../../src/components/Info/Speedrunning/Speedruncom.js";
+import {type SpeedruncomInfo} from "#Infos/Speedrun/Speedruncom.js";
 
 interface Runs {
   data: {
