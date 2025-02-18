@@ -1,36 +1,26 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.js";
+import DataHandler from "#Infos/DataHandler.js";
 
 export type GitlabInfo = {
   date: string;
 } | undefined;
 
 export default function GitLab() {
-  const [gitlab, setGitlab]: [GitlabInfo, React.Dispatch<React.SetStateAction<GitlabInfo>>] = useState();
+  const {data, error, setError} = DataHandler<GitlabInfo>("/.netlify/functions/gitlab", 60 * 20);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
-  const [error, setError] = useState(false);
-
-  const getGitlab = async () => {
-    setGitlab(await fetch("/.netlify/functions/gitlab").then(async r => r.json()));
-  };
 
   useEffect(() => {
-    getGitlab().catch(() => {
-      setError(true);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (gitlab) {
+    if (data) {
       try {
         setElements([
-          <p key={"gitlab-date"}>Latest push: <strong>{gitlab.date}</strong></p>,
+          <p key={"gitlab-date"}>Latest push: <strong>{data.date}</strong></p>,
         ]);
       } catch {
         setError(true);
       }
     }
-  }, [gitlab]);
+  }, [data]);
 
   return (
     <Website

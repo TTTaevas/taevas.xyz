@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.js";
+import DataHandler from "#Infos/DataHandler.js";
 
 export type KitsuclubInfo = {
   id: string
@@ -11,43 +12,32 @@ export type KitsuclubInfo = {
 } | undefined;
 
 export default function KitsuClub() {
-  const [kitsuclub, setKitsuclub]: [KitsuclubInfo, React.Dispatch<React.SetStateAction<KitsuclubInfo>>] = useState();
+  const {data, error, setError} = DataHandler<KitsuclubInfo>("/.netlify/functions/kitsuclub", 60 * 20);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
-  const [error, setError] = useState(false);
-
-  const getKitsuclub = async () => {
-    setKitsuclub(await fetch("/.netlify/functions/kitsuclub").then(async r => r.json()));
-  };
 
   useEffect(() => {
-    getKitsuclub().catch(() => {
-      setError(true);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (kitsuclub) {
+    if (data) {
       try {
-        const date = new Date(kitsuclub.date).toISOString();
+        const date = new Date(data.date).toISOString();
         setElements([
           <div key={"kitsuclub-details"} className="text-left mb-2">
-            <img key={"kitsuclub-avatar"} src={kitsuclub.avatar} alt="avatar" className="float-left rounded-lg w-12 mr-2"/>
-            <strong key={"kitsuclub-username"} className="inline-flex">{...emojify(kitsuclub.username, kitsuclub.emojis)}</strong>
+            <img key={"kitsuclub-avatar"} src={data.avatar} alt="avatar" className="float-left rounded-lg w-12 mr-2"/>
+            <strong key={"kitsuclub-username"} className="inline-flex">{...emojify(data.username, data.emojis)}</strong>
             <br/>
             <strong key={"kitsuclub-date"} className="inline-flex text-sm">{date.substring(0, date.indexOf("T"))}</strong>
           </div>,
-          <p key={"kitsuclub-text"} className="text-left">{...emojify(kitsuclub.text, kitsuclub.emojis)}</p>, // emojis that are only in the post aren't in the response yet :(
+          <p key={"kitsuclub-text"} className="text-left">{...emojify(data.text, data.emojis)}</p>, // emojis that are only in the post aren't in the response yet :(
         ]);
       } catch {
         setError(true);
       }
     }
-  }, [kitsuclub]);
+  }, [data]);
 
   return (
     <Website
       name="KitsuClub"
-      link={`https://kitsunes.club/@${kitsuclub?.id ?? "taevas"}`}
+      link={`https://kitsunes.club/@${data?.id ?? "taevas"}`}
       elements={elements}
       error={error}
     />

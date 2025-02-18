@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.js";
 import { Ruleset } from "osu-api-v2-js";
+import DataHandler from "#Infos/DataHandler.js";
 
 export type OsuInfo = {
   country: string;
@@ -11,9 +12,8 @@ export type OsuInfo = {
 } | undefined;
 
 export default function Osu(args: {ruleset: Ruleset}) {
-  const [osu, setOsu]: [OsuInfo, React.Dispatch<React.SetStateAction<OsuInfo>>] = useState();
+  const {data, error, setError} = DataHandler<OsuInfo>(`/.netlify/functions/osu?ruleset=${args.ruleset}`, 60 * 45);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
-  const [error, setError] = useState(false);
 
   const ruleset = Ruleset[args.ruleset];
   let name = ruleset;
@@ -23,25 +23,15 @@ export default function Osu(args: {ruleset: Ruleset}) {
     name = "catch";
   }
 
-  const getOsu = async () => {
-    setOsu(await fetch(`/.netlify/functions/osu?ruleset=${args.ruleset}`).then(async r => r.json()));
-  };
-
   useEffect(() => {
-    getOsu().catch(() => {
-      setError(true);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (osu) {
+    if (data) {
       try {
         setElements([
           <div key={`osu-${ruleset}`} className="flex">
             <img className="m-auto w-16 h-16" alt={`${ruleset} mode logo`} src={`/osu_rulesets/${ruleset}.png`}/>
             <div className="m-auto">
-              <p>Global: <strong>#{osu.ranks.global}</strong></p>
-              <p>{osu.country}: <strong>#{osu.ranks.country}</strong></p>
+              <p>Global: <strong>#{data.ranks.global}</strong></p>
+              <p>{data.country}: <strong>#{data.ranks.country}</strong></p>
             </div>
           </div>,
         ]);
@@ -49,7 +39,7 @@ export default function Osu(args: {ruleset: Ruleset}) {
         setError(true);
       }
     }
-  }, [osu]);
+  }, [data]);
 
   return (
     <Website

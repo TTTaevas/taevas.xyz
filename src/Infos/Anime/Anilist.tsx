@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.js";
 import ButtonLink from "#parts/ButtonLink.js";
+import DataHandler from "#Infos/DataHandler.js";
 
 export type AnilistInfo = {
   title: string;
@@ -17,50 +18,39 @@ export type AnilistInfo = {
 } | undefined;
 
 export default function Anilist() {
-  const [anilist, setAnilist]: [AnilistInfo, React.Dispatch<React.SetStateAction<AnilistInfo>>] = useState();
+  const {data, error, setError} = DataHandler<AnilistInfo>("/.netlify/functions/anilist", 60 * 30);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
-  const [error, setError] = useState(false);
-
-  const getAnilist = async () => {
-    setAnilist(await fetch("/.netlify/functions/anilist").then(async r => r.json()));
-  };
 
   useEffect(() => {
-    getAnilist().catch(() => {
-      setError(true);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (anilist) {
+    if (data) {
       try {
         setElements([
           <div key={"data"} className="flex mb-4">
-            <img className="m-auto w-16 h-22" alt="anime cover" src={anilist.cover} />
+            <img className="m-auto w-16 h-22" alt="anime cover" src={data.cover} />
             <div className="m-auto pl-2">
-              <p className="font-bold">{anilist.title}</p>
-              <p className="mt-4">Started: <strong>{anilist.startDate}</strong></p>
+              <p className="font-bold">{data.title}</p>
+              <p className="mt-4">Started: <strong>{data.startDate}</strong></p>
               {
-                anilist.episodes.watched >= anilist.episodes.total ?
-                  <p>Finished: <strong>{anilist.endDate}</strong></p> :
-                  <p>Ep. {anilist.episodes.watched}: <strong>{anilist.updateDate}</strong></p>
+                data.episodes.watched >= data.episodes.total ?
+                  <p>Finished: <strong>{data.endDate}</strong></p> :
+                  <p>Ep. {data.episodes.watched}: <strong>{data.updateDate}</strong></p>
               }
             </div>
           </div>,
           <>
             {
-              anilist.episodes.watched >= anilist.episodes.total ?
-                <p>I gave it a <strong>{anilist.score}/10</strong></p> :
-                <p><strong>{anilist.episodes.watched}/{anilist.episodes.total}</strong> episodes watched</p>
+              data.episodes.watched >= data.episodes.total ?
+                <p>I gave it a <strong>{data.score}/10</strong></p> :
+                <p><strong>{data.episodes.watched}/{data.episodes.total}</strong> episodes watched</p>
             }
           </>,
-          <ButtonLink key={"more"} link={anilist.url} text="Anime Link" />,
+          <ButtonLink key={"more"} link={data.url} text="Anime Link" />,
         ]);
       } catch {
         setError(true);
       }
     }
-  }, [anilist]);
+  }, [data]);
 
   return (
     <Website

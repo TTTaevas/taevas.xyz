@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.js";
 import ButtonLink from "#parts/ButtonLink.js";
+import DataHandler from "#Infos/DataHandler.js";
 
 export type HacktheboxInfo = {
   id: string;
@@ -13,46 +14,34 @@ export type HacktheboxInfo = {
 } | undefined;
 
 export default function Hackthebox() {
-  const [hackthebox, setHackthebox]: [HacktheboxInfo, React.Dispatch<React.SetStateAction<HacktheboxInfo>>] = useState();
+  const {data, error, setError} = DataHandler<HacktheboxInfo>("/.netlify/functions/hackthebox", 60 * 60);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
-  const [error, setError] = useState(false);
-
-  const getHackthebox = async () => {
-    setHackthebox(await fetch("/.netlify/functions/hackthebox").then(async r => r.json()));
-  };
 
   useEffect(() => {
-    getHackthebox().catch(() => {
-      setError(true);
-    });
-  }, []);
-
-
-  useEffect(() => {
-    if (hackthebox) {
+    if (data) {
       try {
         setElements([
           <div key={"data"} className="flex">
             {
-              hackthebox.type === "user" ?
-                <img className="m-auto h-16 w-16" alt="machine thumbnail" src={hackthebox.machine_avatar}/> :
-                <a className="m-auto h-16 w-16" href={`https://www.hackthebox.com/achievement/machine/1063999/${hackthebox.id}`} target="_blank" rel="noreferrer">
-                  <img alt="machine thumbnail" src={hackthebox.machine_avatar}/>
+              data.type === "user" ?
+                <img className="m-auto h-16 w-16" alt="machine thumbnail" src={data.machine_avatar}/> :
+                <a className="m-auto h-16 w-16" href={`https://www.hackthebox.com/achievement/machine/1063999/${data.id}`} target="_blank" rel="noreferrer">
+                  <img alt="machine thumbnail" src={data.machine_avatar}/>
                 </a>
             }
             <div className="m-auto pl-4">
-              <p className="font-bold">{hackthebox.name}</p>
-              <p>({hackthebox.type})</p>
+              <p className="font-bold">{data.name}</p>
+              <p>({data.type})</p>
             </div>
           </div>,
-          <p key={"date"} className="mt-2 font-bold">{hackthebox.date}</p>,
-          <ButtonLink key={"more"} link={`https://app.hackthebox.com/machines/${hackthebox.name}`} text="Machine Link" />,
+          <p key={"date"} className="mt-2 font-bold">{data.date}</p>,
+          <ButtonLink key={"more"} link={`https://app.hackthebox.com/machines/${data.name}`} text="Machine Link" />,
         ]);
       } catch {
         setError(true);
       }
     }
-  }, [hackthebox]);
+  }, [data]);
 
   return (
     <Website

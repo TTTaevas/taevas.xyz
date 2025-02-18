@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.js";
 import { WKLevelProgression, WKReset } from "@bachmacintosh/wanikani-api-types";
+import DataHandler from "#Infos/DataHandler.js";
 
 export type WanikaniInfo = {
   progression: {
@@ -36,27 +37,16 @@ function Button(item: Item) {
 }
 
 export default function Wanikani() {
-  const [wanikani, setWanikani]: [WanikaniInfo, React.Dispatch<React.SetStateAction<WanikaniInfo>>] = useState();
+  const {data, error, setError} = DataHandler<WanikaniInfo>("/.netlify/functions/wanikani", 60 * 60);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
-  const [error, setError] = useState(false);
-  
-  const getWanikani = async () => {
-    setWanikani(await fetch("/.netlify/functions/wanikani").then(async r => r.json()));
-  };
 
   useEffect(() => {
-    getWanikani().catch(() => {
-      setError(true);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (wanikani) {
+    if (data) {
       try {
         const now = new Date();
 
         let level = <></>;
-        const unlockedLevels = wanikani.progression.data.filter(d => typeof d.data.unlocked_at === "string");
+        const unlockedLevels = data.progression.data.filter(d => typeof d.data.unlocked_at === "string");
         if (unlockedLevels.length) {
           const arr = unlockedLevels.sort((a, b) => new Date(b.data.unlocked_at!).getTime() - new Date(a.data.unlocked_at!).getTime());
           level = <p className="mb-4"><b>Level {arr[0].data.level}</b> reached!<br/>
@@ -64,9 +54,9 @@ export default function Wanikani() {
         }
 
         let resets = <></>;
-        if (wanikani.resets.length) {
+        if (data.resets.length) {
           const allResets: React.JSX.Element[] = [];
-          for (const dataWrapper of wanikani.resets) {
+          for (const dataWrapper of data.resets) {
             const data = dataWrapper.data;
             allResets.push(<p><b>{`${new Date(data.created_at).toISOString().substring(0, 10)}`}</b>{`: Reset my progress from level ${data.original_level} to level ${data.target_level}`}</p>);
           }
@@ -75,7 +65,7 @@ export default function Wanikani() {
         }
 
         const lessons: React.JSX.Element[] = [];
-        const filteredLessons = wanikani.lessons.filter(lesson => new Date(lesson.available_at) < now);
+        const filteredLessons = data.lessons.filter(lesson => new Date(lesson.available_at) < now);
         for (const lesson of filteredLessons) {
           lessons.push(Button(lesson));
         }
@@ -85,7 +75,7 @@ export default function Wanikani() {
         </div> : <p>No lesson available for now!</p>;
 
         const reviews: React.JSX.Element[] = [];
-        const filteredReviews = wanikani.reviews.filter(review => new Date(review.available_at) < now);
+        const filteredReviews = data.reviews.filter(review => new Date(review.available_at) < now);
         for (const review of filteredReviews) {
           reviews.push(Button(review));
         }
@@ -95,9 +85,9 @@ export default function Wanikani() {
         </div> : <p>No review available for now!</p>;
 
         let whenNextToReview = <></>;
-        if (wanikani.moreThingsToReviewAt) {
+        if (data.moreThingsToReviewAt) {
           const rtf = new Intl.RelativeTimeFormat("en", {style: "long", numeric: "always"});
-          const timeDifference = new Date(Math.abs(new Date(wanikani.moreThingsToReviewAt).getTime() - now.getTime()));
+          const timeDifference = new Date(Math.abs(new Date(data.moreThingsToReviewAt).getTime() - now.getTime()));
           const howManyHours = (timeDifference.getUTCHours() + 1) + ((24 * (timeDifference.getUTCDate() - 1)) * (timeDifference.getUTCMonth() + 1));
           whenNextToReview = <p className="mt-2">{`There will be more stuff to review ${rtf.format(howManyHours, "hour")}!`}</p>;
         }
@@ -115,7 +105,7 @@ export default function Wanikani() {
         setError(true);
       }
     }
-  }, [wanikani]);
+  }, [data]);
 
   return (
     <Website
