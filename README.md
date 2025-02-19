@@ -28,4 +28,5 @@ This package makes use of several online APIs through Netlify in order to delive
 - `API_LASTFM`
 - `API_OSU`
 - `API_WANIKANI`
+- `API_UMAMI`
 - `URL_MONGODB`
