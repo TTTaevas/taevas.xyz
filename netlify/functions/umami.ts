@@ -1,14 +1,24 @@
 import { UmamiInfo } from "#Infos/Website/Umami.js";
 import {type Handler} from "@netlify/functions";
+import { MongoClient } from "mongodb";
+import { Token } from "./umami_token.js";
 
 const handler: Handler = async () => {
-  const api_server = "https://api.umami.is/v1";
-  const website_id = "3461d539-c2fb-4930-9d4a-a0e4016a174a";
+  const client = new MongoClient(process.env.URL_MONGODB!);
+  await client.connect();
+
+  const db = client.db("tokens");
+  const collection = db.collection<Token>("umami");
+  const token = await collection.findOne();
+  void client.close();
+
+  const api_server = "https://visitors.taevas.xyz/api";
+  const website_id = "f196d626-e609-4841-9a80-0dc60f523ed5";
   const now = new Date();
   const response = await fetch(`${api_server}/websites/${website_id}/stats?startAt=${Number(new Date("2025"))}&endAt=${Number(now)}`, {
     headers: {
       "Accept": "application/json",
-      "x-umami-api-key": process.env.API_UMAMI!
+      "Authorization": `Bearer ${token?.access_token}`
     },
   });
 

@@ -1,16 +1,40 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Info from "../Info.js";
 import Umami from "./Umami.js";
 
-export default function Speedrun() {
-  const umami = <Umami key={"umami"}/>;
+export default function Website() {
+  const [token, setToken] = useState(false);
+  const [websites, setWebsites] = useState([] as React.JSX.Element[]);
+  const [error, setError] = useState(false);
+
+  const getToken = async () => {
+    await fetch("/.netlify/functions/umami_token").then((r) => {
+      if (r.ok) {
+        setToken(true);
+      } else {
+        setError(true);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getToken().catch(() => {
+      setError(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      const umami = <Umami key={"umami"}/>;
+      setWebsites([umami]);
+    }
+  }, [token]);
 
   return (
     <Info
       type="Website"
-      websites={[
-        umami,
-      ]}
+      websites={websites}
+      error={error}
     />
   );
 }

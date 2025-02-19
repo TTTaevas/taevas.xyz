@@ -27,8 +27,8 @@ export default function Umami() {
 
   return (
     <Website
-      name="Umami"
-      link="https://cloud.umami.is/share/g31G2F06EWgN9sRM/taevas.xyz"
+      name="Analytics"
+      link="https://visitors.taevas.xyz/share/DlW6mBQ09DMn0sTQ/taevas.xyz"
       elements={elements}
       error={error}
     />
