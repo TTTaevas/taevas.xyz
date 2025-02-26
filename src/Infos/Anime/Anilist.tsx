@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.js";
-import ButtonLink from "#parts/ButtonLink.js";
 import DataHandler from "#Infos/DataHandler.js";
+import Link from "#parts/Link.js";
 
 export type AnilistInfo = {
   title: string;
@@ -28,7 +28,7 @@ export default function Anilist() {
           <div key={"data"} className="flex mb-4">
             <img className="m-auto w-16 h-22" alt="anime cover" src={data.cover} />
             <div className="m-auto pl-2">
-              <p className="font-bold">{data.title}</p>
+              <Link classes="mt-1 px-1 py-2 inline-block w-full font-bold leading-[18px] bg-white text-blue-800" link={data.url} text={data.title}/>
               <p className="mt-4">Started: <strong>{data.startDate}</strong></p>
               {
                 data.episodes.watched >= data.episodes.total ?
@@ -44,7 +44,6 @@ export default function Anilist() {
                 <p><strong>{data.episodes.watched}/{data.episodes.total}</strong> episodes watched</p>
             }
           </>,
-          <ButtonLink key={"more"} link={data.url} text="Anime Link" />,
         ]);
       } catch {
         setError(true);
