@@ -3,13 +3,13 @@ import {api} from "./shared/api.js";
 import {type HacktheboxInfo} from "#Infos/Hacking/Hackthebox.js";
 
 const handler: Handler = async () => {
-  const hackthebox: {profile: {activity: HacktheboxInfo[]}} = await api<{
+  const hackthebox = await api<{
     profile: {
       activity: HacktheboxInfo[];
     };
   }>("https://www.hackthebox.com/api/v4/profile/activity/1063999");
 
-  const pwn = hackthebox.profile.activity.find((a: HacktheboxInfo) => a!.object_type === "machine");
+  const pwn = hackthebox.profile.activity.find((a: HacktheboxInfo) => a?.object_type === "machine");
   if (!pwn) {
     return {
       statusCode: 404,

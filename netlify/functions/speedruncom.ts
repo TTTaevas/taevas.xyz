@@ -84,6 +84,10 @@ const handler: Handler = async () => {
     video: data.run.videos.links.at(0)?.uri,
   };
 
+  while (run.time.startsWith("0") || run.time.startsWith(":")) {
+    run.time = run.time.substring(1);
+  }
+
   return {
     statusCode: 200,
     body: JSON.stringify(run),

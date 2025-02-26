@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.js";
-import ButtonLink from "#parts/ButtonLink.js";
 import DataHandler from "#Infos/DataHandler.js";
+import Link from "#parts/Link.js";
+import ButtonLink from "#parts/ButtonLink.js";
 
 export type SpeedruncomInfo = {
   place: number;
@@ -23,15 +24,18 @@ export default function Speedruncom() {
       try {
         setElements([
           <div key={"data"} className="flex pb-2">
-            <img alt="game thumbnail" src={data.thumbnail} className="h-32 m-auto" />
+            <img alt="game thumbnail" src={data.thumbnail} className="h-24 m-auto" />
             <div className="m-auto pl-2">
-              <p className="mb-2">Placed <strong>#{data.place}</strong> on:</p>
-              <p className="font-bold">{data.game}</p>
-              {data.details.map((d, i) => <p key={`detail-${i}`}>{d}</p>)}
+              <Link key={"more"} classes="mt-1 px-1 py-2 inline-block w-full font-bold leading-[18px] bg-white text-blue-800" link={data.link}
+                text={`${data.game} (${data.details.toString()}) in ${data.time}`}/>
+              <p className="mt-2">Placed <strong>#{data.place}</strong></p>
+              <p className="font-bold">{data.date}</p>
             </div>
           </div>,
-          <p key={"date"} className="mt-2 font-bold">{data.date}</p>,
-          <ButtonLink key={"more"} link={data.link} text="Run Details" />,
+          <> {
+            data.video ? <ButtonLink key={"youtube"} link={data.video} text="YouTube video"/> : ""
+          } </>
+
         ]);
       } catch {
         setError(true);
