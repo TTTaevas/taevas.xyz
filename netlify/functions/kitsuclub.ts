@@ -1,3 +1,5 @@
+/* eslint no-async-promise-executor: 0 */ // Doing promises is needed in order to make multiple requests at once, lowering wait time
+
 import {type Handler} from "@netlify/functions";
 import { KitsuclubInfo } from "#Infos/Fediverse/KitsuClub.js";
 import { api } from "./shared/api.js";
@@ -34,12 +36,41 @@ const handler: Handler = async () => {
     "allowPartial": false,
   }));
 
-  const details = kitsuclub.at(0);
+  const details = kitsuclub.at(Math.max(0, kitsuclub.length - 1));
   if (!details) {
     return {
       statusCode: 404,
     };
   }
+
+  let scan_text = details.text;
+  const emojis_to_get: Promise<void>[] = [];
+  while (scan_text.includes(":")) {
+    const index_1 = scan_text.indexOf(":");
+    const index_2 = scan_text.substring(index_1 + 1).indexOf(":");
+
+    if (index_2 === -1) {
+      scan_text = scan_text.substring(index_1 + 1);
+    } else {
+      const potential_emoji = scan_text.substring(index_1 + 1, index_2 + 1);
+      if (!potential_emoji.includes(" ")) {
+        emojis_to_get.push(new Promise(async (resolve) => {
+          try {
+            const fetched_emote_response = await fetch(`https://kitsunes.club/api/emoji?name=${potential_emoji}`);
+            const fetched_emote = await fetched_emote_response.json() as {name: string, url: string};
+            if (typeof fetched_emote.name === "string" && typeof fetched_emote.url === "string") {
+              details.user.emojis[fetched_emote.name] = fetched_emote.url;
+            }
+          } catch(e) {
+            console.error(e);
+          }
+          resolve();
+        }));
+      }
+      scan_text = scan_text.substring(index_2 + 1);
+    }
+  }
+  await Promise.all(emojis_to_get);
 
   const activity: KitsuclubInfo = {
     note_id: details.id,

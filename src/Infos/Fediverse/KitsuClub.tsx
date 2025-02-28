@@ -38,7 +38,8 @@ export default function KitsuClub() {
           // emojis that are only in the post aren't in the response yet :(
           <Link classes="mt-1 px-2 py-2 inline-block font-bold leading-[18px] bg-white text-blue-800 text-left text-sm"
             key={"link"} link={`https://kitsunes.club/notes/${data.note_id}`} text={<>{
-              ...emojify(data.text, data.emojis).concat(images)
+              ...data.text.split("\n").map((te) => emojify(te, data.emojis).concat(<br/>))
+                .concat(images)
             }</>}
           />
         ]);

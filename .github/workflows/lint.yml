@@ -1,8 +1,5 @@
 name: Lint the code
 on:
-  push:
-    branches:
-      - "**"
   pull_request:
     branches:
       - "**"
