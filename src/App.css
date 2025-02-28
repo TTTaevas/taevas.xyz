@@ -21,3 +21,7 @@ p a {
   color: rgb(244, 196, 253);
   text-decoration: underline;
 }
+
+time {
+  font-weight: bold
+}

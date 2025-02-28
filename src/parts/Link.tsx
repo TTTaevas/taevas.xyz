@@ -7,7 +7,7 @@ export default function Link({
 }: {
   classes?: string;
   link: string;
-  text: string;
+  text: string | React.JSX.Element;
 }) {
   return (
     <a

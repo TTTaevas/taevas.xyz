@@ -4,6 +4,7 @@ import { api } from "./shared/api.js";
 
 const handler: Handler = async () => {
   const kitsuclub = await api<{
+    id: string
     user: {
       name: string
       username: string
@@ -11,7 +12,14 @@ const handler: Handler = async () => {
       emojis: Record<string, string>
     }
     text: string
+    renoteCount: number
+    repliesCount: number
+    reactionCount: number
     createdAt: string
+    files: {
+      thumbnailUrl: string
+      comment: string
+    }[]
   }[]>("https://kitsunes.club/api/users/notes", process.env.API_KITSUCLUB, true, JSON.stringify({
     "userId": "a2hgd7delf",
     "limit": 1,
@@ -34,12 +42,16 @@ const handler: Handler = async () => {
   }
 
   const activity: KitsuclubInfo = {
-    id: details.user.username,
+    note_id: details.id,
+    user_id: details.user.username,
     username: details.user.name,
     avatar: details.user.avatarUrl,
     emojis: details.user.emojis,
     text: details.text,
-    date: details.createdAt
+    date: details.createdAt,
+    images: details.files.map((f) => {
+      return {url: f.thumbnailUrl, alt: f.comment};
+    })
   };
 
   return {

@@ -1,14 +1,20 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.js";
 import DataHandler from "#Infos/DataHandler.js";
+import Link from "#parts/Link.js";
 
 export type KitsuclubInfo = {
-  id: string
+  note_id: string
+  user_id: string
   username: string
   avatar: string
   emojis: Record<string, string>
   text: string
   date: string
+  images: {
+    url: string
+    alt: string
+  }[]
 } | undefined;
 
 export default function KitsuClub() {
@@ -19,14 +25,22 @@ export default function KitsuClub() {
     if (data) {
       try {
         const date = new Date(data.date).toISOString();
+        const images: React.JSX.Element[] = data.images.map((i, index) => <img className="mt-2" key={`img-${index}`} src={i.url} alt={i.alt}/>);
         setElements([
           <div key={"kitsuclub-details"} className="text-left mb-2">
             <img key={"kitsuclub-avatar"} src={data.avatar} alt="avatar" className="float-left rounded-lg w-12 mr-2"/>
             <strong key={"kitsuclub-username"} className="inline-flex">{...emojify(data.username, data.emojis)}</strong>
             <br/>
-            <strong key={"kitsuclub-date"} className="inline-flex text-sm">{date.substring(0, date.indexOf("T"))}</strong>
+            <time key={"kitsuclub-date"} className="inline-flex text-sm" dateTime={date}>
+              {date.substring(0, date.indexOf("T")).concat(" " + date.substring(date.indexOf("T") + 1, date.indexOf(".")) + " UTC")}
+            </time>
           </div>,
-          <p key={"kitsuclub-text"} className="text-left">{...emojify(data.text, data.emojis)}</p>, // emojis that are only in the post aren't in the response yet :(
+          // emojis that are only in the post aren't in the response yet :(
+          <Link classes="mt-1 px-2 py-2 inline-block font-bold leading-[18px] bg-white text-blue-800 text-left text-sm"
+            key={"link"} link={`https://kitsunes.club/notes/${data.note_id}`} text={<>{
+              ...emojify(data.text, data.emojis).concat(images)
+            }</>}
+          />
         ]);
       } catch {
         setError(true);
@@ -37,7 +51,7 @@ export default function KitsuClub() {
   return (
     <Website
       name="KitsuClub"
-      link={`https://kitsunes.club/@${data?.id ?? "taevas"}`}
+      link={`https://kitsunes.club/@${data?.user_id ?? "taevas"}`}
       elements={elements}
       error={error}
     />
