@@ -8,7 +8,7 @@ export default function Website() {
   const [error, setError] = useState(false);
 
   const getToken = async () => {
-    await fetch("/.netlify/functions/umami_token").then((r) => {
+    await fetch("/.netlify/functions/token?service=umami").then((r) => {
       if (r.ok) {
         setToken(true);
       } else {

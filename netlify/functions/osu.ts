@@ -2,7 +2,7 @@ import {type Handler} from "@netlify/functions";
 import * as osu from "osu-api-v2-js";
 import {type OsuInfo} from "#Infos/RhythmGames/Osu.js";
 import {MongoClient} from "mongodb";
-import {type Token} from "./osu_token.js";
+import {type Token} from "./token.js";
 
 const handler: Handler = async (req) => {
   const client = new MongoClient(process.env.URL_MONGODB!);

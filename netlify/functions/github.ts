@@ -6,8 +6,8 @@ const handler: Handler = async () => {
   const octokit = new Octokit({auth: process.env.API_GITHUB});
   const github = await octokit.rest.activity.listEventsForAuthenticatedUser({username: "TTTaevas"});
 
-  const publicPush = github.data.find((e) => e.type === "PushEvent" && e.public);
-  const privatePush = github.data.find((e) => e.type === "PushEvent" && !e.public);
+  const publicPush = github.data.find((e) => (e.type === "PushEvent" || e.type === "PullRequestEvent") && e.public);
+  const privatePush = github.data.find((e) => (e.type === "PushEvent" || e.type === "PullRequestEvent") && !e.public);
   
   const info: GithubInfo = {
     public: publicPush ? {

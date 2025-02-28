@@ -10,7 +10,7 @@ export default function RhythmGames() {
   const [error, setError] = useState(false);
 
   const getToken = async () => {
-    await fetch("/.netlify/functions/osu_token").then((r) => {
+    await fetch("/.netlify/functions/token?service=osu").then((r) => {
       if (r.ok) {
         setToken(true); 
       } else {
