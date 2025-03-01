@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 /** Takes care of getting data regularly */
-export default function DataHandler<T extends unknown | undefined>(url: string, updateEveryXSeconds: number) {
+export default function DataHandler<T extends unknown | undefined>(url: string, updateEveryXSeconds: number, expectData = true) {
   const [data, setData]: [T | undefined, React.Dispatch<React.SetStateAction<T | undefined>>] = useState();
   const [error, setError] = useState(false);
   const [count, setCount] = useState(0);
@@ -9,7 +9,9 @@ export default function DataHandler<T extends unknown | undefined>(url: string, 
   // Try to get and set data
   const updateData = async () => {
     try {
-      setData(await fetch(url).then(async r => r.json()));
+      const response = await fetch(url);
+      if (!response.ok) {throw "failed";};
+      setData(expectData ? await response.json() : true);
       setError(false);
     } catch {
       setError(true);

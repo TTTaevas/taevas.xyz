@@ -3,37 +3,21 @@ import Info from "../Info.js";
 
 import Osu from "./Osu.js";
 import { Ruleset } from "osu-api-v2-js";
+import DataHandler from "#Infos/DataHandler.js";
 
 export default function RhythmGames() {
-  const [token, setToken] = useState(false);
+  const {data, error} = DataHandler<boolean>("/.netlify/functions/token?service=osu", 60 * 60 * 8, false);
   const [websites, setWebsites] = useState([] as React.JSX.Element[]);
-  const [error, setError] = useState(false);
-
-  const getToken = async () => {
-    await fetch("/.netlify/functions/token?service=osu").then((r) => {
-      if (r.ok) {
-        setToken(true); 
-      } else {
-        setError(true);
-      }
-    });
-  };
 
   useEffect(() => {
-    getToken().catch(() => {
-      setError(true);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (token) {
+    if (data) {
       const osu = <Osu ruleset={Ruleset.osu} key={"osu"}/>;
       const taiko = <Osu ruleset={Ruleset.taiko} key={"taiko"}/>;
       const fruits = <Osu ruleset={Ruleset.fruits} key={"fruits"}/>;
       const mania = <Osu ruleset={Ruleset.mania} key={"mania"}/>;
       setWebsites([osu, taiko, fruits, mania]);
     }
-  }, [token]);
+  }, [data]);
   
   return (
     <Info

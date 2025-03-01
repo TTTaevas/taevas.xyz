@@ -1,40 +1,27 @@
 import React, {useEffect, useState} from "react";
 import Info from "../Info.js";
 import Umami from "./Umami.js";
+import DataHandler from "#Infos/DataHandler.js";
 
 export default function Website() {
-  const [token, setToken] = useState(false);
+  const {data} = DataHandler<boolean>("/.netlify/functions/token?service=umami", 60 * 60 * 8, false);
   const [websites, setWebsites] = useState([] as React.JSX.Element[]);
-  const [error, setError] = useState(false);
 
-  const getToken = async () => {
-    await fetch("/.netlify/functions/token?service=umami").then((r) => {
-      if (r.ok) {
-        setToken(true);
-      } else {
-        setError(true);
-      }
-    });
-  };
+  //   useEffect(() => {
+  //     setWebsites([<aWebsite key={"awebsite"}/>]);
+  //   }, []);
 
   useEffect(() => {
-    getToken().catch(() => {
-      setError(true);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (token) {
+    if (data) {
       const umami = <Umami key={"umami"}/>;
-      setWebsites([umami]);
+      setWebsites(websites.concat([umami]));
     }
-  }, [token]);
+  }, [data]);
 
   return (
     <Info
       type="Website"
       websites={websites}
-      error={error}
     />
   );
 }
