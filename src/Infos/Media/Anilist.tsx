@@ -18,7 +18,7 @@ export type AnilistInfo = {
 } | undefined;
 
 export default function Anilist() {
-  const {data, error, setError} = DataHandler<AnilistInfo>("/.netlify/functions/anilist", 60 * 30);
+  const {data, error, setError} = DataHandler<AnilistInfo>("media_anilist", 60 * 30);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

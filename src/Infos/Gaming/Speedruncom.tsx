@@ -16,7 +16,7 @@ export type SpeedruncomInfo = {
 } | undefined;
 
 export default function Speedruncom() {
-  const {data, error, setError} = DataHandler<SpeedruncomInfo>("/.netlify/functions/speedruncom", 60 * 60);
+  const {data, error, setError} = DataHandler<SpeedruncomInfo>("gaming_speedruncom", 60 * 60);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

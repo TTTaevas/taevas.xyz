@@ -15,7 +15,7 @@ export type LastfmInfo = {
 } | undefined;
 
 export default function Lastfm() {
-  const {data, error, setError} = DataHandler<LastfmInfo>("/.netlify/functions/lastfm", 60 * 2);
+  const {data, error, setError} = DataHandler<LastfmInfo>("media_lastfm", 60 * 2);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

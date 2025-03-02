@@ -10,7 +10,7 @@ export type UmamiInfo = {
 } | undefined;
 
 export default function Umami() {
-  const {data, error, setError} = DataHandler<UmamiInfo>("/.netlify/functions/umami", 60 * 5);
+  const {data, error, setError} = DataHandler<UmamiInfo>("website_umami", 60 * 5);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

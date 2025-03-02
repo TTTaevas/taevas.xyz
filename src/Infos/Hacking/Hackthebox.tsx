@@ -14,7 +14,7 @@ export type HacktheboxInfo = {
 } | undefined;
 
 export default function Hackthebox() {
-  const {data, error, setError} = DataHandler<HacktheboxInfo>("/.netlify/functions/hackthebox", 60 * 60);
+  const {data, error, setError} = DataHandler<HacktheboxInfo>("hacking_hackthebox", 60 * 60);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

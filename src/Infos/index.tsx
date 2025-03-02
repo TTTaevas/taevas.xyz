@@ -1,10 +1,8 @@
 import React, {Component} from "react";
-import Music from "./Music/index.js";
-import Speedrun from "./Speedrun/index.js";
+import Media from "./Media/index.js";
 // import Hacking from "./Hacking/index.js";
 import Coding from "./Coding/index.js";
-import RhythmGames from "./RhythmGames/index.js";
-import Anime from "./Anime/index.js";
+import Gaming from "./Gaming/index.js";
 // import Japanese from "./Japanese/index.js";
 import Fediverse from "./Fediverse/index.js";
 import Website from "./Website/index.js";
@@ -18,13 +16,11 @@ export default class Infos extends Component {
     bg-gradient-to-r from-sky-600 to-indigo-600">
       <div draggable="false" ref={this.dragbar} className="z-[100] h-full w-[25px] fixed right-[7px] lg:right-[340px] cursor-ew-resize select-none hover:bg-gradient-to-r from-white/80 to-white/1 active:to-white/20"></div>
       <div className="z-[90] p-2.5 flex flex-wrap text-white">
-        <Music/>
+        <Media/>
         <Fediverse/>
         <Coding/>
-        <Speedrun/>
-        <Anime/>
         {/*<Japanese/>*/}
-        <RhythmGames/>
+        <Gaming/>
         {/*<Hacking/>*/}
         <Website/>
       </div>

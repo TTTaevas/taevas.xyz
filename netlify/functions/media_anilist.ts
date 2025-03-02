@@ -1,5 +1,5 @@
 import {type Handler} from "@netlify/functions";
-import {type AnilistInfo} from "#Infos/Anime/Anilist.js";
+import {type AnilistInfo} from "#Infos/Media/Anilist.js";
 
 const handler: Handler = async () => {
   const anilist = await fetch("https://graphql.anilist.co", {
@@ -52,9 +52,9 @@ const handler: Handler = async () => {
       total: json.media.episodes,
     },
     score: json.score,
-    startDate: json.startedAt.year ? new Date(`${json.startedAt.year}-${json.startedAt.month}-${json.startedAt.day}`).toISOString() : new Date().toISOString(),
+    startDate: json.startedAt.year ? new Date(`${json.startedAt.year}-${json.startedAt.month}-${json.startedAt.day}Z`).toISOString() : new Date().toISOString(),
     updateDate: new Date(json.updatedAt * 1000).toISOString(),
-    endDate: json.completedAt.year ? new Date(`${json.completedAt.year}-${json.completedAt.month}-${json.completedAt.day}`).toISOString() : new Date().toISOString(),
+    endDate: json.completedAt.year ? new Date(`${json.completedAt.year}-${json.completedAt.month}-${json.completedAt.day}Z`).toISOString() : new Date().toISOString(),
     cover: json.media.coverImage.medium,
     url: json.media.siteUrl,
   };

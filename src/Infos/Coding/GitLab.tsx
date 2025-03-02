@@ -7,7 +7,7 @@ export type GitlabInfo = {
 } | undefined;
 
 export default function GitLab() {
-  const {data, error, setError} = DataHandler<GitlabInfo>("/.netlify/functions/gitlab", 60 * 20);
+  const {data, error, setError} = DataHandler<GitlabInfo>("coding_gitlab", 60 * 20);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

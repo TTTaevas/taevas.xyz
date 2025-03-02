@@ -12,7 +12,7 @@ export type OsuInfo = {
 } | undefined;
 
 export default function Osu(args: {ruleset: Ruleset}) {
-  const {data, error, setError} = DataHandler<OsuInfo>(`/.netlify/functions/osu?ruleset=${args.ruleset}`, 60 * 45);
+  const {data, error, setError} = DataHandler<OsuInfo>(`gaming_osu?ruleset=${args.ruleset}`, 60 * 45);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   const ruleset = Ruleset[args.ruleset];

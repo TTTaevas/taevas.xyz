@@ -14,7 +14,7 @@ export interface GithubInfo {
 }
 
 export default function GitHub() {
-  const {data, error, setError} = DataHandler<GithubInfo>("/.netlify/functions/github", 60 * 20);
+  const {data, error, setError} = DataHandler<GithubInfo>("coding_github", 60 * 20);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

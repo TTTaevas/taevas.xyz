@@ -10,7 +10,7 @@ export type KitsudevInfo = {
 } | undefined;
 
 export default function KitsuDev() {
-  const {data, error, setError} = DataHandler<KitsudevInfo>("/.netlify/functions/kitsudev", 60 * 20);
+  const {data, error, setError} = DataHandler<KitsudevInfo>("coding_kitsudev", 60 * 20);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

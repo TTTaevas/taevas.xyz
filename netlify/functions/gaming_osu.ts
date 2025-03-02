@@ -1,6 +1,6 @@
 import {type Handler} from "@netlify/functions";
 import * as osu from "osu-api-v2-js";
-import {type OsuInfo} from "#Infos/RhythmGames/Osu.js";
+import {type OsuInfo} from "#Infos/Gaming/Osu.js";
 import {MongoClient} from "mongodb";
 import {type Token} from "./token.js";
 
