@@ -4,7 +4,7 @@ import Umami from "./Umami.js";
 import DataHandler from "#Infos/DataHandler.js";
 
 export default function Website() {
-  const {data} = DataHandler<boolean>("/.netlify/functions/token?service=umami", 60 * 60 * 8, false);
+  const {data} = DataHandler<boolean>("token?service=umami", 60 * 60 * 8, false);
   const [websites, setWebsites] = useState([] as React.JSX.Element[]);
 
   //   useEffect(() => {

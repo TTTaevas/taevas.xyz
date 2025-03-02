@@ -7,7 +7,7 @@ import { Ruleset } from "osu-api-v2-js";
 import DataHandler from "#Infos/DataHandler.js";
 
 export default function RhythmGames() {
-  const {data, error} = DataHandler<boolean>("/.netlify/functions/token?service=osu", 60 * 60 * 8, false);
+  const {data, error} = DataHandler<boolean>("token?service=osu", 60 * 60 * 8, false);
   const [websites, setWebsites] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {
