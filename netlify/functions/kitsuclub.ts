@@ -1,11 +1,27 @@
-/* eslint no-async-promise-executor: 0 */ // Doing promises is needed in order to make multiple requests at once, lowering wait time
-
 import {type Handler} from "@netlify/functions";
 import { KitsuclubInfo } from "#Infos/Fediverse/KitsuClub.js";
-import { api } from "./shared/api.js";
 
 const handler: Handler = async () => {
-  const kitsuclub = await api<{
+  const kitsuclub = await (await fetch("https://kitsunes.club/api/users/notes", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${process.env.API_KITSUCLUB}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      "userId": "a2hgd7delf",
+      "limit": 1,
+      "withReplies": false,
+      "withRepliesToSelf": false,
+      "withQuotes": true,
+      "withRenotes": false,
+      "withBots": true,
+      "withNonPublic": true,
+      "withChannelNotes": false,
+      "withFiles": false,
+      "allowPartial": false,
+    })
+  })).json() as {
     id: string
     user: {
       name: string
@@ -22,19 +38,7 @@ const handler: Handler = async () => {
       thumbnailUrl: string
       comment: string
     }[]
-  }[]>("https://kitsunes.club/api/users/notes", process.env.API_KITSUCLUB, true, JSON.stringify({
-    "userId": "a2hgd7delf",
-    "limit": 1,
-    "withReplies": false,
-    "withRepliesToSelf": false,
-    "withQuotes": true,
-    "withRenotes": false,
-    "withBots": true,
-    "withNonPublic": true,
-    "withChannelNotes": false,
-    "withFiles": false,
-    "allowPartial": false,
-  }));
+  }[];
 
   const details = kitsuclub.at(Math.max(0, kitsuclub.length - 1));
   if (!details) {

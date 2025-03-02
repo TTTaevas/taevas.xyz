@@ -1,5 +1,3 @@
-/* eslint no-async-promise-executor: 0 */ // Doing promises is needed in order to make multiple requests at once, lowering wait time
-
 import {type Handler} from "@netlify/functions";
 import {InsertOneResult, MongoClient} from "mongodb";
 

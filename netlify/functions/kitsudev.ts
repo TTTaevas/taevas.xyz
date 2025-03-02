@@ -1,15 +1,14 @@
 import {type Handler} from "@netlify/functions";
-import {api} from "./shared/api.js";
 import { type KitsudevInfo } from "#Infos/Coding/KitsuDev.js";
 
 const handler: Handler = async () => {
-  const kitsudev = await api<[{
+  const kitsudev = await (await fetch("https://kitsunes.dev/api/v1/users/Taevas/activities/feeds?limit=1")).json() as [{
     repo: {
       full_name: string
       html_url: string
     }
     created: string
-  }]>("https://kitsunes.dev/api/v1/users/Taevas/activities/feeds?limit=1");
+  }];
 
   const info: KitsudevInfo = {
     name: kitsudev[0].repo.full_name,

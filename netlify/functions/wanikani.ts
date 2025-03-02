@@ -1,5 +1,4 @@
 import {type Handler} from "@netlify/functions";
-import {api} from "./shared/api.js";
 import {type WanikaniInfo} from "#Infos/Japanese/Wanikani.js";
 import { WKLevelProgression, WKResetCollection, WKSummary } from "@bachmacintosh/wanikani-api-types";
 
@@ -50,18 +49,20 @@ function addStuffToLearn(ids: number[], data: {available_at: string; subject_ids
 }
 
 const handler: Handler = async () => {
-  const data = await Promise.all([
-    new Promise((resolve) => {
-      resolve(api("https://api.wanikani.com/v2/level_progressions", process.env.API_WANIKANI)); 
-    }),
-    new Promise((resolve) => {
-      resolve(api("https://api.wanikani.com/v2/resets", process.env.API_WANIKANI)); 
-    }),
-    new Promise((resolve) => {
-      resolve(api("https://api.wanikani.com/v2/summary", process.env.API_WANIKANI)); 
-    }),
-  ]);
+  const urlsToRequest = [
+    "https://api.wanikani.com/v2/level_progressions",
+    "https://api.wanikani.com/v2/resets",
+    "https://api.wanikani.com/v2/summary",
+  ];
+  const toRequest = urlsToRequest.map((url) => new Promise(async (resolve) => {
+    const response = await fetch(url, {headers: {
+      "Authorization": `Bearer ${process.env.API_WANIKANI}`,
+      "Content-Type": "application/json",
+    }});
+    resolve(await response.json());
+  }));
 
+  const data = await Promise.all(toRequest);
   const progression = data[0] as {
     total_count: number;
     data: WKLevelProgression[];
@@ -90,7 +91,10 @@ const handler: Handler = async () => {
   const moreThingsToReviewAt = nextReviews.at(0)?.available_at ?? summary.data.next_reviews_at;
 
   const subjectIdsAll = subjectIdsLessons.concat(subjectIdsReviews);
-  const subjects = await api<{data: Subject[]}>(`https://api.wanikani.com/v2/subjects?ids=${subjectIdsAll.toString()}`, process.env.API_WANIKANI);
+  const subjects = await (await fetch(`https://api.wanikani.com/v2/subjects?ids=${subjectIdsAll.toString()}`, {headers: {
+    "Authorization": `Bearer ${process.env.API_WANIKANI}`,
+    "Content-Type": "application/json",
+  }})).json() as {data: Subject[]};
 
   const lessons = addStuffToLearn(subjectIdsLessons, summary.data.lessons, subjects.data);
   const reviews = addStuffToLearn(subjectIdsReviews, summary.data.reviews, subjects.data);

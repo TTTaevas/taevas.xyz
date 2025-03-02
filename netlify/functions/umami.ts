@@ -1,7 +1,7 @@
 import { UmamiInfo } from "#Infos/Website/Umami.js";
 import {type Handler} from "@netlify/functions";
 import { MongoClient } from "mongodb";
-import { Token } from "./umami_token.js";
+import { Token } from "./token.js";
 
 const handler: Handler = async () => {
   const client = new MongoClient(process.env.URL_MONGODB!);

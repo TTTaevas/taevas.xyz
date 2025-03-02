@@ -32,6 +32,7 @@ export default tseslint.config(
       "@stylistic/indent": ["error", 2],
       "@stylistic/semi": ["error", "always"],
       "react/no-unescaped-entities": "off",
+      "no-async-promise-executor": "off",
     }
   },
   {

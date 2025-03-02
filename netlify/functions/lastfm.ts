@@ -1,9 +1,8 @@
 import {type Handler} from "@netlify/functions";
-import {api} from "./shared/api.js";
 import {type LastfmInfo} from "#Infos/Music/Lastfm.js";
 
 const handler: Handler = async () => {
-  const lastfm = await api<{
+  const lastfm = await (await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=TTTaevas&api_key=${process.env.API_LASTFM}&format=json&limit=1`)).json() as {
     recenttracks: {
       track: {
         artist: {
@@ -27,7 +26,8 @@ const handler: Handler = async () => {
         };
       }[];
     };
-  }>(`http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=TTTaevas&api_key=${process.env.API_LASTFM}&format=json&limit=1`);
+  };
+
   const image = lastfm.recenttracks.track[0].image.find((i) => i.size == "large");
   const track: LastfmInfo = {
     artist: lastfm.recenttracks.track[0].artist["#text"],

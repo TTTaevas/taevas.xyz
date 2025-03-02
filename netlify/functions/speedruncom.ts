@@ -1,5 +1,4 @@
 import {type Handler} from "@netlify/functions";
-import {api} from "./shared/api.js";
 import {type SpeedruncomInfo} from "#Infos/Speedrun/Speedruncom.js";
 
 interface Runs {
@@ -44,7 +43,7 @@ interface Level {
 
 const handler: Handler = async () => {
   // using the API's embedding would be stupid here, as that'd create lag due to irrelevant runs
-  const speedruncom = await api<Runs>("https://www.speedrun.com/api/v1/users/j03v45mj/personal-bests");
+  const speedruncom = await (await fetch("https://www.speedrun.com/api/v1/users/j03v45mj/personal-bests")).json() as Runs;
   const data = speedruncom.data.at(0);
 
   if (!data) {
@@ -53,25 +52,14 @@ const handler: Handler = async () => {
     };
   }
 
-  const detailsToRequest = [new Promise((resolve) => {
-    resolve(api<Game>(`https://www.speedrun.com/api/v1/games/${data.run.game}`));
-  })];
+  const urlsToRequest = [`https://www.speedrun.com/api/v1/games/${data.run.game}`];
+  if (data.run.level) {urlsToRequest.push(`https://www.speedrun.com/api/v1/levels/${data.run.level}`);}
+  if (data.run.category) {urlsToRequest.push(`https://www.speedrun.com/api/v1/categories/${data.run.category}`);}
 
-  if (data.run.level) {
-    detailsToRequest.push(new Promise((resolve) => {
-      resolve(api<Level>(`https://www.speedrun.com/api/v1/levels/${data.run.level}`));
-    }));
-  }
-
-  if (data.run.category) {
-    detailsToRequest.push(new Promise((resolve) => {
-      resolve(api<Level>(`https://www.speedrun.com/api/v1/categories/${data.run.category}`));
-    }));
-  }
-
-  const requests = await Promise.all(detailsToRequest);
-  const game = requests[0] as Game;
-  const details = requests.slice(1) as Level[];
+  const toRequest = urlsToRequest.map((url) => new Promise(async (resolve) => resolve(await (await fetch(url)).json())));
+  const responses = await Promise.all(toRequest) as [Game, Level?, Level?];
+  const game = responses[0];
+  const details = [responses[1]].concat(responses[2]).filter((d) => d !== undefined);
 
   const run: SpeedruncomInfo = {
     place: data.place,
