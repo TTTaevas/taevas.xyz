@@ -1,44 +1,43 @@
+import { sql } from "bun";
 import {type Handler} from "@netlify/functions";
-import {InsertOneResult, MongoClient} from "mongodb";
 
 import {API} from "osu-api-v2-js";
 
 export interface Token {
   access_token: string;
-  expires: Date;
+  expires: number;
+  service: string;
 }
+
+const allowed_services = ["osu", "umami"];
 
 const handler: Handler = async (req) => {
   const service = req.queryStringParameters?.service;
-  if (!service) {return {statusCode: 400};}
+  if (!service || !allowed_services.includes(service)) {return {statusCode: 400};}
 
-  const client = new MongoClient(process.env.URL_MONGODB!);
-  await client.connect();
+  const tokens: Token[] = await sql`
+    SELECT * FROM tokens
+    WHERE service = ${service}
+  `;
 
-  const db = client.db("tokens");
-  const collection = db.collection<Token>(service);
-  const tokens = await collection.find().toArray();
-
-  const now = new Date();
+  const now = Number(new Date());
   const token = tokens.find((t) => t.expires > now);
   const expiredTokens = tokens.filter((t) => now > t.expires);
 
   const promises: Promise<void>[] = [];
 
   if (!token) {
-    const collections = await db.listCollections().toArray();
-    if (!collections.find((c) => c.name === service)) {client.close(); return {statusCode: 400};}
-
     promises.push(new Promise(async (resolve, reject) => {
       console.log(`Setting a new token for ${service}...`);
-      let insertion: InsertOneResult;
+      let new_token: Token | undefined;
 
       if (service === "osu") {
         const api = await API.createAsync(11451, process.env.API_OSU!);
-        insertion = await collection.insertOne({
-          access_token: api.access_token,
-          expires: api.expires,
-        });
+        new_token = await sql`
+          INSERT INTO tokens (access_token, expires, service)
+          VALUES (${api.access_token}, ${Number(api.expires)}, ${service})
+          RETURNING *
+        `;
       }
 
       else if (service === "umami") {
@@ -54,10 +53,11 @@ const handler: Handler = async (req) => {
         // Assume it expires in one day
         const date = new Date();
         date.setHours(date.getHours() + 24);
-        insertion = await collection.insertOne({
-          access_token: json.token,
-          expires: date,
-        });
+        new_token = await sql`
+          INSERT INTO tokens (access_token, expires, service)
+          VALUES (${json.token}, ${Number(date)}, ${service})
+          RETURNING *
+        `;
       }
 
       else {
@@ -65,7 +65,7 @@ const handler: Handler = async (req) => {
         return reject();
       }
 
-      console.log(`New ${service} token in the database: ${insertion.insertedId.toString()}`);
+      if (new_token) {console.log(`New ${service} token in the database, it'll expire on:`, new Date(new_token.expires));}
       resolve();
     }));
   }
@@ -75,11 +75,11 @@ const handler: Handler = async (req) => {
       console.log(`Deleting old tokens for ${service}...`);
       await Promise.all(expiredTokens.map(async (t) => {
         return new Promise<void>(async (resolve) => {
-          const deletion = await collection.deleteOne({_id: t._id});
-          if (deletion.deletedCount) {
-            console.log(`Old ${service} token deleted from the database: ${t._id.toString()}`);
-          }
-
+          await sql`
+            DELETE FROM tokens
+            WHERE access_token = ${t.access_token}
+          `;
+          console.log(`Old ${service} token that expired on:`, new Date(t.expires), "has been deleted");
           resolve();
         });
       }));
@@ -88,7 +88,6 @@ const handler: Handler = async (req) => {
   }
 
   await Promise.all(promises);
-  void client.close();
 
   return {
     statusCode: 200,

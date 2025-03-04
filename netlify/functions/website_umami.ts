@@ -1,16 +1,15 @@
-import { UmamiInfo } from "#Infos/Website/Umami.js";
+import { sql } from "bun";
 import {type Handler} from "@netlify/functions";
-import { MongoClient } from "mongodb";
-import { Token } from "./token.js";
+import {type UmamiInfo} from "#Infos/Website/Umami.js";
+import {type Token} from "./token.js";
 
 const handler: Handler = async () => {
-  const client = new MongoClient(process.env.URL_MONGODB!);
-  await client.connect();
-
-  const db = client.db("tokens");
-  const collection = db.collection<Token>("umami");
-  const token = await collection.findOne();
-  void client.close();
+  const tokens: Token[] = await sql`
+    SELECT * FROM tokens
+    WHERE service = umami
+    LIMIT ${1}
+  `;
+  const token = tokens.at(0);
 
   const api_server = "https://visitors.taevas.xyz/api";
   const website_id = "f196d626-e609-4841-9a80-0dc60f523ed5";

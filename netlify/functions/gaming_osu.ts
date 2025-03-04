@@ -1,17 +1,16 @@
+import { sql } from "bun";
 import {type Handler} from "@netlify/functions";
-import * as osu from "osu-api-v2-js";
 import {type OsuInfo} from "#Infos/Gaming/Osu.js";
-import {MongoClient} from "mongodb";
 import {type Token} from "./token.js";
+import * as osu from "osu-api-v2-js";
 
 const handler: Handler = async (req) => {
-  const client = new MongoClient(process.env.URL_MONGODB!);
-  await client.connect();
-
-  const db = client.db("tokens");
-  const collection = db.collection<Token>("osu");
-  const token = await collection.findOne();
-  void client.close();
+  const tokens: Token[] = await sql`
+    SELECT * FROM tokens
+    WHERE service = osu
+    LIMIT ${1}
+  `;
+  const token = tokens.at(0);
 
   const ruleset = Number(req.queryStringParameters?.ruleset);
   const api = new osu.API({access_token: token?.access_token});

@@ -30,4 +30,3 @@ This package makes use of several online APIs through Netlify in order to delive
 - `API_WANIKANI`
 - `USERNAME_UMAMI`
 - `PASSWORD_UMAMI`
-- `URL_MONGODB`
