@@ -1,9 +1,9 @@
 import React from "react";
-import Tab from "../Tab.js";
-import Translatable from "#parts/Translatable.js";
+import Tab from "../Tab.tsx";
+import Translatable from "#parts/Translatable.tsx";
 import {UserProfile} from "@carbon/icons-react";
 import {type TabDetails} from "#contexts";
-import Link from "#parts/Link.js";
+import Link from "#parts/Link.tsx";
 
 export default function About({
   setTabs,

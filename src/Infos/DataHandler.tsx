@@ -9,7 +9,7 @@ export default function DataHandler<T extends unknown | undefined>(netlifyFuncti
   // Try to get and set data
   const updateData = async () => {
     try {
-      const response = await fetch("/.netlify/functions/" + netlifyFunctionName);
+      const response = await fetch("/api/" + netlifyFunctionName);
       if (!response.ok) {throw "failed";};
       setData(expectData ? await response.json() : true);
       setError(false);

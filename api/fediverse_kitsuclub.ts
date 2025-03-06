@@ -1,11 +1,11 @@
-import {type Handler} from "@netlify/functions";
-import { KitsuclubInfo } from "#Infos/Fediverse/KitsuClub.js";
+import { type KitsuclubInfo } from "#Infos/Fediverse/KitsuClub.tsx";
+import type { Handler } from "..";
 
-const handler: Handler = async () => {
+export const fediverse_kitsuclub: Handler = async () => {
   const kitsuclub = await (await fetch("https://kitsunes.club/api/users/notes", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${process.env.API_KITSUCLUB}`,
+      "Authorization": `Bearer ${process.env["API_KITSUCLUB"]}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -42,9 +42,7 @@ const handler: Handler = async () => {
 
   const details = kitsuclub.at(Math.max(0, kitsuclub.length - 1));
   if (!details) {
-    return {
-      statusCode: 404,
-    };
+    return new Response("Not Found", {status: 404});
   }
 
   let scan_text = details.text;
@@ -89,10 +87,7 @@ const handler: Handler = async () => {
     })
   };
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(activity),
-  };
+  return new Response(new Blob([JSON.stringify(activity)], {
+    type: "application/json",
+  }), {status: 200});
 };
-
-export {handler};

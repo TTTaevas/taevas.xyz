@@ -1,6 +1,6 @@
 import React from "react";
-import Info from "../Info.js";
-import Wanikani from "./Wanikani.js";
+import Info from "../Info.tsx";
+import Wanikani from "./Wanikani.tsx";
 
 export default function Japanese() {
   const wanikani = <Wanikani key={"wanikani"}/>;

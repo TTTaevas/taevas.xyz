@@ -1,7 +1,7 @@
-import {type Handler} from "@netlify/functions";
-import {type AnilistInfo} from "#Infos/Media/Anilist.js";
+import {type AnilistInfo} from "#Infos/Media/Anilist.tsx";
+import type { Handler } from "..";
 
-const handler: Handler = async () => {
+export const media_anilist: Handler = async () => {
   const anilist = await fetch("https://graphql.anilist.co", {
     method: "POST",
     headers: {
@@ -63,10 +63,7 @@ const handler: Handler = async () => {
   anime.updateDate = anime.updateDate.substring(0, anime.updateDate.indexOf("T"));
   anime.endDate = anime.endDate.substring(0, anime.endDate.indexOf("T"));
   
-  return {
-    statusCode: 200,
-    body: JSON.stringify(anime),
-  };
+  return new Response(new Blob([JSON.stringify(anime)], {
+    type: "application/json",
+  }), {status: 200});
 };
-
-export {handler};

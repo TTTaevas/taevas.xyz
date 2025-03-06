@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import AnimateHeight from "react-animate-height";
-import type Translatable from "#parts/Translatable.js";
+import type Translatable from "#parts/Translatable.tsx";
 import {type TabDetails, TabContext} from "#contexts";
 
 export default class Tab extends Component<{

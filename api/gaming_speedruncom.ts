@@ -1,5 +1,5 @@
-import {type Handler} from "@netlify/functions";
-import {type SpeedruncomInfo} from "#Infos/Gaming/Speedruncom.js";
+import {type SpeedruncomInfo} from "#Infos/Gaming/Speedruncom.tsx";
+import type { Handler } from "..";
 
 interface Runs {
   data: {
@@ -41,15 +41,13 @@ interface Level {
   };
 }
 
-const handler: Handler = async () => {
+export const gaming_speedruncom: Handler = async () => {
   // using the API's embedding would be stupid here, as that'd create lag due to irrelevant runs
   const speedruncom = await (await fetch("https://www.speedrun.com/api/v1/users/j03v45mj/personal-bests")).json() as Runs;
   const data = speedruncom.data.at(0);
 
   if (!data) {
-    return {
-      statusCode: 404,
-    };
+    return new Response("Not Found", {status: 404});
   }
 
   const urlsToRequest = [`https://www.speedrun.com/api/v1/games/${data.run.game}`];
@@ -76,10 +74,9 @@ const handler: Handler = async () => {
     run.time = run.time.substring(1);
   }
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(run),
-  };
+  return new Response(new Blob([JSON.stringify(run)], {
+    type: "application/json",
+  }), {status: 200});
 };
 
 // https://gist.github.com/vankasteelj/74ab7793133f4b257ea3
@@ -92,5 +89,3 @@ function sec2time(timeInSeconds: number) {
   const milliseconds = Number(time.toString().slice(-3));
   return pad(hours, 2) + ":" + pad(minutes, 2) + ":" + pad(seconds, 2) + "." + pad(milliseconds, 3);
 };
-
-export {handler};

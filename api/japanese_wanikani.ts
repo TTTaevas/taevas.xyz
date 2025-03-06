@@ -1,6 +1,6 @@
-import {type Handler} from "@netlify/functions";
-import {type WanikaniInfo} from "#Infos/Japanese/Wanikani.js";
-import { WKLevelProgression, WKResetCollection, WKSummary } from "@bachmacintosh/wanikani-api-types";
+import {type WanikaniInfo} from "#Infos/Japanese/Wanikani.tsx";
+import type { WKLevelProgression, WKResetCollection, WKSummary } from "@bachmacintosh/wanikani-api-types";
+import type { Handler } from "..";
 
 interface Subject {
   id: number;
@@ -48,7 +48,7 @@ function addStuffToLearn(ids: number[], data: {available_at: string; subject_ids
   return arr;
 }
 
-const handler: Handler = async () => {
+export const japanese_wanikani: Handler = async () => {
   const urlsToRequest = [
     "https://api.wanikani.com/v2/level_progressions",
     "https://api.wanikani.com/v2/resets",
@@ -56,8 +56,8 @@ const handler: Handler = async () => {
   ];
   const toRequest = urlsToRequest.map((url) => new Promise(async (resolve) => {
     const response = await fetch(url, {headers: {
-      "Authorization": `Bearer ${process.env.API_WANIKANI}`,
-      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env["API_WANIKANI"]}`,
+      "Content-Type": "application.json",
     }});
     resolve(await response.json());
   }));
@@ -92,8 +92,8 @@ const handler: Handler = async () => {
 
   const subjectIdsAll = subjectIdsLessons.concat(subjectIdsReviews);
   const subjects = await (await fetch(`https://api.wanikani.com/v2/subjects?ids=${subjectIdsAll.toString()}`, {headers: {
-    "Authorization": `Bearer ${process.env.API_WANIKANI}`,
-    "Content-Type": "application/json",
+    "Authorization": `Bearer ${process.env["API_WANIKANI"]}`,
+    "Content-Type": "application.json",
   }})).json() as {data: Subject[]};
 
   const lessons = addStuffToLearn(subjectIdsLessons, summary.data.lessons, subjects.data);
@@ -107,10 +107,7 @@ const handler: Handler = async () => {
     moreThingsToReviewAt,
   };
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(info),
-  };
+  return new Response(new Blob([JSON.stringify(info)], {
+    type: "application/json",
+  }), {status: 200});
 };
-
-export {handler};

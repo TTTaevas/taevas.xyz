@@ -1,6 +1,6 @@
 import React from "react";
-import TabButton from "./TabButton.js";
-import Translatable from "#parts/Translatable.js";
+import TabButton from "./TabButton.tsx";
+import Translatable from "#parts/Translatable.tsx";
 import {type TabDetails, LanguageContext, TabContext} from "#contexts";
 
 export default function TabButtons({

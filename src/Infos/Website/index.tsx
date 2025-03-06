@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import Info from "../Info.js";
-import Umami from "./Umami.js";
-import DataHandler from "#Infos/DataHandler.js";
+import Info from "../Info.tsx";
+import Umami from "./Umami.tsx";
+import DataHandler from "#Infos/DataHandler.tsx";
 
 export default function Website() {
   const {data} = DataHandler<boolean>("token?service=umami", 60 * 60 * 8, false);

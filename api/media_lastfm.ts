@@ -1,8 +1,8 @@
-import {type Handler} from "@netlify/functions";
-import {type LastfmInfo} from "#Infos/Media/Lastfm.js";
+import {type LastfmInfo} from "#Infos/Media/Lastfm.tsx";
+import type { Handler } from "..";
 
-const handler: Handler = async () => {
-  const lastfm = await (await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=TTTaevas&api_key=${process.env.API_LASTFM}&format=json&limit=1`)).json() as {
+export const media_lastfm: Handler = async () => {
+  const lastfm = await (await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=TTTaevas&api_key=${process.env["API_LASTFM"]}&format=json&limit=1`)).json() as {
     recenttracks: {
       track: {
         artist: {
@@ -39,10 +39,7 @@ const handler: Handler = async () => {
     date: lastfm.recenttracks.track[0].date?.uts ?? String(Date.now()),
   };
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(track),
-  };
+  return new Response(new Blob([JSON.stringify(track)], {
+    type: "application/json",
+  }), {status: 200});
 };
-
-export {handler};

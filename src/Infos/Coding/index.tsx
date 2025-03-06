@@ -1,8 +1,8 @@
 import React from "react";
-import Info from "../Info.js";
-import GitHub from "./GitHub.js";
-import GitLab from "./GitLab.js";
-import KitsuDev from "./KitsuDev.js";
+import Info from "../Info.tsx";
+import GitHub from "./GitHub.tsx";
+import GitLab from "./GitLab.tsx";
+import KitsuDev from "./KitsuDev.tsx";
 
 export default function Coding() {
   const github = <GitHub key={"github"}/>;

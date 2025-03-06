@@ -1,10 +1,10 @@
 import React from "react";
-import Tab from "../Tab.js";
+import Tab from "../Tab.tsx";
 import {MailAll} from "@carbon/icons-react";
-import CopyField from "#parts/CopyField.js";
-import ButtonLink from "#parts/ButtonLink.js";
-import Translatable from "#parts/Translatable.js";
-import Link from "#parts/Link.js";
+import CopyField from "#parts/CopyField.tsx";
+import ButtonLink from "#parts/ButtonLink.tsx";
+import Translatable from "#parts/Translatable.tsx";
+import Link from "#parts/Link.tsx";
 import {type TabDetails} from "#contexts";
 
 export default function Contact({
@@ -28,7 +28,7 @@ export default function Contact({
         en={<p className="text-center">So, I've decided to go for <Link link="https://matrix.org/" text="the Matrix protocol!"/> Feel free to get in touch with me on this account:</p>}
         fr={<p className="text-center">Alors, j'ai opté pour <Link link="https://matrix.org/" text= "le protocole Matrix !"/> N'hésitez pas à entrer en contact avec moi sur ce compte :</p>}
       />
-      <CopyField text="@taevas:matrix.org" imageUrl="/logos/matrix.svg"/>
+      <CopyField text="@taevas:matrix.org" imageUrl="assets/logos/matrix.svg"/>
       <Translatable
         en={<ButtonLink link="https://matrix.to/#/@taevas:matrix.org" text="(matrix.to link)" />}
         fr={<ButtonLink link="https://matrix.to/#/@taevas:matrix.org" text="(lien matrix.to)" />}

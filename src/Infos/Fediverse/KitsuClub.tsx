@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import Website from "../Website.js";
-import DataHandler from "#Infos/DataHandler.js";
-import Link from "#parts/Link.js";
+import Website from "../Website.tsx";
+import DataHandler from "#Infos/DataHandler.tsx";
+import Link from "#parts/Link.tsx";
 
 export type KitsuclubInfo = {
   note_id: string
