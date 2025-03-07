@@ -15,8 +15,6 @@ export const hacking_hackthebox: Handler = async () => {
   
   pwn.machine_avatar = `https://www.hackthebox.com${pwn.machine_avatar}`;
   pwn.date = pwn.date.substring(0, pwn.date.indexOf("T"));
-  
-  return new Response(new Blob([JSON.stringify(pwn)], {
-    type: "application/json",
-  }), {status: 200});
+
+  return Response.json(pwn, {status: 200});
 };

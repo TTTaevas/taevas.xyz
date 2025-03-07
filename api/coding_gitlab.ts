@@ -14,8 +14,6 @@ export const coding_gitlab: Handler = async () => {
   const activity: GitlabInfo = {
     date: created_at.substring(0, created_at.indexOf("T")),
   };
-  
-  return new Response(new Blob([JSON.stringify(activity)], {
-    type: "application/json",
-  }), {status: 200});
+
+  return Response.json(activity, {status: 200});
 };

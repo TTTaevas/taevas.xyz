@@ -26,7 +26,5 @@ export const gaming_osu: Handler = async (params) => {
     },
   };
 
-  return new Response(new Blob([JSON.stringify(info)], {
-    type: "application/json",
-  }), {status: 200});
+  return Response.json(info, {status: 200});
 };

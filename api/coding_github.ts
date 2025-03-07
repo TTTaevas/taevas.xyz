@@ -19,7 +19,5 @@ export const coding_github: Handler = async () => {
     } : undefined,
   };
   
-  return new Response(new Blob([JSON.stringify(info)], {
-    type: "application/json",
-  }), {status: 200});
+  return Response.json(info, {status: 200});
 };

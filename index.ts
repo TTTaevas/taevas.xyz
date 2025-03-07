@@ -38,7 +38,7 @@ const builds = await Bun.build({
 });
 
 const server = Bun.serve({
-  port: 8080,
+  idleTimeout: 30,
   fetch: async (req) => {
     const url = new URL(req.url);
     const parameters = url.searchParams;

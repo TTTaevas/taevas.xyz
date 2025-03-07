@@ -87,7 +87,5 @@ export const fediverse_kitsuclub: Handler = async () => {
     })
   };
 
-  return new Response(new Blob([JSON.stringify(activity)], {
-    type: "application/json",
-  }), {status: 200});
+  return Response.json(activity, {status: 200});
 };

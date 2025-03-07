@@ -1563,7 +1563,7 @@ video {
 @font-face {
   font-family: "LexendDeca";
 
-  src: url("./assets/fonts/LexendDeca-Regular.ttf") format("truetype");
+  src: url("assets/fonts/LexendDeca-Regular.ttf") format("truetype");
 
   font-weight: normal;
 

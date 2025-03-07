@@ -16,7 +16,5 @@ export const coding_kitsudev: Handler = async () => {
     date: kitsudev[0].created
   };
 
-  return new Response(new Blob([JSON.stringify(info)], {
-    type: "application/json",
-  }), {status: 200});
+  return Response.json(info, {status: 200});
 };

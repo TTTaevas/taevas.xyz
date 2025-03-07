@@ -74,9 +74,7 @@ export const gaming_speedruncom: Handler = async () => {
     run.time = run.time.substring(1);
   }
 
-  return new Response(new Blob([JSON.stringify(run)], {
-    type: "application/json",
-  }), {status: 200});
+  return Response.json(run, {status: 200});
 };
 
 // https://gist.github.com/vankasteelj/74ab7793133f4b257ea3

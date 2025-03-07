@@ -62,8 +62,6 @@ export const media_anilist: Handler = async () => {
   anime.startDate = anime.startDate.substring(0, anime.startDate.indexOf("T"));
   anime.updateDate = anime.updateDate.substring(0, anime.updateDate.indexOf("T"));
   anime.endDate = anime.endDate.substring(0, anime.endDate.indexOf("T"));
-  
-  return new Response(new Blob([JSON.stringify(anime)], {
-    type: "application/json",
-  }), {status: 200});
+
+  return Response.json(anime, {status: 200});
 };

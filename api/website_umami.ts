@@ -17,7 +17,7 @@ export const website_umami: Handler = async () => {
   const now = new Date();
   const response = await fetch(`${api_server}/websites/${website_id}/stats?startAt=${Number(new Date("2025"))}&endAt=${Number(now)}`, {
     headers: {
-      "Accept": "application.json",
+      "Accept": "application/json",
       "Authorization": `Bearer ${token?.access_token}`
     },
   });
@@ -43,7 +43,5 @@ export const website_umami: Handler = async () => {
     totaltime: umami.totaltime.value
   };
 
-  return new Response(new Blob([JSON.stringify(info)], {
-    type: "application/json",
-  }), {status: 200});
+  return Response.json(info, {status: 200});
 };

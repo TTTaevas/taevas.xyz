@@ -57,7 +57,7 @@ export const japanese_wanikani: Handler = async () => {
   const toRequest = urlsToRequest.map((url) => new Promise(async (resolve) => {
     const response = await fetch(url, {headers: {
       "Authorization": `Bearer ${process.env["API_WANIKANI"]}`,
-      "Content-Type": "application.json",
+      "Content-Type": "application/json",
     }});
     resolve(await response.json());
   }));
@@ -93,7 +93,7 @@ export const japanese_wanikani: Handler = async () => {
   const subjectIdsAll = subjectIdsLessons.concat(subjectIdsReviews);
   const subjects = await (await fetch(`https://api.wanikani.com/v2/subjects?ids=${subjectIdsAll.toString()}`, {headers: {
     "Authorization": `Bearer ${process.env["API_WANIKANI"]}`,
-    "Content-Type": "application.json",
+    "Content-Type": "application/json",
   }})).json() as {data: Subject[]};
 
   const lessons = addStuffToLearn(subjectIdsLessons, summary.data.lessons, subjects.data);
@@ -107,7 +107,5 @@ export const japanese_wanikani: Handler = async () => {
     moreThingsToReviewAt,
   };
 
-  return new Response(new Blob([JSON.stringify(info)], {
-    type: "application/json",
-  }), {status: 200});
+  return Response.json(info, {status: 200});
 };

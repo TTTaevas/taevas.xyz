@@ -39,7 +39,5 @@ export const media_lastfm: Handler = async () => {
     date: lastfm.recenttracks.track[0].date?.uts ?? String(Date.now()),
   };
 
-  return new Response(new Blob([JSON.stringify(track)], {
-    type: "application/json",
-  }), {status: 200});
+  return Response.json(track, {status: 200});
 };
