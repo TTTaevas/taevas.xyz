@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "dev": "bunx bun css && bun --hot index.ts",
+    "dev": "bunx bun css && bun --hot index.ts --dev",
     "css": "bun tailwindcss -i ./src/App.css -o index.css",
     "lint": "bunx eslint .",
-    "start": "bun run index.ts"
+    "start": "bun install && bunx bun css && bun run index.ts"
   },
   "dependencies": {
     "@bachmacintosh/wanikani-api-types": "^1.7.0",

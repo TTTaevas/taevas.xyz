@@ -1,3 +1,4 @@
+import { parseArgs } from "util";
 import { coding_github } from "./api/coding_github";
 import { coding_gitlab } from "./api/coding_gitlab";
 import { coding_kitsudev } from "./api/coding_kitsudev";
@@ -11,7 +12,24 @@ import { media_lastfm } from "./api/media_lastfm";
 import { token } from "./api/token";
 import { website_umami } from "./api/website_umami";
 
+// PORT AND SSL STUFF
+
+const certificate = Bun.file("./cert.pem");
+const key = Bun.file("./key.pem");
+const ssl_available = await certificate.exists() && await key.exists();
+console.log("Are we able to use SSL?", ssl_available);
+
+const { values } = parseArgs({args: Bun.argv, allowPositionals: true, options: {dev: {type: "boolean"}}});
+const dev = values.dev ?? false;
+console.log("Are we in development mode?", dev);
+
+const port = dev ? 8000 : ssl_available ? 443 : 80;
+const tls = ssl_available ? {certificate, key} : undefined;
+
+// ACTUAL CODE
+
 export type Handler = (req: URLSearchParams) => Promise<Response>;
+
 const api_endpoints: Handler[] = [
   coding_github,
   coding_gitlab,
@@ -39,6 +57,9 @@ const builds = await Bun.build({
 
 const server = Bun.serve({
   idleTimeout: 30,
+  // @ts-expect-error https://github.com/oven-sh/bun/issues/17772
+  tls,
+  port,
   fetch: async (req) => {
     const url = new URL(req.url);
     const parameters = url.searchParams;
@@ -100,4 +121,4 @@ const server = Bun.serve({
   },
 });
 
-console.log(`Listening on ${server.hostname}:${server.port}`);
+console.log(`Listening on ${server.hostname}:${server.port}\n\n--------\n\n`);
