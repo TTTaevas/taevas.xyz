@@ -48,8 +48,8 @@ export default function Projects({
       </div>
       <div className="border-b-4 py-4">
         <Translatable
-          en={<p>Still in early 2023, I've made <b><Link link="https://github.com/TTTaevas/osu-api-v1.tsx" text="osu-api-v1.tsx"/>, my first JavaScript (TypeScript) package!</b></p>}
-          fr={<p>Toujours début 2023, j'ai créé <b><Link link="https://github.com/TTTaevas/osu-api-v1.tsx" text="osu-api-v1.tsx"/>, mon premier package JavaScript (TypeScript) !</b></p>}
+          en={<p>Still in early 2023, I've made <b><Link link="https://github.com/TTTaevas/osu-api-v1-js" text="osu-api-v1-js"/>, my first JavaScript (TypeScript) package!</b></p>}
+          fr={<p>Toujours début 2023, j'ai créé <b><Link link="https://github.com/TTTaevas/osu-api-v1-js" text="osu-api-v1-js"/>, mon premier package JavaScript (TypeScript) !</b></p>}
         />
         <br/>
         <Translatable
@@ -86,8 +86,8 @@ export default function Projects({
       </div>
       <div className="border-b-4 py-4">
         <Translatable
-          en={<p>So <Link link="https://github.com/TTTaevas/osu-api-v2-js" text="osu-api-v2-js"/> is something I've had to work on during three different and distinct periods. I started working on it in March 2023 roughly around the time I finished working on osu-api-v1.tsx, then I took a break and worked on it again in November 2023, only to finally finish it in March 2024.</p>}
-          fr={<p>Alors <Link link="https://github.com/TTTaevas/osu-api-v2-js" text="osu-api-v2-js"/>, c'est quelque chose sur lequel j'ai dû travailler durant 3 périodes bien différentes, en commençant en Mars 2023 genre quand j'ai fini osu-api-v1.tsx, puis Novembre 2023 après une pause, puis enfin Mars 2024 après une autre pause.</p>}
+          en={<p>So <Link link="https://github.com/TTTaevas/osu-api-v2-js" text="osu-api-v2-js"/> is something I've had to work on during three different and distinct periods. I started working on it in March 2023 roughly around the time I finished working on osu-api-v1-js, then I took a break and worked on it again in November 2023, only to finally finish it in March 2024.</p>}
+          fr={<p>Alors <Link link="https://github.com/TTTaevas/osu-api-v2-js" text="osu-api-v2-js"/>, c'est quelque chose sur lequel j'ai dû travailler durant 3 périodes bien différentes, en commençant en Mars 2023 genre quand j'ai fini osu-api-v1-js, puis Novembre 2023 après une pause, puis enfin Mars 2024 après une autre pause.</p>}
         />
         <br/>
         <Translatable
