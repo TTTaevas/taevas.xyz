@@ -1,3 +1,4 @@
+import type { Server } from "bun";
 import { parseArgs } from "util";
 import { coding_github } from "./api/coding_github";
 import { coding_gitlab } from "./api/coding_gitlab";
@@ -14,17 +15,20 @@ import { website_umami } from "./api/website_umami";
 
 // PORT AND SSL STUFF
 
-const certificate = Bun.file("./cert.pem");
-const key = Bun.file("./key.pem");
-const ssl_available = await certificate.exists() && await key.exists();
-console.log("Are we able to use SSL?", ssl_available);
-
 const { values } = parseArgs({args: Bun.argv, allowPositionals: true, options: {dev: {type: "boolean"}}});
 const dev = values.dev ?? false;
 console.log("Are we in development mode?", dev);
 
-const port = dev ? 8000 : ssl_available ? 443 : 80;
-const tls = ssl_available ? {certificate, key} : undefined;
+const cert = Bun.file(process.env["SSL_CERT"] ?? "./cert.pem");
+const key = Bun.file(process.env["SSL_KEY"] ?? "./key.pem");
+const ssl_available = await cert.exists() && await key.exists();
+console.log("Are we able to use SSL?", ssl_available);
+
+// const port = dev ? 8000 : ssl_available ? 443 : 80;
+const tls = ssl_available ? {cert, key} : undefined;
+const ports: number[] = [dev ? 8000 : 80];
+if (!dev && tls) ports.push(443);
+console.log("Therefore, we are opening ports on:", ports);
 
 // ACTUAL CODE
 
@@ -55,10 +59,10 @@ const builds = await Bun.build({
   },
 });
 
-const server = Bun.serve({
+const servers: Server[] = ports.map((port) => Bun.serve({
   idleTimeout: 30,
   // @ts-expect-error https://github.com/oven-sh/bun/issues/17772
-  tls,
+  tls: port !== 80 ? tls : undefined,
   port,
   fetch: async (req) => {
     const url = new URL(req.url);
@@ -119,6 +123,8 @@ const server = Bun.serve({
 
     return new Response("Not Found", {status: 404});
   },
-});
+}));
 
-console.log(`Listening on ${server.hostname}:${server.port}\n\n--------\n\n`);
+servers.forEach((server) => console.log(`Listening on ${server.hostname}:${server.port}`));
+console.log("\n\n--------\n\n");
+
