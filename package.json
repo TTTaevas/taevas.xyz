@@ -1,9 +1,10 @@
 {
   "scripts": {
-    "dev": "bunx bun css && bun --hot index.ts --dev",
-    "css": "bun tailwindcss -i ./src/App.css -o index.css",
-    "lint": "bunx eslint .",
-    "start": "bun install && bunx bun css && bun run index.ts"
+    "dev": "bun css && vite build && bun --hot index.ts --dev",
+    "css": "tailwindcss -i ./src/App.css -o index.css",
+    "lint": "eslint .",
+    "getready": "bun install && bun css && vite build",
+    "start": "bun getready && bun run index.ts"
   },
   "dependencies": {
     "@bachmacintosh/wanikani-api-types": "^1.7.0",
@@ -18,24 +19,24 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",
-    "@eslint/js": "^9.21.0",
+    "@eslint/js": "^9.22.0",
     "@stylistic/eslint-plugin": "^3.1.0",
     "@tailwindcss/forms": "^0.5.10",
-    "@tailwindcss/postcss": "^4.0.11",
+    "@tailwindcss/postcss": "^4.0.12",
     "@types/bun": "latest",
-    "@types/node": "^20.17.23",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "autoprefixer": "^10.4.20",
+    "autoprefixer": "^10.4.21",
     "dotenv": "^16.4.7",
-    "eslint": "^9.21.0",
+    "eslint": "^9.22.0",
     "eslint-config-xo-typescript": "^7.0.0",
     "eslint-plugin-react": "^7.37.4",
     "postcss": "^8.5.3",
     "react-animate-height": "^3.2.3",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.26.0"
+    "typescript-eslint": "^8.26.1",
+    "vite": "^6.2.1"
   },
   "imports": {
     "#Main/*": "./src/Main/*",

@@ -49,16 +49,6 @@ const api_endpoints: Handler[] = [
   website_umami
 ];
 
-const builds = await Bun.build({
-  entrypoints: ["./src/App.tsx", "index.css"],
-  target: "browser",
-  minify: {
-    identifiers: true,
-    syntax: true,
-    whitespace: true,
-  },
-});
-
 const servers: Server[] = ports.map((port) => Bun.serve({
   idleTimeout: 30,
   // @ts-expect-error https://github.com/oven-sh/bun/issues/17772
@@ -70,7 +60,7 @@ const servers: Server[] = ports.map((port) => Bun.serve({
     // merciless sanitization
     let pathname = url.pathname;
     pathname = pathname
-      .replace(/([^A-Za-z0-9/.-_])/g, "")
+      .replace(/([^A-Za-z0-9/._-])/g, "")
       .replace(/(?<![a-zA-Z])\.(?![a-zA-Z])/g, "");
 
     if (req.method !== "GET") {
@@ -81,29 +71,16 @@ const servers: Server[] = ports.map((port) => Bun.serve({
     // MAIN PAGE
 
     if (pathname === "/") {
-      const indexContent = await Bun.file("index.html").text();
+      const indexContent = await Bun.file("./dist/index.html").text();
       return new Response(indexContent, {headers: {"Content-Type": "text/html"}});
     }
 
-    if (pathname === "/App.tsx" && req.method === "GET") {
-      return new Response(builds.outputs[0].stream(), {
-        headers: {
-          "Content-Type": builds.outputs[0].type,
-        },
-      });
-    };
-
-
     // EXTERNAL TO MAIN PAGE
 
-    if (pathname === "/index.css" && req.method === "GET") {
-      return new Response(builds.outputs[1].stream(), {
-        headers: {
-          "Content-Type": builds.outputs[1].type,
-        },
-      });
-    };
-
+    if (pathname.startsWith("/compressed")) {
+      const asset = Bun.file("./dist" + pathname);
+      return await asset.exists() ? new Response(asset, {status: 200}) : new Response("Not Found", {status: 404});
+    }
 
     if (pathname.startsWith("/assets")) {
       const asset = Bun.file("." + pathname);
