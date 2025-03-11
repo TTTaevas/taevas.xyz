@@ -1,8 +1,8 @@
 import React from "react";
-import About from "./About/index.js";
-import Contact from "./Contact/index.js";
-import Projects from "./Projects/index.js";
-import Support from "./Support/index.js";
+import About from "./About/index.tsx";
+import Contact from "./Contact/index.tsx";
+import Projects from "./Projects/index.tsx";
+import Support from "./Support/index.tsx";
 import {type TabDetails} from "#contexts";
 
 export default function Tabs({

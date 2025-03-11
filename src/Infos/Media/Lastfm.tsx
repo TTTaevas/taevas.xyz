@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {format} from "timeago.js";
-import Website from "../Website.js";
-import Link from "#parts/Link.js";
-import DataHandler from "#Infos/DataHandler.js";
+import Website from "../Website.tsx";
+import Link from "#parts/Link.tsx";
+import DataHandler from "#Infos/DataHandler.tsx";
 
 export type LastfmInfo = {
   artist: string;

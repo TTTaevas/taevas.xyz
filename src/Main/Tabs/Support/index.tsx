@@ -1,9 +1,9 @@
 import React from "react";
-import Tab from "../Tab.js";
-import Translatable from "#parts/Translatable.js";
+import Tab from "../Tab.tsx";
+import Translatable from "#parts/Translatable.tsx";
 import {UserFavorite} from "@carbon/icons-react";
 import {type TabDetails} from "#contexts";
-import ButtonLink from "#parts/ButtonLink.js";
+import ButtonLink from "#parts/ButtonLink.tsx";
 
 export default function Support({
   setTabs,

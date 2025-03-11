@@ -1,9 +1,9 @@
 import React from "react";
-import Tab from "../Tab.js";
-import Translatable from "#parts/Translatable.js";
+import Tab from "../Tab.tsx";
+import Translatable from "#parts/Translatable.tsx";
 import {UserProfile} from "@carbon/icons-react";
 import {type TabDetails} from "#contexts";
-import Link from "#parts/Link.js";
+import Link from "#parts/Link.tsx";
 
 export default function About({
   setTabs,
@@ -13,7 +13,7 @@ export default function About({
   const elements = [(
     <div className="m-4 text-white order-1" key={"about"}>
       <div className="ml-auto max-w-3xl text-left">
-        <img className="m-4 float-right h-24" src="/brittany.jpg" alt="Flag of Brittany" title="Flag of Brittany"/>
+        <img className="m-4 float-right h-24" src="/assets/brittany.jpg" alt="Flag of Brittany" title="Flag of Brittany"/>
         <Translatable
           en={<p>o/ <b>I'm Taevas</b>, a young person from <b><Link link="https://en.wikipedia.org/wiki/Brittany" text="Brittany"/> (western France)</b> who is currently invested in <b>game development.</b> I also do stuff related to web development, networking, and cybersecurity more rarely!</p>}
           fr={<p>o/ <b>Je m'appelle Taevas</b>, je suis une jeune personne de <b>Bretagne</b> qui s'investit dans le <b>développement de jeux-vidéos.</b> Je fais aussi des trucs qui touchent au développement web, aux réseaux, et plus rarement à la cybersécurité!</p>}
@@ -31,7 +31,7 @@ export default function About({
       </div>
       <div className="mr-auto mt-8 max-w-3xl text-right">
         <a href="https://www.pixiv.net/en/artworks/85330094" target="_blank" rel="noreferrer">
-          <img className="m-4 float-left h-24 w-24" src="/lain.png" alt="A drawing of Lain" title="A drawing of Lain"/>
+          <img className="m-4 float-left h-24 w-24" src="/assets/lain.png" alt="A drawing of Lain" title="A drawing of Lain"/>
         </a>
         <Translatable
           en={<p>I really like Japanese media! I'll pretty much always choose to have some drawing of <b>Lain Iwakura from <Link link="https://en.wikipedia.org/wiki/Serial_Experiments_Lain" text="Serial Experiments Lain"/></b> as my profile picture on the various websites I have an account on, as it is a piece of media I deeply enjoy.</p>}

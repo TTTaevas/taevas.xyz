@@ -1,9 +1,9 @@
 import React from "react";
-import Tab from "../Tab.js";
-import Translatable from "#parts/Translatable.js";
+import Tab from "../Tab.tsx";
+import Translatable from "#parts/Translatable.tsx";
 import {Devices} from "@carbon/icons-react";
 import {type TabDetails} from "#contexts";
-import Link from "#parts/Link.js";
+import Link from "#parts/Link.tsx";
 
 export default function Projects({
   setTabs,
@@ -13,7 +13,7 @@ export default function Projects({
   const elements = [(
     <div className="inline-block m-4 text-white text-left" key={"projects"}>
       <div className="border-b-4 pb-4">
-        <a href="https://tttaevas.itch.io/swordventure" target="_blank" rel="noreferrer"><img className="m-4 float-right w-40" src="/swordventure.png" alt="SwordVenture thumbnail"/></a>
+        <a href="https://tttaevas.itch.io/swordventure" target="_blank" rel="noreferrer"><img className="m-4 float-right w-40" src="/assets/swordventure.png" alt="SwordVenture thumbnail"/></a>
         <Translatable
           en={<p><b><Link link="https://tttaevas.itch.io/swordventure" text="SwordVenture"/></b> initially was <Link link="https://github.com/RemiL-Nel/Clicker-game" text="a game made by a friend in React which I helped develop,"/> but months after the project ended, I made the choice to <b>recode it from scratch in <Link link="https://godotengine.org/" text="Godot"/></b>, a proper game engine!</p>}
           fr={<p><b><Link link="https://tttaevas.itch.io/swordventure" text="SwordVenture"/></b> était à la base <Link link="https://github.com/RemiL-Nel/Clicker-game" text="un jeu fait par un ami en React auquel j'ai contribué côté développement,"/> mais quelques mois plus tard, j'ai fait le choix de <b>le refaire en entier dans <Link link="https://godotengine.org/" text="Godot"/></b>, qui est un véritable moteur de jeu vidéo !</p>}

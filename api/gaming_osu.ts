@@ -1,11 +1,11 @@
-import {type Handler} from "@netlify/functions";
 import * as osu from "osu-api-v2-js";
-import {type OsuInfo} from "#Infos/Gaming/Osu.js";
+import {type OsuInfo} from "#Infos/Gaming/Osu.tsx";
 import {MongoClient} from "mongodb";
-import {type Token} from "./token.js";
+import {type Token} from "./token.tsx";
+import type { Handler } from "../index.ts";
 
-const handler: Handler = async (req) => {
-  const client = new MongoClient(process.env.URL_MONGODB!);
+export const gaming_osu: Handler = async (params) => {
+  const client = new MongoClient(process.env["URL_MONGODB"]!);
   await client.connect();
 
   const db = client.db("tokens");
@@ -13,9 +13,10 @@ const handler: Handler = async (req) => {
   const token = await collection.findOne();
   void client.close();
 
-  const ruleset = Number(req.queryStringParameters?.ruleset);
+  let ruleset = params.has("ruleset") ? Number(params.get("ruleset")) : undefined;
+  if (ruleset && isNaN(ruleset)) {ruleset = undefined;}
   const api = new osu.API({access_token: token?.access_token});
-  const profile = await api.getUser(7276846, !isNaN(ruleset) ? ruleset : undefined);
+  const profile = await api.getUser(7276846, ruleset);
 
   const info: OsuInfo = {
     country: profile.country.name,
@@ -25,10 +26,5 @@ const handler: Handler = async (req) => {
     },
   };
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(info),
-  };
+  return Response.json(info, {status: 200});
 };
-
-export {handler};

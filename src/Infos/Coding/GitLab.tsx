@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import Website from "../Website.js";
-import DataHandler from "#Infos/DataHandler.js";
+import Website from "../Website.tsx";
+import DataHandler from "#Infos/DataHandler.tsx";
 
 export type GitlabInfo = {
   date: string;

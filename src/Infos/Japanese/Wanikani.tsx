@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import Website from "../Website.js";
+import Website from "../Website.tsx";
 import { WKLevelProgression, WKReset } from "@bachmacintosh/wanikani-api-types";
-import DataHandler from "#Infos/DataHandler.js";
+import DataHandler from "#Infos/DataHandler.tsx";
 
 export type WanikaniInfo = {
   progression: {

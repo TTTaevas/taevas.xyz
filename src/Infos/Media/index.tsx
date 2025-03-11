@@ -1,7 +1,7 @@
 import React from "react";
-import Info from "../Info.js";
-import Lastfm from "./Lastfm.js";
-import Anilist from "./Anilist.js";
+import Info from "../Info.tsx";
+import Lastfm from "./Lastfm.tsx";
+import Anilist from "./Anilist.tsx";
 
 export default function Media() {
   const lastfm = <Lastfm key={"Lastfm"}/>;

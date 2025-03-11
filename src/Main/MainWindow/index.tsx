@@ -1,9 +1,9 @@
 import React from "react";
 import AnimateHeight from "react-animate-height";
 
-import TabButtons from "./TabButtons/index.js";
-import SocialButtons from "./SocialButtons/index.js";
-import Translatable from "#parts/Translatable.js";
+import TabButtons from "./TabButtons/index.tsx";
+import SocialButtons from "./SocialButtons/index.tsx";
+import Translatable from "#parts/Translatable.tsx";
 
 import {type TabDetails, TabContext} from "#contexts";
 

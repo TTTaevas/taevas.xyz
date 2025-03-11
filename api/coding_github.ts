@@ -1,9 +1,9 @@
-import {type Handler} from "@netlify/functions";
 import {Octokit} from "@octokit/rest";
-import {type GithubInfo} from "#Infos/Coding/GitHub.js";
+import {type GithubInfo} from "#Infos/Coding/GitHub.tsx";
+import type { Handler } from "..";
 
-const handler: Handler = async () => {
-  const octokit = new Octokit({auth: process.env.API_GITHUB});
+export const coding_github: Handler = async () => {
+  const octokit = new Octokit({auth: process.env["API_GITHUB"]});
   const github = await octokit.rest.activity.listEventsForAuthenticatedUser({username: "TTTaevas"});
 
   const publicPush = github.data.find((e) => (e.type === "PushEvent" || e.type === "PullRequestEvent") && e.public);
@@ -19,10 +19,5 @@ const handler: Handler = async () => {
     } : undefined,
   };
   
-  return {
-    statusCode: 200,
-    body: JSON.stringify(info),
-  };
+  return Response.json(info, {status: 200});
 };
-
-export {handler};

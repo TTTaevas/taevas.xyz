@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 /** Takes care of getting data regularly */
-export default function DataHandler<T extends unknown | undefined>(netlifyFunctionName: string, updateEveryXSeconds: number, expectData = true) {
+export default function DataHandler<T extends unknown | undefined>(apiEndpoint: string, updateEveryXSeconds: number, expectData = true) {
   const [data, setData]: [T | undefined, React.Dispatch<React.SetStateAction<T | undefined>>] = useState();
   const [error, setError] = useState(false);
   const [count, setCount] = useState(0);
@@ -9,7 +9,7 @@ export default function DataHandler<T extends unknown | undefined>(netlifyFuncti
   // Try to get and set data
   const updateData = async () => {
     try {
-      const response = await fetch("/.netlify/functions/" + netlifyFunctionName);
+      const response = await fetch("/api/" + apiEndpoint);
       if (!response.ok) {throw "failed";};
       setData(expectData ? await response.json() : true);
       setError(false);

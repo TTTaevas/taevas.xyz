@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "./Link.js";
+import Link from "./Link.tsx";
 
 export default function ButtonLink({
   link,

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import MainWindow from "./MainWindow/index.js";
-import Tabs from "./Tabs/index.js";
+import MainWindow from "./MainWindow/index.tsx";
+import Tabs from "./Tabs/index.tsx";
 import {type TabDetails, LanguageContext, TabContext} from "#contexts";
 
 export default function MainContent() {

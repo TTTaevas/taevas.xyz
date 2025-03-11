@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import Website from "../Website.js";
-import ButtonLink from "#parts/ButtonLink.js";
-import DataHandler from "#Infos/DataHandler.js";
+import Website from "../Website.tsx";
+import ButtonLink from "#parts/ButtonLink.tsx";
+import DataHandler from "#Infos/DataHandler.tsx";
 
 export type HacktheboxInfo = {
   id: string;

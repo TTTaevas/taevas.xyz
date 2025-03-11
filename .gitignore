@@ -1,4 +1,5 @@
 .netlify
 node_modules
 dist
-*.log
+.env
+index.css

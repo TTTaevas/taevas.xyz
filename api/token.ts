@@ -1,18 +1,19 @@
-import {type Handler} from "@netlify/functions";
-import {InsertOneResult, MongoClient} from "mongodb";
-
+import {MongoClient, type InsertOneResult} from "mongodb";
 import {API} from "osu-api-v2-js";
+import type { Handler } from "..";
 
 export interface Token {
   access_token: string;
   expires: Date;
 }
 
-const handler: Handler = async (req) => {
-  const service = req.queryStringParameters?.service;
-  if (!service) {return {statusCode: 400};}
+export const token: Handler = async (params) => {
+  const service = params.get("service");
+  if (!service) {
+    return new Response("Bad Request", {status: 400});
+  }
 
-  const client = new MongoClient(process.env.URL_MONGODB!);
+  const client = new MongoClient(process.env["URL_MONGODB"]!);
   await client.connect();
 
   const db = client.db("tokens");
@@ -27,14 +28,14 @@ const handler: Handler = async (req) => {
 
   if (!token) {
     const collections = await db.listCollections().toArray();
-    if (!collections.find((c) => c.name === service)) {client.close(); return {statusCode: 400};}
+    if (!collections.find((c) => c.name === service)) {client.close(); return new Response("Not Found", {status: 404});}
 
     promises.push(new Promise(async (resolve, reject) => {
       console.log(`Setting a new token for ${service}...`);
       let insertion: InsertOneResult;
 
       if (service === "osu") {
-        const api = await API.createAsync(11451, process.env.API_OSU!);
+        const api = await API.createAsync(11451, process.env["API_OSU"]!);
         insertion = await collection.insertOne({
           access_token: api.access_token,
           expires: api.expires,
@@ -47,7 +48,7 @@ const handler: Handler = async (req) => {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
           },
-          body: `username=${process.env.USERNAME_UMAMI}&password=${process.env.PASSWORD_UMAMI}`
+          body: `username=${process.env["USERNAME_UMAMI"]}&password=${process.env["PASSWORD_UMAMI"]}`
         });
         const json: {token: string} = await response.json();
 
@@ -90,9 +91,5 @@ const handler: Handler = async (req) => {
   await Promise.all(promises);
   void client.close();
 
-  return {
-    statusCode: 200,
-  };
+  return new Response(null, {status: 200});
 };
-
-export {handler};

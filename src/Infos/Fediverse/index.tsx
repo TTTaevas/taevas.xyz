@@ -1,6 +1,6 @@
 import React from "react";
-import Info from "../Info.js";
-import KitsuClub from "./KitsuClub.js";
+import Info from "../Info.tsx";
+import KitsuClub from "./KitsuClub.tsx";
 
 export default function Hacking() {
   const kitsuclub = <KitsuClub key={"kitsuclub"}/>;

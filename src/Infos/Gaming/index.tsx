@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import Info from "../Info.js";
+import Info from "../Info.tsx";
 
-import Speedruncom from "./Speedruncom.js";
-import Osu from "./Osu.js";
+import Speedruncom from "./Speedruncom.tsx";
+import Osu from "./Osu.tsx";
 import { Ruleset } from "osu-api-v2-js";
-import DataHandler from "#Infos/DataHandler.js";
+import DataHandler from "#Infos/DataHandler.tsx";
 
 export default function RhythmGames() {
   const {data, error} = DataHandler<boolean>("token?service=osu", 60 * 60 * 8, false);

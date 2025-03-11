@@ -1,10 +1,10 @@
-import { UmamiInfo } from "#Infos/Website/Umami.js";
-import {type Handler} from "@netlify/functions";
 import { MongoClient } from "mongodb";
-import { Token } from "./token.js";
+import type { Handler } from "../index.ts";
+import type { UmamiInfo } from "#Infos/Website/Umami.tsx";
+import type { Token } from "./token.ts";
 
-const handler: Handler = async () => {
-  const client = new MongoClient(process.env.URL_MONGODB!);
+export const website_umami: Handler = async () => {
+  const client = new MongoClient(process.env["URL_MONGODB"]!);
   await client.connect();
 
   const db = client.db("tokens");
@@ -33,9 +33,7 @@ const handler: Handler = async () => {
   };
 
   if (!umami) {
-    return {
-      statusCode: 404,
-    };
+    return new Response("Not Found", {status: 404});
   }
 
   const info: UmamiInfo = {
@@ -45,10 +43,5 @@ const handler: Handler = async () => {
     totaltime: umami.totaltime.value
   };
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(info),
-  };
+  return Response.json(info, {status: 200});
 };
-
-export {handler};

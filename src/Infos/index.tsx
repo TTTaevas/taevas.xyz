@@ -1,11 +1,11 @@
 import React, {Component} from "react";
-import Media from "./Media/index.js";
-// import Hacking from "./Hacking/index.js";
-import Coding from "./Coding/index.js";
-import Gaming from "./Gaming/index.js";
-// import Japanese from "./Japanese/index.js";
-import Fediverse from "./Fediverse/index.js";
-import Website from "./Website/index.js";
+import Media from "./Media/index.tsx";
+// import Hacking from "./Hacking/index.tsx";
+import Coding from "./Coding/index.tsx";
+import Gaming from "./Gaming/index.tsx";
+// import Japanese from "./Japanese/index.tsx";
+import Fediverse from "./Fediverse/index.tsx";
+import Website from "./Website/index.tsx";
 
 export default class Infos extends Component {
   private readonly dragbar = React.createRef<HTMLDivElement>();

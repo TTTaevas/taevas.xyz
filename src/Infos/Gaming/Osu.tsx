@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import Website from "../Website.js";
+import Website from "../Website.tsx";
 import { Ruleset } from "osu-api-v2-js";
-import DataHandler from "#Infos/DataHandler.js";
+import DataHandler from "#Infos/DataHandler.tsx";
 
 export type OsuInfo = {
   country: string;
@@ -28,7 +28,7 @@ export default function Osu(args: {ruleset: Ruleset}) {
       try {
         setElements([
           <div key={`osu-${ruleset}`} className="flex">
-            <img className="m-auto w-16 h-16" alt={`${ruleset} mode logo`} src={`/osu_rulesets/${ruleset}.png`}/>
+            <img className="m-auto w-16 h-16" alt={`${ruleset} mode logo`} src={`/assets/osu_rulesets/${ruleset}.png`}/>
             <div className="m-auto">
               <p>Global: <strong>#{data.ranks.global}</strong></p>
               <p>{data.country}: <strong>#{data.ranks.country}</strong></p>

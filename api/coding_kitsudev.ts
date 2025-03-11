@@ -1,7 +1,7 @@
-import {type Handler} from "@netlify/functions";
-import { type KitsudevInfo } from "#Infos/Coding/KitsuDev.js";
+import { type KitsudevInfo } from "#Infos/Coding/KitsuDev.tsx";
+import type { Handler } from "..";
 
-const handler: Handler = async () => {
+export const coding_kitsudev: Handler = async () => {
   const kitsudev = await (await fetch("https://kitsunes.dev/api/v1/users/Taevas/activities/feeds?limit=1")).json() as [{
     repo: {
       full_name: string
@@ -16,10 +16,5 @@ const handler: Handler = async () => {
     date: kitsudev[0].created
   };
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(info),
-  };
+  return Response.json(info, {status: 200});
 };
-
-export {handler};
