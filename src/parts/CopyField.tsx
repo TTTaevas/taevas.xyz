@@ -25,7 +25,7 @@ export default function CopyField({
   }
 
   return (
-    <div className="flex w-fit mx-auto m-2 pr-4 pl-0 text-lg bg-red-500 hover:shadow">
+    <div className="flex w-fit mx-auto m-2 pr-4 pl-0 text-lg bg-red-500 hover:shadow-sm">
       {imageUrl ? <div className="bg-red-700 p-4">
         <img src={imageUrl} draggable="false" className="w-8 h-8"/>
       </div> : ""}

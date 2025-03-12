@@ -26,7 +26,7 @@ export default function Anilist() {
       try {
         setElements([
           <div key={"data"} className="flex mb-4">
-            <img className="m-auto w-16 h-22" alt="anime cover" src={data.cover} />
+            <img className="m-auto w-18 h-24" alt="anime cover" src={data.cover} />
             <div className="m-auto pl-2">
               <Link classes="mt-1 px-1 py-2 inline-block w-full font-bold leading-[18px] bg-white text-blue-800" link={data.url} text={data.title}/>
               <p className="mt-4">Started: <strong>{data.startDate}</strong></p>
