@@ -55,7 +55,9 @@ const servers: Server[] = ports.map((port) => Bun.serve({
   tls: port !== 80 ? tls : undefined,
   port,
   fetch: async (req) => {
-    const url = new URL(req.url);
+    const request_url = req.url.startsWith("/") ? "https://taevas.xyz".concat(req.url) : req.url;
+    if (req.url.startsWith("/")) {console.log("Changed", req.url.substring(0, 100), "to", request_url.substring(0, 100));}
+    const url = new URL(request_url);
     const parameters = url.searchParams;
     // merciless sanitization
     let pathname = url.pathname;
