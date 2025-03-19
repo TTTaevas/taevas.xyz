@@ -21,18 +21,20 @@
 }
 
 @font-face {
-  font-family: "LexendDeca";
-  src: url("assets/fonts/LexendDeca-Regular.ttf") format("truetype");
+  font-family: "IBMPlexMono";
+  src: url("assets/fonts/IBMPlexMono-Regular.ttf") format("truetype");
   font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("assets/fonts/IBMPlexMono-Bold.ttf") format("truetype");
+  font-weight: bold;
   font-style: normal;
 }
 
 .App {
-  font-family: "LexendDeca", "Arial", sans-serif;
-}
-
-p {
-  line-height: 1.15rem;
+  font-family: "IBMPlexMono", "Arial", sans-serif;
 }
 
 p a {

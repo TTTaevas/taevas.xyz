@@ -12,7 +12,7 @@ export default class Info extends Component<{
     return (
       <div className="m-2.5 flex w-80 hover:scale-[1.02] active:scale-[1.02]">
         <h2 className={`[text-orientation:upright] [writing-mode:vertical-rl]
-        uppercase text-start text-2xl tracking-[-.1em] font-bold pt-2
+        uppercase text-start text-2xl tracking-[-.1em] font-bold pt-2 pb-2
         rounded-l-xl bg-white select-none
         ${state !== 2 ? "text-sky-600" : "text-purple-600"}`}>
           {this.props.type}

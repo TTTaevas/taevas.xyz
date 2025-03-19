@@ -25,12 +25,12 @@ export default function Website({
   return (
     <div className="hover:font-bold active:font-bold overflow-hidden">
       <a href={link} target="_blank" rel="noreferrer" draggable="false">
-        <h2 className="pr-1 py-1 rounded-tr-[10px] bg-white uppercase text-right font-bold text-indigo-500 transition-all
-        hover:brightness-110 hover:pr-4 hover:text-blue-600">
+        <h2 className="pr-1 py-1 rounded-tr-[10px] bg-white uppercase text-right text-lg font-bold text-indigo-500 transition-all
+        hover:brightness-110 hover:pr-16 hover:text-blue-600">
           {name}
         </h2>
       </a>
-      <div className="p-4 m-auto">
+      <div className="p-4 m-auto max-h-[320px] overflow-auto">
         {
           state === 1 ?
             elements.map((e, i) => 

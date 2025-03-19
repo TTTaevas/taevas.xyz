@@ -49,11 +49,10 @@ export const fediverse_kitsuclub: Handler = async () => {
   const emojis_to_get: Promise<void>[] = [];
   while (scan_text.includes(":")) {
     const index_1 = scan_text.indexOf(":");
-    const index_2 = scan_text.substring(index_1 + 1).indexOf(":");
-
-    if (index_2 === -1) {
+    if (scan_text.substring(index_1 + 1).includes(":") === false) {
       scan_text = scan_text.substring(index_1 + 1);
     } else {
+      const index_2 = scan_text.substring(index_1 + 1).indexOf(":") + scan_text.substring(0, index_1).length;
       const potential_emoji = scan_text.substring(index_1 + 1, index_2 + 1);
       if (!potential_emoji.includes(" ")) {
         emojis_to_get.push(new Promise(async (resolve) => {

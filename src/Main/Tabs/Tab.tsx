@@ -8,7 +8,7 @@ export default class Tab extends Component<{
   id: string;
   name: ReturnType<typeof Translatable>;
   elements: React.JSX.Element[];
-  logo?: JSX.Element;
+  logo?: React.JSX.Element;
   position?: string;
 }> {
   static contextType = TabContext;
@@ -21,7 +21,7 @@ export default class Tab extends Component<{
       <TabContext.Consumer>
         {tabs => (
           <AnimateHeight
-            className={`absolute w-full lg:w-[525px] lg:rounded-xl ${this.props.position}
+            className={`absolute w-full lg:w-[625px] lg:rounded-xl ${this.props.position}
               bg-blue-800/75 hover:bg-blue-800/80 active:bg-blue-800/70 backdrop-brightness-75 backdrop-contrast-150 backdrop-blur
               shadow-[12px_12px_0_0] shadow-blue-950/75
               ${tabs.find((t) => t.id === this.props.id)?.priority ?? "z-50"}`}
@@ -39,11 +39,12 @@ export default class Tab extends Component<{
                   <path d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4l6.6 6.6L8 22.6L9.4 24l6.6-6.6l6.6 6.6l1.4-1.4l-6.6-6.6L24 9.4z"/>
                 </svg>
               </div>
-              <h3 className="text-4xl text-center font-bold text-blue-700 overflow-hidden truncate select-none pt-1">
+              <h3 className="text-3xl text-center font-bold text-blue-600 overflow-hidden truncate select-none pt-1">
                 {this.props.name} - taevas.xyz
               </h3>
             </div>
-            <div className="drop-shadow-2xl">
+            <div className="drop-shadow-2xl max-h-[500px] overflow-y-auto
+             [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-300 [&::-webkit-scrollbar-thumb]:bg-indigo-500 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full">
               {
                 this.props.elements.map((e, i) => 
                   <div key={`element-${i}}`}>

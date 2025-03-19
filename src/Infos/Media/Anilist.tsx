@@ -26,24 +26,18 @@ export default function Anilist() {
       try {
         setElements([
           <div key={"data"} className="flex mb-4">
-            <img className="m-auto w-18 h-24" alt="anime cover" src={data.cover} />
-            <div className="m-auto pl-2">
-              <Link classes="mt-1 px-1 py-2 inline-block w-full font-bold leading-[18px] bg-white text-blue-800" link={data.url} text={data.title}/>
-              <p className="mt-4">Started: <strong>{data.startDate}</strong></p>
-              {
-                data.episodes.watched >= data.episodes.total ?
-                  <p>Finished: <strong>{data.endDate}</strong></p> :
-                  <p>Ep. {data.episodes.watched}: <strong>{data.updateDate}</strong></p>
-              }
+            <img className="mx-auto w-18 h-24" alt="anime cover" src={data.cover} />
+            <div className="m-auto ml-4 w-full">
+              <Link classes="text-lg/6 inline-block px-1 py-2 w-full font-bold bg-white text-blue-800" link={data.url} text={data.title}/>
             </div>
           </div>,
-          <>
-            {
-              data.episodes.watched >= data.episodes.total ?
-                <p>I gave it a <strong>{data.score}/10</strong></p> :
-                <p><strong>{data.episodes.watched}/{data.episodes.total}</strong> episodes watched</p>
-            }
-          </>,
+          <p key="start" className="text-left">Started: <strong>{data.startDate}</strong></p>,
+          <p key="last" className="text-left">{data.episodes.watched >= data.episodes.total ?
+            <>Finished: <strong>{data.endDate}</strong></> :
+            <>Ep. {data.episodes.watched}: <strong>{data.updateDate}</strong></>}</p>,
+          <p key="status" className="text-left">{data.episodes.watched >= data.episodes.total ?
+            <>I gave it a <strong>{data.score}/10</strong></> :
+            <><strong>{data.episodes.watched}/{data.episodes.total}</strong> episodes watched</>}</p>,
         ]);
       } catch {
         setError(true);

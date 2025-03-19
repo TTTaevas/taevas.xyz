@@ -25,13 +25,13 @@ export default function Speedruncom() {
         setElements([
           <div key={"data"} className="flex pb-2">
             <img alt="game thumbnail" src={data.thumbnail} className="h-24 m-auto" />
-            <div className="m-auto pl-2">
-              <Link key={"more"} classes="mt-1 px-1 py-2 inline-block w-full font-bold leading-[18px] bg-white text-blue-800" link={data.link}
+            <div className="m-auto ml-4 w-full">
+              <Link key={"more"} classes="text-lg/6 inline-block px-1 py-2 w-full font-bold bg-white text-blue-800" link={data.link}
                 text={`${data.game} (${data.details.toString()}) in ${data.time}`}/>
-              <p className="mt-2">Placed <strong>#{data.place}</strong></p>
-              <p className="font-bold">{data.date}</p>
             </div>
           </div>,
+          <p key="placement" className="mt-2">Placed <strong>#{data.place}</strong></p>,
+          <p key="date" className="font-bold">{data.date}</p>,
           <> {
             data.video ? <ButtonLink key={"youtube"} link={data.video} text="YouTube video"/> : ""
           } </>
