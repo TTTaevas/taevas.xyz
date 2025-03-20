@@ -32,4 +32,3 @@ This website makes use of several online APIs in order to deliver the `Infos` th
 - `API_WANIKANI`
 - `USERNAME_UMAMI`
 - `PASSWORD_UMAMI`
-- `URL_MONGODB`

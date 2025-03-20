@@ -51,7 +51,6 @@ const api_endpoints: Handler[] = [
 
 const servers: Server[] = ports.map((port) => Bun.serve({
   idleTimeout: 30,
-  // @ts-expect-error https://github.com/oven-sh/bun/issues/17772
   tls: port !== 80 ? tls : undefined,
   port,
   fetch: async (req) => {
@@ -106,4 +105,3 @@ const servers: Server[] = ports.map((port) => Bun.serve({
 
 servers.forEach((server) => console.log(`Listening on ${server.hostname}:${server.port}`));
 console.log("\n\n--------\n\n");
-

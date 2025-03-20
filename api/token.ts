@@ -1,45 +1,56 @@
-import {MongoClient, type InsertOneResult} from "mongodb";
+import { SQL } from "bun";
 import {API} from "osu-api-v2-js";
 import type { Handler } from "..";
 
+const allowed_services = ["osu", "umami"];
+
 export interface Token {
   access_token: string;
-  expires: Date;
+  expires: number;
+  service: string;
 }
 
 export const token: Handler = async (params) => {
   const service = params.get("service");
-  if (!service) {
+  if (!service || !allowed_services.includes(service)) {
     return new Response("Bad Request", {status: 400});
   }
 
-  const client = new MongoClient(process.env["URL_MONGODB"]!);
-  await client.connect();
+  const db = new SQL({
+    username: "postgres"
+  });
+  await db.connect();
+  await db.begin(sql => sql`
+    CREATE TABLE IF NOT EXISTS tokens (
+      access_token text,
+      expires bigserial,
+      service text
+    )
+  `);
 
-  const db = client.db("tokens");
-  const collection = db.collection<Token>(service);
-  const tokens = await collection.find().toArray();
+  const tokens: Token[] = await db.begin(sql => sql`
+    SELECT * FROM tokens
+    WHERE service = ${service}
+  `);
 
-  const now = new Date();
+  const now = Number(new Date());
   const token = tokens.find((t) => t.expires > now);
   const expiredTokens = tokens.filter((t) => now > t.expires);
 
   const promises: Promise<void>[] = [];
 
   if (!token) {
-    const collections = await db.listCollections().toArray();
-    if (!collections.find((c) => c.name === service)) {client.close(); return new Response("Not Found", {status: 404});}
-
     promises.push(new Promise(async (resolve, reject) => {
       console.log(`Setting a new token for ${service}...`);
-      let insertion: InsertOneResult;
+      let new_tokens: Token[] = [];
 
       if (service === "osu") {
         const api = await API.createAsync(11451, process.env["API_OSU"]!);
-        insertion = await collection.insertOne({
-          access_token: api.access_token,
-          expires: api.expires,
-        });
+        new_tokens = await db.begin(sql => sql`
+          INSERT INTO tokens (access_token, expires, service)
+          VALUES (${api.access_token}, ${Number(api.expires)}, ${service})
+          RETURNING *
+        `);
       }
 
       else if (service === "umami") {
@@ -55,10 +66,11 @@ export const token: Handler = async (params) => {
         // Assume it expires in one day
         const date = new Date();
         date.setHours(date.getHours() + 24);
-        insertion = await collection.insertOne({
-          access_token: json.token,
-          expires: date,
-        });
+        new_tokens = await db.begin(sql => sql`
+          INSERT INTO tokens (access_token, expires, service)
+          VALUES (${json.token}, ${Number(date)}, ${service})
+          RETURNING *
+        `);
       }
 
       else {
@@ -66,7 +78,9 @@ export const token: Handler = async (params) => {
         return reject();
       }
 
-      console.log(`New ${service} token in the database: ${insertion.insertedId.toString()}`);
+      new_tokens.forEach((token) => {
+        console.log(`New ${service} token in the database, it'll expire on`, new Date(Number(token.expires)));
+      });
       resolve();
     }));
   }
@@ -76,11 +90,11 @@ export const token: Handler = async (params) => {
       console.log(`Deleting old tokens for ${service}...`);
       await Promise.all(expiredTokens.map(async (t) => {
         return new Promise<void>(async (resolve) => {
-          const deletion = await collection.deleteOne({_id: t._id});
-          if (deletion.deletedCount) {
-            console.log(`Old ${service} token deleted from the database: ${t._id.toString()}`);
-          }
-
+          await db.begin(sql => sql`
+            DELETE FROM tokens
+            WHERE access_token = ${t.access_token}
+          `);
+          console.log(`Old ${service} token that expired on`, new Date(Number(t.expires)), "has been deleted");
           resolve();
         });
       }));
@@ -89,7 +103,6 @@ export const token: Handler = async (params) => {
   }
 
   await Promise.all(promises);
-  void client.close();
 
   return new Response(null, {status: 200});
 };
