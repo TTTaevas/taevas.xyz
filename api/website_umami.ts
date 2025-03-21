@@ -1,19 +1,9 @@
-import { SQL } from "bun";
 import type { Handler } from "../index.ts";
 import type { UmamiInfo } from "#Infos/Website/Umami.tsx";
-import type { Token } from "./token.ts";
+import { db, getToken } from "../database.ts";
 
 export const website_umami: Handler = async () => {
-  const db = new SQL({
-    username: "postgres"
-  });
-  await db.connect();
-  const tokens: Token[] = await db.begin(sql => sql`
-    SELECT * FROM tokens
-    WHERE service = ${"umami"}
-    LIMIT ${1}
-  `);
-  const token = tokens.at(0);
+  const token = await getToken(db, "umami");
 
   const api_server = "https://visitors.taevas.xyz/api";
   const website_id = "f196d626-e609-4841-9a80-0dc60f523ed5";

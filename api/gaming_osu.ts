@@ -1,21 +1,10 @@
-import { SQL } from "bun";
 import * as osu from "osu-api-v2-js";
 import {type OsuInfo} from "#Infos/Gaming/Osu.tsx";
-import {type Token} from "./token.tsx";
 import type { Handler } from "../index.ts";
+import { db, getToken } from "../database.ts";
 
 export const gaming_osu: Handler = async (params) => {
-  const db = new SQL({
-    username: "postgres"
-  });
-  await db.connect();
-
-  const tokens: Token[] = await db.begin(sql => sql`
-    SELECT * FROM tokens
-    WHERE service = ${"osu"}
-    LIMIT ${1}
-  `);
-  const token = tokens.at(0);
+  const token = await getToken(db, "osu");
 
   let ruleset = params.has("ruleset") ? Number(params.get("ruleset")) : undefined;
   if (ruleset && isNaN(ruleset)) {ruleset = undefined;}
