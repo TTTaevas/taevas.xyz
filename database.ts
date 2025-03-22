@@ -1,9 +1,7 @@
 import { SQL } from "bun";
 import type { Token } from "./api/token";
 
-export const db = new SQL({
-  username: "postgres"
-});
+export const db = new SQL({url: process.env["URL_POSTGRESQL"]});
 
 export const createTables = async (database: SQL): Promise<void> => {
   return await database.begin(sql => sql`
@@ -22,10 +20,8 @@ export const removeExpiredTokens = async (database: SQL): Promise<number> => {
     WHERE expires <= ${Number(now)}
     RETURNING *
   `);
-  if (deleted_tokens.length) {
-    console.log("Removed", deleted_tokens.length, "token(s) that had expired!");
-  }
 
+  deleted_tokens.forEach(token => console.log("(DATABASE)", token.service, "token had expired on", new Date(Number(token.expires)), "and has been removed!"));
   return deleted_tokens.length;
 };
 
@@ -42,7 +38,7 @@ export const addToken = async (database: SQL, token: {access_token: string, serv
     RETURNING *
   `);
 
-  console.log("Added new token for", token.service);
+  returned.forEach(token => console.log("(DATABASE)", token.service, "token has been added"));
   return returned[0];
 };
 
