@@ -1,17 +1,10 @@
 import * as osu from "osu-api-v2-js";
 import {type OsuInfo} from "#Infos/Gaming/Osu.tsx";
-import {MongoClient} from "mongodb";
-import {type Token} from "./token.tsx";
 import type { Handler } from "../index.ts";
+import { db, getToken } from "../database.ts";
 
 export const gaming_osu: Handler = async (params) => {
-  const client = new MongoClient(process.env["URL_MONGODB"]!);
-  await client.connect();
-
-  const db = client.db("tokens");
-  const collection = db.collection<Token>("osu");
-  const token = await collection.findOne();
-  void client.close();
+  const token = await getToken(db, "osu");
 
   let ruleset = params.has("ruleset") ? Number(params.get("ruleset")) : undefined;
   if (ruleset && isNaN(ruleset)) {ruleset = undefined;}

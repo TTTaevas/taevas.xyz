@@ -24,6 +24,7 @@ Set the environment variable IBM_TELEMETRY_DISABLED to true
 
 This website makes use of several online APIs in order to deliver the `Infos` that are available on the right side of the main page. Accessing most of these APIs requires a key (or similar), which can be set through the following environment variables (with dotenv support for development):
 
+- `URL_POSTGRESQL`
 - `API_GITHUB`
 - `API_GITLAB`
 - `API_KITSUCLUB`
@@ -32,4 +33,3 @@ This website makes use of several online APIs in order to deliver the `Infos` th
 - `API_WANIKANI`
 - `USERNAME_UMAMI`
 - `PASSWORD_UMAMI`
-- `URL_MONGODB`

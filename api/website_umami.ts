@@ -1,16 +1,9 @@
-import { MongoClient } from "mongodb";
 import type { Handler } from "../index.ts";
 import type { UmamiInfo } from "#Infos/Website/Umami.tsx";
-import type { Token } from "./token.ts";
+import { db, getToken } from "../database.ts";
 
 export const website_umami: Handler = async () => {
-  const client = new MongoClient(process.env["URL_MONGODB"]!);
-  await client.connect();
-
-  const db = client.db("tokens");
-  const collection = db.collection<Token>("umami");
-  const token = await collection.findOne();
-  void client.close();
+  const token = await getToken(db, "umami");
 
   const api_server = "https://visitors.taevas.xyz/api";
   const website_id = "f196d626-e609-4841-9a80-0dc60f523ed5";
