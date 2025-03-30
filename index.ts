@@ -54,52 +54,56 @@ const servers: Server[] = ports.map((port) => Bun.serve({
   tls: port !== 80 ? tls : undefined,
   port,
   fetch: async (req) => {
-    const request_url = req.url.startsWith("/") ? "https://taevas.xyz".concat(req.url) : req.url;
-    if (req.url.startsWith("/")) {console.log("Changed", req.url.substring(0, 100), "to", request_url.substring(0, 100));}
-    const url = new URL(request_url);
-    const parameters = url.searchParams;
-    // merciless sanitization
-    let pathname = url.pathname;
-    pathname = pathname
-      .replace(/([^A-Za-z0-9/._-])/g, "")
-      .replace(/(?<![a-zA-Z])\.(?![a-zA-Z])/g, "");
+    try {
+      const request_url = req.url.startsWith("/") ? "https://taevas.xyz".concat(req.url) : req.url;
+      const url = new URL(request_url);
+      const parameters = url.searchParams;
+      // merciless sanitization
+      let pathname = url.pathname;
+      pathname = pathname
+        .replace(/([^A-Za-z0-9/._-])/g, "")
+        .replace(/(?<![a-zA-Z])\.(?![a-zA-Z])/g, "");
 
-    if (req.method !== "GET") {
-      return new Response("Method Not Allowed", { status: 405 });
-    }
-
-
-    // MAIN PAGE
-
-    if (pathname === "/") {
-      const indexContent = await Bun.file("./dist/index.html").text();
-      return new Response(indexContent, {headers: {"Content-Type": "text/html"}});
-    }
-
-    // EXTERNAL TO MAIN PAGE
-
-    if (pathname.startsWith("/compressed")) {
-      const asset = Bun.file("./dist" + pathname);
-      return await asset.exists() ? new Response(asset, {status: 200}) : new Response("Not Found", {status: 404});
-    }
-
-    if (pathname.startsWith("/assets")) {
-      const asset = Bun.file("." + pathname);
-      return await asset.exists() ? new Response(asset, {status: 200}) : new Response("Not Found", {status: 404});
-    }
+      if (req.method !== "GET") {
+        return new Response("Method Not Allowed", { status: 405 });
+      }
 
 
-    // API
+      // MAIN PAGE
 
-    if (pathname.startsWith("/api")) {
-      for (const endpoint of api_endpoints) {
-        if (pathname === "/api/" + endpoint.name) {
-          return await endpoint(parameters);
+      if (pathname === "/") {
+        const indexContent = await Bun.file("./dist/index.html").text();
+        return new Response(indexContent, {headers: {"Content-Type": "text/html"}});
+      }
+
+      // EXTERNAL TO MAIN PAGE
+
+      if (pathname.startsWith("/compressed")) {
+        const asset = Bun.file("./dist" + pathname);
+        return await asset.exists() ? new Response(asset, {status: 200}) : new Response("Not Found", {status: 404});
+      }
+
+      if (pathname.startsWith("/assets")) {
+        const asset = Bun.file("." + pathname);
+        return await asset.exists() ? new Response(asset, {status: 200}) : new Response("Not Found", {status: 404});
+      }
+
+
+      // API
+
+      if (pathname.startsWith("/api")) {
+        for (const endpoint of api_endpoints) {
+          if (pathname === "/api/" + endpoint.name) {
+            return await endpoint(parameters);
+          }
         }
       }
-    }
 
-    return new Response("Not Found", {status: 404});
+      return new Response("Not Found", {status: 404});
+    } catch(e) {
+      console.error("Returning a 500 because:\n", e);
+      return new Response("Internal Server Error", {status: 500});
+    }
   },
 }));
 
