@@ -3,10 +3,10 @@ import { github } from "./infos/coding/github";
 import { gitlab } from "./infos/coding/gitlab";
 import { kitsudev } from "./infos/coding/kitsudev";
 import { kitsuclub } from "./infos/fediverse/kitsuclub";
-import { osu } from "./infos/gaming/osu";
+// import { osu } from "./infos/gaming/osu";
 import { speedruncom } from "./infos/gaming/speedruncom";
-import { hackthebox } from "./infos/hacking/hackthebox";
-import { wanikani } from "./infos/japanese/wanikani";
+// import { hackthebox } from "./infos/hacking/hackthebox";
+// import { wanikani } from "./infos/japanese/wanikani";
 import { anilist } from "./infos/media/anilist";
 import { lastfm } from "./infos/media/lastfm";
 import { umami } from "./infos/website/umami";
@@ -14,9 +14,9 @@ import { umami } from "./infos/website/umami";
 const info_routes: Record<string, Handler[]> = {
   coding: [github, gitlab, kitsudev],
   fediverse: [kitsuclub],
-  gaming: [osu, speedruncom],
-  hacking: [hackthebox],
-  japanese: [wanikani],
+  gaming: [speedruncom],
+  // hacking: [hackthebox],
+  // japanese: [wanikani],
   media: [anilist, lastfm],
   website: [umami],
 };

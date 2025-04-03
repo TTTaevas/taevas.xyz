@@ -2,11 +2,13 @@ import React, {useState, useEffect} from "react";
 import Website from "../Website.tsx";
 import DataHandler from "#parts/DataHandler.tsx";
 
+// From https://github.com/umami-software/api-client/blob/master/src/types.ts
 export type UmamiInfo = {
-  pageviews: number
-  visits: number
-  visitors: number
-  totaltime: number
+  pageviews: { value: number; prev: number };
+  visitors: { value: number; prev: number };
+  visits: { value: number; prev: number };
+  bounces: { value: number; prev: number };
+  totaltime: { value: number; prev: number };
 } | undefined;
 
 export default function Umami() {
@@ -17,7 +19,7 @@ export default function Umami() {
     if (data) {
       try {
         setElements([
-          <p className="text-left" key={"info"}><b>My website has been <br/>viewed {data.pageviews} times <br/>by {data.visitors} unique visitors!</b></p>
+          <p className="text-left" key={"info"}>Throughout <b>the last 7 days,</b> my website has been visited <b>{data.visits.value} times!</b></p>,
         ]);
       } catch {
         setError(true);
