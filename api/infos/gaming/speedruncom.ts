@@ -1,5 +1,7 @@
 import {type SpeedruncomInfo} from "#Infos/Gaming/Speedruncom.tsx";
-import type { Handler } from "..";
+import type { Handler } from "../..";
+
+const user_id = "j03v45mj";
 
 interface Runs {
   data: {
@@ -41,17 +43,22 @@ interface Level {
   };
 }
 
-export const gaming_speedruncom: Handler = async () => {
+export const speedruncom: Handler = async () => {
   // using the API's embedding would be stupid here, as that'd create lag due to irrelevant runs
-  const speedruncom = await (await fetch("https://www.speedrun.com/api/v1/users/j03v45mj/personal-bests")).json() as Runs;
+
+  /** https://github.com/speedruncomorg/api/blob/master/version1/users.md#get-usersidpersonal-bests */
+  const speedruncom = await (await fetch(`https://www.speedrun.com/api/v1/users/${user_id}/personal-bests`)).json() as Runs;
   const data = speedruncom.data.at(0);
 
   if (!data) {
     return new Response("Not Found", {status: 404});
   }
 
+  /** https://github.com/speedruncomorg/api/blob/master/version1/games.md#get-gamesid */
   const urlsToRequest = [`https://www.speedrun.com/api/v1/games/${data.run.game}`];
+  /** https://github.com/speedruncomorg/api/blob/master/version1/levels.md#get-levelsid */
   if (data.run.level) {urlsToRequest.push(`https://www.speedrun.com/api/v1/levels/${data.run.level}`);}
+  /** https://github.com/speedruncomorg/api/blob/master/version1/categories.md */
   if (data.run.category) {urlsToRequest.push(`https://www.speedrun.com/api/v1/categories/${data.run.category}`);}
 
   const toRequest = urlsToRequest.map((url) => new Promise(async (resolve) => resolve(await (await fetch(url)).json())));

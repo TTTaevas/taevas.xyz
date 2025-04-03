@@ -1,8 +1,8 @@
 import { Gitlab } from "@gitbeaker/rest";
 import {type GitlabInfo} from "#Infos/Coding/GitLab.tsx";
-import type { Handler } from "..";
+import type { Handler } from "../..";
 
-export const coding_gitlab: Handler = async () => {
+export const gitlab: Handler = async () => {
   const api = new Gitlab({token: process.env["API_GITLAB"]!});
   const gitlab = await api.Events.all({action: "pushed"});
 

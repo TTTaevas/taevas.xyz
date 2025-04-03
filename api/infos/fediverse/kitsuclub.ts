@@ -1,7 +1,10 @@
 import { type KitsuclubInfo } from "#Infos/Fediverse/KitsuClub.tsx";
-import type { Handler } from "..";
+import type { Handler } from "../..";
 
-export const fediverse_kitsuclub: Handler = async () => {
+const user_id = "a2hgd7delf";
+
+export const kitsuclub: Handler = async () => {
+  /** https://kitsunes.club/api-doc#tag/users/POST/users/notes */
   const kitsuclub = await (await fetch("https://kitsunes.club/api/users/notes", {
     method: "POST",
     headers: {
@@ -9,7 +12,7 @@ export const fediverse_kitsuclub: Handler = async () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      "userId": "a2hgd7delf",
+      "userId": user_id,
       "limit": 1,
       "withReplies": false,
       "withRepliesToSelf": false,

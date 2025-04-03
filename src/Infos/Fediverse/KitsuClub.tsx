@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.tsx";
-import DataHandler from "#Infos/DataHandler.tsx";
+import DataHandler from "#parts/DataHandler.tsx";
 import Link from "#parts/Link.tsx";
 
 export type KitsuclubInfo = {
@@ -18,7 +18,7 @@ export type KitsuclubInfo = {
 } | undefined;
 
 export default function KitsuClub() {
-  const {data, error, setError} = DataHandler<KitsuclubInfo>("fediverse_kitsuclub", 60 * 20);
+  const {data, error, setError} = DataHandler<KitsuclubInfo>("infos/fediverse/kitsuclub", 60 * 20);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

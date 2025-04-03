@@ -1,8 +1,8 @@
-import type { Handler } from "../index.ts";
+import type { Handler } from "../..";
 import type { UmamiInfo } from "#Infos/Website/Umami.tsx";
-import { db, getToken } from "../database.ts";
+import { db, getToken } from "../../../database.ts";
 
-export const website_umami: Handler = async () => {
+export const umami: Handler = async () => {
   const token = await getToken(db, "umami");
 
   const api_server = "https://visitors.taevas.xyz/api";

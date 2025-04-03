@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.tsx";
-import { WKLevelProgression, WKReset } from "@bachmacintosh/wanikani-api-types";
-import DataHandler from "#Infos/DataHandler.tsx";
+import type { WKLevelProgression, WKReset } from "@bachmacintosh/wanikani-api-types";
+import DataHandler from "#parts/DataHandler.tsx";
 
 export type WanikaniInfo = {
   progression: {
@@ -37,7 +37,7 @@ function Button(item: Item) {
 }
 
 export default function Wanikani() {
-  const {data, error, setError} = DataHandler<WanikaniInfo>("japanese_wanikani", 60 * 60);
+  const {data, error, setError} = DataHandler<WanikaniInfo>("infos/japanese/wanikani", 60 * 60);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

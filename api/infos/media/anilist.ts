@@ -1,7 +1,10 @@
 import {type AnilistInfo} from "#Infos/Media/Anilist.tsx";
-import type { Handler } from "..";
+import type { Handler } from "../..";
 
-export const media_anilist: Handler = async () => {
+const username = "Taevas";
+
+export const anilist: Handler = async () => {
+  /** https://github.com/AniList/ApiV2-GraphQL-Docs/blob/master/docs/reference/query.md */
   const anilist = await fetch("https://graphql.anilist.co", {
     method: "POST",
     headers: {
@@ -39,7 +42,7 @@ export const media_anilist: Handler = async () => {
         }
       `,
       variables: {
-        userName: "Taevas",
+        userName: username,
       },
     }),
   });

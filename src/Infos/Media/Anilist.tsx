@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.tsx";
-import DataHandler from "#Infos/DataHandler.tsx";
+import DataHandler from "#parts/DataHandler.tsx";
 import Link from "#parts/Link.tsx";
 
 export type AnilistInfo = {
@@ -18,7 +18,7 @@ export type AnilistInfo = {
 } | undefined;
 
 export default function Anilist() {
-  const {data, error, setError} = DataHandler<AnilistInfo>("media_anilist", 60 * 30);
+  const {data, error, setError} = DataHandler<AnilistInfo>("infos/media/anilist", 60 * 30);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

@@ -1,8 +1,11 @@
 import {type LastfmInfo} from "#Infos/Media/Lastfm.tsx";
-import type { Handler } from "..";
+import type { Handler } from "../..";
 
-export const media_lastfm: Handler = async () => {
-  const lastfm = await (await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=TTTaevas&api_key=${process.env["API_LASTFM"]}&format=json&limit=1`)).json() as {
+const username = "TTTaevas";
+
+export const lastfm: Handler = async () => {
+  /** https://www.last.fm/api/show/user.getRecentTracks */
+  const lastfm = await (await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${process.env["API_LASTFM"]}&format=json&limit=1`)).json() as {
     recenttracks: {
       track: {
         artist: {

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import Info from "../Info.tsx";
 import Umami from "./Umami.tsx";
-import DataHandler from "#Infos/DataHandler.tsx";
+import DataHandler from "#parts/DataHandler.tsx";
 
 export default function Website() {
-  const {data} = DataHandler<boolean>("token?service=umami", 60 * 60 * 8, false);
+  const {data} = DataHandler<boolean>("infos/token?service=umami", 60 * 60 * 8, false);
   const [websites, setWebsites] = useState([] as React.JSX.Element[]);
 
   //   useEffect(() => {

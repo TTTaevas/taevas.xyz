@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.tsx";
-import DataHandler from "#Infos/DataHandler.tsx";
+import DataHandler from "#parts/DataHandler.tsx";
 
 export type UmamiInfo = {
   pageviews: number
@@ -10,7 +10,7 @@ export type UmamiInfo = {
 } | undefined;
 
 export default function Umami() {
-  const {data, error, setError} = DataHandler<UmamiInfo>("website_umami", 60 * 5);
+  const {data, error, setError} = DataHandler<UmamiInfo>("infos/website/umami", 60 * 5);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

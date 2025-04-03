@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.tsx";
-import DataHandler from "#Infos/DataHandler.tsx";
+import DataHandler from "#parts/DataHandler.tsx";
 import Link from "#parts/Link.tsx";
 
 export type KitsudevInfo = {
@@ -10,7 +10,7 @@ export type KitsudevInfo = {
 } | undefined;
 
 export default function KitsuDev() {
-  const {data, error, setError} = DataHandler<KitsudevInfo>("coding_kitsudev", 60 * 20);
+  const {data, error, setError} = DataHandler<KitsudevInfo>("infos/coding/kitsudev", 60 * 20);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

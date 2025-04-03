@@ -1,10 +1,12 @@
 import {Octokit} from "@octokit/rest";
 import {type GithubInfo} from "#Infos/Coding/GitHub.tsx";
-import type { Handler } from "..";
+import type { Handler } from "../..";
 
-export const coding_github: Handler = async () => {
+const username = "TTTaevas";
+
+export const github: Handler = async () => {
   const octokit = new Octokit({auth: process.env["API_GITHUB"]});
-  const github = await octokit.rest.activity.listEventsForAuthenticatedUser({username: "TTTaevas"});
+  const github = await octokit.rest.activity.listEventsForAuthenticatedUser({username});
 
   const publicPush = github.data.find((e) => (e.type === "PushEvent" || e.type === "PullRequestEvent") && e.public);
   const privatePush = github.data.find((e) => (e.type === "PushEvent" || e.type === "PullRequestEvent") && !e.public);

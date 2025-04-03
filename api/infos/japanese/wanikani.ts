@@ -1,6 +1,6 @@
 import {type WanikaniInfo} from "#Infos/Japanese/Wanikani.tsx";
 import type { WKLevelProgression, WKResetCollection, WKSummary } from "@bachmacintosh/wanikani-api-types";
-import type { Handler } from "..";
+import type { Handler } from "../..";
 
 interface Subject {
   id: number;
@@ -48,7 +48,7 @@ function addStuffToLearn(ids: number[], data: {available_at: string; subject_ids
   return arr;
 }
 
-export const japanese_wanikani: Handler = async () => {
+export const wanikani: Handler = async () => {
   const urlsToRequest = [
     "https://api.wanikani.com/v2/level_progressions",
     "https://api.wanikani.com/v2/resets",

@@ -1,4 +1,4 @@
-import { addToken, createTables, db, getToken, removeExpiredTokens } from "../database";
+import { addToken, createTables, db, getToken, removeExpiredTokens } from "../../database";
 import {API} from "osu-api-v2-js";
 import type { Handler } from "..";
 

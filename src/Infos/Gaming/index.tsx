@@ -4,10 +4,10 @@ import Info from "../Info.tsx";
 import Speedruncom from "./Speedruncom.tsx";
 // import Osu from "./Osu.tsx";
 // import { Ruleset } from "osu-api-v2-js";
-// import DataHandler from "#Infos/DataHandler.tsx";
+// import DataHandler from "#parts/DataHandler.tsx";
 
 export default function RhythmGames() {
-//   const {data, error} = DataHandler<boolean>("token?service=osu", 60 * 60 * 8, false);
+//   const {data, error} = DataHandler<boolean>("infos/token?service=osu", 60 * 60 * 8, false);
   const [websites, setWebsites] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

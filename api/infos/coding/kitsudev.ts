@@ -1,8 +1,11 @@
 import { type KitsudevInfo } from "#Infos/Coding/KitsuDev.tsx";
-import type { Handler } from "..";
+import type { Handler } from "../..";
 
-export const coding_kitsudev: Handler = async () => {
-  const kitsudev = await (await fetch("https://kitsunes.dev/api/v1/users/Taevas/activities/feeds?limit=1")).json() as [{
+const username = "Taevas";
+
+export const kitsudev: Handler = async () => {
+  /** https://kitsunes.dev/api/swagger#/user/userListActivityFeeds */
+  const kitsudev = await (await fetch(`https://kitsunes.dev/api/v1/users/${username}/activities/feeds?limit=1`)).json() as [{
     repo: {
       full_name: string
       html_url: string

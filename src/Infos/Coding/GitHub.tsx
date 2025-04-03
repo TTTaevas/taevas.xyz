@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.tsx";
-import DataHandler from "#Infos/DataHandler.tsx";
+import DataHandler from "#parts/DataHandler.tsx";
 import Link from "#parts/Link.tsx";
 
 export interface GithubInfo {
@@ -14,7 +14,7 @@ export interface GithubInfo {
 }
 
 export default function GitHub() {
-  const {data, error, setError} = DataHandler<GithubInfo>("coding_github", 60 * 20);
+  const {data, error, setError} = DataHandler<GithubInfo>("infos/coding/github", 60 * 20);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

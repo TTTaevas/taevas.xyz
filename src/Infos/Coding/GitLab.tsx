@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.tsx";
-import DataHandler from "#Infos/DataHandler.tsx";
+import DataHandler from "#parts/DataHandler.tsx";
 
 export type GitlabInfo = {
   date: string;
 } | undefined;
 
 export default function GitLab() {
-  const {data, error, setError} = DataHandler<GitlabInfo>("coding_gitlab", 60 * 20);
+  const {data, error, setError} = DataHandler<GitlabInfo>("infos/coding/gitlab", 60 * 20);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

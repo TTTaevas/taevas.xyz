@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.tsx";
 import ButtonLink from "#parts/ButtonLink.tsx";
-import DataHandler from "#Infos/DataHandler.tsx";
+import DataHandler from "#parts/DataHandler.tsx";
 
 export type HacktheboxInfo = {
   id: string;
@@ -14,7 +14,7 @@ export type HacktheboxInfo = {
 } | undefined;
 
 export default function Hackthebox() {
-  const {data, error, setError} = DataHandler<HacktheboxInfo>("hacking_hackthebox", 60 * 60);
+  const {data, error, setError} = DataHandler<HacktheboxInfo>("infos/hacking/hackthebox", 60 * 60);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

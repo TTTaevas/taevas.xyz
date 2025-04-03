@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.tsx";
 import { Ruleset } from "osu-api-v2-js";
-import DataHandler from "#Infos/DataHandler.tsx";
+import DataHandler from "#parts/DataHandler.tsx";
 
 export type OsuInfo = {
   country: string;
@@ -12,7 +12,7 @@ export type OsuInfo = {
 } | undefined;
 
 export default function Osu(args: {ruleset: Ruleset}) {
-  const {data, error, setError} = DataHandler<OsuInfo>(`gaming_osu?ruleset=${args.ruleset}`, 60 * 45);
+  const {data, error, setError} = DataHandler<OsuInfo>(`infos/gaming/osu?ruleset=${args.ruleset}`, 60 * 45);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   const ruleset = Ruleset[args.ruleset];

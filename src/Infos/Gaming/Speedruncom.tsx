@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Website from "../Website.tsx";
-import DataHandler from "#Infos/DataHandler.tsx";
+import DataHandler from "#parts/DataHandler.tsx";
 import Link from "#parts/Link.tsx";
 import ButtonLink from "#parts/ButtonLink.tsx";
 
@@ -16,7 +16,7 @@ export type SpeedruncomInfo = {
 } | undefined;
 
 export default function Speedruncom() {
-  const {data, error, setError} = DataHandler<SpeedruncomInfo>("gaming_speedruncom", 60 * 60);
+  const {data, error, setError} = DataHandler<SpeedruncomInfo>("infos/gaming/speedruncom", 60 * 60);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {

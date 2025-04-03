@@ -1,8 +1,11 @@
 import {type HacktheboxInfo} from "#Infos/Hacking/Hackthebox.tsx";
-import type { Handler } from "..";
+import type { Handler } from "../..";
 
-export const hacking_hackthebox: Handler = async () => {
-  const hackthebox = await (await fetch("https://www.hackthebox.com/api/v4/profile/activity/1063999")).json() as {
+const user_id = 1063999;
+
+export const hackthebox: Handler = async () => {
+  /** https://documenter.getpostman.com/view/13129365/TVeqbmeq#1b0b22fc-2e45-456a-9a8f-42888375d1a9 */
+  const hackthebox = await (await fetch(`https://www.hackthebox.com/api/v4/profile/activity/${user_id}`)).json() as {
     profile: {
       activity: HacktheboxInfo[];
     };

@@ -1,17 +1,6 @@
 import type { Server } from "bun";
 import { parseArgs } from "util";
-import { coding_github } from "./api/coding_github";
-import { coding_gitlab } from "./api/coding_gitlab";
-import { coding_kitsudev } from "./api/coding_kitsudev";
-import { fediverse_kitsuclub } from "./api/fediverse_kitsuclub";
-import { gaming_osu } from "./api/gaming_osu";
-import { gaming_speedruncom } from "./api/gaming_speedruncom";
-import { hacking_hackthebox } from "./api/hacking_hackthebox";
-import { japanese_wanikani } from "./api/japanese_wanikani";
-import { media_anilist } from "./api/media_anilist";
-import { media_lastfm } from "./api/media_lastfm";
-import { token } from "./api/token";
-import { website_umami } from "./api/website_umami";
+import { api } from "./api";
 
 // PORT AND SSL STUFF
 
@@ -31,23 +20,6 @@ if (!dev && tls) ports.push(443);
 console.log("Therefore, we are opening ports on:", ports);
 
 // ACTUAL CODE
-
-export type Handler = (req: URLSearchParams) => Promise<Response>;
-
-const api_endpoints: Handler[] = [
-  coding_github,
-  coding_gitlab,
-  coding_kitsudev,
-  fediverse_kitsuclub,
-  gaming_osu,
-  gaming_speedruncom,
-  hacking_hackthebox,
-  japanese_wanikani,
-  media_anilist,
-  media_lastfm,
-  token,
-  website_umami
-];
 
 const servers: Server[] = ports.map((port) => Bun.serve({
   idleTimeout: 30,
@@ -92,11 +64,7 @@ const servers: Server[] = ports.map((port) => Bun.serve({
       // API
 
       if (pathname.startsWith("/api")) {
-        for (const endpoint of api_endpoints) {
-          if (pathname === "/api/" + endpoint.name) {
-            return await endpoint(parameters);
-          }
-        }
+        return await api(pathname, parameters);
       }
 
       return new Response("Not Found", {status: 404});

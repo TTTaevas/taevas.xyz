@@ -1,5 +1,5 @@
 import { SQL } from "bun";
-import type { Token } from "./api/token";
+import type { Token } from "./api/infos/token";
 
 export const db = new SQL({url: process.env["URL_POSTGRESQL"]});
 

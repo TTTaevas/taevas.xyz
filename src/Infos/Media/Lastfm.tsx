@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {format} from "timeago.js";
 import Website from "../Website.tsx";
 import Link from "#parts/Link.tsx";
-import DataHandler from "#Infos/DataHandler.tsx";
+import DataHandler from "#parts/DataHandler.tsx";
 
 export type LastfmInfo = {
   artist: string;
@@ -15,7 +15,7 @@ export type LastfmInfo = {
 } | undefined;
 
 export default function Lastfm() {
-  const {data, error, setError} = DataHandler<LastfmInfo>("media_lastfm", 60 * 2);
+  const {data, error, setError} = DataHandler<LastfmInfo>("infos/media/lastfm", 60 * 2);
   const [elements, setElements] = useState([] as React.JSX.Element[]);
 
   useEffect(() => {
